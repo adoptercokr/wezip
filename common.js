@@ -406,3 +406,50 @@ if (document.readyState === 'loading') {
   initVisitorCounter();
 }
 
+
+
+// 1클릭 URL 복사 및 토스트 알림 기능
+function copyPageUrl(btn) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast('페이지 링크가 복사되었습니다!');
+    }).catch(() => {
+      fallbackCopy();
+    });
+  } else {
+    fallbackCopy();
+  }
+}
+
+function fallbackCopy() {
+  const tempInput = document.createElement('input');
+  tempInput.value = window.location.href;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  showToast('페이지 링크가 복사되었습니다!');
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('wezipToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'wezipToast';
+    toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-slate-700 flex items-center gap-2 transition-all duration-200 select-none';
+    toast.innerHTML = `
+      <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span id="wezipToastMsg"></span>
+    `;
+    document.body.appendChild(toast);
+  }
+  const msgEl = document.getElementById('wezipToastMsg');
+  if (msgEl) msgEl.textContent = msg;
+  toast.style.display = 'flex';
+  toast.style.opacity = '1';
+  clearTimeout(window.__wezipToastTimer);
+  window.__wezipToastTimer = setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => { toast.style.display = 'none'; }, 200);
+  }, 2200);
+}
