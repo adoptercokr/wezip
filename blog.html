@@ -287,10 +287,10 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-1.5 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">45</span>)
+                        전체 (<span id="countAll">46</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (13)
+                        급여·노동 (14)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
                         부동산·주거 (12)
@@ -314,7 +314,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">45</span>건의 칼럼 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">46</span>건의 칼럼 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 <div class="text-[11px] text-slate-400 hidden sm:block">
@@ -410,6 +410,17 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 46,
+        title: "2026 세법개정안 핵심 총정리: 종부세 14억·월세공제 1,200만·근로장려금 360만 완벽 해설",
+        desc: "2026년 최신 세법개정안 핵심 총정리! 1주택 종부세 14억 상향, 월세 세액공제 1,200만원, 근로장려금 360만원, 혼인·출산 증여공제 3억원 완벽 해설.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "NEW",
+        date: "2026.10.27",
+        readTime: "약 7분",
+        link: "blog-tax-reform-2026-guide.html"
+      },
       {
         no: 45,
         title: "금리인하요구권 신청 자격과 은행 거절 시 대응법: 승진·연봉 인상·신용점수 상승으로 대출이자 줄이기",
