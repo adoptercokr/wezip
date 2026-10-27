@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+content_*.py
+create_*.py
+rename_*.py
+update_*.py
+inspect_*.py
+change_domain.py

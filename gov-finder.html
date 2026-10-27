@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 정부지원금 & 정책 찾기 | 복지로·정부24 연계 맞춤 혜택 조회 | 위집 (wezip)</title>
+    <meta name="description" content="2026년 중앙부처·지자체 32대 핵심 국가지원금 중 내 상황(연령, 가구, 주거, 경제활동, 소득)에 맞는 정부 혜택을 1초 만에 매칭하고 복지로, 정부24, 홈택스 공식 신청 링크를 제공합니다.">
+    <link rel="canonical" href="https://wezip.co.kr/gov-finder.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="2026 정부지원금 & 정책 찾기 | 복지로·정부24 연계 맞춤 혜택 조회 | 위집">
+    <meta property="og:description" content="청년월세, 부모급여, 근로장려금, 디딤돌·버팀목 대출, K-패스, 기저귀바우처 등 32대 정부 정책 실시간 매칭">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wezip.co.kr/gov-finder.html">
+    <meta property="og:site_name" content="위집 (wezip)">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "나에게 맞는 정부지원금 & 정책 찾기",
+      "url": "https://wezip.co.kr/gov-finder.html",
+      "applicationCategory": "GovernmentApplication",
+      "operatingSystem": "All",
+      "description": "2026년 대한민국 정부 복지·주거·금융·출산 32대 지원금 맞춤형 매칭 및 모의 판정 서비스",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      }
+    }
+    </script>
+</head>
+<body class="bg-[#F4F6F9] min-h-screen text-slate-800 antialiased flex flex-col justify-between">
+
+    <!-- 포털 최상단 슬림 바: 로고, 로고 우측 주메뉴(PC), 모바일 메뉴 토글 -->
+    <header class="bg-[#1E293B] text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 좌측: 로고 + 주메뉴 4개 (PC에서는 한 줄로 로고 바로 오른쪽에 배치) -->
+            <div class="flex items-center gap-6 lg:gap-8 h-full">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="16" y1="14" x2="16" y2="18"></line>
+                            <path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white notranslate" translate="no">위집</span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <!-- PC 주메뉴 (로고 바로 오른쪽에 배치, 단일 가로행 유지 & whitespace-nowrap) -->
+                <nav class="hidden md:flex items-center gap-1 xl:gap-2 h-full text-xs lg:text-sm font-bold whitespace-nowrap">
+                    <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1 font-extrabold border border-emerald-500/30">
+                        <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>지원금 찾기</span>
+                    </a>
+                    <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
+
+                    <!-- 1. 급여·소득 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>급여·소득</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="salary.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">연봉 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">실수령액</span>
+                                </a>
+                                <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>알바·최저시급 계산기</span>
+                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                </a>
+                                <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">퇴사자 실업급여 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                </a>
+                                <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>퇴직금 계산기</span>
+                                    <span class="text-[11px] text-slate-400">실수령액</span>
+                                </a>
+                                <a href="annual-leave.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>연차 일수·수당 계산기</span>
+                                    <span class="text-[11px] text-slate-400">미사용 수당</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 부동산 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>부동산</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="real-transfer-tax.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">내 집 양도세 계산기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
+                                </a>
+                                <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>버팀목 전세대출·HUG 조회</span>
+                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                </a>
+                                <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부동산 복비·취득세 계산기</span>
+                                    <span class="text-[11px] text-slate-400">국토부 상한</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 복지·지원 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>복지·지원</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="gov-finder.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold text-emerald-600">맞춤 지원금 & 정책 찾기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">32대 정책</span>
+                                </a>
+                                <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">청년 지원 대상조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                </a>
+                                <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부모급여·아동수당 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                </a>
+                                <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>근로장려금 수급 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">최대 330만</span>
+                                </a>
+                                <a href="gov-median.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>2026 복지 지원금 자격조회</span>
+                                    <span class="text-[11px] text-slate-400">중위소득</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 대출·금융 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>대출·금융</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">대출이자 & DSR 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                </a>
+                                <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>예·적금 만기이자 계산기</span>
+                                    <span class="text-[11px] text-slate-400">비과세 비교</span>
+                                </a>
+                                <a href="youth-leap.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>청년도약계좌 만기금 조회</span>
+                                    <span class="text-[11px] text-slate-400">기여금 매칭</span>
+                                </a>
+                                <a href="dutch-pay.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>더치페이 N빵 계산기</span>
+                                    <span class="text-[11px] text-slate-400">카톡 1초</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 우측: 모바일 햄버거 메뉴 버튼만 배치하여 공간 100% 확보 (공유 및 불필요한 긴 뱃지 제거) -->
+            <div class="flex items-center">
+                <button type="button" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition" aria-label="메뉴 열기">
+                    <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 반응형 드롭다운 메뉴 (모바일에서 깔끔하게 정돈되어 노출) -->
+        <div id="mobileNavMenu" class="hidden md:hidden bg-[#0F172A] border-t border-slate-800 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+            <!-- 핵심 빠른 링크 -->
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+                <a href="gov-finder.html" class="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+                <a href="blog.html" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 text-blue-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span>금융 칼럼</span>
+                </a>
+            </div>
+
+            <!-- 급여·소득 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">연봉 계산기</a>
+                    <a href="hourly-wage.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">알바·시급</a>
+                    <a href="unemployment.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">퇴사자 실업급여</a>
+                    <a href="severance.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">퇴직금 계산기</a>
+                    <a href="annual-leave.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">연차 일수·수당</a>
+                </div>
+            </div>
+
+            <!-- 부동산·주거 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
+                </div>
+            </div>
+
+            <!-- 정부지원·복지 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">정부지원·복지</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="gov-rent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">청년 지원 대상조회</a>
+                    <a href="gov-parent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">부모급여·아동수당</a>
+                    <a href="gov-subsidy.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">근로장려금 조회</a>
+                    <a href="gov-median.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">복지 지원금 자격</a>
+                </div>
+            </div>
+
+            <!-- 대출·금융 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">대출·금융</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="loan-dsr.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">대출이자 & DSR</a>
+                    <a href="savings.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">예·적금 만기이자</a>
+                    <a href="youth-leap.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">청년도약계좌</a>
+                    <a href="dutch-pay.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">더치페이 N빵</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- 상단 타이틀 브리핑 -->
+        <div class="text-center mb-8 space-y-2">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full text-xs font-extrabold shadow-xs">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>2026 정부지원금 & 정책 매칭 엔진 (총 32개 DB 탑재)</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">나에게 맞는 정부 지원금 & 정책 찾기</h1>
+            <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">내 상황(연령, 가구, 주거, 경제활동, 소득)을 선택하거나 검색하면, 2026년 중앙부처 32대 핵심 정책 중 내가 받을 수 있는 최대 지원금과 공식 신청 링크(복지로, 정부24, 홈택스 등)를 1초 만에 찾아드립니다.</p>
+        </div>
+
+        <!-- 실시간 키워드 검색창 카드 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs mb-6">
+            <label for="policySearchInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                지원금 직접 검색 (명칭 또는 키워드 입력)
+            </label>
+            <div class="relative">
+                <input type="text" id="policySearchInput" oninput="handlePolicySearch(this.value)"
+                       placeholder="예: 월세, 청년, 기저귀, 난임, 교통비, 통신비, 전기세, 어르신, 적금 등..."
+                       class="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500 transition">
+                <svg class="svg-icon w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-3 text-slate-400 hover:text-slate-600 p-1" aria-label="검색어 지우기">
+                    <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 mt-2.5 text-[11px] text-slate-500">
+                <span class="font-bold text-slate-400">인기 키워드:</span>
+                <button type="button" onclick="setSearchTerm('청년월세')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">청년월세</button>
+                <button type="button" onclick="setSearchTerm('부모급여')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">부모급여</button>
+                <button type="button" onclick="setSearchTerm('근로장려금')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">근로장려금</button>
+                <button type="button" onclick="setSearchTerm('K-패스')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">K-패스</button>
+                <button type="button" onclick="setSearchTerm('기저귀')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">기저귀</button>
+                <button type="button" onclick="setSearchTerm('난임')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">난임</button>
+            </div>
+        </div>
+
+        <!-- 인터랙티브 조건 선택 필터 카드 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                    <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-black">1</span>
+                        <span>나의 5대 기본 조건 선택 (필터링)</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">해당되는 항목을 클릭하여 선택해 주세요. 조건에 맞춰 실시간으로 매칭됩니다.</p>
+                </div>
+                <button type="button" onclick="resetFilters()" class="text-xs text-slate-500 hover:text-blue-600 font-bold transition flex items-center gap-1 border border-slate-200 px-2.5 py-1.5 rounded-lg bg-slate-50">
+                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                    <span>조건 초기화</span>
+                </button>
+            </div>
+
+            <!-- 1. 연령대 -->
+            <div class="space-y-2.5">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">1. 연령대</label>
+                <div class="grid grid-cols-3 gap-2.5 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="age" data-value="youth">
+                        청년층 (만 19~34세)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="middle">
+                        중장년 (만 35~64세)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="senior">
+                        어르신 (만 65세 이상)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. 가구 형태 -->
+            <div class="space-y-2.5">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">2. 가구 형태</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="family" data-value="single">
+                        1인 단독 가구
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="newlywed">
+                        신혼부부 (7년 이내)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="infant">
+                        영유아 자녀 (0~2세)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="child">
+                        미성년/다자녀 (3~18세)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 주거 형태 -->
+            <div class="space-y-2.5">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">3. 주거 형태</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="housing" data-value="rent">
+                        무주택 월세
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="jeonse">
+                        무주택 전세
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="first_buy">
+                        생애최초 주택구입
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="owner">
+                        1주택 자가 보유
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. 고용 / 소득 형태 -->
+            <div class="space-y-2.5">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">4. 고용 및 경제활동 상태</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="job" data-value="employee">
+                        직장인 (근로소득자)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="part_time">
+                        알바 / 프리랜서 (3.3%)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="jobless">
+                        구직자 / 퇴사자 / 미취업
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="business">
+                        소상공인 / 자영업자
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. 소득 구간 -->
+            <div class="space-y-2.5">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">5. 대략적인 연 소득 (또는 가구 기준)</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="income" data-value="low">
+                        중위 60% 이하 (월 143만 이하)
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under36">
+                        연 3,600만 원 이하
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under75">
+                        연 7,500만 원 이하
+                    </button>
+                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="over75">
+                        연 7,500만 원 초과
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 매칭 결과 영역 -->
+        <div id="resultsSection" class="mt-8 space-y-6">
+            <!-- 요약 리포트 카드 -->
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded-full">실시간 모의 매칭 결과</span>
+                            <span class="text-xs text-slate-400" id="dbTotalNotice">전체 32개 정책 DB</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black mt-2">
+                            고객님께 해당되는 정부 혜택: 총 <span id="matchCount" class="text-emerald-400">0</span>건
+                            <span class="text-xs font-normal text-slate-300 block sm:inline sm:ml-2" id="matchRatioText">(전체 32건 중 매칭)</span>
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-1">예상 누적 최대 지원 가치: <span id="matchTotalAmount" class="font-extrabold text-white text-base sm:text-lg">0원</span></p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="copyResults()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center gap-1.5">
+                            <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>결과 복사</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매칭 정책 카드 그리드 -->
+            <div id="policyCardsGrid" class="grid grid-cols-1 gap-4">
+                <!-- 자바스크립트로 동적 렌더링 -->
+            </div>
+        </div>
+
+        <!-- [전문가 심층 가이드 & 2026 정부지원금 총람] -->
+        <article class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10">
+            <div>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">2026 정부 복지 가이드</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-2">2026년 대한민국 핵심 국가지원금 총람 및 신청 누락 방지 가이드</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">보건복지부, 국토교통부, 고용노동부, 국세청 공식 고시 종합 안내</p>
+            </div>
+
+            <!-- 섹션 1: 정부 복지제도 이용 원칙 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>1. 대한민국 복지 혜택의 대원칙: '신청주의'</span>
+                </h3>
+                <p>
+                    대한민국의 거의 모든 정부 복지 급여와 지원금은 대상자가 직접 신청서를 제출해야만 지급이 시작되는 <strong>'신청주의(申請主義)'</strong> 원칙을 따릅니다. 법적으로 자격 조건을 완벽히 갖추고 있더라도 스스로 신청하지 않으면 지난 기간의 지원금을 소급해서 돌려받을 수 없습니다. 따라서 본인의 생애주기 단계마다 지원 가능한 정책을 정기적으로 확인하고 접수 기간 내에 빠짐없이 신청하는 것이 무엇보다 중요합니다.
+                </p>
+            </section>
+
+            <!-- 섹션 2: 4대 핵심 정부 신청 포털 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>2. 반드시 북마크해야 할 정부 공식 4대 신청 포털</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                    <a href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer" class="p-4 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl space-y-1.5 transition block group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 text-sm group-hover:text-blue-600">복지로 (bokjiro.go.kr)</span>
+                            <span class="text-[11px] text-blue-600 font-bold flex items-center gap-0.5">바로가기 &rarr;</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">보건복지부 주관. 청년월세특별지원, 부모급여, 아동수당, 기초생활보장급여, 장애인연금 등 사회보장 복지 통합 신청.</p>
+                    </a>
+                    <a href="https://www.gov.kr" target="_blank" rel="noopener noreferrer" class="p-4 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl space-y-1.5 transition block group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 text-sm group-hover:text-blue-600">정부24 (gov.kr)</span>
+                            <span class="text-[11px] text-blue-600 font-bold flex items-center gap-0.5">바로가기 &rarr;</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">행정안전부 주관. 행복출산 원스톱 서비스(첫만남이용권 일괄 신청), 보조금24(맞춤형 혜택 조회), 전세보증금 반환보증료 지원.</p>
+                    </a>
+                    <a href="https://www.hometax.go.kr" target="_blank" rel="noopener noreferrer" class="p-4 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl space-y-1.5 transition block group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 text-sm group-hover:text-blue-600">국세청 홈택스 (hometax.go.kr)</span>
+                            <span class="text-[11px] text-blue-600 font-bold flex items-center gap-0.5">바로가기 &rarr;</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">국세청 주관. 근로장려금(최대 330만), 자녀장려금(1인 100만), 5월 종합소득세 환급, 연말정산 간소화 서비스.</p>
+                    </a>
+                    <a href="https://www.work24.go.kr" target="_blank" rel="noopener noreferrer" class="p-4 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl space-y-1.5 transition block group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 text-sm group-hover:text-blue-600">고용24 (work24.go.kr)</span>
+                            <span class="text-[11px] text-blue-600 font-bold flex items-center gap-0.5">바로가기 &rarr;</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">고용노동부 주관. 실업급여(구직급여), 국민취업지원제도(월 50만), 내일배움카드(훈련비 최대 500만), 육아휴직급여.</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 2026 연간 지원금 캘린더 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>3. 2026년 주요 국가지원금 신청 캘린더</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">월별</th>
+                                <th class="p-3">지원 사업명</th>
+                                <th class="p-3">신청 대상</th>
+                                <th class="p-3 text-blue-600">지급 시기 및 혜택</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">3월</td>
+                                <td class="p-3 font-semibold">근로장려금 하반기분 신청</td>
+                                <td class="p-3">근로소득자 (소득·재산 요건)</td>
+                                <td class="p-3 text-blue-600 font-bold">6월 말 정산 지급</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">5월</td>
+                                <td class="p-3 font-semibold">근로·자녀장려금 정기신청</td>
+                                <td class="p-3">근로자, 사업자, 종교인</td>
+                                <td class="p-3 text-blue-600 font-bold">8월 말~9월 초 최대 330만+자녀당 100만</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">9월</td>
+                                <td class="p-3 font-semibold">근로장려금 상반기분 신청</td>
+                                <td class="p-3">근로소득자</td>
+                                <td class="p-3 text-blue-600 font-bold">12월 말 산정액의 35% 선지급</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">상시</td>
+                                <td class="p-3 font-semibold">부모급여, 청년월세, 도약계좌</td>
+                                <td class="p-3">출생 가구 및 무주택 청년</td>
+                                <td class="p-3 text-blue-600 font-bold">매월 25일 계좌 입금</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 섹션 4: FAQ -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>4. 지원금 찾기 자주 묻는 질문 (FAQ)</span>
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 여러 정부지원금을 동시에 중복으로 받을 수 있나요?</div>
+                        <p class="text-slate-600 leading-relaxed">네, 상당수 지원금은 중복 수급이 가능합니다. 예를 들어 출산 가구는 첫만남이용권 + 부모급여 + 아동수당을 동시에 전액 수령하며, 청년 근로자는 근로장려금 + 청년월세특별지원 + 청년도약계좌를 동시에 이용할 수 있습니다. 단, 지자체 유사 월세사업과 국토부 청년월세 등 동일 목적의 사업은 중복이 제한됩니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 정부지원금을 받으면 세금을 내야 하나요?</div>
+                        <p class="text-slate-600 leading-relaxed">아닙니다. 부모급여, 아동수당, 청년월세지원, 근로장려금, 실업급여 등은 소득세법상 전액 비과세 소득으로 분류되므로 세금이 부과되지 않으며, 건강보험료 산정 소득에도 합산되지 않습니다.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- [하단 스폰서 광고 배너 영역 (반응형 728x90, 300x250)] -->
+        <section class="mt-8 mb-4" aria-label="스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-4 sm:p-5 text-center shadow-xs flex flex-col items-center justify-center min-h-[100px] sm:min-h-[120px] hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">ADVERTISEMENT</span>
+                <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span class="text-slate-700 font-bold">스폰서 광고 영역</span>
+                    </div>
+                    <span class="text-slate-400 text-xs">(구글 애드센스 반응형 728×90, 300×250 / 카카오 애드핏 코드 삽입)</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-700">위집 (wezip) - 나에게 맞는 정부지원금 & 정책 찾기</p>
+            <p>보건복지부, 국토교통부, 고용노동부, 국세청 2026년 공식 고시 지침에 따라 모의 매칭됩니다.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600 py-1.5 border-y border-slate-100 my-2">
+                <a href="about.html" class="hover:text-blue-600 font-semibold transition">서비스 소개</a>
+                <span class="text-slate-300">·</span>
+                <a href="blog.html" class="hover:text-blue-600 font-semibold transition">금융 지식 칼럼</a>
+                <span class="text-slate-300">·</span>
+                <a href="terms.html" class="hover:text-blue-600 font-semibold transition">이용약관 및 법적 면책</a>
+                <span class="text-slate-300">·</span>
+                <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
+            </div>
+            <p class="text-slate-400">© 2026 wezip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script src="common.js"></script>
+    <script>
+        // 32대 대한민국 공식 정부 지원 정책 데이터베이스
+        const POLICIES = [
+            {
+                id: 'rent_subsidy',
+                name: '청년월세 한시 특별지원 (월 20만원)',
+                dept: '국토교통부',
+                badge: '월 20만원',
+                amountNum: 2400000,
+                amountText: '연 최대 240만 원 (월 20만 × 12개월)',
+                summary: '부모와 따로 거주하는 무주택 청년 대상, 실제 월세 납부액을 매월 현금 계좌 지급',
+                req: '만 19~34세 무주택 청년, 보증금 5천만 & 월세 70만 이하, 청년가구 중위 60% 이하 & 원가구 100% 이하',
+                linkUrl: 'gov-rent.html',
+                calcText: '청년월세 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['월세', '청년', '주거비', '보증금', '임차료', '자취'],
+                match: (u) => u.age === 'youth' && u.housing === 'rent' && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'youth_leap',
+                name: '청년도약계좌 (정부기여금 + 비과세)',
+                dept: '서민금융진흥원',
+                badge: '5년 목돈',
+                amountNum: 1440000,
+                amountText: '정부기여금 최대 144만 원 + 이자 비과세 + 연 6%대 금리',
+                summary: '5년간 매월 최대 70만 원 납입 시 정부가 월 최대 2.4만 원 매칭 지원하여 약 5천만 원 목돈 형성',
+                req: '만 19~34세 청년, 개인 총급여 7,500만 원 이하, 가구소득 중위 250% 이하',
+                linkUrl: 'youth-leap.html',
+                calcText: '도약계좌 계산기',
+                officialName: '서민금융진흥원 바로가기',
+                officialUrl: 'https://www.kinfa.or.kr',
+                keywords: ['청년도약계좌', '적금', '목돈', '기여금', '비과세', '청년저축'],
+                match: (u) => u.age === 'youth' && (u.job === 'employee' || u.job === 'part_time') && u.income !== 'over75'
+            },
+            {
+                id: 'parent_subsidy',
+                name: '부모급여 (만 0세 월 100만 / 1세 월 50만)',
+                dept: '보건복지부',
+                badge: '연 1,200만',
+                amountNum: 12000000,
+                amountText: '만 0세 연 1,200만 원 + 1세 연 600만 원 (총 1,800만 원)',
+                summary: '소득·재산 무관 출생 아동의 부모에게 매월 25일 계좌로 현금 지급 (어린이집 이용 시 차액 현금 지급)',
+                req: '대한민국 국적의 만 0~1세(생후 0~23개월) 아동을 양육하는 모든 부모',
+                linkUrl: 'gov-parent.html',
+                calcText: '부모급여 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['부모급여', '영유아', '출산', '양육', '0세', '1세', '아기'],
+                match: (u) => u.family === 'infant'
+            },
+            {
+                id: 'first_meet',
+                name: '첫만남이용권 (출생 축하 바우처)',
+                dept: '보건복지부',
+                badge: '바우처 200~300만',
+                amountNum: 2000000,
+                amountText: '첫째아 200만 원 / 둘째아 이상 300만 원 바우처',
+                summary: '출생 아동 보호자 국민행복카드에 일시금 바우처 지급 (산후조리원, 육아용품 등 사용 가능)',
+                req: '출생 신고 후 정상 주민등록번호를 부여받은 모든 출생아',
+                linkUrl: 'gov-parent.html',
+                calcText: '출산지원금 계산기',
+                officialName: '정부24 신청 바로가기',
+                officialUrl: 'https://www.gov.kr',
+                keywords: ['첫만남이용권', '출생', '바우처', '국민행복카드', '출산축하금'],
+                match: (u) => u.family === 'infant'
+            },
+            {
+                id: 'child_allowance',
+                name: '아동수당 (만 8세 미만 월 10만원)',
+                dept: '보건복지부',
+                badge: '월 10만원',
+                amountNum: 1200000,
+                amountText: '연 120만 원 (8년간 총 960만 원 확정 지급)',
+                summary: '소득 무관 만 8세 미만(0~95개월) 모든 아동에게 매월 25일 10만 원 현금 지급',
+                req: '만 8세 생일 전월까지의 대한민국 모든 아동',
+                linkUrl: 'gov-parent.html',
+                calcText: '아동수당 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['아동수당', '육아', '자녀', '어린이', '아이'],
+                match: (u) => u.family === 'infant' || u.family === 'child'
+            },
+            {
+                id: 'work_subsidy',
+                name: '근로장려금 (최대 330만원 환급)',
+                dept: '국세청',
+                badge: '최대 330만',
+                amountNum: 1650000,
+                amountText: '단독 최대 165만 / 홑벌이 285만 / 맞벌이 330만 원',
+                summary: '열심히 일하지만 소득이 적은 근로자·사업자 가구에 국세청이 현금으로 환급해 주는 세액공제',
+                req: '단독 연 2,200만 미만, 홑벌이 3,200만 미만, 맞벌이 4,400만 미만 & 재산 2.4억 미만',
+                linkUrl: 'gov-subsidy.html',
+                calcText: '근로장려금 계산기',
+                officialName: '국세청 홈택스 바로가기',
+                officialUrl: 'https://www.hometax.go.kr',
+                keywords: ['근로장려금', '장려금', '국세청', '환급', '저소득', '세금환급'],
+                match: (u) => (u.job === 'employee' || u.job === 'part_time' || u.job === 'business') && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'child_subsidy',
+                name: '자녀장려금 (자녀 1인당 최대 100만원)',
+                dept: '국세청',
+                badge: '1인 100만',
+                amountNum: 1000000,
+                amountText: '부양자녀 1인당 최대 100만 원 (근로장려금과 중복 수령)',
+                summary: '저출산 극복을 위해 부부합산 소득 기준을 연 7,000만 원 미만으로 대폭 상향 적용',
+                req: '부부합산 총소득 7,000만 원 미만, 18세 미만 부양자녀 양육 가구 & 재산 2.4억 미만',
+                linkUrl: 'gov-subsidy.html',
+                calcText: '자녀장려금 계산기',
+                officialName: '국세청 홈택스 바로가기',
+                officialUrl: 'https://www.hometax.go.kr',
+                keywords: ['자녀장려금', '부양자녀', '자녀수당', '다자녀', '장려금'],
+                match: (u) => (u.family === 'infant' || u.family === 'child') && u.income !== 'over75'
+            },
+            {
+                id: 'beodeul_loan',
+                name: '청년·신혼 버팀목 전세자금대출',
+                dept: '국토교통부',
+                badge: '연 1.8% 저리',
+                amountNum: 3500000,
+                amountText: '시중금리 대비 연간 약 300만~400만 원 이자 절감',
+                summary: '주택도시기금 저리 전세자금 대출 (청년 최대 2억, 신혼부부 최대 3억 한도)',
+                req: '무주택 세대주, 연소득 5,000만 원 이하(신혼 7.5천), 순자산 3.45억 이하',
+                linkUrl: 'real-loan.html',
+                calcText: '전세대출 계산기',
+                officialName: '주택도시기금 바로가기',
+                officialUrl: 'https://enhuf.molit.go.kr',
+                keywords: ['버팀목', '전세대출', '전세자금', '기금대출', '신혼부부대출'],
+                match: (u) => u.housing === 'jeonse' && (u.age === 'youth' || u.family === 'newlywed') && u.income !== 'over75'
+            },
+            {
+                id: 'jeonse_guarantee',
+                name: '청년 전세보증금 반환보증료 지원 (최대 30만원)',
+                dept: '국토교통부 / 지자체',
+                badge: '보증료 전액환급',
+                amountNum: 300000,
+                amountText: '납부한 HUG·HF 전세보증금 반환보증료 최대 30만 원 현금 환급',
+                summary: '전세사기 예방을 위해 보증보험에 가입한 무주택 청년의 보증료를 지자체가 전액 환급',
+                req: '만 19~39세 무주택 청년, 임차보증금 3억 이하, 연소득 5천만 이하(신혼 7.5천)',
+                linkUrl: 'real-loan.html',
+                calcText: 'HUG 보증료 조회기',
+                officialName: '정부24 신청 바로가기',
+                officialUrl: 'https://www.gov.kr',
+                keywords: ['보증보험', 'HUG', '전세사기', '반환보증', '보증료지원'],
+                match: (u) => u.housing === 'jeonse' && (u.age === 'youth' || u.family === 'newlywed') && u.income !== 'over75'
+            },
+            {
+                id: 'first_home_tax',
+                name: '생애최초 주택구입 취득세 감면 (최대 200만원)',
+                dept: '행정안전부',
+                badge: '200만원 면제',
+                amountNum: 2000000,
+                amountText: '산출 취득세에서 최대 200만 원 전액 면제·감면',
+                summary: '세대원 전원 주택 소유 이력이 없는 생애최초 주택 매수 시 소득 제한 없이 감면',
+                req: '생애최초 주택 취득자 (소득 무관), 취득가액 12억 원 이하 주택 대상',
+                linkUrl: 'real-estate.html',
+                calcText: '취득세 감면 계산기',
+                officialName: '위택스 감면신청 바로가기',
+                officialUrl: 'https://www.wetax.go.kr',
+                keywords: ['생애최초', '취득세', '주택구입', '내집마련', '세금면제'],
+                match: (u) => u.housing === 'first_buy'
+            },
+            {
+                id: 'didimdol_loan',
+                name: '내집마련 디딤돌 대출 (연 2.45%~)',
+                dept: '국토교통부',
+                badge: '연 2%대 고정금리',
+                amountNum: 4000000,
+                amountText: '시중 주담대 대비 연간 약 300만~500만 원 이자 절감',
+                summary: '무주택 서민을 위한 저금리 주택구입자금 대출 (최대 4억 원 한도)',
+                req: '부부합산 연소득 6천만 이하(신혼 8.5천), 순자산 4.69억 이하, 5억 이하 주택',
+                linkUrl: 'loan-dsr.html',
+                calcText: '디딤돌 DSR 계산기',
+                officialName: '주택도시기금 바로가기',
+                officialUrl: 'https://enhuf.molit.go.kr',
+                keywords: ['디딤돌', '주택담보대출', '주담대', '저리대출', '구입자금'],
+                match: (u) => u.housing === 'first_buy' && u.income !== 'over75'
+            },
+            {
+                id: 'newborn_special_loan',
+                name: '신생아 특례 디딤돌·버팀목 대출 (최저 1.6%)',
+                dept: '국토교통부',
+                badge: '최저 연 1.6%',
+                amountNum: 5000000,
+                amountText: '구입자금 최대 5억(연 1.6%~3.3%), 전세자금 최대 3억(연 1.1%~3.0%)',
+                summary: '출산 2년 이내 무주택 가구 대상 파격적인 초저금리 주택구입 및 전세자금 융자',
+                req: '신청일 기준 2년 이내 출산(입양), 부부합산 소득 2억 이하, 자산 요건 충족',
+                linkUrl: 'real-loan.html',
+                calcText: '신생아 특례 계산기',
+                officialName: '주택도시기금 바로가기',
+                officialUrl: 'https://enhuf.molit.go.kr',
+                keywords: ['신생아특례', '출산대출', '신생아디딤돌', '저출산대출', '아기대출'],
+                match: (u) => u.family === 'infant' && (u.housing === 'first_buy' || u.housing === 'jeonse')
+            },
+            {
+                id: 'job_seek_subsidy',
+                name: '국민취업지원제도 1유형 (구직촉진수당 300만원)',
+                dept: '고용노동부',
+                badge: '총 300만원',
+                amountNum: 3000000,
+                amountText: '월 50만 원 × 6개월 = 총 300만 원 현금 지급',
+                summary: '취업을 준비하는 구직자에게 취업지원서비스와 함께 생계 수당을 무상 지원',
+                req: '만 15~69세 구직자, 가구 중위소득 60% 이하(청년은 120% 이하), 재산 4억 이하',
+                linkUrl: 'unemployment.html',
+                calcText: '구직수당 계산기',
+                officialName: '고용24 신청 바로가기',
+                officialUrl: 'https://www.work24.go.kr',
+                keywords: ['국민취업지원제도', '구직촉진수당', '취준생', '실업', '구직수당'],
+                match: (u) => u.job === 'jobless' && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'learning_card',
+                name: '국민내일배움카드 (훈련비 최대 500만원)',
+                dept: '고용노동부',
+                badge: '300~500만 바우처',
+                amountNum: 3000000,
+                amountText: '5년간 300만~500만 원 직무 훈련비 국비 지원',
+                summary: '직무능력 개발 및 이직·취업을 희망하는 국민 누구나 학원 수강료 45~85% 국비 지원',
+                req: '국민 누구나 신청 가능 (공무원, 사학연금 대상자, 연매출 4억 이상 자영업자 등 제외)',
+                linkUrl: 'hourly-wage.html',
+                calcText: '시급·교육비 계산기',
+                officialName: '고용24·HRD-Net 바로가기',
+                officialUrl: 'https://www.hrd.go.kr',
+                keywords: ['내일배움카드', '직업훈련', '국비지원', '자격증', '학원비'],
+                match: (u) => true
+            },
+            {
+                id: 'basic_housing',
+                name: '기초생활보장 주거급여 (월세 전액 실비 지원)',
+                dept: '국토교통부',
+                badge: '월세 전액지원',
+                amountNum: 3600000,
+                amountText: '지역별 기준임대료 상한 전액 실비 지원 (서울 1인 최대 34만)',
+                summary: '소득인정액이 기준 중위소득 48% 이하인 저소득 임차가구의 실제 월세 전액을 매월 지원',
+                req: '가구 소득인정액 기준 중위소득 48% 이하 (부양의무자 기준 없음)',
+                linkUrl: 'gov-median.html',
+                calcText: '주거급여 판정기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['주거급여', '기초수급', '월세지원', '임차급여', '취약계층'],
+                match: (u) => u.housing === 'rent' && u.income === 'low'
+            },
+            {
+                id: 'basic_living',
+                name: '기초생활보장 생계급여 (최대 월 195만원)',
+                dept: '보건복지부',
+                badge: '월 최대 195만',
+                amountNum: 8500000,
+                amountText: '1인 가구 월 최대 76만 원 / 4인 가구 월 최대 195만 원 현금 지급',
+                summary: '소득인정액이 기준 중위소득 32% 이하인 가구의 최저 생활을 보장하기 위해 생계비 지급',
+                req: '소득인정액이 기준 중위소득 32% 이하인 가구',
+                linkUrl: 'gov-median.html',
+                calcText: '생계급여 판정기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['생계급여', '기초생활수급', '기초수급자', '생계비', '최저생활'],
+                match: (u) => u.income === 'low'
+            },
+            {
+                id: 'senior_tax_free',
+                name: '어르신 비과세종합저축 (이자소득세 0%)',
+                dept: '기획재정부',
+                badge: '1인 5천만 비과세',
+                amountNum: 770000,
+                amountText: '1인당 5,000만 원 한도 이자소득세 15.4% 전액 면제 (연 수십만 원 절세)',
+                summary: '만 65세 이상 어르신에게 제공되는 정기예금·적금 비과세 저축 혜택',
+                req: '만 65세 이상 거주자 (직전 3개년 금융소득종합과세 대상자 제외)',
+                linkUrl: 'savings.html',
+                calcText: '비과세 예금 계산기',
+                officialName: '정부24 안내 바로가기',
+                officialUrl: 'https://www.gov.kr',
+                keywords: ['비과세종합저축', '어르신저축', '노인예금', '이자소득세', '65세'],
+                match: (u) => u.age === 'senior'
+            },
+            {
+                id: 'basic_pension',
+                name: '기초연금 (만 65세 이상 월 최대 33.4만원)',
+                dept: '보건복지부',
+                badge: '월 33.4만원',
+                amountNum: 4000000,
+                amountText: '단독가구 월 최대 334,810원 / 부부가구 월 최대 535,680원',
+                summary: '만 65세 이상 어르신 중 소득 인정액 하위 70% 가구에 매월 25일 평생 현금 지급',
+                req: '만 65세 이상 대한민국 국적 어르신 중 소득인정액 선정기준액 이하 가구',
+                linkUrl: 'gov-median.html',
+                calcText: '기초연금 모의조회',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['기초연금', '노령연금', '어르신연금', '65세연금', '효도연금'],
+                match: (u) => u.age === 'senior' && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'k_pass',
+                name: 'K-패스 (대중교통비 최대 53% 환급)',
+                dept: '국토교통부',
+                badge: '교통비 20~53% 환급',
+                amountNum: 240000,
+                amountText: '일반 20%, 청년(만 19~34세) 30%, 저소득층 53% 교통비 현금 환급',
+                summary: '전국 지하철·시내버스·광역버스 월 15회 이상 이용 시 지출액의 최대 53%를 계좌로 현금 환급',
+                req: '만 19세 이상 대한민국 국민, 월 15회 이상 대중교통 이용자',
+                linkUrl: 'dutch-pay.html',
+                calcText: '교통비 환급 계산기',
+                officialName: 'K-패스 공식 신청 바로가기',
+                officialUrl: 'https://korea-pass.kr',
+                keywords: ['K패스', '케이패스', '교통카드', '대중교통', '버스환급', '지하철환급'],
+                match: (u) => true
+            },
+            {
+                id: 'energy_voucher',
+                name: '에너지바우처 (전기·가스·난방비 연평균 36.7만원)',
+                dept: '산업통상자원부',
+                badge: '연 36.7만원',
+                amountNum: 367000,
+                amountText: '하절기 전기요금 차감 + 동절기 난방비(가스·연탄·등유) 바우처 지원',
+                summary: '취약계층의 냉·난방비 부담을 덜어주기 위해 전기, 도시가스, 지역난방 요금을 직접 차감',
+                req: '생계·의료·주거·교육급여 수급자 중 노인, 영유아, 장애인, 임산부, 한부모가족 포함 가구',
+                linkUrl: 'gov-median.html',
+                calcText: '에너지바우처 조회기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['에너지바우처', '난방비', '전기세', '가스요금', '취약계층난방'],
+                match: (u) => u.income === 'low' && (u.age === 'senior' || u.family === 'infant')
+            },
+            {
+                id: 'youth_tomorrow_savings',
+                name: '청년내일저축계좌 (정부 매칭 월 10~30만원)',
+                dept: '보건복지부',
+                badge: '3년 최대 1,440만',
+                amountNum: 7200000,
+                amountText: '3년간 본인 360만 저축 시 정부지원금 360만~1,080만 원 추가 매칭',
+                summary: '일하는 저소득 청년이 월 10만 원을 저축하면 정부가 매월 10만~30만 원을 추가 적립',
+                req: '만 19~34세(수급자는 15~39세) 일하는 청년, 가구 중위소득 100% 이하',
+                linkUrl: 'savings.html',
+                calcText: '매칭 저축 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['청년내일저축', '내일저축계좌', '청년적금', '자산형성', '매칭저축'],
+                match: (u) => u.age === 'youth' && (u.job === 'employee' || u.job === 'part_time') && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'diaper_powder',
+                name: '저소득층 기저귀·조제분유 지원 (월 최대 20만원)',
+                dept: '보건복지부',
+                badge: '월 9만~20만원',
+                amountNum: 1080000,
+                amountText: '기저귀 월 9만 원 + 조제분유 월 11만 원 국민행복카드 바우처',
+                summary: '영아(0~24개월)를 둔 저소득층 가정의 양육비 부담 경감을 위해 기저귀·분유 구입비 지원',
+                req: '만 2세 미만 영아 양육 가구 중 기초수급자, 차상위계층, 한부모가족, 기준 중위 80% 이하 다자녀',
+                linkUrl: 'gov-parent.html',
+                calcText: '기저귀 바우처 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['기저귀지원', '분유지원', '국민행복카드', '영아바우처', '기저귀'],
+                match: (u) => u.family === 'infant' && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'infertility_support',
+                name: '난임부부 시술비 지원 (소득제한 폐지, 회당 최대 110만원)',
+                dept: '보건복지부 / 지자체',
+                badge: '회당 최대 110만',
+                amountNum: 2200000,
+                amountText: '신선배아 최대 110만, 동결배아 최대 50만, 인공수정 최대 30만 원 (최대 25회)',
+                summary: '저출산 극복을 위해 부부 소득 기준을 전면 폐지하고 난임 시술 본인부담금 및 비급여 지원',
+                req: '법적 혼인 상태 또는 사실혼 관계의 난임 진단 부부 (소득 무관)',
+                linkUrl: 'gov-parent.html',
+                calcText: '난임 지원금 계산기',
+                officialName: '정부24 신청 바로가기',
+                officialUrl: 'https://www.gov.kr',
+                keywords: ['난임지원', '시험관', '인공수정', '난임시술', '임신지원'],
+                match: (u) => u.family === 'newlywed' || u.family === 'single'
+            },
+            {
+                id: 'durunuri',
+                name: '두루누리 사회보험료 지원 (국민연금·고용보험 80% 지원)',
+                dept: '고용노동부',
+                badge: '사회보험 80% 감면',
+                amountNum: 1150000,
+                amountText: '근로자와 사업주가 부담하는 국민연금·고용보험료의 80% 국가 지원',
+                summary: '소규모 사업장 저임금 근로자의 사회안전망 강화를 위해 보험료의 80%를 국가가 직접 대납',
+                req: '근로자 수 10인 미만 사업장, 월평균보수 270만 원 미만 신규 가입 근로자',
+                linkUrl: 'salary.html',
+                calcText: '4대보험 감면 계산기',
+                officialName: '4대사회보험 연계센터 바로가기',
+                officialUrl: 'https://www.4insure.or.kr',
+                keywords: ['두루누리', '사회보험지원', '국민연금감면', '고용보험지원', '소규모사업장'],
+                match: (u) => (u.job === 'employee' || u.job === 'part_time') && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'small_biz_electricity',
+                name: '소상공인 전기요금 특별지원 (최대 20만원)',
+                dept: '중소벤처기업부',
+                badge: '전기료 20만원',
+                amountNum: 200000,
+                amountText: '사업자당 최대 20만 원 전기요금 직접 차감 및 환급',
+                summary: '고물가·고금리로 경영난을 겪는 영세 소상공인의 고정비 부담 경감을 위해 전기료 지원',
+                req: '연매출 6,000만 원 이하 사업자, 일반용·산업용 등 전기를 사용하는 활동 개인·법인사업자',
+                linkUrl: 'hourly-wage.html',
+                calcText: '소상공인 지원금 계산기',
+                officialName: '소상공인전기요금특별지원 바로가기',
+                officialUrl: 'https://www.kised.or.kr',
+                keywords: ['소상공인', '전기요금', '전기세지원', '영세자영업자', '사업자지원'],
+                match: (u) => u.job === 'business' && (u.income === 'low' || u.income === 'under36')
+            },
+            {
+                id: 'postpartum_care',
+                name: '산모·신생아 건강관리 지원 (산후도우미 바우처)',
+                dept: '보건복지부',
+                badge: '바우처 50만~150만',
+                amountNum: 1000000,
+                amountText: '전문 산후도우미 파견 서비스 비용의 약 50%~80% 정부 지원',
+                summary: '출산 가정에 건강관리사가 방문하여 산모의 산후 회복과 신생아 양육을 돕는 바우처',
+                req: '출산(예정) 가정 중 기준 중위소득 150% 이하 가구 (지자체별 소득 예외 지원 확대)',
+                linkUrl: 'gov-parent.html',
+                calcText: '산후조리 바우처 계산기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['산후도우미', '산모건강관리', '신생아도우미', '산후조리', '출산바우처'],
+                match: (u) => u.family === 'infant'
+            },
+            {
+                id: 'childcare_service',
+                name: '아이돌봄 서비스 정부지원 (시간당 최대 85% 지원)',
+                dept: '여성가족부',
+                badge: '돌봄비 최대 85%',
+                amountNum: 2400000,
+                amountText: '소득 유형에 따라 시간당 정부지원금 1,500원 ~ 9,800원 차등 지원',
+                summary: '부모의 맞벌이 등으로 양육 공백이 발생한 가정에 아이돌보미가 찾아가는 돌봄 서비스',
+                req: '만 12세 이하 아동 양육 가구 중 양육공백 발생 가정 (소득 기준에 따라 가·나·다·라형 차등)',
+                linkUrl: 'gov-parent.html',
+                calcText: '아이돌봄료 계산기',
+                officialName: '아이돌봄서비스 공식 바로가기',
+                officialUrl: 'https://www.idolbom.go.kr',
+                keywords: ['아이돌봄', '돌보미', '양육공백', '아이돌봄서비스', '맞벌이돌봄'],
+                match: (u) => (u.family === 'infant' || u.family === 'child') && (u.job === 'employee' || u.job === 'business')
+            },
+            {
+                id: 'telecom_discount',
+                name: '취약계층 통신요금 감면 (월 최대 33,500원)',
+                dept: '과학기술정보통신부',
+                badge: '월 최대 3.3만원 할인',
+                amountNum: 402000,
+                amountText: '기본료 최대 26,000원 면제 + 통화료 50% 감면 (월 최대 33,500원 할인)',
+                summary: '기초생활수급자, 차상위계층, 장애인, 국가유공자, 기초연금 수급자 대상 휴대폰 요금 감면',
+                req: '생계·의료·주거·교육급여 수급자, 차상위계층, 기초연금 수령 어르신',
+                linkUrl: 'gov-median.html',
+                calcText: '통신비 감면 계산기',
+                officialName: '정부24 신청 바로가기',
+                officialUrl: 'https://www.gov.kr',
+                keywords: ['통신비감면', '휴대폰요금할인', '통신요금', '취약계층통신', '기초연금할인'],
+                match: (u) => u.income === 'low' || u.age === 'senior'
+            },
+            {
+                id: 'long_term_care',
+                name: '노인장기요양보험 재가급여 (요양비 85% 국가부담)',
+                dept: '보건복지부 / 국민건강보험',
+                badge: '국가부담 85%',
+                amountNum: 6000000,
+                amountText: '방문요양, 주야간보호, 방문목욕 서비스 이용료의 85% 건강보험 지원',
+                summary: '고령이나 노인성 질병으로 일상생활을 혼자 수행하기 어려운 어르신께 장기요양 서비스 제공',
+                req: '만 65세 이상 또는 만 65세 미만 노인성 질환자 중 장기요양 1~5등급 판정자',
+                linkUrl: 'gov-median.html',
+                calcText: '장기요양 모의판정',
+                officialName: '국민건강보험공단 바로가기',
+                officialUrl: 'https://www.nhis.or.kr',
+                keywords: ['장기요양', '노인요양', '방문요양', '요양등급', '어르신돌봄'],
+                match: (u) => u.age === 'senior'
+            },
+            {
+                id: 'youth_suit_rental',
+                name: '청년 면접정장 무료 대여 지원',
+                dept: '고용노동부 / 지자체',
+                badge: '연 3~5회 무료',
+                amountNum: 300000,
+                amountText: '면접 정장 세트(자켓, 바지/스커트, 셔츠, 넥타이, 구두) 3박 4일 무료 대여',
+                summary: '취업 면접을 앞둔 청년 구직자의 경제적 부담 경감을 위해 맞춤형 면접 정장 무료 대여',
+                req: '만 19~39세 구직 청년 (실제 면접 증빙 서류 제출자)',
+                linkUrl: 'unemployment.html',
+                calcText: '취업비용 절약 가이드',
+                officialName: '온통청년 포털 바로가기',
+                officialUrl: 'https://www.youthcenter.go.kr',
+                keywords: ['면접정장', '정장대여', '청년취업', '면접복장', '취업지원'],
+                match: (u) => u.age === 'youth' && u.job === 'jobless'
+            },
+            {
+                id: 'youth_dream_account',
+                name: '청년주택드림 청약통장 & 우대 대출 (연 2.2%~)',
+                dept: '국토교통부',
+                badge: '최고 4.5% 금리',
+                amountNum: 1800000,
+                amountText: '최대 연 4.5% 고금리 + 당첨 시 분양가의 80%까지 최저 연 2.2% 주택드림대출 연계',
+                summary: '청년의 자산 형성과 내 집 마련을 원스톱으로 연결하는 청년 전용 특화 청약저축',
+                req: '만 19~34세 무주택 청년, 연소득 5,000만 원 이하',
+                linkUrl: 'real-loan.html',
+                calcText: '청약통장 이자 계산기',
+                officialName: '주택도시기금 바로가기',
+                officialUrl: 'https://enhuf.molit.go.kr',
+                keywords: ['청년주택드림', '주택드림청약', '청약통장', '청년청약', '분양대출'],
+                match: (u) => u.age === 'youth' && u.income !== 'over75'
+            },
+            {
+                id: 'medical_subsidy',
+                name: '기초생활보장 의료급여 (병원비 1종·2종 면제 및 경감)',
+                dept: '보건복지부',
+                badge: '진료비 전액수준',
+                amountNum: 5000000,
+                amountText: '1종: 입원비 전액 무료 / 2종: 입원비 10%만 부담 (외래 진료비 1,000원~1,500원)',
+                summary: '생활이 어려운 저소득 국민의 질병 치료를 위해 진료비 대부분을 국가재정으로 지원',
+                req: '소득인정액이 기준 중위소득 40% 이하인 수급권자',
+                linkUrl: 'gov-median.html',
+                calcText: '의료급여 판정기',
+                officialName: '복지로 신청 바로가기',
+                officialUrl: 'https://www.bokjiro.go.kr',
+                keywords: ['의료급여', '병원비면제', '진료비감면', '1종의료급여', '2종의료급여'],
+                match: (u) => u.income === 'low'
+            }
+        ];
+
+        // 필터 선택 상태
+        const userState = {
+            age: 'youth',
+            family: 'single',
+            housing: 'rent',
+            job: 'employee',
+            income: 'low'
+        };
+
+        let searchQuery = '';
+
+        // 필터 버튼 클릭 리스너 연결
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const group = this.dataset.group;
+                const value = this.dataset.value;
+
+                // 같은 그룹 내 다른 버튼 비활성화
+                document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach(b => {
+                    b.classList.remove('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700');
+                    b.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+                });
+
+                // 현재 버튼 활성화
+                this.classList.add('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700');
+                this.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+
+                userState[group] = value;
+                runPolicyMatch();
+            });
+        });
+
+        // 검색어 입력 핸들러
+        function handlePolicySearch(val) {
+            searchQuery = val.trim().toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            runPolicyMatch();
+        }
+
+        // 검색어 초기화
+        function clearSearch() {
+            const input = document.getElementById('policySearchInput');
+            input.value = '';
+            searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            runPolicyMatch();
+        }
+
+        // 인기 키워드 클릭
+        function setSearchTerm(term) {
+            const input = document.getElementById('policySearchInput');
+            input.value = term;
+            handlePolicySearch(term);
+        }
+
+        // 필터 초기화
+        function resetFilters() {
+            userState.age = 'youth';
+            userState.family = 'single';
+            userState.housing = 'rent';
+            userState.job = 'employee';
+            userState.income = 'low';
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const group = btn.dataset.group;
+                const val = btn.dataset.value;
+                if (userState[group] === val) {
+                    btn.classList.add('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700');
+                    btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+                } else {
+                    btn.classList.remove('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700');
+                    btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+                }
+            });
+            clearSearch();
+        }
+
+        // 매칭 실행 함수
+        function runPolicyMatch() {
+            const totalDB = POLICIES.length;
+
+            const matched = POLICIES.filter(p => {
+                // 1. 조건 매칭 검사
+                const conditionPass = p.match(userState);
+
+                // 2. 검색어 매칭 검사
+                if (!searchQuery) return conditionPass;
+
+                const nameMatch = p.name.toLowerCase().includes(searchQuery);
+                const summaryMatch = p.summary.toLowerCase().includes(searchQuery);
+                const deptMatch = p.dept.toLowerCase().includes(searchQuery);
+                const kwMatch = p.keywords && p.keywords.some(k => k.toLowerCase().includes(searchQuery));
+
+                // 검색어가 있을 때는 검색어에 부합하는 정책을 우선 검출 (조건과 함께 만족하거나 검색어 직접 일치)
+                return (nameMatch || summaryMatch || deptMatch || kwMatch);
+            });
+
+            const countEl = document.getElementById('matchCount');
+            const totalEl = document.getElementById('matchTotalAmount');
+            const ratioTextEl = document.getElementById('matchRatioText');
+            const grid = document.getElementById('policyCardsGrid');
+
+            countEl.textContent = `${matched.length}건`;
+            ratioTextEl.textContent = `(전체 ${totalDB}건 중 ${matched.length}건 매칭)`;
+
+            let totalAmt = 0;
+            matched.forEach(p => totalAmt += p.amountNum);
+            totalEl.textContent = `${formatNumber(Math.floor(totalAmt / 10000))}만 원 상당`;
+
+            grid.innerHTML = '';
+
+            if (matched.length === 0) {
+                grid.innerHTML = `
+                    <div class="p-8 bg-white border border-slate-200 rounded-2xl text-center text-slate-500 space-y-2">
+                        <svg class="svg-icon w-8 h-8 text-slate-300 mx-auto" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <p class="font-bold text-base text-slate-700">해당 조건 및 검색어에 직접 매칭되는 지원금이 없습니다.</p>
+                        <p class="text-xs">검색어를 지우시거나 상단의 연령, 주거, 소득 조건을 변경해 보세요.</p>
+                        <button type="button" onclick="resetFilters()" class="mt-3 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold transition hover:bg-blue-700">
+                            조건 초기화하고 전체 보기
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            matched.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-5 sm:p-6 bg-white border border-slate-200 rounded-2xl shadow-xs hover:border-blue-400 hover:shadow-sm transition space-y-4";
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-black shrink-0">${idx + 1}</span>
+                            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded whitespace-nowrap">${p.dept}</span>
+                            <h4 class="font-black text-base sm:text-lg text-slate-900">${p.name}</h4>
+                        </div>
+                        <span class="text-xs font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-md self-start sm:self-auto whitespace-nowrap">${p.badge}</span>
+                    </div>
+
+                    <div class="space-y-1.5 text-xs sm:text-sm">
+                        <div class="flex items-start gap-2">
+                            <span class="font-bold text-slate-900 shrink-0">예상 혜택:</span>
+                            <span class="text-blue-600 font-extrabold">${p.amountText}</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-600">
+                            <span class="font-bold text-slate-900 shrink-0">지원 내용:</span>
+                            <span>${p.summary}</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-500 text-xs pt-1">
+                            <span class="font-bold text-slate-700 shrink-0">자격 요건:</span>
+                            <span>${p.req}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100">
+                        <a href="${p.linkUrl}" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5">
+                            <svg class="svg-icon w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+                            <span>${p.calcText}</span>
+                        </a>
+                        <a href="${p.officialUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs group">
+                            <span>${p.officialName}</span>
+                            <svg class="svg-icon w-3.5 h-3.5 text-blue-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 결과 복사 함수
+        function copyResults() {
+            const totalDB = POLICIES.length;
+            const matched = POLICIES.filter(p => {
+                const conditionPass = p.match(userState);
+                if (!searchQuery) return conditionPass;
+                const nameMatch = p.name.toLowerCase().includes(searchQuery);
+                const summaryMatch = p.summary.toLowerCase().includes(searchQuery);
+                const deptMatch = p.dept.toLowerCase().includes(searchQuery);
+                const kwMatch = p.keywords && p.keywords.some(k => k.toLowerCase().includes(searchQuery));
+                return (nameMatch || summaryMatch || deptMatch || kwMatch);
+            });
+
+            let text = `[위집 2026 정부지원금 매칭 결과 (총 ${totalDB}건 중 ${matched.length}건 매칭)]\n`;
+            text += `선택 조건: ${userState.age} / ${userState.family} / ${userState.housing} / ${userState.job} / ${userState.income}\n`;
+            text += `매칭 정책 총 ${matched.length}건\n\n`;
+            matched.forEach((p, i) => {
+                text += `${i+1}. [${p.dept}] ${p.name}\n- 예상 혜택: ${p.amountText}\n- 지원 내용: ${p.summary}\n- 신청 공식처: ${p.officialName} (${p.officialUrl})\n\n`;
+            });
+            text += `실시간 맞춤 조회: https://wezip.co.kr/gov-finder.html`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("맞춤 지원금 매칭 결과가 클립보드에 복사되었습니다!");
+            }).catch(() => {
+                showToast("복사에 실패했습니다.");
+            });
+        }
+
+        // 최초 1회 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            runPolicyMatch();
+        });
+    </script>
+</body>
+</html>

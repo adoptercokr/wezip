@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026년 연봉 구간별 실수령액 및 4대보험·세금 원천징수 원리 완전 분석 | 위집 (wezip)</title>
+    <meta name="description" content="식대 비과세 20만 원 한도 반영, 2026년 4대보험 개정 요율과 국세청 근로소득 간이세액표에 따른 1인~4인 가구별 실수령액 매트릭스를 정밀 분석합니다.">
+    <link rel="canonical" href="https://wezip.co.kr/blog-salary-guide-2026.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="2026년 연봉 구간별 실수령액 및 4대보험·세금 원천징수 원리 완전 분석 | 위집">
+    <meta property="og:description" content="식대 비과세 20만 원 한도 반영, 2026년 4대보험 개정 요율과 국세청 근로소득 간이세액표에 따른 1인~4인 가구별 실수령액 매트릭스를 정밀 분석합니다.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://wezip.co.kr/blog-salary-guide-2026.html">
+    <meta property="og:site_name" content="위집 (wezip)">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "2026년 연봉 구간별 실수령액 및 4대보험·세금 원천징수 원리 완전 분석",
+      "description": "식대 비과세 20만 원 한도 반영, 2026년 4대보험 개정 요율과 국세청 근로소득 간이세액표에 따른 1인~4인 가구별 실수령액 매트릭스를 정밀 분석합니다.",
+      "author": {
+        "@type": "Organization",
+        "name": "위집 금융편집국",
+        "url": "https://wezip.co.kr/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "위집",
+        "url": "https://wezip.co.kr"
+      },
+      "datePublished": "2026-10-15",
+      "dateModified": "2026-10-15",
+      "mainEntityOfPage": "https://wezip.co.kr/blog-salary-guide-2026.html"
+    }
+    </script>
+</head>
+<body class="bg-[#F4F6F9] min-h-screen text-slate-800 antialiased flex flex-col justify-between">
+
+        <!-- 포털 최상단 슬림 바: 로고, 로고 우측 주메뉴(PC), 모바일 메뉴 토글 -->
+    <header class="bg-[#1E293B] text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 좌측: 로고 + 주메뉴 4개 (PC에서는 한 줄로 로고 바로 오른쪽에 배치) -->
+            <div class="flex items-center gap-6 lg:gap-8 h-full">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="16" y1="14" x2="16" y2="18"></line>
+                            <path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white notranslate" translate="no">위집</span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <!-- PC 주메뉴 (로고 바로 오른쪽에 배치, 단일 가로행 유지 & whitespace-nowrap) -->
+                <nav class="hidden md:flex items-center gap-1 xl:gap-2 h-full text-xs lg:text-sm font-bold whitespace-nowrap">
+                    <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1 font-extrabold border border-emerald-500/30">
+                        <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>지원금 찾기</span>
+                    </a>
+                    <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
+
+                    <!-- 1. 급여·소득 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>급여·소득</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="salary.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">연봉 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">실수령액</span>
+                                </a>
+                                <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>알바·최저시급 계산기</span>
+                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                </a>
+                                <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">퇴사자 실업급여 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                </a>
+                                <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>퇴직금 계산기</span>
+                                    <span class="text-[11px] text-slate-400">실수령액</span>
+                                </a>
+                                <a href="annual-leave.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>연차 일수·수당 계산기</span>
+                                    <span class="text-[11px] text-slate-400">미사용 수당</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 부동산 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>부동산</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="real-transfer-tax.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">내 집 양도세 계산기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
+                                </a>
+                                <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>버팀목 전세대출·HUG 조회</span>
+                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                </a>
+                                <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부동산 복비·취득세 계산기</span>
+                                    <span class="text-[11px] text-slate-400">국토부 상한</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 복지·지원 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>복지·지원</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="gov-finder.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold text-emerald-600">맞춤 지원금 & 정책 찾기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">32대 정책</span>
+                                </a>
+                                <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">청년 지원 대상조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                </a>
+                                <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부모급여·아동수당 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                </a>
+                                <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>근로장려금 수급 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">최대 330만</span>
+                                </a>
+                                <a href="gov-median.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>2026 복지 지원금 자격조회</span>
+                                    <span class="text-[11px] text-slate-400">중위소득</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 대출·금융 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>대출·금융</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">대출이자 & DSR 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                </a>
+                                <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>예·적금 만기이자 계산기</span>
+                                    <span class="text-[11px] text-slate-400">비과세 비교</span>
+                                </a>
+                                <a href="youth-leap.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>청년도약계좌 만기금 조회</span>
+                                    <span class="text-[11px] text-slate-400">기여금 매칭</span>
+                                </a>
+                                <a href="dutch-pay.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>더치페이 N빵 계산기</span>
+                                    <span class="text-[11px] text-slate-400">카톡 1초</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 우측: 모바일 햄버거 메뉴 버튼만 배치하여 공간 100% 확보 (공유 및 불필요한 긴 뱃지 제거) -->
+            <div class="flex items-center">
+                <button type="button" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition" aria-label="메뉴 열기">
+                    <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 반응형 드롭다운 메뉴 (모바일에서 깔끔하게 정돈되어 노출) -->
+        <div id="mobileNavMenu" class="hidden md:hidden bg-[#0F172A] border-t border-slate-800 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+            <!-- 핵심 빠른 링크 -->
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+                <a href="gov-finder.html" class="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+                <a href="blog.html" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 text-blue-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span>금융 칼럼</span>
+                </a>
+            </div>
+
+            <!-- 급여·소득 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">연봉 계산기</a>
+                    <a href="hourly-wage.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">알바·시급</a>
+                    <a href="unemployment.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">퇴사자 실업급여</a>
+                    <a href="severance.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">퇴직금 계산기</a>
+                    <a href="annual-leave.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">연차 일수·수당</a>
+                </div>
+            </div>
+
+            <!-- 부동산·주거 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
+                </div>
+            </div>
+
+            <!-- 정부지원·복지 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">정부지원·복지</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="gov-rent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">청년 지원 대상조회</a>
+                    <a href="gov-parent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">부모급여·아동수당</a>
+                    <a href="gov-subsidy.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">근로장려금 조회</a>
+                    <a href="gov-median.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">복지 지원금 자격</a>
+                </div>
+            </div>
+
+            <!-- 대출·금융 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">대출·금융</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="loan-dsr.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">대출이자 & DSR</a>
+                    <a href="savings.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">예·적금 만기이자</a>
+                    <a href="youth-leap.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">청년도약계좌</a>
+                    <a href="dutch-pay.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">더치페이 N빵</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 본문 아티클 영역 -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- 빵부스러기 네비게이션 -->
+        <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
+            <a href="index.html" class="hover:text-blue-600">홈</a>
+            <span>/</span>
+            <a href="blog.html" class="hover:text-blue-600">금융 칼럼</a>
+            <span>/</span>
+            <span class="text-slate-600 font-semibold truncate">급여 & 세무</span>
+        </nav>
+
+        <!-- 아티클 헤더 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-4">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">급여 & 세무</span>
+                <span class="text-slate-400">·</span>
+                <span class="text-slate-500 font-medium">2026-10-15</span>
+                <span class="text-slate-400">·</span>
+                <span class="text-slate-500 font-medium">읽는 시간: 약 5분</span>
+                <span class="text-slate-400">·</span>
+                <span class="text-slate-600 font-semibold">작성: 위집 금융편집국</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
+                2026년 연봉 구간별 실수령액 및 4대보험·세금 원천징수 원리 완전 분석
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed pt-1 border-t border-slate-100">
+                식대 비과세 20만 원 한도 반영, 2026년 4대보험 개정 요율과 국세청 근로소득 간이세액표에 따른 1인~4인 가구별 실수령액 매트릭스를 정밀 분석합니다.
+            </p>
+
+            <!-- 관련 계산기 바로가기 배너 -->
+            <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+                <div class="flex items-center gap-2 text-xs sm:text-sm text-blue-900 font-bold">
+                    <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+                    <span>본문 내용을 내 상황에 맞게 1초 만에 무료로 직접 계산해 보세요!</span>
+                </div>
+                <a href="salary.html" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm shrink-0 text-center">
+                    위집 연봉 실수령액 계산기 바로가기 &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- 본문 내용 (마크다운 스타일 HTML) -->
+        <article class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 text-sm sm:text-base text-slate-700 leading-relaxed">
+            
+            <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 연봉 협상 후 내 통장에 실제로 들어오는 돈은 얼마일까?</h2>
+            <p>
+                새해가 되거나 이직 시 연봉 협상을 마친 뒤 가장 먼저 궁금한 것은 "그래서 내 통장에 찍히는 월 실수령액이 정확히 얼마인가?"입니다. 계약서에 적힌 세전 연봉 5,000만 원을 단순히 12개월로 나누면 월 416만 6,666원이지만, 실제 통장에는 350만 원 남짓만 입금됩니다. 무려 60만 원이 넘는 차액이 발생하는 이유는 <strong>4대 사회보험(국민연금, 건강보험, 장기요양보험, 고용보험)</strong>과 <strong>근로소득세 및 지방소득세</strong>가 원천징수되기 때문입니다.
+            </p>
+
+            <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-4">2. 2026년 근로자 부담 4대보험 공제 요율 총정리</h2>
+            <p>
+                2026년 기준 대한민국 근로자의 월 급여에서 원천징수되는 4대 사회보험 요율은 다음과 같습니다. 식대 등 비과세액을 제외한 '과세대상 급여'를 기준으로 부과됩니다.
+            </p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs sm:text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+                    <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-3">보험 종류</th>
+                            <th class="p-3">근로자 부담 요율</th>
+                            <th class="p-3">사업주 부담 요율</th>
+                            <th class="p-3">합계</th>
+                            <th class="p-3">특이사항</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">국민연금</td>
+                            <td class="p-3 font-bold text-blue-600">4.5%</td>
+                            <td class="p-3">4.5%</td>
+                            <td class="p-3">9.0%</td>
+                            <td class="p-3">기준소득월액 상한(월 617만 원) 적용 시 월 최대 277,650원</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">건강보험</td>
+                            <td class="p-3 font-bold text-blue-600">3.545%</td>
+                            <td class="p-3">3.545%</td>
+                            <td class="p-3">7.09%</td>
+                            <td class="p-3">보수월액 기준 전액 부과</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">노인장기요양보험</td>
+                            <td class="p-3 font-bold text-blue-600">건보료의 12.95%</td>
+                            <td class="p-3">동일</td>
+                            <td class="p-3">-</td>
+                            <td class="p-3">산정된 건강보험료의 12.95% 부과 (과세급여의 약 0.459%)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">고용보험</td>
+                            <td class="p-3 font-bold text-blue-600">0.9%</td>
+                            <td class="p-3">1.15%~1.75%</td>
+                            <td class="p-3">-</td>
+                            <td class="p-3">실업급여 재원 및 고용안정 기금</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-4">3. 소득세법 제12조 식대 20만 원 비과세의 마법</h2>
+            <p>
+                급여 명세서에서 반드시 확인해야 할 절세 핵심 항목은 <strong>비과세 식대(월 최대 20만 원)</strong>입니다. 식대 20만 원은 소득세 과세표준에서 제외될 뿐 아니라 국민연금, 건강보험, 고용보험 산정 기준 보수에서도 전액 제외됩니다. 월 20만 원 비과세가 정상 적용되면 4대보험에서 매월 약 1만 8,000원, 소득세 및 지방세에서 월 1만~3만 원가량 줄어들어 <strong>연간 약 30만~50만 원의 순수 실수령액 증가 효과</strong>가 발생합니다.
+            </p>
+
+            <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-4">4. 2026 연봉 구간별 월 실수령액 비교 매트릭스 (1인 가구 기준)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs sm:text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+                    <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-3">연봉 (세전)</th>
+                            <th class="p-3">월 세전 급여</th>
+                            <th class="p-3">4대보험 공제</th>
+                            <th class="p-3">소득세+지방세</th>
+                            <th class="p-3 text-blue-600">월 예상 실수령액</th>
+                            <th class="p-3">실수령 비율</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">3,000만 원</td>
+                            <td class="p-3">250만 원</td>
+                            <td class="p-3">215,970원</td>
+                            <td class="p-3">37,880원</td>
+                            <td class="p-3 text-blue-600 font-bold">2,246,150원</td>
+                            <td class="p-3">89.8%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">4,000만 원</td>
+                            <td class="p-3">333.3만 원</td>
+                            <td class="p-3">294,220원</td>
+                            <td class="p-3">109,230원</td>
+                            <td class="p-3 text-blue-600 font-bold">2,929,880원</td>
+                            <td class="p-3">87.9%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">5,000만 원</td>
+                            <td class="p-3">416.7만 원</td>
+                            <td class="p-3">372,480원</td>
+                            <td class="p-3">219,770원</td>
+                            <td class="p-3 text-blue-600 font-bold">3,574,410원</td>
+                            <td class="p-3">85.8%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">7,000만 원</td>
+                            <td class="p-3">583.3만 원</td>
+                            <td class="p-3">529,000원</td>
+                            <td class="p-3">507,760원</td>
+                            <td class="p-3 text-blue-600 font-bold">4,796,570원</td>
+                            <td class="p-3">82.2%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">1억 원</td>
+                            <td class="p-3">833.3만 원</td>
+                            <td class="p-3">717,440원</td>
+                            <td class="p-3">1,133,520원</td>
+                            <td class="p-3 text-blue-600 font-bold">6,482,370원</td>
+                            <td class="p-3">77.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-4">5. 연말정산 환급금을 극대화하는 3대 팁</h2>
+            <p>
+                매월 급여에서 떼이는 소득세는 '국세청 간이세액표'에 따른 추정치일 뿐이며, 진짜 세금은 다음 해 1~2월 연말정산을 통해 확정됩니다. 연간 실수령액을 높이기 위해서는 ① 체크카드 및 현금영수증 소득공제(30%), ② 연금저축 및 IRP 납입 세액공제(최대 900만 원 납입 시 최대 148만 5천 원 환급), ③ 주택청약종합저축 납입 공제(연 300만 원 한도 내 40%인 120만 원 소득공제)를 반드시 활용해야 합니다.
+            </p>
+
+        </article>
+
+        <!-- 본문 하단 관련 계산기 카드 -->
+        <div class="mt-8 p-6 bg-slate-900 text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-emerald-400">100% 무료 시뮬레이션</span>
+                <h3 class="text-lg font-black mt-1">지금 바로 내 맞춤 수치를 시뮬레이션해 보세요</h3>
+                <p class="text-xs text-slate-300 mt-0.5">회원가입 없이 2026년 최신 공식 기준에 맞춰 1초 만에 정확한 수치를 산출합니다.</p>
+            </div>
+            <a href="salary.html" class="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs sm:text-sm transition shadow-sm shrink-0">
+                위집 연봉 실수령액 계산기 실행하기
+            </a>
+        </div>
+
+        <!-- [하단 스폰서 광고 배너 영역 (반응형 728x90, 300x250)] -->
+        <section class="mt-8 mb-4" aria-label="스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-4 sm:p-5 text-center shadow-xs flex flex-col items-center justify-center min-h-[100px] sm:min-h-[120px] hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">ADVERTISEMENT</span>
+                <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span class="text-slate-700 font-bold">스폰서 광고 영역</span>
+                    </div>
+                    <span class="text-slate-400 text-xs">(구글 애드센스 반응형 728×90, 300×250 / 카카오 애드핏 코드 삽입)</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-700">위집 (wezip) - 금융·세무·정책 지식 칼럼</p>
+            <p>본 포털의 모든 아티클은 2026년 대한민국 관계 법령과 공식 정부 고시를 바탕으로 정기 갱신됩니다.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600 py-1.5 border-y border-slate-100 my-2">
+                <a href="about.html" class="hover:text-blue-600 font-semibold transition">서비스 소개</a>
+                <span class="text-slate-300">·</span>
+                <a href="blog.html" class="hover:text-blue-600 font-semibold transition">칼럼 전체보기</a>
+                <span class="text-slate-300">·</span>
+                <a href="terms.html" class="hover:text-blue-600 font-semibold transition">이용약관 및 법적 면책</a>
+                <span class="text-slate-300">·</span>
+                <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
+            </div>
+            <p class="text-slate-400">© 2026 wezip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast"></div>
+    <script src="common.js"></script>
+</body>
+</html>

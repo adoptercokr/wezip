@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>2026 부모급여·아동수당 계산기 - 생년월일·자녀순위·지역별 지원금 조회 | 위집</title>
+    <meta name="description" content="2026년 최신 정부 출산·양육 지원금! 아이 생년월일 입력 시 현재 월령별 이번 달 수령액, 남은 잔여 지원금, 첫만남이용권(200~300만원), 부모급여(0세 월 100만, 1세 월 50만), 아동수당, 17개 지자체별 출산지원금까지 만 8세 총 3,000만원+ 로드맵을 1초 만에 계산합니다.">
+    <meta name="keywords" content="2026 부모급여 계산기, 아동수당 나이 생년월일, 첫만남이용권 금액, 지자체 출산지원금, 부모급여 100만원, 만 0세 1세 지원금, 출산축하금, 복지로 모의계산">
+    <link rel="canonical" href="https://wezip.co.kr/gov-parent.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026 부모급여 & 아동수당 생년월일별 계산기 - 위집">
+    <meta property="og:description" content="아이 생년월일·순위·지역 입력! 이번 달 입금액부터 만 8세까지 총 3,000만원+ 지원금 로드맵 실시간 산출">
+    <meta property="og:url" content="https://wezip.co.kr/gov-parent.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "부모급여 및 아동수당 생년월일별 계산기",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "All",
+          "url": "https://wezip.co.kr/gov-parent.html"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "부모급여는 생년월일 기준으로 언제까지 지급되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "부모급여는 출생월부터 만 1세 생일 전월(0~11개월)까지 월 100만원, 만 1세 생일 달부터 만 2세 생일 전월(12~23개월)까지 월 50만원이 지급되어 총 24개월간 지급됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "아동수당과 부모급여는 중복으로 받을 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "네, 100% 중복 수령이 가능합니다. 만 0세의 경우 부모급여 100만원에 아동수당 10만원이 더해져 매월 110만원이 계좌로 입금됩니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col justify-between">
+
+        <!-- 포털 최상단 슬림 바: 로고, 로고 우측 주메뉴(PC), 모바일 메뉴 토글 -->
+    <header class="bg-[#1E293B] text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 좌측: 로고 + 주메뉴 4개 (PC에서는 한 줄로 로고 바로 오른쪽에 배치) -->
+            <div class="flex items-center gap-6 lg:gap-8 h-full">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="16" y1="14" x2="16" y2="18"></line>
+                            <path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white notranslate" translate="no">위집</span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <!-- PC 주메뉴 (로고 바로 오른쪽에 배치, 단일 가로행 유지 & whitespace-nowrap) -->
+                <nav class="hidden md:flex items-center gap-1 xl:gap-2 h-full text-xs lg:text-sm font-bold whitespace-nowrap">
+                    <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1 font-extrabold border border-emerald-500/30">
+                        <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>지원금 찾기</span>
+                    </a>
+                    <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
+
+                    <!-- 1. 급여·소득 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>급여·소득</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="salary.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">연봉 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">실수령액</span>
+                                </a>
+                                <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>알바·최저시급 계산기</span>
+                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                </a>
+                                <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">퇴사자 실업급여 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                </a>
+                                <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>퇴직금 계산기</span>
+                                    <span class="text-[11px] text-slate-400">실수령액</span>
+                                </a>
+                                <a href="annual-leave.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>연차 일수·수당 계산기</span>
+                                    <span class="text-[11px] text-slate-400">미사용 수당</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 부동산 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>부동산</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="real-transfer-tax.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">내 집 양도세 계산기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
+                                </a>
+                                <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>버팀목 전세대출·HUG 조회</span>
+                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                </a>
+                                <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부동산 복비·취득세 계산기</span>
+                                    <span class="text-[11px] text-slate-400">국토부 상한</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 복지·지원 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>복지·지원</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="gov-finder.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold text-emerald-600">맞춤 지원금 & 정책 찾기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">32대 정책</span>
+                                </a>
+                                <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">청년 지원 대상조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                </a>
+                                <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부모급여·아동수당 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                </a>
+                                <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>근로장려금 수급 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">최대 330만</span>
+                                </a>
+                                <a href="gov-median.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>2026 복지 지원금 자격조회</span>
+                                    <span class="text-[11px] text-slate-400">중위소득</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 대출·금융 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>대출·금융</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">대출이자 & DSR 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                </a>
+                                <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>예·적금 만기이자 계산기</span>
+                                    <span class="text-[11px] text-slate-400">비과세 비교</span>
+                                </a>
+                                <a href="youth-leap.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>청년도약계좌 만기금 조회</span>
+                                    <span class="text-[11px] text-slate-400">기여금 매칭</span>
+                                </a>
+                                <a href="dutch-pay.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>더치페이 N빵 계산기</span>
+                                    <span class="text-[11px] text-slate-400">카톡 1초</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 우측: 모바일 햄버거 메뉴 버튼만 배치하여 공간 100% 확보 (공유 및 불필요한 긴 뱃지 제거) -->
+            <div class="flex items-center">
+                <button type="button" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition" aria-label="메뉴 열기">
+                    <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 반응형 드롭다운 메뉴 (모바일에서 깔끔하게 정돈되어 노출) -->
+        <div id="mobileNavMenu" class="hidden md:hidden bg-[#0F172A] border-t border-slate-800 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+            <!-- 핵심 빠른 링크 -->
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+                <a href="gov-finder.html" class="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+                <a href="blog.html" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 text-blue-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span>금융 칼럼</span>
+                </a>
+            </div>
+
+            <!-- 급여·소득 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">연봉 계산기</a>
+                    <a href="hourly-wage.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">알바·시급</a>
+                    <a href="unemployment.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">퇴사자 실업급여</a>
+                    <a href="severance.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">퇴직금 계산기</a>
+                    <a href="annual-leave.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">연차 일수·수당</a>
+                </div>
+            </div>
+
+            <!-- 부동산·주거 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
+                </div>
+            </div>
+
+            <!-- 정부지원·복지 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">정부지원·복지</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="gov-rent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">청년 지원 대상조회</a>
+                    <a href="gov-parent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">부모급여·아동수당</a>
+                    <a href="gov-subsidy.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">근로장려금 조회</a>
+                    <a href="gov-median.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">복지 지원금 자격</a>
+                </div>
+            </div>
+
+            <!-- 대출·금융 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">대출·금융</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="loan-dsr.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">대출이자 & DSR</a>
+                    <a href="savings.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">예·적금 만기이자</a>
+                    <a href="youth-leap.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">청년도약계좌</a>
+                    <a href="dutch-pay.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">더치페이 N빵</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black mb-2 shadow-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>회원가입 없는 100% 무료 모의조회</span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-600 font-medium">보건복지부 2026 아동양육 지원체계</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">부모급여 & 아동수당 무료 정밀 모의계산기</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                아이 생년월일, 자녀 순위, 거주 지역(지자체)을 반영하여 <strong>이번 달 입금액</strong>과 <strong>남은 수령액</strong>, 만 8세까지 <strong>총 지원금 로드맵</strong>을 산출합니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- 좌측 입력 폼 -->
+            <div class="lg:col-span-6 space-y-4">
+                <div class="calc-card p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+                    <!-- 1. 아동 출생 상태 및 생년월일 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">아동 출생 상태</label>
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <label class="flex items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-blue-500 cursor-pointer">
+                                <input type="radio" name="bornStatus" value="born" checked class="w-4 h-4 accent-blue-600">
+                                <span class="text-xs font-bold text-slate-800">이미 출생함 (생년월일 입력)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:border-blue-500">
+                                <input type="radio" name="bornStatus" value="expect" class="w-4 h-4 accent-blue-600">
+                                <span class="text-xs font-bold text-slate-800">출생 예정 (임신 중)</span>
+                            </label>
+                        </div>
+
+                        <!-- 생년월일 입력란 -->
+                        <div id="birthDateGroup">
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-xs font-bold text-slate-700" id="birthDateLabel">아동 생년월일</label>
+                                <span class="text-xs font-bold text-blue-600" id="currentAgeText">생후 5개월 (만 0세)</span>
+                            </div>
+                            <input type="date" id="birthDateInput" value="2026-05-15"
+                                   class="w-full text-base font-bold text-slate-900 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- 2. 자녀 출생 순위 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">자녀 출생 순위 (첫만남이용권 차등)</label>
+                        <select id="childRank" class="w-full text-sm font-bold text-slate-900 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="first" selected>첫째아 (첫만남이용권 200만원)</option>
+                            <option value="second">둘째아 (첫만남이용권 300만원)</option>
+                            <option value="third">셋째아 이상 다자녀 (첫만남이용권 300만원 + 다자녀 가산)</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. 거주 지역 (지자체별 출산지원금/산후조리비) -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-bold text-slate-700">거주 지역 (17개 시도별 지자체 지원금)</label>
+                            <span class="text-xs text-slate-500" id="regionSubsidyDesc">서울 평균 약 220만원</span>
+                        </div>
+                        <select id="regionSelect" class="w-full text-sm font-semibold text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="seoul" selected>서울특별시 (산후조리경비 100만 + 교통비 70만 + 구별 축하금)</option>
+                            <option value="gyeonggi">경기도 (산후조리비 50만 + 시군별 출산축하금)</option>
+                            <option value="incheon">인천광역시 (1억+ 아이드림 / 천사지원금 연 120만 등 특화)</option>
+                            <option value="busan">부산광역시 (출산지원금 둘째 100만 / 셋째 300만)</option>
+                            <option value="daegu">대구광역시 (첫째 50만 / 둘째 100만 / 셋째 200만)</option>
+                            <option value="daejeon">대전광역시 (대전형 양육수당 및 출산장려금)</option>
+                            <option value="gwangju">광주광역시 (출생축하금 및 육아수당)</option>
+                            <option value="sejong">세종특별자치시 (출산축하금 120만원)</option>
+                            <option value="gangwon">강원특별자치도 (육아기본수당 및 시군 지원금)</option>
+                            <option value="chungbuk">충청북도 (출산육아수당 분할 지급)</option>
+                            <option value="chungnam">충청남도 (충남 아기수당 및 출산장려금)</option>
+                            <option value="jeonbuk">전북특별자치도 (시군별 첫째~셋째 지원금)</option>
+                            <option value="jeonnam">전라남도 (공공산후조리원 및 출산축하금)</option>
+                            <option value="gyeongbuk">경상북도 (출산장려금 및 다자녀 지원)</option>
+                            <option value="gyeongnam">경상남도 (시군별 출산축하금 및 바우처)</option>
+                            <option value="jeju">제주특별자치도 (첫째 50만 / 둘째 200만 등 주거지원)</option>
+                            <option value="other">기타 지역 (기본 전국 공통 기준)</option>
+                        </select>
+                    </div>
+
+                    <!-- 4. 양육 형태 (가정양육 vs 어린이집) -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">양육 형태 (만 0~1세)</label>
+                        <select id="careType" class="w-full text-sm font-semibold text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="home" selected>가정 양육 (부모급여 전액 100% 현금 통장 수령)</option>
+                            <option value="daycare">어린이집 이용 (보육료 바우처 차감 후 0세 차액 현금 지급)</option>
+                        </select>
+                    </div>
+
+                    <!-- 법정 기준 안내 -->
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 space-y-1.5">
+                        <div class="font-bold text-slate-900 flex items-center gap-1">
+                            <svg class="svg-icon w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <span>2026 정부 지원금 산정 공식</span>
+                        </div>
+                        <div>• <strong>만 0세(0~11개월)</strong>: 부모급여 월 100만원 + 아동수당 월 10만원 = <strong>매월 110만원</strong></div>
+                        <div>• <strong>만 1세(12~23개월)</strong>: 부모급여 월 50만원 + 아동수당 월 10만원 = <strong>매월 60만원</strong></div>
+                        <div>• <strong>만 2~7세(24~95개월)</strong>: 아동수당 매월 10만원 (총 96개월간 지급)</div>
+                    </div>
+
+                    <!-- 지원금 조회하기 버튼 -->
+                    <div class="mt-4 pt-3 border-t border-slate-100">
+                        <button type="button" onclick="calculateParent(); showToast('지원금 로드맵이 산출되었습니다.');"
+                                class="w-full py-3 px-4 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+                            <svg class="svg-icon w-4 h-4 text-white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <span>지원금 로드맵 조회하기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 우측 결과 리포트 -->
+            <div class="lg:col-span-6 space-y-4">
+                <!-- 메인 결과 카드 -->
+                <div class="calc-card p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
+                    <!-- 상단 강조: 이번 달 바로 받는 금액 -->
+                    <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-4 mb-5">
+                        <div class="flex justify-between items-center text-xs text-blue-800 font-bold mb-1">
+                            <span>이번 달 통장 입금 예정액</span>
+                            <span id="currentStatusBadge" class="px-2 py-0.5 rounded bg-blue-600 text-white text-[11px]">0세 구간</span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl sm:text-4xl font-black text-blue-700 tracking-tight" id="thisMonthAmount">1,100,000</span>
+                            <span class="text-sm font-bold text-blue-900">원 / 월</span>
+                        </div>
+                        <div class="text-[11px] text-blue-600 mt-1" id="thisMonthBreakdown">
+                            부모급여 100만원 + 아동수당 10만원 합산
+                        </div>
+                    </div>
+
+                    <!-- 총 지원금액 -->
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">만 8세까지 총 누적 정부지원금</div>
+                    <div class="mt-1 flex items-baseline gap-1">
+                        <span class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight" id="parentTotalGrant">31,800,000</span>
+                        <span class="text-base font-bold text-slate-600">원</span>
+                    </div>
+
+                    <div class="text-xs text-slate-500 mt-1">
+                        현재 월령 이후 남은 잔여 지원금: <strong class="text-slate-800 font-bold" id="remainingGrantText">27,400,000원</strong>
+                    </div>
+
+                    <!-- 상세 항목별 분해 -->
+                    <div class="mt-5 space-y-2 text-xs pt-4 border-t border-slate-100">
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">첫만남이용권 (국민행복카드 바우처)</span>
+                            <span class="font-bold text-slate-900" id="resFirstMeet">2,000,000원</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">지자체 출산지원금 & 산후조리비 (추정)</span>
+                            <span class="font-bold text-emerald-700" id="resRegionGrant">2,200,000원</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">만 0세 부모급여 (12개월)</span>
+                            <span class="font-bold text-slate-900" id="resAgeZero">12,000,000원 (월 100만)</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">만 1세 부모급여 (12개월)</span>
+                            <span class="font-bold text-slate-900" id="resAgeOne">6,000,000원 (월 50만)</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-slate-600">아동수당 (총 96개월, 만 8세 미만)</span>
+                            <span class="font-bold text-slate-900" id="resChildAllowance">9,600,000원 (월 10만)</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="copyParentResult()" class="w-full py-3 px-4 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+                            <svg class="svg-icon w-4 h-4 text-white" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>지원금 로드맵 결과 복사하기</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 신청 필수 팁 -->
+                <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm text-xs text-slate-600 space-y-2">
+                    <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>출생 후 60일 이내 신청 필수 (소급 적용)</span>
+                    </div>
+                    <p>• <strong>행복출산 원스톱 서비스</strong>: 주민센터 출생신고 시 한 번에 신청하거나 정부24 / 복지로 웹사이트에서 온라인으로 신청할 수 있습니다.</p>
+                    <p>• <strong>소급 지원</strong>: 출생일로부터 60일 이내에 신청해야 출생월부터 밀린 금액을 전부 소급해서 지급받을 수 있습니다. 60일이 지나면 신청월부터만 지급됩니다.</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- [전문가 심층 가이드 & 2026 법령 해설 리포트] -->
+        <article class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10">
+            <div>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">2026 영유아 양육지원 가이드</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-2">2026년 대한민국 출산·양육 지원금(부모급여·첫만남이용권·아동수당) 통합 수급 가이드</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">보건복지부 아동복지정책과 및 저출산·고령사회위원회 2026년 육아지원 종합계획 기준</p>
+            </div>
+
+            <!-- 섹션 1: 3대 국가지원금 체계 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>1. 2026년 정부 3대 영유아 국가지원금 핵심 체계 총정리</span>
+                </h3>
+                <p>
+                    대한민국 정부는 출산 가구의 초기 양육 비용 부담을 획기적으로 줄이기 위해 소득·재산 기준 없이 모든 아동에게 보편적으로 지급되는 3대 복지 급여(부모급여, 첫만남이용권, 아동수당)를 운영하고 있습니다.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 text-xs">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">부모급여 (만 0~1세)</div>
+                        <p class="text-slate-600 leading-relaxed">• <strong>0세(0~11개월)</strong>: 매월 <strong>100만 원</strong> (연 1,200만 원)<br>• <strong>1세(12~23개월)</strong>: 매월 <strong>50만 원</strong> (연 600만 원)<br>• 매월 25일 신청 계좌로 현금 입금</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">첫만남이용권 (출생 시 바우처)</div>
+                        <p class="text-slate-600 leading-relaxed">• <strong>첫째아</strong>: <strong>200만 원</strong> 바우처<br>• <strong>둘째아 이상</strong>: <strong>300만 원</strong> 바우처<br>• 국민행복카드 포인트로 지급, 산후조리원 및 육아용품 등 사용</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">아동수당 (만 8세 미만)</div>
+                        <p class="text-slate-600 leading-relaxed">• 출생월부터 <strong>만 8세 생일 전월(0~95개월)</strong>까지<br>• 아동 1인당 매월 <strong>10만 원</strong> 현금 지급<br>• 8년간 총 960만 원 확정 지급</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 2: 0~7세 생애주기별 누적 지원금 로드맵 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>2. 출생부터 초등학교 입학 전까지 생애주기별 누적 수령액 매트릭스</span>
+                </h3>
+                <p>
+                    2026년 태어난 첫째아가 만 8세 미만까지 성장하는 동안 정부로부터 순수하게 직접 지급받는 현금 및 바우처 누적 총액은 <strong>최소 2,960만 원</strong>에 달합니다. (둘째아의 경우 첫만남이용권 100만 원 증액으로 총 3,060만 원 + 지자체 추가 축하금 지원)
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">연령 단계</th>
+                                <th class="p-3">부모급여</th>
+                                <th class="p-3">첫만남이용권</th>
+                                <th class="p-3">아동수당</th>
+                                <th class="p-3 text-blue-600">해당 연령 연간 수령액</th>
+                                <th class="p-3">누적 수령 총액</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">0세 (생후 0~11개월)</td>
+                                <td class="p-3">1,200만 원 (100만×12)</td>
+                                <td class="p-3">200만 원 (바우처)</td>
+                                <td class="p-3">120만 원 (10만×12)</td>
+                                <td class="p-3 text-blue-600 font-bold">1,520만 원</td>
+                                <td class="p-3 font-bold">1,520만 원</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">1세 (생후 12~23개월)</td>
+                                <td class="p-3">600만 원 (50만×12)</td>
+                                <td class="p-3 text-slate-400">-</td>
+                                <td class="p-3">120만 원 (10만×12)</td>
+                                <td class="p-3 text-blue-600 font-bold">720만 원</td>
+                                <td class="p-3 font-bold">2,240만 원</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">2세 ~ 7세 (각 1년간)</td>
+                                <td class="p-3 text-slate-400">-</td>
+                                <td class="p-3 text-slate-400">-</td>
+                                <td class="p-3">각 120만 원/년</td>
+                                <td class="p-3 text-blue-600 font-bold">연 120만 원 (총 720만)</td>
+                                <td class="p-3 font-bold text-blue-600">총 2,960만 원 (첫째아)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 어린이집 이용 시 보육료 바우처 차액 지급 원리 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>3. 어린이집 등원 시 보육료 바우처 전환 및 차액 현금 지급 공식</span>
+                </h3>
+                <p>
+                    가정에서 양육하지 않고 어린이집에 보낼 경우, 부모급여는 보육료 바우처로 우선 전환됩니다. 이때 <strong>부모급여 지원액이 정부 기본 보육료 지원 단가보다 큰 경우 그 차액을 부모 계좌로 현금 입금</strong>해 드립니다.
+                </p>
+                <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl text-xs sm:text-sm text-slate-800 space-y-2">
+                    <div class="font-bold text-blue-900">어린이집 이용 시 부모급여 차액 수령 규칙:</div>
+                    <p class="text-slate-700">• <strong>만 0세 아동 (부모급여 100만 원)</strong>: 어린이집 보육료 바우처(약 54만 원 결제) + <strong>부모 통장에 차액 약 46만 원 현금 지급</strong></p>
+                    <p class="text-slate-700">• <strong>만 1세 아동 (부모급여 50만 원)</strong>: 보육료 바우처 단가(약 47만 5천 원 결제) + <strong>부모 통장에 차액 약 2만 5천 원 현금 지급</strong></p>
+                    <p class="text-slate-600 text-xs">※ 보육료 결제는 국민행복카드로 진행되며, 차액은 매월 25일 지정 계좌로 자동 입금됩니다.</p>
+                </div>
+            </section>
+
+            <!-- 섹션 4: 신청 방법 및 행복출산 원스톱 서비스 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>4. '행복출산 원스톱 서비스'로 출생신고 당일 한 번에 신청하는 법</span>
+                </h3>
+                <p>
+                    부모급여, 아동수당, 첫만남이용권, 지자체 출산지원금, 전기요금 30% 감면 등은 개별 신청할 필요 없이 주민센터 방문 출생신고 시 또는 <strong>정부24(gov.kr) '행복출산 원스톱 서비스'</strong>를 통해 단 한 번의 신청서 작성으로 모두 연동 처리됩니다.
+                </p>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs leading-relaxed">
+                    <p>• <strong>출생일로부터 60일 이내 신청 필수</strong>: 출생 후 60일 이내에 신청하면 태어난 달까지 소급하여 전액 지급됩니다. 그러나 60일이 지나면 신청일이 속한 달부터 지급되므로 이전 달 급여가 영구 소멸됩니다.</p>
+                    <p>• <strong>준비물</strong>: 부모 신분증, 통장 사본, 국민행복카드 (온라인 신청 시 공동인증서/간편인증)</p>
+                </div>
+            </section>
+
+            <!-- 섹션 5: FAQ -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>5. 출산·양육 지원금 자주 묻는 질문 (FAQ)</span>
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 육아휴직 급여를 받는 중에도 부모급여와 아동수당을 중복해서 받을 수 있나요?</div>
+                        <p class="text-slate-600 leading-relaxed">네, 100% 중복 수급이 가능합니다. 육아휴직 급여는 고용보험법에 따른 고용안정 급여이며, 부모급여와 아동수당은 보건복지부의 아동 보편 복지 급여이므로 상호 차감 없이 모두 전액 수령할 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 첫만남이용권 바우처의 유효기간과 사용 불가 업종은 무엇인가요?</div>
+                        <p class="text-slate-600 leading-relaxed">아동 출생일로부터 <strong>2년(24개월)</strong> 동안 유효하며, 기한 내 미사용 잔액은 자동 소멸됩니다. 유흥업소, 사행업소, 마사지 등 레저·위생업소, 상품권 구매 등을 제외한 온·오프라인 전 업종(산후조리원, 대형마트, 백화점, 병원, 약국, 육아용품점 등)에서 자유롭게 사용할 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 해외에 장기 체류할 경우 부모급여나 아동수당이 중단되나요?</div>
+                        <p class="text-slate-600 leading-relaxed">아동이 국외에 <strong>90일(3개월) 이상 계속 체류</strong>하는 경우 출국일이 속하는 달의 다음 달부터 급여 지급이 정지됩니다. 귀국 후 입국 사실이 행정전산망으로 확인되면 익월부터 다시 지급이 재개됩니다.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- [하단 스폰서 광고 배너 영역 (반응형 728x90, 300x250)] -->
+        <section class="mt-8 mb-4" aria-label="스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-4 sm:p-5 text-center shadow-xs flex flex-col items-center justify-center min-h-[100px] sm:min-h-[120px] hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">ADVERTISEMENT</span>
+                <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span class="text-slate-700 font-bold">스폰서 광고 영역</span>
+                    </div>
+                    <span class="text-slate-400 text-xs">(구글 애드센스 반응형 728×90, 300×250 / 카카오 애드핏 코드 삽입)</span>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:block" data-ad-format="auto" ...></ins> -->
+            </div>
+        </section>
+</main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-700">위집 부모급여 & 아동수당 무료 정밀 모의계산기</p>
+            <p>보건복지부 아동수당법, 영유아보육법 및 2026년 중앙정부·지자체 저출생 대책 기준을 반영합니다.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600 py-1.5 border-y border-slate-100 my-2">
+                <a href="about.html" class="hover:text-blue-600 font-semibold transition">서비스 소개</a>
+                <span class="text-slate-300">·</span>
+                <a href="terms.html" class="hover:text-blue-600 font-semibold transition">이용약관 및 법적 면책</a>
+                <span class="text-slate-300">·</span>
+                <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
+            </div>
+            <p class="text-slate-400">© 2026 wezip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script src="common.js"></script>
+    <script>
+        const bornStatusRadios = document.getElementsByName('bornStatus');
+        const birthDateInput = document.getElementById('birthDateInput');
+        const childRank = document.getElementById('childRank');
+        const regionSelect = document.getElementById('regionSelect');
+        const careType = document.getElementById('careType');
+        const currentAgeText = document.getElementById('currentAgeText');
+        const birthDateLabel = document.getElementById('birthDateLabel');
+        const regionSubsidyDesc = document.getElementById('regionSubsidyDesc');
+
+        // 지자체별 추정 출산지원금 테이블 (첫째, 둘째, 셋째)
+        const regionGrants = {
+            seoul: { first: 2200000, second: 2700000, third: 3700000, desc: '산후조리비 100만 + 교통비 70만 + 구별 지원' },
+            gyeonggi: { first: 800000, second: 1200000, third: 2000000, desc: '경기 산후조리비 50만 + 시군별 지원' },
+            incheon: { first: 2500000, second: 3500000, third: 5000000, desc: '1억+ 아이드림 (천사지원금 등 대폭 지원)' },
+            busan: { first: 500000, second: 1500000, third: 3500000, desc: '둘째 100만 / 셋째 300만 지원' },
+            daegu: { first: 500000, second: 1000000, third: 2000000, desc: '출산축하금 첫째 50만 / 둘째 100만' },
+            daejeon: { first: 1000000, second: 1500000, third: 2500000, desc: '대전형 양육지원금 및 축하금' },
+            gwangju: { first: 1000000, second: 1000000, third: 1500000, desc: '광주 출생축하금' },
+            sejong: { first: 1200000, second: 1200000, third: 1200000, desc: '세종시 출산축하금 120만원' },
+            gangwon: { first: 1000000, second: 1500000, third: 2500000, desc: '강원 육아기본수당 및 시군 지원' },
+            chungbuk: { first: 1000000, second: 2000000, third: 3000000, desc: '충북 출산육아수당 분할 지원' },
+            chungnam: { first: 1000000, second: 1500000, third: 2500000, desc: '충남 아기수당 및 출산장려금' },
+            jeonbuk: { first: 1000000, second: 2000000, third: 3000000, desc: '전북 시군별 출산축하금' },
+            jeonnam: { first: 1500000, second: 2500000, third: 4000000, desc: '전남 출산장려금 및 공공산후조리' },
+            gyeongbuk: { first: 1000000, second: 1500000, third: 2500000, desc: '경북 출산장려금 및 다자녀' },
+            gyeongnam: { first: 1000000, second: 1500000, third: 2500000, desc: '경남 출산축하금 및 바우처' },
+            jeju: { first: 500000, second: 2000000, third: 2000000, desc: '제주 둘째 이상 주거비 등 지원' },
+            other: { first: 500000, second: 1000000, third: 1500000, desc: '전국 평균 기초 출산축하금' }
+        };
+
+        function getBornStatus() {
+            for (const r of bornStatusRadios) {
+                if (r.checked) return r.value;
+            }
+            return 'born';
+        }
+
+        for (const r of bornStatusRadios) {
+            r.addEventListener('change', () => {
+                const status = getBornStatus();
+                if (status === 'expect') {
+                    birthDateLabel.textContent = '출생 예정일';
+                } else {
+                    birthDateLabel.textContent = '아동 생년월일';
+                }
+                calculateParent();
+            });
+        }
+
+        function calculateParent() {
+            const status = getBornStatus();
+            const birthDate = new Date(birthDateInput.value);
+            const now = new Date(2026, 9, 14); // 2026년 10월 기준
+
+            const rank = childRank.value;
+            const region = regionSelect.value;
+            const care = careType.value;
+
+            // 지자체 설명 업데이트
+            regionSubsidyDesc.textContent = regionGrants[region].desc;
+
+            // 1. 첫만남이용권
+            let firstMeet = 2000000;
+            if (rank === 'second' || rank === 'third') {
+                firstMeet = 3000000;
+            }
+
+            // 2. 지자체 출산지원금
+            let regGrant = regionGrants[region].first;
+            if (rank === 'second') regGrant = regionGrants[region].second;
+            else if (rank === 'third') regGrant = regionGrants[region].third;
+
+            // 3. 월령 계산
+            let monthsPassed = 0;
+            if (status === 'born') {
+                const diffTime = now.getTime() - birthDate.getTime();
+                monthsPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 30.4375));
+                if (monthsPassed < 0) monthsPassed = 0;
+            } else {
+                monthsPassed = 0; // 예정
+            }
+
+            // 월령 텍스트 업데이트
+            if (status === 'expect') {
+                currentAgeText.textContent = '출생 예정 (0개월차부터 산출)';
+            } else if (monthsPassed < 12) {
+                currentAgeText.textContent = `생후 ${monthsPassed}개월 (만 0세)`;
+            } else if (monthsPassed < 24) {
+                currentAgeText.textContent = `생후 ${monthsPassed}개월 (만 1세)`;
+            } else if (monthsPassed < 96) {
+                const ageYears = Math.floor(monthsPassed / 12);
+                currentAgeText.textContent = `생후 ${monthsPassed}개월 (만 ${ageYears}세)`;
+            } else {
+                currentAgeText.textContent = `생후 ${monthsPassed}개월 (만 8세 이상)`;
+            }
+
+            // 4. 부모급여 & 아동수당 총액
+            // 0세 구간 (0~11개월): 12회
+            const isHome = care === 'home';
+            const ageZeroMonthly = isHome ? 1000000 : 460000; // 어린이집은 바우처 차액 약 46만
+            const ageOneMonthly = isHome ? 500000 : 0; // 어린이집은 보육료 바우처 전액 대체
+
+            const totalAgeZero = ageZeroMonthly * 12;
+            const totalAgeOne = ageOneMonthly * 12;
+            const totalChildAllowance = 100000 * 96; // 96개월
+
+            const grandTotal = firstMeet + regGrant + totalAgeZero + totalAgeOne + totalChildAllowance;
+
+            // 5. 이번 달 수령액 및 남은 수령액 계산
+            let thisMonth = 0;
+            let thisMonthBreakdown = '';
+            let statusBadge = '';
+
+            if (status === 'expect') {
+                thisMonth = 0;
+                thisMonthBreakdown = '출생 후 첫 달 부모급여(100만) + 아동수당(10만) + 첫만남(200~300만) 입금';
+                statusBadge = '출생 예정';
+            } else if (monthsPassed < 12) {
+                thisMonth = ageZeroMonthly + 100000;
+                thisMonthBreakdown = `부모급여 ${formatNumber(ageZeroMonthly)}원 + 아동수당 100,000원 합산`;
+                statusBadge = '만 0세 구간';
+            } else if (monthsPassed < 24) {
+                thisMonth = ageOneMonthly + 100000;
+                thisMonthBreakdown = isHome ? '부모급여 500,000원 + 아동수당 100,000원 합산' : '보육료 바우처 지원 + 아동수당 100,000원';
+                statusBadge = '만 1세 구간';
+            } else if (monthsPassed < 96) {
+                thisMonth = 100000;
+                thisMonthBreakdown = '아동수당 매월 100,000원 통장 입금';
+                statusBadge = '만 2~7세 아동수당 구간';
+            } else {
+                thisMonth = 0;
+                thisMonthBreakdown = '만 8세 초과 (지원 종료)';
+                statusBadge = '지원 완료';
+            }
+
+            // 남은 금액 계산
+            let remaining = 0;
+            if (status === 'expect') {
+                remaining = grandTotal;
+            } else {
+                let remainingAgeZeroMonths = Math.max(0, 12 - monthsPassed);
+                let remainingAgeOneMonths = 0;
+                if (monthsPassed < 12) remainingAgeOneMonths = 12;
+                else if (monthsPassed < 24) remainingAgeOneMonths = Math.max(0, 24 - monthsPassed);
+
+                let remainingChildAllowanceMonths = Math.max(0, 96 - monthsPassed);
+
+                remaining = (remainingAgeZeroMonths * ageZeroMonthly) +
+                            (remainingAgeOneMonths * ageOneMonthly) +
+                            (remainingChildAllowanceMonths * 100000);
+
+                if (monthsPassed === 0) {
+                    remaining += (firstMeet + regGrant);
+                }
+            }
+
+            // UI 반영
+            document.getElementById('thisMonthAmount').textContent = formatNumber(thisMonth);
+            document.getElementById('thisMonthBreakdown').textContent = thisMonthBreakdown;
+            document.getElementById('currentStatusBadge').textContent = statusBadge;
+
+            document.getElementById('parentTotalGrant').textContent = formatNumber(grandTotal);
+            document.getElementById('remainingGrantText').textContent = `${formatNumber(remaining)}원`;
+
+            document.getElementById('resFirstMeet').textContent = `${formatNumber(firstMeet)}원`;
+            document.getElementById('resRegionGrant').textContent = `${formatNumber(regGrant)}원`;
+            document.getElementById('resAgeZero').textContent = `${formatNumber(totalAgeZero)}원 (월 ${formatNumber(ageZeroMonthly)})`;
+            document.getElementById('resAgeOne').textContent = isHome ? `${formatNumber(totalAgeOne)}원 (월 50만)` : '어린이집 보육료 바우처 전액 지원';
+            document.getElementById('resChildAllowance').textContent = `${formatNumber(totalChildAllowance)}원 (월 10만 × 96개월)`;
+        }
+
+        birthDateInput.addEventListener('change', calculateParent);
+        childRank.addEventListener('change', calculateParent);
+        regionSelect.addEventListener('change', calculateParent);
+        careType.addEventListener('change', calculateParent);
+
+        function copyParentResult() {
+            const thisM = document.getElementById('thisMonthAmount').textContent;
+            const total = document.getElementById('parentTotalGrant').textContent;
+            const remain = document.getElementById('remainingGrantText').textContent;
+            const age = currentAgeText.textContent;
+            const text = `[위집 부모급여 & 아동수당 정밀 모의계산 결과]\n상태: ${age}\n이번 달 입금액: ${thisM}원\n남은 수령액: ${remain}\n만 8세까지 총 누적 지원금: ${total}원\n계산기: ${window.location.href}`;
+            copyToClipboard(text);
+        }
+
+        calculateParent();
+        recordRecentCalc('부모급여·아동수당 대상조회', 'gov-parent.html', 'baby');
+    </script>
+</body>
+</html>

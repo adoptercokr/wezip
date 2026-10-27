@@ -1,0 +1,16 @@
+{
+  "name": "위집 - 대한민국 금융·생활 마이크로 계산기",
+  "short_name": "위집",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "description": "2026년 최신 세법 및 금융 기준 반영! 연봉 실수령액, 최저시급, 퇴직금, 스트레스 DSR, 부동산 복비, 예적금 이자 실시간 계산기 모음",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

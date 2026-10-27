@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>2026 근로장려금 & 자녀장려금 모의 계산기 | 위집</title>
+    <meta name="description" content="2026년 국세청 근로장려금(단독 최대 165만, 홑벌이 285만, 맞벌이 330만) 및 자녀장려금(자녀 1인당 최대 100만원) 모의 계산기입니다. 가구원 수, 연간 총소득, 재산 요건을 입력하여 예상 지급액을 즉시 산출하세요.">
+    <meta name="keywords" content="2026 근로장려금 계산기, 근로장려금 자격요건, 자녀장려금 100만원, 근로장려금 재산요건 2.4억, 맞벌이 소득요건, 근로장려금 신청기간">
+    <link rel="canonical" href="https://wezip.co.kr/gov-subsidy.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026 근로장려금 & 자녀장려금 모의 계산기 - 위집">
+    <meta property="og:description" content="단독 165만·맞벌이 330만·자녀당 100만! 근로/자녀장려금 1초 모의계산">
+    <meta property="og:url" content="https://wezip.co.kr/gov-subsidy.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "근로장려금 및 자녀장려금 계산기",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "All",
+          "url": "https://wezip.co.kr/gov-subsidy.html"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "근로장려금 재산 기준은 어떻게 되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "가구원 모두가 소유한 재산 합계액이 2억 4천만원 미만이어야 합니다. 재산 합계액이 1억 7천만원 이상 2억 4천만원 미만인 경우에는 장려금 산정액의 50%만 지급됩니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col justify-between">
+
+            <!-- 포털 최상단 슬림 바: 로고, 로고 우측 주메뉴(PC), 모바일 메뉴 토글 -->
+    <header class="bg-[#1E293B] text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 좌측: 로고 + 주메뉴 4개 (PC에서는 한 줄로 로고 바로 오른쪽에 배치) -->
+            <div class="flex items-center gap-6 lg:gap-8 h-full">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="16" y1="14" x2="16" y2="18"></line>
+                            <path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white notranslate" translate="no">위집</span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <!-- PC 주메뉴 (로고 바로 오른쪽에 배치, 단일 가로행 유지 & whitespace-nowrap) -->
+                <nav class="hidden md:flex items-center gap-1 xl:gap-2 h-full text-xs lg:text-sm font-bold whitespace-nowrap">
+                    <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1 font-extrabold border border-emerald-500/30">
+                        <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>지원금 찾기</span>
+                    </a>
+                    <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
+
+                    <!-- 1. 급여·소득 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>급여·소득</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="salary.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">연봉 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">실수령액</span>
+                                </a>
+                                <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>알바·최저시급 계산기</span>
+                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                </a>
+                                <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">퇴사자 실업급여 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                </a>
+                                <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>퇴직금 계산기</span>
+                                    <span class="text-[11px] text-slate-400">실수령액</span>
+                                </a>
+                                <a href="annual-leave.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>연차 일수·수당 계산기</span>
+                                    <span class="text-[11px] text-slate-400">미사용 수당</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 부동산 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>부동산</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="real-transfer-tax.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">내 집 양도세 계산기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
+                                </a>
+                                <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>버팀목 전세대출·HUG 조회</span>
+                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                </a>
+                                <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부동산 복비·취득세 계산기</span>
+                                    <span class="text-[11px] text-slate-400">국토부 상한</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 복지·지원 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>복지·지원</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="gov-finder.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold text-emerald-600">맞춤 지원금 & 정책 찾기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">32대 정책</span>
+                                </a>
+                                <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">청년 지원 대상조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                </a>
+                                <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부모급여·아동수당 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                </a>
+                                <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>근로장려금 수급 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">최대 330만</span>
+                                </a>
+                                <a href="gov-median.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>2026 복지 지원금 자격조회</span>
+                                    <span class="text-[11px] text-slate-400">중위소득</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 대출·금융 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>대출·금융</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">대출이자 & DSR 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                </a>
+                                <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>예·적금 만기이자 계산기</span>
+                                    <span class="text-[11px] text-slate-400">비과세 비교</span>
+                                </a>
+                                <a href="youth-leap.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>청년도약계좌 만기금 조회</span>
+                                    <span class="text-[11px] text-slate-400">기여금 매칭</span>
+                                </a>
+                                <a href="dutch-pay.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>더치페이 N빵 계산기</span>
+                                    <span class="text-[11px] text-slate-400">카톡 1초</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 우측: 모바일 햄버거 메뉴 버튼만 배치하여 공간 100% 확보 (공유 및 불필요한 긴 뱃지 제거) -->
+            <div class="flex items-center">
+                <button type="button" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition" aria-label="메뉴 열기">
+                    <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 반응형 드롭다운 메뉴 (모바일에서 깔끔하게 정돈되어 노출) -->
+        <div id="mobileNavMenu" class="hidden md:hidden bg-[#0F172A] border-t border-slate-800 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+            <!-- 핵심 빠른 링크 -->
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+                <a href="gov-finder.html" class="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+                <a href="blog.html" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 text-blue-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span>금융 칼럼</span>
+                </a>
+            </div>
+
+            <!-- 급여·소득 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">연봉 계산기</a>
+                    <a href="hourly-wage.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">알바·시급</a>
+                    <a href="unemployment.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">퇴사자 실업급여</a>
+                    <a href="severance.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">퇴직금 계산기</a>
+                    <a href="annual-leave.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">연차 일수·수당</a>
+                </div>
+            </div>
+
+            <!-- 부동산·주거 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
+                </div>
+            </div>
+
+            <!-- 정부지원·복지 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">정부지원·복지</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="gov-rent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">청년 지원 대상조회</a>
+                    <a href="gov-parent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">부모급여·아동수당</a>
+                    <a href="gov-subsidy.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">근로장려금 조회</a>
+                    <a href="gov-median.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">복지 지원금 자격</a>
+                </div>
+            </div>
+
+            <!-- 대출·금융 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">대출·금융</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="loan-dsr.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">대출이자 & DSR</a>
+                    <a href="savings.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">예·적금 만기이자</a>
+                    <a href="youth-leap.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">청년도약계좌</a>
+                    <a href="dutch-pay.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">더치페이 N빵</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black mb-2 shadow-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>회원가입 없는 100% 무료 판정기</span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-600 font-medium">국세청 장려금 세법 기준</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">근로장려금 & 자녀장려금 무료 모의계산기</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                가구 유형과 연간 총소득, 가구 재산 합계액을 입력하여 국세청 예상 지급액을 모의 계산합니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- 입력 폼 -->
+            <div class="lg:col-span-6 space-y-4">
+                <div class="calc-card p-5 bg-white border border-slate-200 rounded-2xl">
+
+                    <!-- 가구 유형 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">가구 구성</label>
+                        <select id="subsidyFamilyType" class="w-full text-sm font-medium text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-900">
+                            <option value="single" selected>단독 가구 (연소득 2,200만원 미만)</option>
+                            <option value="oneIncome">홑벌이 가구 (연소득 3,200만원 미만)</option>
+                            <option value="dualIncome">맞벌이 가구 (연소득 3,800만원 미만)</option>
+                        </select>
+                    </div>
+
+                    <!-- 부양자녀 수 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">18세 미만 부양자녀 수 (자녀장려금)</label>
+                        <select id="subsidyChildCount" class="w-full text-sm font-medium text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-900">
+                            <option value="0" selected>0명</option>
+                            <option value="1">1명 (최대 100만원)</option>
+                            <option value="2">2명 (최대 200만원)</option>
+                            <option value="3">3명 (최대 300만원)</option>
+                        </select>
+                    </div>
+
+                    <!-- 연간 부부 합산 총급여액 -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-bold text-slate-700">연간 총소득 (세전)</label>
+                            <span class="text-xs text-slate-500" id="subsidyIncomeKorean">1,200만 원</span>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="annualIncomeInput" value="12,000,000" inputmode="numeric"
+                                   class="w-full text-sm font-bold text-slate-900 p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-right pr-8">
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">원</span>
+                        </div>
+                    </div>
+
+                    <!-- 가구 재산 합계액 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">가구원 재산 합계 (부동산, 예금, 차 등)</label>
+                        <select id="subsidyAssetTier" class="w-full text-sm font-medium text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-900">
+                            <option value="under170" selected>1억 7천만원 미만 (100% 전액 지급)</option>
+                            <option value="under240">1억 7천만원 ~ 2억 4천만원 미만 (50% 감액 지급)</option>
+                            <option value="over240">2억 4천만원 이상 (지급 제외 대상)</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 결과 리포트 -->
+            <div class="lg:col-span-6 space-y-4">
+                <div class="calc-card p-6 bg-white border border-slate-200 rounded-2xl relative">
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">예상 총 수령 장려금</div>
+                    
+                    <div class="mt-2 flex items-baseline gap-1">
+                        <span class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight" id="subsidyTotalAmount">1,650,000</span>
+                        <span class="text-base font-bold text-slate-600">원</span>
+                    </div>
+
+                    <div class="mt-5 space-y-2.5 text-xs pt-4 border-t border-slate-100">
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">근로장려금 산정액</span>
+                            <span class="font-bold text-slate-900" id="resEarnedSubsidy">1,650,000원</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
+                            <span class="text-slate-600">자녀장려금 산정액</span>
+                            <span class="font-bold text-slate-900" id="resChildSubsidy">0원</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-slate-600">재산 요건 반영 비율</span>
+                            <span class="font-bold text-slate-900" id="resAssetRatio">100% 지급</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex gap-2">
+                        <button type="button" onclick="copySubsidyResult()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                            장려금 결과 복사하기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-100 border border-slate-200 rounded-2xl text-[11px] text-slate-700 leading-relaxed">
+                    <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0 mt-0.5 inline-block mr-1" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><strong>정기 신청 기간</strong>: 매년 5월 1일 ~ 5월 31일(국세청 홈택스). 기한 후 신청 시 95% 지급되니 정기 기간 내 신청이 가장 유리합니다.
+                </div>
+            </div>
+
+        </div>
+
+    
+        <!-- [전문가 심층 가이드 & 2026 법령 해설 리포트] -->
+        <article class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10">
+            <div>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">2026 소득세법 환급 가이드</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-2">2026년 국세청 근로장려금·자녀장려금 신청 자격, 소득·재산 요건 및 최대 330만 원 산정 가이드</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">조세특례제한법 제100조의2~제100조의13 및 국세청 장려세제운영과 최신 법령 개정 기준</p>
+            </div>
+
+            <!-- 섹션 1: 가구유형별 근로장려금 소득요건 및 최대지급액 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>1. 2026년 근로장려금 가구 유형별 총소득 기준 및 최대 환급 금액</span>
+                </h3>
+                <p>
+                    근로장려금은 일은 하지만 소득이 적어 생활이 어려운 저소득 근로자, 사업자(전문직 제외), 종교인 가구에 대해 실질소득과 자녀양육을 정부가 현금으로 직접 지원하는 환급형 세액공제(EITC) 제도입니다.
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">가구 구분</th>
+                                <th class="p-3">가구 구성원 기준</th>
+                                <th class="p-3">총소득 기준금액 (미만)</th>
+                                <th class="p-3 text-blue-600">근로장려금 최대 지급액</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">단독 가구</td>
+                                <td class="p-3">배우자, 부양자녀, 70세 이상 직계존속이 모두 없는 가구</td>
+                                <td class="p-3">연 2,200만 원 미만</td>
+                                <td class="p-3 text-blue-600 font-bold">최대 165만 원</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">홑벌이 가구</td>
+                                <td class="p-3">배우자(총급여 300만 미만) 또는 부양자녀·70세 이상 존속이 있는 가구</td>
+                                <td class="p-3">연 3,200만 원 미만</td>
+                                <td class="p-3 text-blue-600 font-bold">최대 285만 원</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">맞벌이 가구</td>
+                                <td class="p-3">신청인 및 배우자 각각의 총급여액 등이 300만 원 이상인 가구</td>
+                                <td class="p-3 font-bold text-emerald-600">연 4,400만 원 미만 (대폭 완화)</td>
+                                <td class="p-3 text-blue-600 font-bold">최대 330만 원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 섹션 2: 자녀장려금 1인당 100만 원 확대 개정 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>2. 자녀장려금 소득 기준 7,000만 원 확대 및 부양자녀 1인당 100만 원</span>
+                </h3>
+                <p>
+                    저출산 극복을 위해 <strong>자녀장려금(CTC)</strong>의 부부 합산 총소득 요건이 종전 4,000만 원 미만에서 <strong>연 7,000만 원 미만으로 대폭 상향</strong>되었습니다. 18세 미만 부양자녀(2007.1.2 이후 출생자) <strong>1인당 최대 100만 원(최저 50만 원)</strong>이 지원되며, 근로장려금과 동시에 중복 지급받을 수 있습니다.
+                </p>
+                <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl text-xs sm:text-sm text-slate-800 space-y-1.5">
+                    <div class="font-bold text-blue-900">자녀장려금 예시 시나리오:</div>
+                    <p class="text-slate-700">• 홑벌이 부부 소득 2,800만 원 / 미성년 자녀 2명인 가구:</p>
+                    <p class="text-slate-700 font-semibold">• 근로장려금 약 200만 원 + 자녀장려금 200만 원(100만×2명) = <strong>총 400만 원 현금 지급</strong></p>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 재산 요건 및 감액 기준 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>3. 가구원 합산 재산 기준(2.4억 원 미만) 및 재산 감액 규정</span>
+                </h3>
+                <p>
+                    소득 요건을 충족하더라도 가구원 모두가 소유하고 있는 재산 합계액이 <strong>2억 4,000만 원 이상이면 수급 대상에서 제외</strong>됩니다. 재산 평가는 주택, 토지, 건축물(시가표준액 기준), 승용차(시가표준액), 전세보증금, 예금·적금·주식 등 금융자산이 합산되며 <strong>부채(대출금)는 차감되지 않습니다.</strong>
+                </p>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-2">
+                    <p>• <strong>재산 1억 7,000만 원 미만</strong>: 산정된 장려금의 <strong>100% 전액 지급</strong></p>
+                    <p>• <strong>재산 1억 7,000만 원 이상 ~ 2억 4,000만 원 미만</strong>: 산정된 장려금의 <strong>50% 감액 지급</strong></p>
+                    <p>• <strong>재산 2억 4,000만 원 이상</strong>: 지급 대상 제외 (0원)</p>
+                </div>
+            </section>
+
+            <!-- 섹션 4: 신청 일정 및 신청 방법 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>4. 정기신청(5월) vs 반기신청(3월·9월) 일정 및 원클릭 신청 채널</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">정기신청 (근로자·사업자·종교인)</div>
+                        <p class="text-slate-600">• <strong>신청 기간</strong>: 매년 5월 1일 ~ 5월 31일<br>• <strong>지급 시기</strong>: 매년 8월 말 ~ 9월 초 지급<br>• <strong>기한 후 신청</strong>: 6월 1일 ~ 11월 30일 (산정액의 90%만 지급)</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">반기신청 (근로소득자 전용)</div>
+                        <p class="text-slate-600">• <strong>상반기분</strong>: 9월 1일~9월 15일 신청 &rarr; 12월 말 35% 지급<br>• <strong>하반기분</strong>: 익년 3월 1일~3월 15일 신청 &rarr; 6월 말 정산 지급</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500">※ 국세청 홈택스 웹사이트, 모바일 손택스 앱 또는 ARS 자동응답전화(1544-9944)를 통해 주민등록번호와 개별인증번호를 입력하면 1분 안에 간편 신청이 완료됩니다.</p>
+            </section>
+
+            <!-- 섹션 5: FAQ -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>5. 근로장려금·자녀장려금 자주 묻는 질문 (FAQ)</span>
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 아르바이트나 일용직 근로자도 근로장려금을 받을 수 있나요?</div>
+                        <p class="text-slate-600 leading-relaxed">네, 가능합니다. 4대보험 가입 여부와 무관하게 사업주가 국세청에 일용근로소득 지급명세서 또는 간이지급명세서를 정상 제출하여 근로소득이 국세청 전산에 잡힌다면 수급 요건 충족 시 장려금을 받을 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 부모님과 함께 거주하고 있는 미혼 단독 가구도 신청 가능한가요?</div>
+                        <p class="text-slate-600 leading-relaxed">주민등록상 부모님과 동일 세대를 구성하고 있다면 부모님의 소득과 재산이 모두 합산되어 판정됩니다. 만약 부모님의 재산 합계액이 2억 4,000만 원 이상이면 본인의 소득이 적더라도 수급 대상에서 제외되므로, 만 30세 이상이거나 일정 소득이 있어 주민등록을 세대 분리하여 독립 거주하는 경우 단독 가구로 인정받을 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 국세 체납액이 있는 경우 장려금에서 상계(차감)되나요?</div>
+                        <p class="text-slate-600 leading-relaxed">신청인에게 체납된 국세가 있는 경우 지급할 장려금의 30% 한도 내에서 체납 세액과 상계 충당된 후 나머지 70% 금액이 신청인 계좌로 환급 입금됩니다.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- [하단 스폰서 광고 배너 영역 (반응형 728x90, 300x250)] -->
+        <section class="mt-8 mb-4" aria-label="스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-4 sm:p-5 text-center shadow-xs flex flex-col items-center justify-center min-h-[100px] sm:min-h-[120px] hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">ADVERTISEMENT</span>
+                <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span class="text-slate-700 font-bold">스폰서 광고 영역</span>
+                    </div>
+                    <span class="text-slate-400 text-xs">(구글 애드센스 반응형 728×90, 300×250 / 카카오 애드핏 코드 삽입)</span>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:block" data-ad-format="auto" ...></ins> -->
+            </div>
+        </section>
+</main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-700">위집 근로장려금 & 자녀장려금 무료 모의계산기</p>
+            <p>조세특례제한법 근로장려세제(EITC) 산정표에 의거한 모의 시뮬레이션입니다.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600 py-1.5 border-y border-slate-100 my-2">
+                <a href="about.html" class="hover:text-blue-600 font-semibold transition">서비스 소개</a>
+                <span class="text-slate-300">·</span>
+                <a href="terms.html" class="hover:text-blue-600 font-semibold transition">이용약관 및 법적 면책</a>
+                <span class="text-slate-300">·</span>
+                <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
+            </div>
+            <p class="text-slate-400">© 2026 wezip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script src="common.js"></script>
+    <script>
+        const subsidyFamilyType = document.getElementById('subsidyFamilyType');
+        const subsidyChildCount = document.getElementById('subsidyChildCount');
+        const annualIncomeInput = document.getElementById('annualIncomeInput');
+        const subsidyAssetTier = document.getElementById('subsidyAssetTier');
+        const subsidyIncomeKorean = document.getElementById('subsidyIncomeKorean');
+
+        function calculateSubsidy() {
+            const fType = subsidyFamilyType.value;
+            const childCount = parseInt(subsidyChildCount.value, 10);
+            const income = unformatNumber(annualIncomeInput.value);
+            const assetTier = subsidyAssetTier.value;
+
+            const man = Math.floor(income / 10000);
+            subsidyIncomeKorean.textContent = `${formatNumber(man)}만 원`;
+
+            if (assetTier === 'over240') {
+                document.getElementById('subsidyTotalAmount').textContent = '0';
+                document.getElementById('resEarnedSubsidy').textContent = '지급 제외';
+                document.getElementById('resChildSubsidy').textContent = '지급 제외';
+                document.getElementById('resAssetRatio').textContent = '재산 2.4억원 이상 (0%)';
+                return;
+            }
+
+            const assetMult = assetTier === 'under240' ? 0.5 : 1.0;
+
+            // 간이 근로장려금 산출 (피크 구간 모의)
+            let maxEarned = 1650000;
+            let incomeCap = 22000000;
+            if (fType === 'oneIncome') {
+                maxEarned = 2850000;
+                incomeCap = 32000000;
+            } else if (fType === 'dualIncome') {
+                maxEarned = 3300000;
+                incomeCap = 38000000;
+            }
+
+            let earned = 0;
+            if (income < incomeCap) {
+                // 단순 점증/평탄/점감 모의곡선
+                earned = Math.floor(maxEarned * (1 - (income / incomeCap) * 0.4));
+            }
+
+            // 자녀장려금: 자녀 1인당 최대 100만원 (소득 7000만원 미만)
+            let childGrant = 0;
+            if (income < 70000000 && childCount > 0) {
+                childGrant = childCount * 1000000;
+                if (income > 40000000) {
+                    childGrant = Math.floor(childGrant * (1 - (income - 40000000) / 30000000 * 0.5));
+                }
+            }
+
+            earned = Math.floor(earned * assetMult);
+            childGrant = Math.floor(childGrant * assetMult);
+            const total = earned + childGrant;
+
+            document.getElementById('resEarnedSubsidy').textContent = `${formatNumber(earned)}원`;
+            document.getElementById('resChildSubsidy').textContent = `${formatNumber(childGrant)}원`;
+            document.getElementById('resAssetRatio').textContent = assetMult === 1 ? '100% 전액 지급' : '50% 감액 지급 (재산 1.7억 초과)';
+            document.getElementById('subsidyTotalAmount').textContent = formatNumber(total);
+        }
+
+        subsidyFamilyType.addEventListener('change', calculateSubsidy);
+        subsidyChildCount.addEventListener('change', calculateSubsidy);
+        annualIncomeInput.addEventListener('input', (e) => {
+            e.target.value = formatNumber(unformatNumber(e.target.value));
+            calculateSubsidy();
+        });
+        subsidyAssetTier.addEventListener('change', calculateSubsidy);
+
+        function copySubsidyResult() {
+            const total = document.getElementById('subsidyTotalAmount').textContent;
+            const text = `[위집 근로/자녀장려금 모의계산]\n예상 총 수령액: ${total}원\n계산기: ${window.location.href}`;
+            copyToClipboard(text);
+        }
+
+        calculateSubsidy();
+    </script>
+</body>
+</html>

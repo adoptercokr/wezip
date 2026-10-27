@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>예·적금 이자 & 비과세 세금우대 무료 계산기 - 단리/복리 비교 | 위집</title>
+    <meta name="description" content="정기예금·정기적금 단리 및 복리 만기 이자 계산기입니다. 일반과세(15.4%), 조합원 세금우대(1.4%), ISA 비과세(0%) 세액 공제 후 최종 실수령액과 절세 금액을 실시간 비교하세요.">
+    <meta name="keywords" content="예금 이자 계산기, 적금 이자 계산기, 적금 계산법, 비과세 적금, 세금우대 1.4%, 신협 농협 예탁금 비과세, ISA 비과세 혜택, 복리 계산기">
+    <link rel="canonical" href="https://wezip.co.kr/savings.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="예·적금 이자 & 비과세 세금우대 무료 계산기 - 위집">
+    <meta property="og:description" content="일반과세 vs 세금우대 vs 비과세 만기 수령액 3단 비교 계산">
+    <meta property="og:url" content="https://wezip.co.kr/savings.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "예적금 이자 및 비과세 계산기",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "All",
+          "url": "https://wezip.co.kr/savings.html"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "정기예금과 정기적금의 이자 계산 방식 차이는 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "정기예금은 처음에 목돈을 한 번에 예치하여 1년치 이자가 전액 붙지만, 정기적금은 매월 나누어 입금하므로 첫 달 입금액만 12개월치 이자가 붙고 마지막 달 입금액은 1개월치 이자만 붙어 실질 수령 이자는 예금의 약 절반 수준이 됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "조합원 세금우대(1.4%) 혜택은 누구나 받을 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "만 19세 이상 거주자라면 신협, 농협, 수협, 산림조합, 새마을금고의 조합원(준조합원)으로 가입 시 1인당 3,000만원 한도 내에서 이자소득세 14%가 면제되고 농어촌특별세 1.4%만 부과되는 혜택을 받을 수 있습니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col justify-between">
+
+            <!-- 포털 최상단 슬림 바: 로고, 로고 우측 주메뉴(PC), 모바일 메뉴 토글 -->
+    <header class="bg-[#1E293B] text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 좌측: 로고 + 주메뉴 4개 (PC에서는 한 줄로 로고 바로 오른쪽에 배치) -->
+            <div class="flex items-center gap-6 lg:gap-8 h-full">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="16" y1="14" x2="16" y2="18"></line>
+                            <path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white notranslate" translate="no">위집</span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <!-- PC 주메뉴 (로고 바로 오른쪽에 배치, 단일 가로행 유지 & whitespace-nowrap) -->
+                <nav class="hidden md:flex items-center gap-1 xl:gap-2 h-full text-xs lg:text-sm font-bold whitespace-nowrap">
+                    <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1 font-extrabold border border-emerald-500/30">
+                        <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>지원금 찾기</span>
+                    </a>
+                    <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
+
+                    <!-- 1. 급여·소득 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>급여·소득</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="salary.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">연봉 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">실수령액</span>
+                                </a>
+                                <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>알바·최저시급 계산기</span>
+                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                </a>
+                                <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">퇴사자 실업급여 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                </a>
+                                <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>퇴직금 계산기</span>
+                                    <span class="text-[11px] text-slate-400">실수령액</span>
+                                </a>
+                                <a href="annual-leave.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>연차 일수·수당 계산기</span>
+                                    <span class="text-[11px] text-slate-400">미사용 수당</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 부동산 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>부동산</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="real-transfer-tax.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">내 집 양도세 계산기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
+                                </a>
+                                <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>버팀목 전세대출·HUG 조회</span>
+                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                </a>
+                                <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부동산 복비·취득세 계산기</span>
+                                    <span class="text-[11px] text-slate-400">국토부 상한</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 복지·지원 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>복지·지원</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="gov-finder.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold text-emerald-600">맞춤 지원금 & 정책 찾기</span>
+                                    <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">32대 정책</span>
+                                </a>
+                                <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">청년 지원 대상조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                </a>
+                                <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>부모급여·아동수당 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                </a>
+                                <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>근로장려금 수급 대상조회</span>
+                                    <span class="text-[11px] text-slate-400">최대 330만</span>
+                                </a>
+                                <a href="gov-median.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>2026 복지 지원금 자격조회</span>
+                                    <span class="text-[11px] text-slate-400">중위소득</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 대출·금융 -->
+                    <div class="relative group h-full flex items-center">
+                        <button type="button" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition flex items-center gap-1">
+                            <span>대출·금융</span>
+                            <svg class="svg-icon w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 w-64 animate-in fade-in">
+                            <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
+                                <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">대출이자 & DSR 계산기</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                </a>
+                                <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>예·적금 만기이자 계산기</span>
+                                    <span class="text-[11px] text-slate-400">비과세 비교</span>
+                                </a>
+                                <a href="youth-leap.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>청년도약계좌 만기금 조회</span>
+                                    <span class="text-[11px] text-slate-400">기여금 매칭</span>
+                                </a>
+                                <a href="dutch-pay.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span>더치페이 N빵 계산기</span>
+                                    <span class="text-[11px] text-slate-400">카톡 1초</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 우측: 모바일 햄버거 메뉴 버튼만 배치하여 공간 100% 확보 (공유 및 불필요한 긴 뱃지 제거) -->
+            <div class="flex items-center">
+                <button type="button" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition" aria-label="메뉴 열기">
+                    <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 반응형 드롭다운 메뉴 (모바일에서 깔끔하게 정돈되어 노출) -->
+        <div id="mobileNavMenu" class="hidden md:hidden bg-[#0F172A] border-t border-slate-800 px-4 py-4 space-y-4 max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+            <!-- 핵심 빠른 링크 -->
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+                <a href="gov-finder.html" class="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+                <a href="blog.html" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 text-blue-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span>금융 칼럼</span>
+                </a>
+            </div>
+
+            <!-- 급여·소득 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">연봉 계산기</a>
+                    <a href="hourly-wage.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">알바·시급</a>
+                    <a href="unemployment.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">퇴사자 실업급여</a>
+                    <a href="severance.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">퇴직금 계산기</a>
+                    <a href="annual-leave.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">연차 일수·수당</a>
+                </div>
+            </div>
+
+            <!-- 부동산·주거 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
+                </div>
+            </div>
+
+            <!-- 정부지원·복지 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">정부지원·복지</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="gov-rent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">청년 지원 대상조회</a>
+                    <a href="gov-parent.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">부모급여·아동수당</a>
+                    <a href="gov-subsidy.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">근로장려금 조회</a>
+                    <a href="gov-median.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">복지 지원금 자격</a>
+                </div>
+            </div>
+
+            <!-- 대출·금융 -->
+            <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">대출·금융</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <a href="loan-dsr.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">대출이자 & DSR</a>
+                    <a href="savings.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">예·적금 만기이자</a>
+                    <a href="youth-leap.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">청년도약계좌</a>
+                    <a href="dutch-pay.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">더치페이 N빵</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black mb-2 shadow-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>회원가입 없는 100% 무료 계산기</span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-600 font-medium">과세 유형 3단 비교</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">예·적금 이자 & 비과세 세금우대 무료 계산기</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                정기예금과 정기적금 만기 수령액 및 세금우대(1.4%), 비과세(0%) 적용 시 절세 금액을 산출합니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- 입력 폼 -->
+            <div class="lg:col-span-6 space-y-4">
+                <div class="calc-card p-5 bg-white rounded-2xl border border-slate-200">
+
+                    <!-- 상품 유형 -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">상품 종류</label>
+                        <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
+                            <button type="button" id="typeDeposit" class="py-2 text-xs font-bold rounded-lg bg-white text-teal-700 shadow-sm transition">정기예금 (목돈 굴리기)</button>
+                            <button type="button" id="typeSavings" class="py-2 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">정기적금 (매월 저축)</button>
+                        </div>
+                    </div>
+
+                    <!-- 금액 입력 -->
+                    <div class="mb-3">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-bold text-slate-700" id="moneyLabel">예치 금액 (일시 납입)</label>
+                            <span class="text-xs font-bold text-teal-700" id="savingsAmountKorean">1,000만 원</span>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="savingsAmountInput" value="10,000,000" inputmode="numeric"
+                                   class="w-full text-lg font-bold text-slate-900 px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 text-right pr-12">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">원</span>
+                        </div>
+                    </div>
+
+                    <!-- 퀵 버튼 -->
+                    <div class="flex flex-wrap gap-1.5 mb-4 quick-btn-group" id="savingsQuickBtns">
+                        <button type="button" data-add="1000000" class="quick-btn">+100만</button>
+                        <button type="button" data-add="5000000" class="quick-btn">+500만</button>
+                        <button type="button" data-add="10000000" class="quick-btn">+1천만</button>
+                        <button type="button" data-add="50000000" class="quick-btn">+5천만</button>
+                        <button type="button" data-reset="0" class="quick-btn text-rose-600">초기화</button>
+                    </div>
+
+                    <!-- 금리 및 기간 -->
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">기본 금리 (연 %)</label>
+                            <div class="relative">
+                                <input type="number" id="savingsRateInput" value="3.5" step="0.1" min="0.1" max="20"
+                                       class="w-full text-sm font-bold text-slate-900 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 text-right pr-8">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">저축 기간</label>
+                            <select id="savingsMonthsSelect" class="w-full text-sm font-semibold text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500">
+                                <option value="6">6개월</option>
+                                <option value="12" selected>12개월 (1년)</option>
+                                <option value="24">24개월 (2년)</option>
+                                <option value="36">36개월 (3년)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 단리 vs 복리 -->
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <label class="text-xs font-bold text-slate-700">이자 계산 방식</label>
+                        <div class="flex gap-2 text-xs">
+                            <label class="inline-flex items-center gap-1 cursor-pointer">
+                                <input type="radio" name="interestCalcType" value="simple" checked class="accent-teal-600">
+                                <span>단리</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1 cursor-pointer">
+                                <input type="radio" name="interestCalcType" value="compound" class="accent-teal-600">
+                                <span>월복리</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 결과 리포트 -->
+            <div class="lg:col-span-6 space-y-4">
+                <div class="calc-card p-6 bg-white rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="text-xs font-bold text-teal-700 uppercase tracking-wide">만기 실수령액 (일반과세 15.4%)</div>
+                    <div class="mt-1 flex items-baseline gap-1">
+                        <span class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight" id="resultNormalNet">10,296,100</span>
+                        <span class="text-base font-bold text-slate-600">원</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1" id="savingsResultSub">원금 10,000,000원 + 세후이자 296,100원</p>
+
+                    <!-- 과세 유형 3단 비교 카드 -->
+                    <div class="mt-5 space-y-2.5 text-xs pt-4 border-t border-slate-100">
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-slate-800">일반과세 (15.4%)</div>
+                                <div class="text-[11px] text-slate-400">이자 350,000원 - 세금 53,900원</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-slate-900" id="cardNormalVal">10,296,100원</div>
+                                <div class="text-[10px] text-slate-400">기준</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-teal-50/70 border border-teal-200 flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-teal-900 flex items-center gap-1">
+                                    세금우대 (1.4%)
+                                    <span class="text-[10px] px-1 bg-teal-600 text-white rounded">신협·농협</span>
+                                </div>
+                                <div class="text-[11px] text-teal-700">농특세 1.4%만 과세</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-extrabold text-teal-800" id="cardTaxPrefVal">10,345,100원</div>
+                                <div class="text-[10px] text-teal-600 font-bold" id="cardTaxPrefSaved">+49,000원 절세</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-200 flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-blue-900 flex items-center gap-1">
+                                    비과세 (0%)
+                                    <span class="text-[10px] px-1 bg-blue-600 text-white rounded">ISA·도약계좌</span>
+                                </div>
+                                <div class="text-[11px] text-blue-700">이자 세금 0원 전액 수령</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-extrabold text-blue-800" id="cardNonTaxVal">10,350,000원</div>
+                                <div class="text-[10px] text-blue-600 font-bold" id="cardNonTaxSaved">+53,900원 절세</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex gap-2">
+                        <button type="button" onclick="copySavingsSummary()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                            이자 계산 결과 복사
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    
+        <!-- [전문가 심층 가이드 & 2026 법령 해설 리포트] -->
+        <article class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10">
+            <div>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">2026 수신 금융 심층 가이드</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-2">2026년 예·적금 단리 vs 월복리 이자 산출 공식 및 일반과세·세금우대·비과세 저축 절세 가이드</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">조세특례제한법 제88조의2, 제89조의3 및 금융감독원 금융소비자정보포털 수신금리 산정 표준</p>
+            </div>
+
+            <!-- 섹션 1: 예금 vs 적금 실질 수익률 차이 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>1. 정기예금 vs 정기적금의 결정적 실질 이자 차이 (적금의 54.17% 법칙)</span>
+                </h3>
+                <p>
+                    동일한 4.0% 금리라 하더라도 <strong>정기예금</strong>은 1년 동안 원금 전체가 예치되어 약속된 4.0% 이자를 전액 지급받지만, <strong>정기적금</strong>은 매월 분할 입금되므로 첫 달 입금액만 12개월 치 이자를 받고 마지막 달 입금액은 단 1개월 치 이자만 받게 됩니다.
+                </p>
+                <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl text-xs sm:text-sm text-slate-800 space-y-2">
+                    <div class="font-bold text-blue-900">정기적금 실질 이자 계산 공식:</div>
+                    <p class="text-slate-700 font-mono">총 이자 = 월 불입액 × 연이율 × [n(n+1) / (2 × 12)] (n = 계약 개월 수)</p>
+                    <p class="text-slate-700">12개월 만기 적금의 평균 예치 기간 계수는 <strong>(12+1)/(2×12) = 54.17%</strong>입니다. 따라서 연 4.0% 적금의 실질 체감 이자율은 예금 기준 <strong>약 2.17%</strong> 수준입니다.</p>
+                </div>
+            </section>
+
+            <!-- 섹션 2: 단리 vs 복리 원리 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>2. 단리(Simple Interest) vs 월복리(Monthly Compound)의 수학적 수익 차이</span>
+                </h3>
+                <p>
+                    단리는 최초 예치 원금에만 이자가 붙는 반면, 월복리는 매월 발생한 이자가 원금에 가산되어 다음 달에는 '원금+이자'에 다시 이자가 붙는 눈덩이(Snowball) 효과를 발휘합니다.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">단리 (Simple Interest)</div>
+                        <p class="text-slate-600">만기 이자 = 원금 × 연이율 × (예치 기간 / 1년)<br>1년 단기 상품에서는 복리와 큰 차이가 없으나 기간이 길어질수록 수익 차이가 벌어집니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900 text-sm">월복리 (Monthly Compound)</div>
+                        <p class="text-slate-600 font-mono">만기 원리금 = 원금 × (1 + 연이율/12)^개월수<br>3년 이상 중장기 예치 시 복리 상품이 단리 대비 수십만~수백만 원의 추가 이자를 창출합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 3대 과세 유형 비교표 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>3. 이자소득세 3대 과세 유형 (일반과세 15.4% vs 세금우대 1.4% vs 비과세 0%)</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">과세 구분</th>
+                                <th class="p-3">총 공제세율</th>
+                                <th class="p-3">가입 요건 및 한도</th>
+                                <th class="p-3">대표 금융 상품</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">일반과세</td>
+                                <td class="p-3 font-bold text-rose-600">15.4% (소득세 14% + 지방소득세 1.4%)</td>
+                                <td class="p-3">제한 없음 (모든 국민 누구나)</td>
+                                <td class="p-3">시중은행 정기예금·정기적금</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">세금우대 (농특세)</td>
+                                <td class="p-3 font-bold text-blue-600">1.4% (이자소득세 0% 면제 + 농특세 1.4%)</td>
+                                <td class="p-3">만 19세 이상 조합원/준조합원 (1인당 3,000만 원 한도)</td>
+                                <td class="p-3 font-semibold text-blue-600">신협, 새마을금고, 농협, 수협 예탁금</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">완전 비과세</td>
+                                <td class="p-3 font-bold text-emerald-600">0.0% (세금 전액 면제)</td>
+                                <td class="p-3">만 65세 이상, 장애인, 국가유공자 (1인당 5,000만 원)</td>
+                                <td class="p-3 font-semibold text-emerald-600">비과세종합저축, 청년도약계좌, ISA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 섹션 4: 예치금액별 세후 실수령 이자 비교표 -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>4. 정기예금 1년(금리 연 3.8%) 가입 시 과세 유형별 실수령 이자 매트릭스</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">예치 금액</th>
+                                <th class="p-3">세전 총 이자</th>
+                                <th class="p-3">일반과세 세후이자 (15.4%)</th>
+                                <th class="p-3 text-blue-600">세금우대 세후이자 (1.4%)</th>
+                                <th class="p-3 text-emerald-600">비과세 실수령액 (0%)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">1,000만 원</td>
+                                <td class="p-3">380,000원</td>
+                                <td class="p-3">321,480원</td>
+                                <td class="p-3 text-blue-600 font-bold">374,680원 (+53,200원)</td>
+                                <td class="p-3 text-emerald-600 font-bold">380,000원 (+58,520원)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">3,000만 원</td>
+                                <td class="p-3">1,140,000원</td>
+                                <td class="p-3">964,440원</td>
+                                <td class="p-3 text-blue-600 font-bold">1,124,040원 (+159,600원)</td>
+                                <td class="p-3 text-emerald-600 font-bold">1,140,000원 (+175,560원)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-900">5,000만 원</td>
+                                <td class="p-3">1,900,000원</td>
+                                <td class="p-3">1,607,400원</td>
+                                <td class="p-3 text-slate-400">한도 초과(혼합)</td>
+                                <td class="p-3 text-emerald-600 font-bold">1,900,000원 (+292,600원)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 섹션 5: FAQ -->
+            <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>5. 예·적금 저축 자주 묻는 질문 (FAQ)</span>
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 예금자보호법 5,000만 원 한도는 어떻게 계산되나요?</div>
+                        <p class="text-slate-600 leading-relaxed">예금보험공사는 금융기관 1곳당(지점이 달라도 동일 은행 전체를 하나로 봄) 동일 예금자의 <strong>원금과 소정의 이자를 합산하여 1인당 최고 5,000만 원</strong>까지만 보호합니다. 따라서 원금 기준 4,500만~4,700만 원 단위로 은행을 쪼개어 분산 가입하는 것이 안전합니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 새마을금고와 신협도 예금자보호가 되나요?</div>
+                        <p class="text-slate-600 leading-relaxed">새마을금고는 새마을금고법에 따른 '예금자보호준비금', 신협은 신협법에 따른 '예금자보호기금'을 통해 일반 시중은행과 완전히 동일하게 1인당 최고 5,000만 원까지 법적으로 원리금을 보호합니다. 또한 금고 법인별로 각각 5,000만 원씩 보호되므로 여러 독립 법인에 나누어 예치할 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                        <div class="font-bold text-slate-900">Q. 금융소득종합과세 기준은 얼마인가요?</div>
+                        <p class="text-slate-600 leading-relaxed">개인이 1년 동안 벌어들인 이자소득과 배당소득의 합계액이 <strong>연간 2,000만 원을 초과</strong>할 경우, 2,000만 원 초과분은 다른 소득(근로소득, 사업소득 등)과 합산되어 최고 45% 누진세율로 종합과세되며 건강보험료 피부양자 자격이 박탈됩니다.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- [하단 스폰서 광고 배너 영역 (반응형 728x90, 300x250)] -->
+        <section class="mt-8 mb-4" aria-label="스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-4 sm:p-5 text-center shadow-xs flex flex-col items-center justify-center min-h-[100px] sm:min-h-[120px] hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">ADVERTISEMENT</span>
+                <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="svg-icon w-4 h-4 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <span class="text-slate-700 font-bold">스폰서 광고 영역</span>
+                    </div>
+                    <span class="text-slate-400 text-xs">(구글 애드센스 반응형 728×90, 300×250 / 카카오 애드핏 코드 삽입)</span>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:block" data-ad-format="auto" ...></ins> -->
+            </div>
+        </section>
+</main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-700">위집 예·적금 이자 & 비과세 계산기</p>
+            <p>조세특례제한법 제89조 및 금융권 표준 이자 산정 기준에 따릅니다.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600 py-1.5 border-y border-slate-100 my-2">
+                <a href="about.html" class="hover:text-blue-600 font-semibold transition">서비스 소개</a>
+                <span class="text-slate-300">·</span>
+                <a href="terms.html" class="hover:text-blue-600 font-semibold transition">이용약관 및 법적 면책</a>
+                <span class="text-slate-300">·</span>
+                <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
+            </div>
+            <p class="text-slate-400">© 2026 wezip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script src="common.js"></script>
+    <script>
+        recordRecentCalc('예·적금 이자 계산기', 'savings.html', 'trending-up');
+
+        let isDeposit = true; // true: 예금, false: 적금
+        const savingsAmountInput = document.getElementById('savingsAmountInput');
+        const savingsRateInput = document.getElementById('savingsRateInput');
+        const savingsMonthsSelect = document.getElementById('savingsMonthsSelect');
+        const typeDeposit = document.getElementById('typeDeposit');
+        const typeSavings = document.getElementById('typeSavings');
+        const moneyLabel = document.getElementById('moneyLabel');
+        const savingsAmountKorean = document.getElementById('savingsAmountKorean');
+
+        typeDeposit.addEventListener('click', () => {
+            if (isDeposit) return;
+            isDeposit = true;
+            typeDeposit.classList.add('bg-white', 'text-teal-700', 'shadow-sm');
+            typeDeposit.classList.remove('text-slate-600');
+            typeSavings.classList.remove('bg-white', 'text-teal-700', 'shadow-sm');
+            typeSavings.classList.add('text-slate-600');
+            moneyLabel.textContent = '예치 금액 (일시 납입)';
+            calculateSavings();
+        });
+
+        typeSavings.addEventListener('click', () => {
+            if (!isDeposit) return;
+            isDeposit = false;
+            typeSavings.classList.add('bg-white', 'text-teal-700', 'shadow-sm');
+            typeSavings.classList.remove('text-slate-600');
+            typeDeposit.classList.remove('bg-white', 'text-teal-700', 'shadow-sm');
+            typeDeposit.classList.add('text-slate-600');
+            moneyLabel.textContent = '월 납입 금액 (매월 저축)';
+            calculateSavings();
+        });
+
+        function calculateSavings() {
+            const amount = unformatNumber(savingsAmountInput.value);
+            const rate = parseFloat(savingsRateInput.value) || 0;
+            const months = parseInt(savingsMonthsSelect.value, 10);
+            const isCompound = document.querySelector('input[name="interestCalcType"]:checked')?.value === 'compound';
+
+            // 한글 금액 표기
+            const uk = Math.floor(amount / 100000000);
+            const man = Math.floor((amount % 100000000) / 10000);
+            savingsAmountKorean.textContent = (uk > 0 ? `${uk}억 ` : '') + (man > 0 ? `${man}만 ` : '') + '원';
+
+            let totalPrincipal = 0;
+            let grossInterest = 0;
+
+            if (isDeposit) {
+                // 예금
+                totalPrincipal = amount;
+                if (!isCompound) {
+                    grossInterest = amount * (rate / 100) * (months / 12);
+                } else {
+                    // 월복리
+                    grossInterest = amount * Math.pow(1 + (rate / 100 / 12), months) - amount;
+                }
+            } else {
+                // 적금
+                totalPrincipal = amount * months;
+                if (!isCompound) {
+                    // 적금 단리: sum_{i=1}^n M * r * i/12 = M * r * n(n+1)/(2*12)
+                    grossInterest = amount * (rate / 100) * (months * (months + 1) / (2 * 12));
+                } else {
+                    // 적금 월복리
+                    let sum = 0;
+                    const r = rate / 100 / 12;
+                    for (let i = 1; i <= months; i++) {
+                        sum += amount * Math.pow(1 + r, i);
+                    }
+                    grossInterest = sum - totalPrincipal;
+                }
+            }
+
+            grossInterest = Math.floor(grossInterest);
+
+            // 일반과세: 15.4%
+            const normalTax = Math.floor(grossInterest * 0.154);
+            const normalNetInterest = grossInterest - normalTax;
+            const normalTotal = totalPrincipal + normalNetInterest;
+
+            // 세금우대: 1.4%
+            const taxPrefTax = Math.floor(grossInterest * 0.014);
+            const taxPrefNetInterest = grossInterest - taxPrefTax;
+            const taxPrefTotal = totalPrincipal + taxPrefNetInterest;
+            const taxPrefSaved = normalTax - taxPrefTax;
+
+            // 비과세: 0%
+            const nonTaxTotal = totalPrincipal + grossInterest;
+            const nonTaxSaved = normalTax;
+
+            // DOM 바인딩
+            document.getElementById('resultNormalNet').textContent = formatNumber(normalTotal);
+            document.getElementById('savingsResultSub').textContent = `원금 ${formatNumber(totalPrincipal)}원 + 세후이자 ${formatNumber(normalNetInterest)}원`;
+
+            document.getElementById('cardNormalVal').textContent = `${formatNumber(normalTotal)}원`;
+            document.getElementById('cardTaxPrefVal').textContent = `${formatNumber(taxPrefTotal)}원`;
+            document.getElementById('cardTaxPrefSaved').textContent = `+${formatNumber(taxPrefSaved)}원 절세`;
+            document.getElementById('cardNonTaxVal').textContent = `${formatNumber(nonTaxTotal)}원`;
+            document.getElementById('cardNonTaxSaved').textContent = `+${formatNumber(nonTaxSaved)}원 절세`;
+        }
+
+        setupQuickButtons('#savingsQuickBtns', 'savingsAmountInput', calculateSavings);
+        savingsRateInput.addEventListener('input', calculateSavings);
+        savingsMonthsSelect.addEventListener('change', calculateSavings);
+        document.querySelectorAll('input[name="interestCalcType"]').forEach(r => r.addEventListener('change', calculateSavings));
+
+        function copySavingsSummary() {
+            const normal = document.getElementById('resultNormalNet').textContent;
+            const nonTax = document.getElementById('cardNonTaxVal').textContent;
+            const text = `[위집 예적금 이자 계산 결과]\n일반과세 수령액: ${normal}원\n비과세(ISA 등) 수령액: ${nonTax}원\n계산기: ${window.location.href}`;
+            copyToClipboard(text);
+        }
+
+        calculateSavings();
+    </script>
+</body>
+</html>
