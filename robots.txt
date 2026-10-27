@@ -59,6 +59,6 @@ User-agent: Daumoa
 Allow: /
 
 # Sitemap
-Sitemap: https://wezip.co.kr/sitemap.xml
+Sitemap: https://www.wezip.co.kr/sitemap.xml
 
 Sitemap: https://www.wezip.co.kr/rss.xml
