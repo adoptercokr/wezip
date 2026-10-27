@@ -336,12 +336,12 @@ function initVisitorCounter() {
       <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-medium shadow-2xs">
         <span class="flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>오늘 방문자 <strong id="wezipTodayVisits" class="font-bold text-slate-800">...</strong></span>
+          <span>오늘 방문(PV) <strong id="wezipTodayVisits" class="font-bold text-slate-800">...</strong></span>
         </span>
         <span class="text-slate-300">|</span>
         <span class="flex items-center gap-1">
           <svg class="svg-icon w-3 h-3 text-blue-600" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <span>전체 방문자 <strong id="wezipTotalVisits" class="font-bold text-blue-600">...</strong></span>
+          <span>전체 방문(PV) <strong id="wezipTotalVisits" class="font-bold text-blue-600">...</strong></span>
         </span>
       </div>
     `;
@@ -354,23 +354,44 @@ function initVisitorCounter() {
     }
   }
 
-  // hits.sh 실시간 카운트 비동기 조회
-  fetch('https://hits.sh/wezip.co.kr.svg?view=today-total')
+  // 중복 카운팅 (PV 모드: 새로고침 및 페이지 이동마다 즉시 +1 반영)
+  const todayDateStr = new Date().toISOString().slice(0, 10);
+  let storedDate = localStorage.getItem('wezip_pv_date');
+  let localToday = parseInt(localStorage.getItem('wezip_pv_today') || '0', 10);
+  let localTotal = parseInt(localStorage.getItem('wezip_pv_total') || '0', 10);
+
+  if (storedDate !== todayDateStr) {
+    localStorage.setItem('wezip_pv_date', todayDateStr);
+    localToday = 0;
+  }
+  localToday += 1;
+  localTotal += 1;
+  localStorage.setItem('wezip_pv_today', localToday);
+  localStorage.setItem('wezip_pv_total', localTotal);
+
+  const todayEl = document.getElementById('wezipTodayVisits');
+  const totalEl = document.getElementById('wezipTotalVisits');
+  if (todayEl) todayEl.textContent = localToday.toLocaleString();
+  if (totalEl) totalEl.textContent = localTotal.toLocaleString();
+
+  // hits.sh 실시간 카운트 비동기 조회 (캐시 방지 타임스탬프 첨부)
+  fetch(`https://hits.sh/wezip.co.kr.svg?view=today-total&_t=${Date.now()}`, { cache: 'no-store' })
     .then(res => res.text())
     .then(svg => {
       const match = svg.match(/aria-label="[^:]*?:\s*([0-9,]+)\s*\/\s*([0-9,]+)"/);
       if (match) {
-        const todayEl = document.getElementById('wezipTodayVisits');
-        const totalEl = document.getElementById('wezipTotalVisits');
-        if (todayEl) todayEl.textContent = match[1];
-        if (totalEl) totalEl.textContent = match[2];
+        const serverToday = parseInt(match[1].replace(/,/g, ''), 10) || 0;
+        const serverTotal = parseInt(match[2].replace(/,/g, ''), 10) || 0;
+        const displayToday = Math.max(serverToday, localToday);
+        const displayTotal = Math.max(serverTotal, localTotal + serverTotal - 1);
+        if (todayEl) todayEl.textContent = displayToday.toLocaleString();
+        if (totalEl) totalEl.textContent = displayTotal.toLocaleString();
       }
     })
     .catch(() => {
-      const todayEl = document.getElementById('wezipTodayVisits');
-      const totalEl = document.getElementById('wezipTotalVisits');
-      if (todayEl && todayEl.textContent === '...') todayEl.textContent = '1';
-      if (totalEl && totalEl.textContent === '...') totalEl.textContent = '1';
+      // 오프라인이거나 로딩 중일 때 로컬 PV 값 유지
+      if (todayEl) todayEl.textContent = localToday.toLocaleString();
+      if (totalEl) totalEl.textContent = localTotal.toLocaleString();
     });
 }
 

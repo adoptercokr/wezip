@@ -266,7 +266,22 @@
     </header>
 
     <!-- 본문 아티클 영역 -->
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+        <main class="w-full max-w-4xl mx-auto">
         <!-- 빵부스러기 네비게이션 -->
         <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
             <a href="index.html" class="hover:text-blue-600">홈</a>
@@ -363,7 +378,58 @@
                 출생 후 60일 이내에 '행복출산 원스톱 서비스(정부24 또는 주민센터)'를 통해 신청하면 태어난 달까지 소급하여 전액 지급받을 수 있습니다. 그러나 60일이 지난 후 신청하면 신청 당월부터 지급되어 지나간 달의 수백만 원 급여가 영구 소멸되므로 출생신고 당일 즉시 일괄 신청하시기 바랍니다.
             </p>
 
-        </article>
+        
+            <!-- [추가 상세 블로그 해설 1: 실전 사례 시뮬레이션 및 심층 분석] -->
+            <section class="mt-10 pt-8 border-t border-slate-200 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>3. 실전 사례로 보는 시뮬레이션 및 심층 분석</span>
+                </h2>
+                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200">
+                    
+            <p><strong>사례 분석 (2026년 3월 첫 아이를 출산한 맞벌이 이 씨 부부)</strong>: 아이가 태어나면 출생 신고와 동시에 첫만남이용권 바우처 200만 원(둘째는 300만 원)이 국민행복카드에 일시 충전됩니다. 또한 생후 0세(0~11개월) 기간 동안 매월 부모급여 100만 원과 아동수당 10만 원이 매월 25일 현금 계좌로 자동 입금됩니다.</p>
+            <p class="mt-2">아이가 만 1세(12~23개월)가 되면 부모급여는 월 50만 원으로 조정되며, 아동수당 10만 원은 만 8세 미만까지 매월 지속 지급됩니다. 이로써 출생 후 만 2세까지 국가에서 수령하는 순수 현금 및 바우처 총액은 <strong>최소 2,420만 원 이상</strong>에 달합니다.</p>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 2: 전문가가 전하는 실전 가이드 & 필수 꿀팁] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>4. 전문가가 전하는 실무 가이드 & 필수 꿀팁</span>
+                </h2>
+                <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
+                    
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                <li><strong>행복출산 원스톱 서비스 신청</strong>: 주민센터 출생신고 시 '행복출산 원스톱 서비스'를 신청하면 부모급여, 아동수당, 첫만남이용권, 지자체 출산지원금이 단 1회 신청으로 모두 연결됩니다.</li>
+                <li><strong>출생일 60일 이내 신청 필수</strong>: 출생 후 60일 이내에 신청해야 출생월부터 소급하여 지원금을 지급받을 수 있으며, 60일을 초과하면 신청 당월부터만 지급됩니다.</li>
+                <li><strong>어린이집 보육료 바우처 전환</strong>: 부모급여를 받던 중 아이를 어린이집에 보낼 경우, 보육료 바우처 결제액을 차감한 차액만 현금으로 입금되므로 전환 신청을 누락하지 않아야 합니다.</li>
+            </ul>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 3: 자주 묻는 질문 (FAQ) & 주의사항] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>5. 자주 묻는 핵심 질문 (FAQ)</span>
+                </h2>
+                
+            <div class="space-y-3">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 부모의 소득이나 자산이 많으면 부모급여를 못 받나요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">부모급여와 아동수당은 부모의 소득이나 자산 기준 없이 대한민국 국적의 모든 아동에게 보편 지급됩니다.</div>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 첫만남이용권 바우처의 유효기간은 언제까지인가요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">아동 출생일로부터 1년 이내에 사용해야 하며, 기한 내 미사용 잔액은 국고로 자동 환수되므로 주의해야 합니다.</div>
+                </div>
+            </div>
+        
+            </section>
+</article>
 
         <!-- 본문 하단 관련 계산기 카드 -->
         <div class="mt-8 p-6 bg-slate-900 text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -391,6 +457,20 @@
             </div>
         </section>
     </main>
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+    </div>
 
     <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">

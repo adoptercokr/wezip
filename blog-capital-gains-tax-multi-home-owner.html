@@ -266,7 +266,22 @@
     </header>
 
     <!-- 본문 아티클 영역 -->
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+        <main class="w-full max-w-4xl mx-auto">
         <!-- 빵부스러기 네비게이션 -->
         <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
             <a href="index.html" class="hover:text-blue-600">홈</a>
@@ -352,7 +367,58 @@
                 </div>
             </section>
         
-        </article>
+        
+            <!-- [추가 상세 블로그 해설 1: 실전 사례 시뮬레이션 및 심층 분석] -->
+            <section class="mt-10 pt-8 border-t border-slate-200 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>3. 실전 사례로 보는 시뮬레이션 및 심층 분석</span>
+                </h2>
+                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200">
+                    
+            <p><strong>사례 분석 (조정대상지역 2주택 보유자 박 씨의 양도세 비교)</strong>: 서울 송파구에 아파트 2채(A주택, B주택)를 보유한 박 씨가 5년 전 8억에 취득하여 현재 13억이 된 B주택(양도차익 5억)을 매도하는 상황입니다. 다주택자 양도세 중과가 적용되면 기본세율(40%)에 +20%p가 가산되어 최고 60% 세율과 장기보유특별공제(장특공) 0%가 적용되어 양도세가 약 2억 8천만 원에 달합니다.</p>
+            <p class="mt-2">반면, 한시적 중과 유예 혜택을 적용받으면 기본세율(최고 40%)만 적용되고 5년 보유에 따른 장기보유특별공제 10%가 인정되어 세액이 약 1억 6천만 원 수준으로 줄어들어 <strong>무려 1억 2천만 원 이상의 세금을 절감</strong>할 수 있습니다.</p>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 2: 전문가가 전하는 실전 가이드 & 필수 꿀팁] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>4. 전문가가 전하는 실무 가이드 & 필수 꿀팁</span>
+                </h2>
+                <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
+                    
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                <li><strong>매도 순서의 절대 법칙</strong>: 양도차익이 적은 주택을 먼저 매도하여 일반과세로 정리하고, 양도차익이 가장 큰 주택을 마지막에 남겨 1세대 1주택 비과세(최대 12억 원) 및 장특공 최대 80%를 적용받아야 합니다.</li>
+                <li><strong>일시적 2주택 3년 처분 기한 준수</strong>: 신규 주택 취득일로부터 3년 이내에 종전 주택을 처분해야 1주택 비과세 특례를 온전히 누릴 수 있습니다.</li>
+                <li><strong>계약일이 아닌 잔금일 기준</strong>: 중과 유예 만료일을 앞두고 있다면 계약 체결일이 아닌 '잔금 청산일' 또는 '등기 접수일' 중 빠른 날이 과세 기준일이 됨을 반드시 유의해야 합니다.</li>
+            </ul>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 3: 자주 묻는 질문 (FAQ) & 주의사항] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>5. 자주 묻는 핵심 질문 (FAQ)</span>
+                </h2>
+                
+            <div class="space-y-3">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 지방 저가 주택도 다주택 주택 수에 무조건 포함되나요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">수도권·광역시·세종시 외 읍·면 지역의 기준시가 3억 원 이하 주택은 양도세 중과 판정 시 주택 수에서 제외되는 특례 규정이 존재합니다.</div>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 분양권과 입주권도 주택 수에 합산되나요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">2021년 1월 1일 이후 취득한 분양권과 조합원 입주권은 다른 주택의 양도세 중과 판단 시 주택 수에 모두 합산됩니다.</div>
+                </div>
+            </div>
+        
+            </section>
+</article>
 
         <!-- 하단 바로가기 및 공유 배너 -->
         <div class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -370,6 +436,20 @@
             </div>
         </div>
     </main>
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+    </div>
 
     <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">

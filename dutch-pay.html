@@ -267,7 +267,22 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+        <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+        <main class="w-full max-w-4xl mx-auto">
 
         <div class="mb-6">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black mb-2 shadow-xs">
@@ -548,6 +563,20 @@
             </div>
         </section>
 </main>
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+    </div>
 
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
         <div class="max-w-4xl mx-auto px-4 space-y-1">

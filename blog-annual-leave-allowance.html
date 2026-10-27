@@ -266,7 +266,22 @@
     </header>
 
     <!-- 본문 아티클 영역 -->
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+        <main class="w-full max-w-4xl mx-auto">
         <!-- 빵부스러기 네비게이션 -->
         <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
             <a href="index.html" class="hover:text-blue-600">홈</a>
@@ -360,7 +375,58 @@
                 <li><strong>서면 통보 필수</strong>: 이메일이나 사내 인트라넷 공지가 아닌 근로자별 서면(종이) 통보가 원칙입니다.</li>
                 <li><strong>퇴사 시에는 촉진 불가</strong>: 퇴사로 인해 물리적으로 휴가를 사용할 수 없는 경우에는 회사가 연차 촉진을 했더라도 미사용 수당을 반드시 100% 현금 정산해야 합니다.</li>
             </ul>
-        </article>
+        
+            <!-- [추가 상세 블로그 해설 1: 실전 사례 시뮬레이션 및 심층 분석] -->
+            <section class="mt-10 pt-8 border-t border-slate-200 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>3. 실전 사례로 보는 시뮬레이션 및 심층 분석</span>
+                </h2>
+                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200">
+                    
+            <p><strong>사례 분석 (사회초년생 입사 1~2년 차 김 씨의 연차 계산)</strong>: 김 씨는 2025년 3월 1일에 입사하여 2026년 2월 28일까지 만 1년을 개근했습니다. 근로기준법 제60조에 따라 입사 첫해 1년 미만 기간 동안 1개월 개근 시 1일씩 총 11일의 연차가 발생했으며, 만 1년이 되는 2026년 3월 1일에 15일의 연차가 추가로 새롭게 부여됩니다. 만약 첫해 발생한 11일을 한 번도 사용하지 않았다면, 입사 1년 시점에 미사용 11일에 대한 연차수당 청구권이 발생합니다.</p>
+            <p class="mt-2"><strong>연차수당 계산 공식</strong>: <code>미사용 연차일수 × 1일 통상임금(시간급 통상임금 × 1일 소정근로시간 8시간)</code>으로 계산됩니다. 월 통상임금이 300만 원인 근로자의 1시간 통상임금은 약 14,354원(300만 원 ÷ 209시간)이며, 1일 연차수당은 약 114,832원입니다. 미사용 연차가 5일 남아있다면 연말 또는 퇴직 시 약 574,160원을 수당으로 정산받게 됩니다.</p>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 2: 전문가가 전하는 실전 가이드 & 필수 꿀팁] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>4. 전문가가 전하는 실무 가이드 & 필수 꿀팁</span>
+                </h2>
+                <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
+                    
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                <li><strong>연차 사용촉진제도 유효성 확인</strong>: 회사가 적법하게 서면으로 연차 사용 촉진을 통보하지 않고 구두나 사내 메신저로만 독려한 경우, 근로자가 연차를 쓰지 못했다면 회사는 반드시 연차수당을 현금 지급해야 합니다.</li>
+                <li><strong>퇴직 시 연차 정산</strong>: 퇴직으로 인해 사용할 수 없게 된 모든 미사용 연차는 최종 급여 지급일(퇴직 후 14일 이내)에 퇴직금과 별도로 전액 정산되어야 합니다.</li>
+                <li><strong>중도 입사자의 회계연도 기준 정산</strong>: 입사일 기준보다 회계연도(1월 1일) 기준 정산이 근로자에게 불리한 경우, 퇴직 시에는 반드시 근로자에게 더 유리한 '입사일 기준'으로 재정산해야 합니다.</li>
+            </ul>
+        
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 3: 자주 묻는 질문 (FAQ) & 주의사항] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>5. 자주 묻는 핵심 질문 (FAQ)</span>
+                </h2>
+                
+            <div class="space-y-3">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 병가나 개인 사정으로 결근이 있어도 연차가 발생하나요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">1년간 출근율이 80% 이상이면 15일의 연차가 정상 발생합니다. 출근율이 80% 미만인 해에는 개근한 월수만큼(월 1일)만 연차가 비례 부여됩니다.</div>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div class="font-bold text-slate-800 text-sm">Q. 연차수당에도 세금이 부과되나요?</div>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-1">네, 연차수당은 근로소득에 해당하므로 소득세와 4대보험료가 동일하게 공제된 후 통장에 입금됩니다.</div>
+                </div>
+            </div>
+        
+            </section>
+</article>
 
         <!-- 하단 바로가기 및 공유 배너 -->
         <div class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -378,6 +444,20 @@
             </div>
         </div>
     </main>
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+    </div>
 
     <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">

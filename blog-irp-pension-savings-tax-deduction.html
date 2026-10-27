@@ -266,7 +266,22 @@
     </header>
 
     <!-- 본문 아티클 영역 -->
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+        <main class="w-full max-w-4xl mx-auto">
         <!-- 빵부스러기 네비게이션 -->
         <nav class="flex items-center gap-1.5 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
             <a href="index.html" class="hover:text-blue-600">홈</a>
@@ -378,7 +393,58 @@
                 </div>
             </section>
         
-        </article>
+        
+            <!-- [추가 상세 블로그 해설 1: 실전 사례 시뮬레이션 및 심층 분석] -->
+            <section class="mt-10 pt-8 border-t border-slate-200 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>3. 실전 사례로 보는 시뮬레이션 및 심층 분석</span>
+                </h2>
+                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200">
+                    
+                <p><strong>실전 시뮬레이션 (절세 계좌 및 세액공제 극대화 시나리오)</strong>: 연금저축 vs IRP(개인형 퇴직연금) 차이점과 연 최대 900만원 세액공제(148.5만원 환급) 전략과 관련하여 대한민국 세제는 과세표준 구간에 따라 6%에서 최고 45%의 초과누진세율이 적용됩니다. 소득공제(과세표준 자체를 낮춤)와 세액공제(산출된 세금에서 직접 차감)의 성격을 명확히 이해하고 연금저축·IRP 및 ISA 계좌를 조합하면 연간 최대 148.5만 원 이상의 실질 세금 환급이 가능합니다.</p>
+                <p class="mt-2"><strong>금융소득 종합과세 방어</strong>: 연간 예적금 이자 및 배당소득 합계액이 2,000만 원을 초과하면 타 소득과 합산 과세되어 건강보험료 피부양자 자격 박탈 등 심각한 후폭풍이 발생하므로 비과세 종합저축 및 ISA 만기 전환 전략을 필히 실행해야 합니다.</p>
+            
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 2: 전문가가 전하는 실전 가이드 & 필수 꿀팁] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>4. 전문가가 전하는 실무 가이드 & 필수 꿀팁</span>
+                </h2>
+                <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
+                    
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                    <li><strong>ISA 만기 자금의 연금계좌 이체 특례</strong>: ISA 만기 금액을 60일 이내에 연금계좌로 전환 납입하면 전환 금액의 10%(최대 300만 원)에 대해 추가 세액공제 혜택을 받을 수 있습니다.</li>
+                    <li><strong>현금영수증 자진발급분 등록</strong>: 사업자나 매장에서 핸드폰 번호 미입력으로 국세청 지정 번호(010-000-1234)로 발행된 영수증은 홈택스에서 3년 이내 본인 번호로 귀속 등록해야 공제받습니다.</li>
+                    <li><strong>가족 간 차용증 작성 및 이자 이체 내역</strong>: 증여세 과세를 피하기 위해 가족 간 금전 대차 시 법정 적정 이자율(연 4.6%)과 상환 계획을 명시한 차용증을 작성하고 실제 은행 계좌로 이자를 매월 지급해야 차용으로 인정됩니다.</li>
+                </ul>
+            
+                </div>
+            </section>
+
+            <!-- [추가 상세 블로그 해설 3: 자주 묻는 질문 (FAQ) & 주의사항] -->
+            <section class="mt-8 pt-8 border-t border-slate-100 space-y-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                    <span>5. 자주 묻는 핵심 질문 (FAQ)</span>
+                </h2>
+                
+                <div class="space-y-3">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="font-bold text-slate-800 text-sm">Q. 5월 종합소득세 신고를 기한 내에 놓치면 어떻게 되나요?</div>
+                        <div class="text-xs sm:text-sm text-slate-600 mt-1">무신고가산세(납부세액의 20%)와 납부지연가산세(하루당 0.022%)가 매일 추가되므로 홈택스에서 즉시 '기한 후 신고'를 진행하여 가산세 감면을 받아야 합니다.</div>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="font-bold text-slate-800 text-sm">Q. 프리랜서 3.3% 환급액은 언제 통장에 입금되나요?</div>
+                        <div class="text-xs sm:text-sm text-slate-600 mt-1">5월 정기신고 기간에 신고를 완료한 경우, 관할 세무서와 구청의 검토를 거쳐 통상 6월 말에서 7월 초 사이에 환급 계좌로 일괄 지급됩니다.</div>
+                    </div>
+                </div>
+            
+            </section>
+</article>
 
         <!-- 하단 바로가기 및 공유 배너 -->
         <div class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -396,6 +462,20 @@
             </div>
         </div>
     </main>
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스<br>스폰서 영역</div>
+                </div>
+                <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
+                <span class="text-[10px] text-slate-400 font-medium">위집 스폰서</span>
+            </div>
+        </aside>
+    </div>
 
     <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
