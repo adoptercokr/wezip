@@ -333,16 +333,18 @@ function initVisitorCounter() {
     badgeContainer.id = 'wezipVisitorBadge';
     badgeContainer.className = 'py-2 flex items-center justify-center';
     badgeContainer.innerHTML = `
-      <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-medium shadow-2xs">
+      <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 px-3.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-medium shadow-2xs">
         <span class="flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>오늘 방문(PV) <strong id="wezipTodayVisits" class="font-bold text-slate-800">...</strong></span>
+          <span>오늘 방문 <strong id="wezipTodayVisits" class="font-bold text-slate-800">...</strong></span>
         </span>
         <span class="text-slate-300">|</span>
         <span class="flex items-center gap-1">
           <svg class="svg-icon w-3 h-3 text-blue-600" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <span>전체 방문(PV) <strong id="wezipTotalVisits" class="font-bold text-blue-600">...</strong></span>
+          <span>전체 방문 <strong id="wezipTotalVisits" class="font-bold text-blue-600">...</strong></span>
         </span>
+        <span class="text-slate-300">·</span>
+        <span class="text-[10px] text-slate-400 font-normal">26년 10월 27일부터</span>
       </div>
     `;
 
