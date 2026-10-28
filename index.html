@@ -121,7 +121,8 @@
                         <span>지원금 찾기</span>
                     </a>
                     <a href="blog.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">금융 칼럼</a>
-                    <a href="contact.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition font-bold">광고·제휴</a>
+                    <a href="contact.html?type=general" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition font-bold">일반문의</a>
+                    <a href="contact.html?type=ad" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-blue-300 hover:text-white hover:bg-slate-800 transition font-bold border border-blue-500/30">광고문의</a>
 
                     <!-- 1. 급여·소득 -->
                     <div class="relative group h-full flex items-center">
@@ -267,7 +268,10 @@
                 </a>
             </div>
 
-            <div class="pt-2 border-t border-slate-800"><a href="contact.html" class="block p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-blue-300">광고 및 비즈니스 제휴 문의 &rarr;</a></div>
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                <a href="contact.html?type=general" class="block p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-slate-200">일반 문의 &rarr;</a>
+                <a href="contact.html?type=ad" class="block p-2 rounded-lg bg-blue-950/80 border border-blue-500/40 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-blue-300">광고 문의 &rarr;</a>
+            </div>
             <!-- 급여·소득 -->
             <div>
                 <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">급여·소득</div>
@@ -381,7 +385,7 @@
                 <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
                 <div class="w-full pt-2 border-t border-slate-100">
                     <span class="text-[10px] text-slate-400 font-medium block mb-1">위집 스폰서</span>
-                    <a href="contact.html" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
+                    <a href="contact.html?type=ad" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
                         배너 광고 문의 &rarr;
                     </a>
                 </div>
@@ -1395,7 +1399,7 @@
                 <!-- 실제 애드센스 코드 삽입 위치: <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" ...></ins> -->
                 <div class="w-full pt-2 border-t border-slate-100">
                     <span class="text-[10px] text-slate-400 font-medium block mb-1">위집 스폰서</span>
-                    <a href="contact.html" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
+                    <a href="contact.html?type=ad" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
                         배너 광고 문의 &rarr;
                     </a>
                 </div>
@@ -1422,7 +1426,9 @@
                 <span class="text-slate-300">·</span>
                 <a href="privacy.html" class="hover:text-blue-600 font-semibold transition">개인정보처리방침</a>
                 <span class="text-slate-300">·</span>
-                <a href="contact.html" class="hover:text-blue-600 font-semibold transition">광고/제휴 문의</a>
+                <a href="contact.html?type=general" class="hover:text-blue-600 font-semibold transition">일반 문의</a>
+                <span class="text-slate-300">·</span>
+                <a href="contact.html?type=ad" class="hover:text-blue-600 font-bold transition">광고 문의</a>
             </div>
             <p class="pt-2 text-slate-400">© 2026 wezip. All rights reserved.</p>
         </div>
