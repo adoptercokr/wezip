@@ -158,6 +158,10 @@
 - **구글 서치콘솔:**
   - 소유권 확인 메타: `<meta name="google-site-verification" content="rG_dAHCcKAuP0DmIaLVp9EMR-RvnwceWg_-WmMwQCR4" />`
   - URL 접두어 속성 `https://wezip.co.kr/` 등록 및 사이트맵 제출 성공
+- **다음(Daum / 카카오) 웹마스터도구:**
+  - 인증 방식: robots.txt 하단 인증키 기입
+  - 인증 코드: `#DaumWebMasterTool:742ccc120c16a4ff031a8e1d8971d975e5fe0e655e361ff24f28b17b870faabc:7v7Co2KibzUex4fH7zWmNA==`
+  - robots.txt 배포 완료
 
 ---
 
