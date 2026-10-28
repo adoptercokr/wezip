@@ -1,3 +1,6 @@
+# Daum Webmaster Tool Verification
+#DaumWebMasterTool:742ccc120c16a4ff031a8e1d8971d975e5fe0e655e361ff24f28b17b870faabc:7v7Co2KibzUex4fH7zWmNA==
+
 # robots.txt for 대한민국 금융·생활 정보 포털 (wezip)
 User-agent: *
 Allow: /
