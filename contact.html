@@ -356,7 +356,7 @@
         }
     });
 
-    // 일반 문의 제출 처리 (제목, 연락처, 내용)
+    // 일반 문의 제출 처리 (발신자/제목/본문에 [위집 wezip.co.kr] 출처 100% 명확히 표기)
     function handleGeneralSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('genSubmitBtn');
@@ -364,17 +364,29 @@
         btn.disabled = true;
         btn.innerHTML = '<span>접수 중...</span>';
 
+        const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+        const title = document.getElementById('genTitle').value.trim();
+        const contact = document.getElementById('genContact').value.trim();
+        const message = document.getElementById('genMessage').value.trim();
+
         const payload = {
-            _subject: '[위집 일반문의] ' + document.getElementById('genTitle').value,
-            문의제목: document.getElementById('genTitle').value,
-            회신연락처: document.getElementById('genContact').value,
-            문의내용: document.getElementById('genMessage').value
+            name: '[위집 wezip.co.kr] 일반문의',
+            _subject: '[위집 wezip.co.kr] 일반문의: ' + title,
+            사이트출처: '위집 (wezip.co.kr) - 대한민국 생활 금융 포털',
+            문의유형: '일반 문의 (서비스 이용 / 오류 제보 / 건의)',
+            문의제목: title,
+            회신연락처: contact,
+            문의내용: message,
+            접수일시: nowStr
         };
+        if (contact.includes('@')) {
+            payload._replyto = contact;
+        }
 
         sendPayload(payload, btn, originalText);
     }
 
-    // 광고 문의 제출 처리 (제목, 업체명, 연락처, 내용)
+    // 광고 문의 제출 처리 (발신자/제목/본문에 [위집 wezip.co.kr] 출처 100% 명확히 표기)
     function handleAdSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('adSubmitBtn');
@@ -382,13 +394,26 @@
         btn.disabled = true;
         btn.innerHTML = '<span>접수 중...</span>';
 
+        const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+        const title = document.getElementById('adTitle').value.trim();
+        const company = document.getElementById('adCompany').value.trim();
+        const contact = document.getElementById('adContact').value.trim();
+        const message = document.getElementById('adMessage').value.trim();
+
         const payload = {
-            _subject: '[위집 광고문의] ' + document.getElementById('adTitle').value,
-            문의제목: document.getElementById('adTitle').value,
-            업체명: document.getElementById('adCompany').value,
-            회신연락처: document.getElementById('adContact').value,
-            문의내용: document.getElementById('adMessage').value
+            name: '[위집 wezip.co.kr] 광고문의',
+            _subject: '[위집 wezip.co.kr] 광고문의: ' + (company ? '[' + company + '] ' : '') + title,
+            사이트출처: '위집 (wezip.co.kr) - 대한민국 생활 금융 포털',
+            문의유형: '광고 및 제휴 문의',
+            업체명: company || '(미입력)',
+            문의제목: title,
+            회신연락처: contact,
+            문의내용: message,
+            접수일시: nowStr
         };
+        if (contact.includes('@')) {
+            payload._replyto = contact;
+        }
 
         sendPayload(payload, btn, originalText);
     }

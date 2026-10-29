@@ -126,9 +126,10 @@
 - **초간단 폼 필드:**
   - **일반 문의:** 제목(`genTitle`), 회신 연락처/이메일(`genContact`), 문의 내용(`genMessage`)
   - **광고 문의:** 제목(`adTitle`), 업체명/성함(`adCompany`), 회신 연락처/이메일(`adContact`), 문의 내용(`adMessage`)
-- **이메일 100% 완전 비노출 암호화:**
-  - 관리자 수신 이메일(`joykorea7@gmail.com`)이 화면에 절대 노출되지 않음
-  - JS에서 Base64 토큰(`am95a29yZWE3QGdtYWlsLmNvbQ==`)으로 디코딩되어 FormSubmit AJAX 엔드포인트로 전송
+- **이메일 보안 및 메일 출처 3중 각인 식별:**
+  - 관리자 수신 이메일(`joykorea7@gmail.com`)이 화면에 절대 노출되지 않음 (Base64 암호화 전송)
+  - **애니맵 등 타 사이트와 명확한 구분:** 메일함 발신자명(`name: [위집 wezip.co.kr]`), 메일 제목(`_subject: [위집 wezip.co.kr] ...`), 본문 1행(`사이트출처: 위집 (wezip.co.kr)`)에 출처가 3중으로 굵게 각인되어 수신 메일함에서 즉시 판별 가능
+  - 상대방이 이메일 입력 시 `_replyto`가 자동 지정되어 메일함에서 클릭 한 번으로 바로 답장 가능
   - 페이지 리로드 없이 1초 만에 비동기 전송 후 접수 완료 토스트 및 확인 카드 표출
 
 ### 2) 실시간 방문자 카운터 시스템 (`api/counter.js` & `common.js`)
