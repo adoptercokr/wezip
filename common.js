@@ -453,3 +453,52 @@ function showToast(msg) {
     setTimeout(() => { toast.style.display = 'none'; }, 200);
   }, 2200);
 }
+
+
+/**
+ * 카카오톡 및 모바일 SNS 원클릭 결과 공유 함수
+ * - 모바일(스마트폰): Web Share API를 호출하여 OS 카카오톡 공유창 즉시 실행
+ * - PC / 웹: 계산 결과 텍스트와 링크를 클립보드에 복사하고 카카오톡 붙여넣기 안내 토스트 표시
+ */
+async function shareToKakao(calcTitle, summaryText) {
+  const currentUrl = window.location.href.split('?')[0];
+  const title = calcTitle || document.title.split('-')[0].trim() || 'WE ZIP 무료 계산기';
+  const text = summaryText || `[WE ZIP] ${title} 결과\n100% 무료 생활 금융 포털에서 확인하세요:\n${currentUrl}`;
+
+  // 1. 모바일 환경 (Android, iPhone, iPad 등): Web Share API로 카카오톡 즉시 연동
+  if (navigator.share && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+    try {
+      await navigator.share({
+        title: title,
+        text: text,
+        url: currentUrl
+      });
+      return;
+    } catch (err) {
+      if (err.name === 'AbortError') return; // 사용자가 취소함
+    }
+  }
+
+  // 2. PC 브라우저 또는 Web Share 미지원 환경: 클립보드 복사 + 카카오톡 토스트 안내
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(`${text}\n\n👉 링크: ${currentUrl}`);
+      showToast('카카오톡 채팅창에 바로 붙여넣기(Ctrl+V)할 수 있게 복사되었습니다!');
+      return;
+    } catch (e) {}
+  }
+
+  fallbackCopyText(`${text}\n\n👉 링크: ${currentUrl}`, '카카오톡 채팅창에 바로 붙여넣기(Ctrl+V)할 수 있게 복사되었습니다!');
+}
+
+function fallbackCopyText(textToCopy, successMsg = '클립보드에 복사되었습니다!') {
+  const tempInput = document.createElement('textarea');
+  tempInput.value = textToCopy;
+  tempInput.style.position = 'fixed';
+  tempInput.style.left = '-9999px';
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  showToast(successMsg);
+}

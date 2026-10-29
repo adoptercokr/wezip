@@ -414,7 +414,11 @@
                     </div>
 
                     <div class="mt-6 pt-4 border-t border-slate-100 flex gap-2">
-                        <button type="button" onclick="copyLeapSummary()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                        <button type="button" onclick="copyLeapSummary(true)" class="flex-1 py-2.5 px-3 rounded-xl bg-[#FEE500] hover:bg-[#FDD835] text-[#371D1E] text-xs font-black active:scale-98 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.708 4.8 4.27 6.054l-1.09 4.01c-.097.358.307.643.597.447l4.757-3.14c.153.015.308.024.466.024 4.97 0 9-3.185 9-7.115S16.97 3 12 3z"/></svg>
+                                <span>카카오톡 공유</span>
+                            </button>
+                            <button type="button" onclick="copyLeapSummary()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
                             도약계좌 결과 복사하기
                         </button>
                     </div>
@@ -708,11 +712,15 @@
         leapIncomeBracket.addEventListener('change', calculateLeap);
         leapRate.addEventListener('input', calculateLeap);
 
-        function copyLeapSummary() {
+        function copyLeapSummary(toKakao) {
             const total = document.getElementById('leapTotalResult').textContent;
             const extra = document.getElementById('leapExtraProfit').textContent;
             const text = `[위집 청년도약계좌 5년 계산 결과]\n총 수령액: ${total}원 (일반적금 대비 ${extra})\n계산기: ${window.location.href}`;
-            copyToClipboard(text);
+            if (toKakao && typeof shareToKakao === 'function') {
+                shareToKakao('청년도약계좌 5년 만기금 계산기', text);
+            } else {
+                copyToClipboard(text);
+            }
         }
 
         calculateLeap();

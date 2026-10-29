@@ -445,10 +445,18 @@
                     </div>
 
                     <div class="mt-6 pt-4 border-t border-slate-100">
-                        <button type="button" onclick="copyUnemploySummary()" class="w-full py-3 px-4 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+                        <div class="flex gap-2 w-full">
+                            <button type="button" onclick="copyUnemploySummary(true)" class="flex-1 py-2.5 px-3 rounded-xl bg-[#FEE500] hover:bg-[#FDD835] text-[#371D1E] text-xs font-black active:scale-98 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.708 4.8 4.27 6.054l-1.09 4.01c-.097.358.307.643.597.447l4.757-3.14c.153.015.308.024.466.024 4.97 0 9-3.185 9-7.115S16.97 3 12 3z"/></svg>
+                                <span>카카오톡 공유</span>
+                            </button>
+                            <button type="button" onclick="copyUnemploySummary()" class="flex-1 py-3 px-4 rounded-xl bg-blue-600 text-white text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+                                
                             <svg class="svg-icon w-4 h-4 text-white" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                             <span>실업급여 모의계산 결과 복사하기</span>
-                        </button>
+                        
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -724,12 +732,16 @@
         unemployDuration.addEventListener('change', calculateUnemployment);
         unemployAge.addEventListener('change', calculateUnemployment);
 
-        function copyUnemploySummary() {
+        function copyUnemploySummary(toKakao) {
             const total = document.getElementById('unemployTotalAmount').textContent;
             const days = document.getElementById('unemployDaysText').textContent;
             const daily = document.getElementById('unemployDailyAmount').textContent;
             const text = `[위집 실업급여 모의계산 결과]\n총 예상 수급액: ${total}원\n수급 기간: ${days} (1일 ${daily})\n계산기: ${window.location.href}`;
-            copyToClipboard(text);
+            if (toKakao && typeof shareToKakao === 'function') {
+                shareToKakao('2026 퇴사자 실업급여 계산기', text);
+            } else {
+                copyToClipboard(text);
+            }
         }
 
         calculateUnemployment();

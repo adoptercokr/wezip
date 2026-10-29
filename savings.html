@@ -456,7 +456,11 @@
                     </div>
 
                     <div class="mt-6 pt-4 border-t border-slate-100 flex gap-2">
-                        <button type="button" onclick="copySavingsSummary()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                        <button type="button" onclick="copySavingsSummary(true)" class="flex-1 py-2.5 px-3 rounded-xl bg-[#FEE500] hover:bg-[#FDD835] text-[#371D1E] text-xs font-black active:scale-98 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.708 4.8 4.27 6.054l-1.09 4.01c-.097.358.307.643.597.447l4.757-3.14c.153.015.308.024.466.024 4.97 0 9-3.185 9-7.115S16.97 3 12 3z"/></svg>
+                                <span>카카오톡 공유</span>
+                            </button>
+                            <button type="button" onclick="copySavingsSummary()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
                             이자 계산 결과 복사
                         </button>
                     </div>
@@ -779,11 +783,15 @@
         savingsMonthsSelect.addEventListener('change', calculateSavings);
         document.querySelectorAll('input[name="interestCalcType"]').forEach(r => r.addEventListener('change', calculateSavings));
 
-        function copySavingsSummary() {
+        function copySavingsSummary(toKakao) {
             const normal = document.getElementById('resultNormalNet').textContent;
             const nonTax = document.getElementById('cardNonTaxVal').textContent;
             const text = `[위집 예적금 이자 계산 결과]\n일반과세 수령액: ${normal}원\n비과세(ISA 등) 수령액: ${nonTax}원\n계산기: ${window.location.href}`;
-            copyToClipboard(text);
+            if (toKakao && typeof shareToKakao === 'function') {
+                shareToKakao('예·적금 만기이자 & 비과세 계산기', text);
+            } else {
+                copyToClipboard(text);
+            }
         }
 
         calculateSavings();
