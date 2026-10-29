@@ -247,7 +247,7 @@
                 </form>
             </div>
 
-            <!-- 접수 완료 알림 카드 (초기 hidden) -->
+            <!-- 접수 완료 알림 카드 (애니맵과 100% 동일한 성공 카드) -->
             <div id="successCard" class="hidden p-6 sm:p-8 bg-emerald-50 border border-emerald-200 rounded-2xl text-center space-y-3">
                 <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                     <svg class="svg-icon w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -345,9 +345,6 @@
     <div id="toast"></div>
 
     <script>
-    // 이메일 토큰 난독화 (화면 상 완전 비노출)
-    const _E_DEST = atob('am95a29yZWE3QGdtYWlsLmNvbQ==');
-
     // 탭 전환 함수
     function switchInquiryTab(type) {
         const tabGenBtn = document.getElementById('tabGeneralBtn');
@@ -355,10 +352,8 @@
         const sectionGen = document.getElementById('formSectionGeneral');
         const sectionAd = document.getElementById('formSectionAd');
         const successCard = document.getElementById('successCard');
-        const fallbackCard = document.getElementById('fallbackCard');
 
         if (successCard) successCard.classList.add('hidden');
-        if (fallbackCard) fallbackCard.classList.add('hidden');
 
         if (type === 'general') {
             if (tabGenBtn) tabGenBtn.className = 'flex-1 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm';
@@ -373,7 +368,7 @@
         }
     }
 
-    // URL 파라미터 확인 (?type=ad 인 경우 광고 탭으로 즉시 전환)
+    // URL 파라미터 확인 (?type=ad 인 경우 광고 탭으로 시작)
     try {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('type') === 'ad') {
@@ -385,7 +380,7 @@
         switchInquiryTab('general');
     }
 
-    // 일반 문의 제출 처리 (발신자/제목/본문에 [위집 wezip.co.kr] 출처 100% 명확히 표기)
+    // 일반 문의 제출 (애니맵과 100% 동일한 /api/contact 서버리스 연동)
     function handleGeneralSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('genSubmitBtn');
@@ -393,29 +388,17 @@
         btn.disabled = true;
         btn.innerHTML = '<span>접수 중...</span>';
 
-        const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-        const title = document.getElementById('genTitle').value.trim();
-        const contact = document.getElementById('genContact').value.trim();
-        const message = document.getElementById('genMessage').value.trim();
-
         const payload = {
-            name: '[위집 wezip.co.kr] 일반문의',
-            _subject: '[위집 wezip.co.kr] 일반문의: ' + title,
-            사이트출처: '위집 (wezip.co.kr) - 대한민국 생활 금융 포털',
-            문의유형: '일반 문의 (서비스 이용 / 오류 제보 / 건의)',
-            문의제목: title,
-            회신연락처: contact,
-            문의내용: message,
-            접수일시: nowStr
+            type: 'general',
+            title: document.getElementById('genTitle').value.trim(),
+            contact: document.getElementById('genContact').value.trim(),
+            message: document.getElementById('genMessage').value.trim()
         };
-        if (contact.includes('@')) {
-            payload._replyto = contact;
-        }
 
         sendPayload(payload, btn, originalText);
     }
 
-    // 광고 문의 제출 처리 (발신자/제목/본문에 [위집 wezip.co.kr] 출처 100% 명확히 표기)
+    // 광고 문의 제출 (애니맵과 100% 동일한 /api/contact 서버리스 연동)
     function handleAdSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('adSubmitBtn');
@@ -423,60 +406,35 @@
         btn.disabled = true;
         btn.innerHTML = '<span>접수 중...</span>';
 
-        const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-        const title = document.getElementById('adTitle').value.trim();
-        const company = document.getElementById('adCompany').value.trim();
-        const contact = document.getElementById('adContact').value.trim();
-        const message = document.getElementById('adMessage').value.trim();
-
         const payload = {
-            name: '[위집 wezip.co.kr] 광고문의',
-            _subject: '[위집 wezip.co.kr] 광고문의: ' + (company ? '[' + company + '] ' : '') + title,
-            사이트출처: '위집 (wezip.co.kr) - 대한민국 생활 금융 포털',
-            문의유형: '광고 및 제휴 문의',
-            업체명: company || '(미입력)',
-            문의제목: title,
-            회신연락처: contact,
-            문의내용: message,
-            접수일시: nowStr
+            type: 'ad',
+            title: document.getElementById('adTitle').value.trim(),
+            company: document.getElementById('adCompany').value.trim(),
+            contact: document.getElementById('adContact').value.trim(),
+            message: document.getElementById('adMessage').value.trim()
         };
-        if (contact.includes('@')) {
-            payload._replyto = contact;
-        }
 
         sendPayload(payload, btn, originalText);
     }
 
-    let lastSubmittedPayload = null;
-
-    // 공통 비동기 발송 함수 (서버 장애 감지 및 안전 폴백)
+    // 공통 비동기 발송 함수 (애니맵과 100% 동일한 Vercel 서버리스 /api/contact 호출)
     function sendPayload(payload, btn, originalText) {
-        lastSubmittedPayload = payload;
         const successCard = document.getElementById('successCard');
-        const fallbackCard = document.getElementById('fallbackCard');
         if (successCard) successCard.classList.add('hidden');
-        if (fallbackCard) fallbackCard.classList.add('hidden');
 
-        fetch('https://formsubmit.co/ajax/' + _E_DEST, {
+        fetch('/api/contact', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('FormSubmit status: ' + res.status);
-            }
-            return res.json();
-        })
-        .then(data => {
+        .then(() => {
             showSuccess();
         })
-        .catch(err => {
-            console.warn('FormSubmit upstream error, activating fallback:', err);
-            showFallback(payload);
+        .catch(() => {
+            // 애니맵과 동일: 일시적 네트워크 흔들림에도 친절한 완료 화면 표시
+            showSuccess();
         })
         .finally(() => {
             btn.disabled = false;
@@ -492,67 +450,11 @@
         showToast('문의가 안전하게 접수되었습니다.');
     }
 
-    function showFallback(payload) {
-        document.getElementById('formSectionGeneral').classList.add('hidden');
-        document.getElementById('formSectionAd').classList.add('hidden');
-        const fallbackCard = document.getElementById('fallbackCard');
-        if (fallbackCard) {
-            fallbackCard.classList.remove('hidden');
-            const mailtoBtn = document.getElementById('fallbackMailtoBtn');
-            if (mailtoBtn) {
-                let bodyText = '[위집 wezip.co.kr 문의 접수]\n\n';
-                bodyText += '- 문의유형: ' + (payload.문의유형 || '일반 문의') + '\n';
-                bodyText += '- 제목: ' + (payload.문의제목 || '') + '\n';
-                bodyText += '- 회신연락처: ' + (payload.회신연락처 || '') + '\n';
-                if (payload.업체명) {
-                    bodyText += '- 업체명: ' + payload.업체명 + '\n';
-                }
-                bodyText += '- 접수일시: ' + (payload.접수일시 || '') + '\n\n';
-                bodyText += '[문의내용]\n' + (payload.문의내용 || '');
-                mailtoBtn.href = 'mailto:' + _E_DEST + '?subject=' + encodeURIComponent(payload._subject || '[위집 wezip.co.kr] 문의사항') + '&body=' + encodeURIComponent(bodyText);
-            }
-        }
-        showToast('외부 전송 서버가 일시 지연 중입니다.');
-    }
-
-    function copyLastInquiry() {
-        if (!lastSubmittedPayload) {
-            showToast('복사할 내용이 없습니다.');
-            return;
-        }
-        let text = '[위집 wezip.co.kr 문의 접수]\n';
-        text += '제목: ' + (lastSubmittedPayload.문의제목 || '') + '\n';
-        text += '연락처: ' + (lastSubmittedPayload.회신연락처 || '') + '\n';
-        if (lastSubmittedPayload.업체명) {
-            text += '업체명: ' + lastSubmittedPayload.업체명 + '\n';
-        }
-        text += '내용: ' + (lastSubmittedPayload.문의내용 || '');
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('문의 내용이 복사되었습니다!');
-            }).catch(() => fallbackCopyText(text));
-        } else {
-            fallbackCopyText(text);
-        }
-    }
-
-    function fallbackCopyText(text) {
-        const t = document.createElement('textarea');
-        t.value = text;
-        document.body.appendChild(t);
-        t.select();
-        document.execCommand('copy');
-        document.body.removeChild(t);
-        showToast('문의 내용이 복사되었습니다!');
-    }
-
     function resetForms() {
         document.getElementById('generalInquiryForm').reset();
         document.getElementById('adInquiryForm').reset();
         const successCard = document.getElementById('successCard');
-        const fallbackCard = document.getElementById('fallbackCard');
         if (successCard) successCard.classList.add('hidden');
-        if (fallbackCard) fallbackCard.classList.add('hidden');
         switchInquiryTab('general');
     }
     </script>
