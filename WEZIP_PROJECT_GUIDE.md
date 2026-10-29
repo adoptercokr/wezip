@@ -119,20 +119,18 @@
 ## 3. 핵심 시스템 세부 규격
 
 ### 1) 고객센터 및 광고 문의 시스템 (`api/contact.js` & `contact.html`)
-- **애니맵(Animap)과 100% 동일한 3중 채널(ShipMyForm + Formspree + FormSubmit) 실시간 동시 전송:**
-  - Vercel 전용 백엔드 API(`/api/contact`)를 구축하여 서버 간 통신(Server-to-Server)으로 3개 엔드포인트에 동시 발송 (`Promise.allSettled`)
-  - **채널 1 (ShipMyForm):** `https://shipmyform.com/to/joykorea7@gmail.com` (서버 다운 없이 가장 신속한 직배송)
-  - **채널 2 (Formspree):** `https://formspree.io/f/xaqlbwqy` (관리자 백업 엔드포인트 동시 수신)
-  - **채널 3 (FormSubmit):** `https://formsubmit.co/ajax/joykorea7@gmail.com` (521 서버 다운 복구 시 자동 연동)
-  - 3개 중 하나라도 살아있으면 100% 무조건 도착하므로 단일 서비스 장애 원천 차단
+- **대표님 네이버 공식 메일(ymjcokr@naver.com) 100% 무중단 즉시 수신 체계:**
+  - Vercel 전용 백엔드 API(`/api/contact`)를 구축하여 서버 간 통신(Server-to-Server)으로 발송
+  - **1순위 (Formspree 공식 엔드포인트):** `https://formspree.io/f/xaqlbwqy` -> `ymjcokr@naver.com` 즉시 배달 (애니맵과 100% 동일)
+  - **2순위 (FormSubmit 네이버 백업):** `https://formsubmit.co/ajax/ymjcokr@naver.com` (Base64 암호화 보관)
 - **2단 탭 구조:** `일반 문의` 탭과 `광고 문의` 탭으로 분리하여 원클릭 즉시 전환 (`switchInquiryTab`)
 - **초간단 폼 필드:**
   - **일반 문의:** 제목(`genTitle`, 내용 바로 위), 회신 연락처/이메일(`genContact`), 문의 내용(`genMessage`)
   - **광고 문의:** 제목(`adTitle`, 내용 바로 위), 업체명/성함(`adCompany`), 회신 연락처/이메일(`adContact`), 문의 내용(`adMessage`)
 - **이메일 보안 및 메일 출처 3중 각인 식별:**
-  - 관리자 수신 이메일(`joykorea7@gmail.com`)이 프론트엔드 코드에 절대 노출되지 않음 (서버단 Base64 처리)
-  - **애니맵 등 타 사이트와 명확한 구분:** 메일함 발신자명(`name: [위집 wezip.co.kr]`), 메일 제목(`_subject: [위집 wezip.co.kr] ...`), 본문 1행(`사이트출처: 위집 (wezip.co.kr)`)에 출처가 3중으로 굵게 각인
-  - 상대방이 이메일 입력 시 `_replyto`가 자동 지정되어 메일함에서 클릭 한 번으로 바로 답장 가능
+  - 관리자 수신 이메일(`ymjcokr@naver.com`)이 프론트엔드 코드에 절대 노출되지 않음 (서버단 Base64 처리)
+  - **애니맵 등 타 사이트와 명확한 구분:** 메일함 발신자명(`name: [위집 wezip.co.kr]`), 메일 제목(`_subject: [위집 wezip.co.kr] ...`), 본문 1행(`사이트출처: 위집 (wezip.co.kr)`)에 출처가 3중으로 굵게 각인되어 네이버 메일함에서 즉시 판별 가능
+  - 상대방이 이메일 입력 시 `_replyto`가 자동 지정되어 네이버 메일함에서 클릭 한 번으로 바로 답장 가능
 
 ### 2) 실시간 방문자 카운터 시스템 (`api/counter.js` & `common.js`)
 - **원리 및 크로스 브라우징 완전 동기화:**

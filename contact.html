@@ -263,33 +263,6 @@
                 </div>
             </div>
 
-            <!-- 외부 전송 지연 시 세이프가드 폴백 카드 (내용 보존 & 1클릭 직접 발송) -->
-            <div id="fallbackCard" class="hidden p-6 sm:p-8 bg-amber-50 border border-amber-200 rounded-2xl text-center space-y-4">
-                <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
-                    <svg class="svg-icon w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                </div>
-                <div>
-                    <div class="font-black text-lg text-slate-900">외부 전송 서버가 일시 지연 중입니다</div>
-                    <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                        작성하신 문의 내용은 안전하게 보존되어 있습니다.<br class="hidden sm:inline"> 아래 버튼을 누르시면 메일 앱에서 1초 만에 바로 전송하실 수 있습니다.
-                    </p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2">
-                    <a id="fallbackMailtoBtn" href="#" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition flex items-center justify-center gap-2">
-                        <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span>이메일 앱으로 즉시 전송</span>
-                    </a>
-                    <button type="button" onclick="copyLastInquiry()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition flex items-center justify-center gap-1.5">
-                        <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        <span>문의내용 복사</span>
-                    </button>
-                    <button type="button" onclick="resetForms()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl text-slate-500 hover:text-slate-800 font-medium text-xs transition">
-                        다시 작성하기
-                    </button>
-                </div>
-                <div class="text-[11px] text-slate-400">수신처: joykorea7@gmail.com</div>
-            </div>
-
             <!-- 하단 간편 안내 바 -->
             <div class="p-3.5 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs text-slate-500">
                 <div class="flex items-center gap-2">
