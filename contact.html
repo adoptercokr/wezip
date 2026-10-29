@@ -65,8 +65,7 @@
                     <a href="salary.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">연봉·실수령액</a>
                     <a href="real-transfer-tax.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">양도세·부동산</a>
                     <a href="loan-dsr.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">대출이자·DSR</a>
-                    <a href="contact.html?type=general" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition font-bold">일반문의</a>
-                    <a href="contact.html?type=ad" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-blue-300 hover:text-white hover:bg-slate-800 transition font-bold border border-blue-500/30">광고문의</a>
+                    <a href="contact.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg text-white bg-slate-800 transition font-bold">문의하기</a>
                 </nav>
             </div>
 
@@ -89,8 +88,7 @@
                 </a>
                 <a href="salary.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center">연봉 계산기</a>
                 <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center">내 집 양도세</a>
-                <a href="contact.html?type=general" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-slate-200">일반 문의</a>
-                <a href="contact.html?type=ad" class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-500/40 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-blue-300">광고 문의</a>
+                <a href="contact.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold text-xs text-center text-slate-200 col-span-2">문의하기</a>
             </div>
         </div>
     </header>
@@ -265,6 +263,33 @@
                 </div>
             </div>
 
+            <!-- 외부 전송 지연 시 세이프가드 폴백 카드 (내용 보존 & 1클릭 직접 발송) -->
+            <div id="fallbackCard" class="hidden p-6 sm:p-8 bg-amber-50 border border-amber-200 rounded-2xl text-center space-y-4">
+                <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
+                    <svg class="svg-icon w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <div>
+                    <div class="font-black text-lg text-slate-900">외부 전송 서버가 일시 지연 중입니다</div>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                        작성하신 문의 내용은 안전하게 보존되어 있습니다.<br class="hidden sm:inline"> 아래 버튼을 누르시면 메일 앱에서 1초 만에 바로 전송하실 수 있습니다.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2">
+                    <a id="fallbackMailtoBtn" href="#" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition flex items-center justify-center gap-2">
+                        <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span>이메일 앱으로 즉시 전송</span>
+                    </a>
+                    <button type="button" onclick="copyLastInquiry()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs transition flex items-center justify-center gap-1.5">
+                        <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>문의내용 복사</span>
+                    </button>
+                    <button type="button" onclick="resetForms()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl text-slate-500 hover:text-slate-800 font-medium text-xs transition">
+                        다시 작성하기
+                    </button>
+                </div>
+                <div class="text-[11px] text-slate-400">수신처: joykorea7@gmail.com</div>
+            </div>
+
             <!-- 하단 간편 안내 바 -->
             <div class="p-3.5 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs text-slate-500">
                 <div class="flex items-center gap-2">
@@ -418,8 +443,16 @@
         sendPayload(payload, btn, originalText);
     }
 
-    // 공통 비동기 발송 함수
+    let lastSubmittedPayload = null;
+
+    // 공통 비동기 발송 함수 (서버 장애 감지 및 안전 폴백)
     function sendPayload(payload, btn, originalText) {
+        lastSubmittedPayload = payload;
+        const successCard = document.getElementById('successCard');
+        const fallbackCard = document.getElementById('fallbackCard');
+        if (successCard) successCard.classList.add('hidden');
+        if (fallbackCard) fallbackCard.classList.add('hidden');
+
         fetch('https://formsubmit.co/ajax/' + _E_DEST, {
             method: 'POST',
             headers: {
@@ -428,11 +461,18 @@
             },
             body: JSON.stringify(payload)
         })
-        .then(() => {
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('FormSubmit status: ' + res.status);
+            }
+            return res.json();
+        })
+        .then(data => {
             showSuccess();
         })
-        .catch(() => {
-            showSuccess();
+        .catch(err => {
+            console.warn('FormSubmit upstream blip/521, activating fallback:', err);
+            showFallback(payload);
         })
         .finally(() => {
             btn.disabled = false;
@@ -443,13 +483,70 @@
     function showSuccess() {
         document.getElementById('formSectionGeneral').classList.add('hidden');
         document.getElementById('formSectionAd').classList.add('hidden');
-        document.getElementById('successCard').classList.remove('hidden');
+        const successCard = document.getElementById('successCard');
+        if (successCard) successCard.classList.remove('hidden');
         showToast('문의가 안전하게 접수되었습니다.');
+    }
+
+    function showFallback(payload) {
+        document.getElementById('formSectionGeneral').classList.add('hidden');
+        document.getElementById('formSectionAd').classList.add('hidden');
+        const fallbackCard = document.getElementById('fallbackCard');
+        if (fallbackCard) {
+            fallbackCard.classList.remove('hidden');
+            const mailtoBtn = document.getElementById('fallbackMailtoBtn');
+            if (mailtoBtn) {
+                const bodyText = `[위집 wezip.co.kr 문의 접수]
+
+- 문의유형: ${payload.문의유형 || '일반 문의'}
+- 제목: ${payload.문의제목 || ''}
+- 회신연락처: ${payload.회신연락처 || ''}
+${payload.업체명 ? '- 업체명: ' + payload.업체명 + '
+' : ''}- 접수일시: ${payload.접수일시 || ''}
+
+[문의내용]
+${payload.문의내용 || ''}`;
+                mailtoBtn.href = `mailto:${_E_DEST}?subject=${encodeURIComponent(payload._subject || '[위집 wezip.co.kr] 문의사항')}&body=${encodeURIComponent(bodyText)}`;
+            }
+        }
+        showToast('외부 전송 서버가 일시 지연 중입니다.');
+    }
+
+    function copyLastInquiry() {
+        if (!lastSubmittedPayload) {
+            showToast('복사할 내용이 없습니다.');
+            return;
+        }
+        const text = `[위집 wezip.co.kr 문의 접수]
+제목: ${lastSubmittedPayload.문의제목}
+연락처: ${lastSubmittedPayload.회신연락처}
+내용: ${lastSubmittedPayload.문의내용}`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('문의 내용이 복사되었습니다!');
+            }).catch(() => fallbackCopyText(text));
+        } else {
+            fallbackCopyText(text);
+        }
+    }
+
+    function fallbackCopyText(text) {
+        const t = document.createElement('textarea');
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        showToast('문의 내용이 복사되었습니다!');
     }
 
     function resetForms() {
         document.getElementById('generalInquiryForm').reset();
         document.getElementById('adInquiryForm').reset();
+        const successCard = document.getElementById('successCard');
+        const fallbackCard = document.getElementById('fallbackCard');
+        if (successCard) successCard.classList.add('hidden');
+        if (fallbackCard) fallbackCard.classList.add('hidden');
         switchInquiryTab('general');
     }
     </script>
