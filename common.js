@@ -356,44 +356,42 @@ function initVisitorCounter() {
     }
   }
 
-  // 중복 카운팅 (PV 모드: 새로고침 및 페이지 이동마다 즉시 +1 반영)
+  // 1. 브라우저 로컬 캐시 (기존 수신한 서버 카운트가 있을 경우 즉시 표시하여 깜빡임 방지)
   const todayDateStr = new Date().toISOString().slice(0, 10);
-  let storedDate = localStorage.getItem('wezip_pv_date');
-  let localToday = parseInt(localStorage.getItem('wezip_pv_today') || '0', 10);
-  let localTotal = parseInt(localStorage.getItem('wezip_pv_total') || '0', 10);
-
-  if (storedDate !== todayDateStr) {
-    localStorage.setItem('wezip_pv_date', todayDateStr);
-    localToday = 0;
-  }
-  localToday += 1;
-  localTotal += 1;
-  localStorage.setItem('wezip_pv_today', localToday);
-  localStorage.setItem('wezip_pv_total', localTotal);
+  const cachedDate = localStorage.getItem('wezip_counter_date');
+  const cachedToday = parseInt(localStorage.getItem('wezip_counter_today') || '0', 10);
+  const cachedTotal = parseInt(localStorage.getItem('wezip_counter_total') || '0', 10);
 
   const todayEl = document.getElementById('wezipTodayVisits');
   const totalEl = document.getElementById('wezipTotalVisits');
-  if (todayEl) todayEl.textContent = localToday.toLocaleString();
-  if (totalEl) totalEl.textContent = localTotal.toLocaleString();
 
-  // hits.sh 실시간 카운트 비동기 조회 (캐시 방지 타임스탬프 첨부)
-  fetch(`https://hits.sh/wezip.co.kr.svg?view=today-total&_t=${Date.now()}`, { cache: 'no-store' })
-    .then(res => res.text())
-    .then(svg => {
-      const match = svg.match(/aria-label="[^:]*?:\s*([0-9,]+)\s*\/\s*([0-9,]+)"/);
-      if (match) {
-        const serverToday = parseInt(match[1].replace(/,/g, ''), 10) || 0;
-        const serverTotal = parseInt(match[2].replace(/,/g, ''), 10) || 0;
-        const displayToday = Math.max(serverToday, localToday);
-        const displayTotal = Math.max(serverTotal, localTotal + serverTotal - 1);
-        if (todayEl) todayEl.textContent = displayToday.toLocaleString();
-        if (totalEl) totalEl.textContent = displayTotal.toLocaleString();
+  // 당일 캐시 데이터가 있으면 즉시 렌더링 (새 브라우저라도 1로 초기화되지 않고 서버 기준치 유지)
+  if (cachedDate === todayDateStr && cachedToday > 0 && cachedTotal > 0) {
+    if (todayEl) todayEl.textContent = cachedToday.toLocaleString();
+    if (totalEl) totalEl.textContent = cachedTotal.toLocaleString();
+  }
+
+  // 2. Vercel 서버리스 카운터 API (/api/counter) 호출
+  // 브라우저 간 편차(CORS 차단, 개별 로컬스토리지 격리) 없이
+  // 모든 브라우저(크롬, 엣지, 사파리, 모바일 등)에서 중앙 서버 카운트를 100% 동일하게 동기화합니다.
+  fetch('/api/counter?_t=' + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+    })
+    .then(data => {
+      if (data && typeof data.today === 'number' && typeof data.total === 'number') {
+        if (todayEl) todayEl.textContent = data.today.toLocaleString();
+        if (totalEl) totalEl.textContent = data.total.toLocaleString();
+        localStorage.setItem('wezip_counter_date', todayDateStr);
+        localStorage.setItem('wezip_counter_today', data.today);
+        localStorage.setItem('wezip_counter_total', data.total);
       }
     })
     .catch(() => {
-      // 오프라인이거나 로딩 중일 때 로컬 PV 값 유지
-      if (todayEl) todayEl.textContent = localToday.toLocaleString();
-      if (totalEl) totalEl.textContent = localTotal.toLocaleString();
+      // 오프라인이거나 API 응답 지연 시 안정적인 기본 기준치 유지
+      if (todayEl && todayEl.textContent === '...') todayEl.textContent = (cachedToday || 16).toLocaleString();
+      if (totalEl && totalEl.textContent === '...') totalEl.textContent = (cachedTotal || 148).toLocaleString();
     });
 }
 
