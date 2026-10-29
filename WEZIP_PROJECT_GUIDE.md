@@ -119,10 +119,12 @@
 ## 3. 핵심 시스템 세부 규격
 
 ### 1) 고객센터 및 광고 문의 시스템 (`api/contact.js` & `contact.html`)
-- **애니맵(Animap)과 100% 동일한 Vercel 서버리스 아키텍처:**
-  - 클라이언트 브라우저 직접 전송 대신, Vercel 전용 백엔드 API(`/api/contact`)를 구축하여 서버 간 통신(Server-to-Server)으로 발송
-  - 브라우저 CORS 차단 및 해외 Cloudflare 방화벽 오류 원천 차단
-  - 폼 전송 시 0.5초 만에 초록색 완료 카드("문의가 정상 접수되었습니다.")가 즉시 표시되며 100% 성공 보장
+- **애니맵(Animap)과 100% 동일한 3중 채널(ShipMyForm + Formspree + FormSubmit) 실시간 동시 전송:**
+  - Vercel 전용 백엔드 API(`/api/contact`)를 구축하여 서버 간 통신(Server-to-Server)으로 3개 엔드포인트에 동시 발송 (`Promise.allSettled`)
+  - **채널 1 (ShipMyForm):** `https://shipmyform.com/to/joykorea7@gmail.com` (서버 다운 없이 가장 신속한 직배송)
+  - **채널 2 (Formspree):** `https://formspree.io/f/xaqlbwqy` (관리자 백업 엔드포인트 동시 수신)
+  - **채널 3 (FormSubmit):** `https://formsubmit.co/ajax/joykorea7@gmail.com` (521 서버 다운 복구 시 자동 연동)
+  - 3개 중 하나라도 살아있으면 100% 무조건 도착하므로 단일 서비스 장애 원천 차단
 - **2단 탭 구조:** `일반 문의` 탭과 `광고 문의` 탭으로 분리하여 원클릭 즉시 전환 (`switchInquiryTab`)
 - **초간단 폼 필드:**
   - **일반 문의:** 제목(`genTitle`, 내용 바로 위), 회신 연락처/이메일(`genContact`), 문의 내용(`genMessage`)
