@@ -295,11 +295,11 @@ function calculateSalaryPercentile(annualSalary) {
  * 2026 구글 애널리틱스 4 (GA4) 자동 연동 모듈
  * 대표님의 GA4 측정 ID (G-XXXXXXXXXX) 입력 시 사이트 전체 67개 페이지에 실시간 적용됩니다.
  */
-const WEZIP_GA4_ID = ''; // 예: 'G-XXXXXXXXXX' 입력 시 자동 활성화
+const WEZIP_GA4_ID = 'G-2N5V6S642H'; // 예: 'G-XXXXXXXXXX' 입력 시 자동 활성화
 
 function initGA4() {
   if (!WEZIP_GA4_ID || WEZIP_GA4_ID === 'G-XXXXXXXXXX') return;
-  if (window.__ga4_initialized) return;
+  if (window.__ga4_initialized || window.gtag || document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
   window.__ga4_initialized = true;
 
   const script = document.createElement('script');
