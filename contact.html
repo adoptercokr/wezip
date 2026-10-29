@@ -355,31 +355,35 @@
         const sectionGen = document.getElementById('formSectionGeneral');
         const sectionAd = document.getElementById('formSectionAd');
         const successCard = document.getElementById('successCard');
+        const fallbackCard = document.getElementById('fallbackCard');
 
-        successCard.classList.add('hidden');
+        if (successCard) successCard.classList.add('hidden');
+        if (fallbackCard) fallbackCard.classList.add('hidden');
 
         if (type === 'general') {
-            tabGenBtn.className = 'flex-1 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm';
-            tabAdBtn.className = 'flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900';
-            sectionGen.classList.remove('hidden');
-            sectionAd.classList.add('hidden');
+            if (tabGenBtn) tabGenBtn.className = 'flex-1 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm';
+            if (tabAdBtn) tabAdBtn.className = 'flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900';
+            if (sectionGen) sectionGen.classList.remove('hidden');
+            if (sectionAd) sectionAd.classList.add('hidden');
         } else {
-            tabAdBtn.className = 'flex-1 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm';
-            tabGenBtn.className = 'flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900';
-            sectionAd.classList.remove('hidden');
-            sectionGen.classList.add('hidden');
+            if (tabAdBtn) tabAdBtn.className = 'flex-1 py-3 px-4 rounded-xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm';
+            if (tabGenBtn) tabGenBtn.className = 'flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900';
+            if (sectionAd) sectionAd.classList.remove('hidden');
+            if (sectionGen) sectionGen.classList.add('hidden');
         }
     }
 
-    // URL 파라미터 확인 (?type=ad 인 경우 광고 탭으로 시작)
-    window.addEventListener('DOMContentLoaded', () => {
+    // URL 파라미터 확인 (?type=ad 인 경우 광고 탭으로 즉시 전환)
+    try {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('type') === 'ad') {
             switchInquiryTab('ad');
         } else {
             switchInquiryTab('general');
         }
-    });
+    } catch (e) {
+        switchInquiryTab('general');
+    }
 
     // 일반 문의 제출 처리 (발신자/제목/본문에 [위집 wezip.co.kr] 출처 100% 명확히 표기)
     function handleGeneralSubmit(e) {
@@ -471,7 +475,7 @@
             showSuccess();
         })
         .catch(err => {
-            console.warn('FormSubmit upstream blip/521, activating fallback:', err);
+            console.warn('FormSubmit upstream error, activating fallback:', err);
             showFallback(payload);
         })
         .finally(() => {
@@ -496,17 +500,16 @@
             fallbackCard.classList.remove('hidden');
             const mailtoBtn = document.getElementById('fallbackMailtoBtn');
             if (mailtoBtn) {
-                const bodyText = `[위집 wezip.co.kr 문의 접수]
-
-- 문의유형: ${payload.문의유형 || '일반 문의'}
-- 제목: ${payload.문의제목 || ''}
-- 회신연락처: ${payload.회신연락처 || ''}
-${payload.업체명 ? '- 업체명: ' + payload.업체명 + '
-' : ''}- 접수일시: ${payload.접수일시 || ''}
-
-[문의내용]
-${payload.문의내용 || ''}`;
-                mailtoBtn.href = `mailto:${_E_DEST}?subject=${encodeURIComponent(payload._subject || '[위집 wezip.co.kr] 문의사항')}&body=${encodeURIComponent(bodyText)}`;
+                let bodyText = '[위집 wezip.co.kr 문의 접수]\n\n';
+                bodyText += '- 문의유형: ' + (payload.문의유형 || '일반 문의') + '\n';
+                bodyText += '- 제목: ' + (payload.문의제목 || '') + '\n';
+                bodyText += '- 회신연락처: ' + (payload.회신연락처 || '') + '\n';
+                if (payload.업체명) {
+                    bodyText += '- 업체명: ' + payload.업체명 + '\n';
+                }
+                bodyText += '- 접수일시: ' + (payload.접수일시 || '') + '\n\n';
+                bodyText += '[문의내용]\n' + (payload.문의내용 || '');
+                mailtoBtn.href = 'mailto:' + _E_DEST + '?subject=' + encodeURIComponent(payload._subject || '[위집 wezip.co.kr] 문의사항') + '&body=' + encodeURIComponent(bodyText);
             }
         }
         showToast('외부 전송 서버가 일시 지연 중입니다.');
@@ -517,10 +520,13 @@ ${payload.문의내용 || ''}`;
             showToast('복사할 내용이 없습니다.');
             return;
         }
-        const text = `[위집 wezip.co.kr 문의 접수]
-제목: ${lastSubmittedPayload.문의제목}
-연락처: ${lastSubmittedPayload.회신연락처}
-내용: ${lastSubmittedPayload.문의내용}`;
+        let text = '[위집 wezip.co.kr 문의 접수]\n';
+        text += '제목: ' + (lastSubmittedPayload.문의제목 || '') + '\n';
+        text += '연락처: ' + (lastSubmittedPayload.회신연락처 || '') + '\n';
+        if (lastSubmittedPayload.업체명) {
+            text += '업체명: ' + lastSubmittedPayload.업체명 + '\n';
+        }
+        text += '내용: ' + (lastSubmittedPayload.문의내용 || '');
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast('문의 내용이 복사되었습니다!');
