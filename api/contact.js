@@ -41,17 +41,17 @@ export default async function handler(req, res) {
     const finalTitle = trimmedTitle || defaultTitle;
 
     // 출처 3중 각인: 발신자명(name), 제목(_subject), 본문 첫 행(사이트출처)
-    const senderName = `[위집 wezip.co.kr] ${typeLabel}`;
+    const senderName = `[WE ZIP wezip.co.kr] ${typeLabel}`;
     const mailSubject = isAd
-      ? `[위집 wezip.co.kr] 광고문의: ${trimmedCompany ? `[${trimmedCompany}] ` : ''}${finalTitle}`
-      : `[위집 wezip.co.kr] 일반문의: ${finalTitle}`;
+      ? `[WE ZIP wezip.co.kr] 광고문의: ${trimmedCompany ? `[${trimmedCompany}] ` : ''}${finalTitle}`
+      : `[WE ZIP wezip.co.kr] 일반문의: ${finalTitle}`;
 
     const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
 
     const payload = {
       name: senderName,
       _subject: mailSubject,
-      사이트출처: '위집 (wezip.co.kr) - 대한민국 생활 금융 포털',
+      사이트출처: 'WE ZIP (wezip.co.kr) - 대한민국 생활 금융 포털',
       문의유형: isAd ? '광고 및 제휴 문의' : '일반 문의 (서비스 이용 / 계산기 오류 제보 / 건의)',
       ...(isAd ? { 업체명: trimmedCompany || '(미입력)' } : {}),
       문의제목: finalTitle,
