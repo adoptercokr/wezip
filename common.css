@@ -170,3 +170,30 @@ details summary::-webkit-details-marker {
   body { background: white; }
   .calc-card { box-shadow: none; border: 1px solid #ccc; }
 }
+
+/* ============================================================
+   모바일 한국어 줄바꿈 최적화 (iOS Safari / 스마트폰 단어 쪼개짐 방지)
+   ============================================================ */
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 표 헤더 단어 쪼개짐 방지 (회사부담 / 액 분리 방지) */
+th {
+  white-space: nowrap !important;
+  word-break: keep-all;
+}
+
+td {
+  word-break: keep-all;
+}
+
+/* 뱃지 및 상태 태그 단어 쪼개짐 방지 (성장 단 / 계 분리 방지) */
+.badge,
+[id*="Grade"],
+[id*="Badge"],
+[class*="rounded-full"],
+[class*="rounded"] span {
+  word-break: keep-all;
+}
