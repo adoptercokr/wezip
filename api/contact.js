@@ -24,7 +24,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    const body = req.body || {};
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        try {
+          body = Object.fromEntries(new URLSearchParams(body));
+        } catch (e2) {
+          body = {};
+        }
+      }
+    }
+    body = body || {};
+
     const { type = 'general', title = '', contact = '', company = '', message = '' } = body;
 
     const trimmedContact = (contact || '').trim();
