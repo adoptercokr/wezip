@@ -483,7 +483,7 @@ async function shareToKakao(calcTitle, summaryText) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
       await navigator.clipboard.writeText(`${text}\n\n👉 링크: ${currentUrl}`);
-      showToast('카카오톡 채팅창에 바로 붙여넣기(Ctrl+V)할 수 있게 복사되었습니다!');
+      showToast('계산 결과와 링크가 복사되었습니다! (카톡/카페/메모장에 Ctrl+V)');
       return;
     } catch (e) {}
   }
