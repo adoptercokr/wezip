@@ -197,10 +197,14 @@
                                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent transition leading-relaxed"></textarea>
                     </div>
 
-                    <div class="pt-2">
-                        <button type="submit" id="genSubmitBtn" class="w-full py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm transition">
+                    <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                        <button type="submit" id="genSubmitBtn" class="flex-1 py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm transition active:scale-98">
                             <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                            <span>일반 문의 보내기</span>
+                            <span>온라인 문의 접수하기</span>
+                        </button>
+                        <button type="button" onclick="sendDirectEmail('general')" class="py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-98" title="클릭 시 작성하신 내용이 이메일 프로그램으로 채워져 바로 발송됩니다">
+                            <svg class="svg-icon w-4 h-4 text-slate-500" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span class="whitespace-nowrap">직접 메일 보내기</span>
                         </button>
                     </div>
                 </form>
@@ -255,23 +259,27 @@
                                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent transition leading-relaxed"></textarea>
                     </div>
 
-                    <div class="pt-2">
-                        <button type="submit" id="adSubmitBtn" class="w-full py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm transition">
+                    <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                        <button type="submit" id="adSubmitBtn" class="flex-1 py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm transition active:scale-98">
                             <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                            <span>광고 문의 보내기</span>
+                            <span>온라인 광고 문의 접수하기</span>
+                        </button>
+                        <button type="button" onclick="sendDirectEmail('ad')" class="py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-98" title="클릭 시 작성하신 내용이 이메일 프로그램으로 채워져 바로 발송됩니다">
+                            <svg class="svg-icon w-4 h-4 text-slate-500" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span class="whitespace-nowrap">직접 메일 보내기</span>
                         </button>
                     </div>
                 </form>
             </div>
 
-            <!-- 접수 완료 알림 카드 (애니맵과 100% 동일한 성공 카드) -->
+            <!-- 접수 완료 알림 카드 (100% 검증된 성공 안내) -->
             <div id="successCard" class="hidden p-6 sm:p-8 bg-emerald-50 border border-emerald-200 rounded-2xl text-center space-y-3">
                 <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                     <svg class="svg-icon w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
                 <div class="font-black text-lg text-emerald-950">문의가 정상 접수되었습니다.</div>
                 <p class="text-xs sm:text-sm text-emerald-800 leading-relaxed max-w-md mx-auto">
-                    보내주신 내용을 담당자가 확인한 후, 기재해 주신 연락처/이메일로 24시간 이내에 신속히 회신드리겠습니다.
+                    보내주신 내용이 담당자 메일함(ymjcokr@naver.com)으로 안전하게 전송되었습니다. 기재해 주신 연락처로 24시간 이내에 신속히 회신드리겠습니다.
                 </p>
                 <div class="pt-2">
                     <button type="button" onclick="resetForms()" class="px-4 py-2 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition">
@@ -280,13 +288,41 @@
                 </div>
             </div>
 
-            <!-- 하단 간편 안내 바 -->
-            <div class="p-3.5 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs text-slate-500">
-                <div class="flex items-center gap-2">
-                    <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                    <span>접수된 내용은 암호화되어 관리자 메일함으로 바로 전송됩니다.</span>
+            <!-- 전송 실패 알림 카드 (투명한 오류 알림 + 작성 내용 보존 및 직접 메일 발송 제공) -->
+            <div id="errorCard" class="hidden p-6 sm:p-8 bg-rose-50 border border-rose-200 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+                    <svg class="svg-icon w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                 </div>
-                <span class="font-bold text-slate-700 shrink-0">24시간 내 회신</span>
+                <div class="font-black text-lg text-rose-950">문의 접수 중 일시적인 오류가 발생했습니다.</div>
+                <p class="text-xs sm:text-sm text-rose-800 leading-relaxed max-w-md mx-auto" id="errorMessageText">
+                    네트워크 통신 지연으로 온라인 접수에 실패했습니다. 소중한 문의 내용이 유실되지 않도록 아래 <strong>[직접 메일 보내기]</strong>를 누르시면 작성하신 내용 그대로 네이버 메일함으로 바로 전송하실 수 있습니다.
+                </p>
+                <div class="pt-3 flex flex-col sm:flex-row gap-2 justify-center max-w-sm mx-auto">
+                    <button type="button" onclick="sendDirectEmail()" class="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98">
+                        <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span>직접 이메일 보내기</span>
+                    </button>
+                    <button type="button" onclick="restoreForms()" class="py-2.5 px-4 rounded-xl border border-rose-300 text-rose-700 text-xs font-bold hover:bg-rose-100/70 transition active:scale-98">
+                        양식으로 돌아가기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 하단 공식 메일 직통 안내 바 -->
+            <div class="p-4 bg-white border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600 shadow-xs">
+                <div class="flex items-center gap-2.5 text-center sm:text-left">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-slate-800">공식 담당자 직통 이메일: <span class="text-blue-600 select-all font-extrabold">ymjcokr@naver.com</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">온라인 폼 외에 위 이메일로 바로 메일을 보내셔도 동일하게 24시간 내 회신드립니다.</div>
+                    </div>
+                </div>
+                <button type="button" onclick="sendDirectEmail()" class="w-full sm:w-auto py-2 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shrink-0 active:scale-98 shadow-xs">
+                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <span class="whitespace-nowrap">직접 메일 보내기</span>
+                </button>
             </div>
         </main>
 
@@ -370,13 +406,70 @@
         switchInquiryTab('general');
     }
 
-    // 일반 문의 제출 (애니맵과 100% 동일한 /api/contact 서버리스 연동)
+        // 직접 이메일 보내기 (mailto 링크 + 자동 클립보드 복사 2중 안전망)
+    function sendDirectEmail(formType) {
+        const isAd = formType === 'ad' || (document.getElementById('formSectionAd') && !document.getElementById('formSectionAd').classList.contains('hidden'));
+        let title = '', contact = '', message = '', company = '';
+
+        if (isAd) {
+            const compEl = document.getElementById('adCompany');
+            const titleEl = document.getElementById('adTitle');
+            const contEl = document.getElementById('adContact');
+            const msgEl = document.getElementById('adMessage');
+            company = compEl ? compEl.value.trim() : '';
+            title = titleEl ? titleEl.value.trim() : '';
+            contact = contEl ? contEl.value.trim() : '';
+            message = msgEl ? msgEl.value.trim() : '';
+        } else {
+            const titleEl = document.getElementById('genTitle');
+            const contEl = document.getElementById('genContact');
+            const msgEl = document.getElementById('genMessage');
+            title = titleEl ? titleEl.value.trim() : '';
+            contact = contEl ? contEl.value.trim() : '';
+            message = msgEl ? msgEl.value.trim() : '';
+        }
+
+        const prefix = isAd ? '[WE ZIP 광고문의] ' : '[WE ZIP 문의] ';
+        const defaultTitle = isAd ? '광고 및 제휴 제안' : '서비스 이용 및 계산기 문의';
+        const finalTitle = title || defaultTitle;
+        const mailSubject = encodeURIComponent(prefix + (company ? `[${company}] ` : '') + finalTitle);
+
+        let bodyText = `[WE ZIP 고객 문의]
+
+`;
+        if (company) bodyText += `■ 업체/성함: ${company}
+`;
+        if (contact) bodyText += `■ 회신 연락처: ${contact}
+`;
+        bodyText += `■ 문의 제목: ${finalTitle}
+
+`;
+        bodyText += `■ 문의 내용:
+${message || '(문의하실 내용을 이곳에 작성해 주세요)'}
+
+`;
+        bodyText += `-------------------------
+사이트: https://wezip.co.kr`;
+
+        const mailBody = encodeURIComponent(bodyText);
+        const targetEmail = 'ymjcokr@naver.com';
+
+        // 클립보드에 이메일 주소 복사 백업
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(targetEmail).catch(() => {});
+        }
+
+        showToast('대표 이메일(ymjcokr@naver.com)로 메일 앱이 연결됩니다.');
+        window.location.href = `mailto:${targetEmail}?subject=${mailSubject}&body=${mailBody}`;
+    }
+
+    // 일반 문의 제출
     function handleGeneralSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('genSubmitBtn');
         const originalText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<span>접수 중...</span>';
+        btn.innerHTML = '<span>접수 확인 중...</span>';
 
         const payload = {
             type: 'general',
@@ -388,13 +481,13 @@
         sendPayload(payload, btn, originalText);
     }
 
-    // 광고 문의 제출 (애니맵과 100% 동일한 /api/contact 서버리스 연동)
+    // 광고 문의 제출
     function handleAdSubmit(e) {
         e.preventDefault();
         const btn = document.getElementById('adSubmitBtn');
         const originalText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<span>접수 중...</span>';
+        btn.innerHTML = '<span>접수 확인 중...</span>';
 
         const payload = {
             type: 'ad',
@@ -407,37 +500,70 @@
         sendPayload(payload, btn, originalText);
     }
 
-    // 공통 비동기 발송 함수 (애니맵과 100% 동일한 Vercel 서버리스 /api/contact 호출)
-    function sendPayload(payload, btn, originalText) {
+    // 공통 비동기 발송 함수 (응답 성공 여부 엄격 검증)
+    async function sendPayload(payload, btn, originalText) {
         const successCard = document.getElementById('successCard');
+        const errorCard = document.getElementById('errorCard');
         if (successCard) successCard.classList.add('hidden');
+        if (errorCard) errorCard.classList.add('hidden');
 
-        fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(() => {
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json().catch(() => null);
+
+            // 실제 서버 성공(HTTP 200 & success: true)일 때만 성공 화면 노출!
+            if (!res.ok || !data || !data.success) {
+                const errMsg = (data && data.error) ? data.error : '서버 통신 지연으로 인해 문의가 정상 접수되지 않았습니다.';
+                showError(errMsg);
+                return;
+            }
+
             showSuccess();
-        })
-        .catch(() => {
-            // 애니맵과 동일: 일시적 네트워크 흔들림에도 친절한 완료 화면 표시
-            showSuccess();
-        })
-        .finally(() => {
+        } catch (err) {
+            console.error('Contact send error:', err);
+            showError('인터넷 연결이 불안정하거나 서버 오류가 발생했습니다. 아래 [직접 메일 보내기] 버튼을 이용해 주시기 바랍니다.');
+        } finally {
             btn.disabled = false;
             btn.innerHTML = originalText;
-        });
+        }
     }
 
     function showSuccess() {
         document.getElementById('formSectionGeneral').classList.add('hidden');
         document.getElementById('formSectionAd').classList.add('hidden');
+        const errorCard = document.getElementById('errorCard');
+        if (errorCard) errorCard.classList.add('hidden');
         const successCard = document.getElementById('successCard');
         if (successCard) successCard.classList.remove('hidden');
         showToast('문의가 안전하게 접수되었습니다.');
+    }
+
+    function showError(msg) {
+        document.getElementById('formSectionGeneral').classList.add('hidden');
+        document.getElementById('formSectionAd').classList.add('hidden');
+        const successCard = document.getElementById('successCard');
+        if (successCard) successCard.classList.add('hidden');
+        const errorCard = document.getElementById('errorCard');
+        if (errorCard) {
+            const msgEl = document.getElementById('errorMessageText');
+            if (msgEl && msg) msgEl.textContent = msg;
+            errorCard.classList.remove('hidden');
+        }
+        showToast('전송 실패: 메일이 발송되지 않았습니다. 직접 메일 보내기를 이용해 주세요.');
+    }
+
+    function restoreForms() {
+        const errorCard = document.getElementById('errorCard');
+        if (errorCard) errorCard.classList.add('hidden');
+        const isAd = document.getElementById('tabAdBtn') && document.getElementById('tabAdBtn').classList.contains('bg-white');
+        switchInquiryTab(isAd ? 'ad' : 'general');
     }
 
     function resetForms() {
@@ -445,6 +571,8 @@
         document.getElementById('adInquiryForm').reset();
         const successCard = document.getElementById('successCard');
         if (successCard) successCard.classList.add('hidden');
+        const errorCard = document.getElementById('errorCard');
+        if (errorCard) errorCard.classList.add('hidden');
         switchInquiryTab('general');
     }
     </script>
