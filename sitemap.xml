@@ -1200,4 +1200,10 @@
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
+    <url>
+        <loc>https://wezip.co.kr/blog-national-pension-early-receipt.html</loc>
+        <lastmod>2026-11-08</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
 </urlset>
