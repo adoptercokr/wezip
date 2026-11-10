@@ -169,6 +169,67 @@ TOPIC_QUEUE = [
             ("Q. 피부양자에서 탈락하면 언제부터 지역 건보료 고지서가 나오나요?",
              "국세청 소득자료가 공단에 통보되는 매년 11월에 피부양자 자격 변동 심사가 진행되며, 12월 10일경 최초의 지역건보료 고지서가 발송됩니다.")
         ]
+    },
+    {
+        "slug": "blog-cheongyak-dream-2026",
+        "title": "2026 청년 주택드림 청약통장 및 드림대출(연 2.2%) 전환 조건 총정리: 청약 당첨부터 분양가 80% 저리 대출 실전 가이드",
+        "desc": "청년 무주택자 필수! 최대 4.5% 고금리 청년 주택드림 청약통장 가입 자격(만 19~34세, 연소득 5천만 이하)과 청약 당첨 시 최저 2.2% 금리로 분양가 80%까지 지원하는 드림대출 연계 공식 총정리.",
+        "cat": "realestate",
+        "catName": "부동산·주거",
+        "badge": "청년",
+        "readTime": "약 7분",
+        "calcLink": "housing-points.html",
+        "calcName": "청약 가점 계산기",
+        "table": {
+            "title": "청년 주택드림 청약통장 vs 기존 주택청약종합저축 비교",
+            "headers": ["구분", "기존 주택청약종합저축", "청년 주택드림 청약통장"],
+            "rows": [
+                ["최고 이자율", "연 2.8% ~ 3.1%", "최대 연 4.5% 우대금리 제공"],
+                ["월 납입 한도", "월 최대 50만 원", "월 최대 100만 원까지 납입 가능"],
+                ["비과세 및 소득공제", "연 300만원 한도 40% 소득공제", "이자소득 500만원 비과세 + 연 300만원 소득공제"],
+                ["전용 연계 대출", "없음 (일반 주택담보대출 이용)", "최저 연 2.2% 청년주택드림대출 연계 (분양가 80% 한도)"]
+            ]
+        },
+        "simulation": {
+            "title": "실전 청약 및 대출 시뮬레이션: 분양가 6억원 아파트 당첨 시",
+            "body": "• 청년 주택드림 통장 가입 1년 이상, 1,000만원 이상 납입 후 청약 당첨 시 전용 대출 적용 가능.\n• 분양가 6억원의 80%인 최대 4.8억원을 최저 2.2% 금리로 조달 가능하여, 시중 은행 주담대(4%대) 대비 매달 약 70만 원, 1년에 800만 원 이상의 이자 비용을 아낄 수 있습니다."
+        },
+        "faqs": [
+            ("Q. 기존 일반 청약통장 가입자도 청년 주택드림으로 전환할 수 있나요?",
+             "네, 소득 및 연령 요건을 충족하면 기존 가입 은행에서 '전환 신규'를 신청할 수 있으며, 기존 통장의 납입 회차와 인정 순위가 100% 그대로 승계됩니다."),
+            ("Q. 청년 주택드림 대출은 어떤 주택에 적용되나요?",
+             "분양가 6억원 이하, 전용면적 85㎡ 이하의 신규 분양 주택에 적용되며, 당첨 후 입주 시점에 대출이 실행됩니다.")
+        ]
+    },
+    {
+        "slug": "blog-freelancer-tax-saving-strategy",
+        "title": "프리랜서 3.3% 5월 종합소득세 절세 비법: 단순경비율 vs 기준경비율 장부 기장과 세금 환급 꿀팁",
+        "desc": "3.3% 원천징수 프리랜서 및 N잡러 필수! 직전연도 수입 2,400만원·3,600만원 기준 단순경비율과 기준경비율 판정 기준, 간편장부 작성으로 가산세 피하고 3.3% 뗀 세금 100% 환급받는 실전 노하우.",
+        "cat": "salary",
+        "catName": "급여·세무",
+        "badge": "절세",
+        "readTime": "약 7분",
+        "calcLink": "freelancer.html",
+        "calcName": "3.3% 프리랜서 종합소득세 계산기",
+        "table": {
+            "title": "프리랜서 종합소득세 신고 유형별 경비 인정 기준",
+            "headers": ["신고 유형", "직전연도 수입 기준", "경비 인정 방식 및 장부 의무"],
+            "rows": [
+                ["단순경비율 (F/G유형)", "2,400만 원 미만 (당해연도 7,500만 미만)", "증빙 서류 없이도 수입의 60~70%를 경비로 일괄 인정 (대부분 환급)"],
+                ["기준경비율 (D유형)", "2,400만 원 이상 ~ 7,500만 원 미만", "주요 경비(임차료·인건비 등)는 적격증빙 필수, 기본 경비만 소액 인정"],
+                ["간편장부 대상자", "7,500만 원 미만", "가계부 형태의 간편장부를 작성하면 기준경비율 폭탄을 피하고 합법 절세 가능"]
+            ]
+        },
+        "simulation": {
+            "title": "실전 환급 시뮬레이션: 연 수입 3,000만원 프리랜서 A씨",
+            "body": "• 단순 추계 신고 시: 기준경비율(약 15%)만 적용되어 소득금액이 높게 잡혀 수십만 원의 세금을 추가 납부해야 하는 '세금 폭탄' 발생.\n• 간편장부 기장 신고 시: 업무용 통신비, 장비 구입비, 식대, 교통비 등 실제 지출 경비 1,800만 원(60%)을 장부에 반영하여 기납부 3.3% 세금 99만 원 중 약 60~80만 원을 전액 환급받을 수 있습니다."
+        },
+        "faqs": [
+            ("Q. 5월 종합소득세를 신고하지 않고 그냥 넘어가면 어떻게 되나요?",
+             "기납부된 3.3% 세금을 환급받지 못할 뿐만 아니라, 추가 납부 세액이 있는 경우 무신고가산세(20%)와 납부지연가산세(하루 0.022%)가 부과되고 건강보험료가 크게 오를 수 있습니다."),
+            ("Q. 직장인이 부업으로 3.3% 프리랜서 소득이 있는 경우 어떻게 신고하나요?",
+             "직장에서 진행한 연말정산 지급명세서와 3.3% 사업소득 원천징수영수증을 합산하여 5월 종합소득세 정기 신고 기간에 합산 신고해야 과소신고 가산세를 피할 수 있습니다.")
+        ]
     }
 ]
 
@@ -363,9 +424,35 @@ def render_article_html(topic, today_str):
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {desc}
                 </p>
+
+                <!-- 계산기 바로가기 배너 -->
+                <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+                    <div class="flex items-center gap-2 text-xs sm:text-sm text-blue-900 font-bold">
+                        <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+                        <span>내 실제 예상 금액을 1초 만에 무료로 직접 계산해 보세요!</span>
+                    </div>
+                    <a href="{calc_link}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm shrink-0 text-center">
+                        {calc_name} 바로가기 &rarr;
+                    </a>
+                </div>
             </header>
 
             <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
+                <!-- [블로그형 스토리텔링 도입부 & 공감 해설] -->
+                <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-5 sm:p-7 space-y-3.5 text-slate-700 text-sm sm:text-base leading-relaxed">
+                    <div class="flex items-center gap-2 font-black text-slate-900 text-base sm:text-lg">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                        <span>{title} 핵심 분석 및 실전 가이드</span>
+                    </div>
+                    <p class="font-medium text-slate-800 leading-relaxed">
+                        {desc}
+                    </p>
+                    <div class="pt-2 border-t border-blue-100/80 flex items-center gap-2 text-xs font-bold text-blue-800">
+                        <span>* 위집 편집국 핵심 조언:</span>
+                        <span class="font-normal text-slate-600">본 칼럼의 세부 기준 및 모의 계산 결과는 관계 법령 개정에 맞춰 주기적으로 업데이트됩니다. 하단의 전용 계산기를 통해 본인의 실질 예상 금액을 직접 확인해 보세요.</span>
+                    </div>
+                </div>
+
                 <section class="space-y-4">
                     <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
                         <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
