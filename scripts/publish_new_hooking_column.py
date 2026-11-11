@@ -1,0 +1,637 @@
+# -*- coding: utf-8 -*-
+"""
+publish_new_hooking_column.py
+1. Generates brand new column: blog-monthly-rent-tax-deduction-secret.html (#51)
+   Follows: Easy friendly intro -> Detail table & exact simulation -> Traps & FAQ.
+2. Updates hooking titles for #50, #49, #48 across their HTML files and blog.html.
+3. Updates sitemap.xml and rss.xml.
+"""
+
+import os
+import re
+import datetime
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TODAY = datetime.date.today().isoformat()
+TODAY_DOT = TODAY.replace("-", ".")
+NOW_RFC822 = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%a, %d %b %Y %H:%M:%S +0900")
+
+# 1. New Article Data (#51)
+ARTICLE_51 = {
+    "slug": "blog-monthly-rent-tax-deduction-secret",
+    "no": 51,
+    "title": "월세 50만 원 내면서 1년에 100만 원 버리고 계셨나요? 집주인 눈치 안 보고 5년 치 몰아서 돌려받는 월세 세액공제 비밀",
+    "desc": "월세 내는 직장인 필수 필독! 집주인 동의 없이 100% 환급받는 월세 세액공제(최대 17%, 연 170만원) 자격 조건과 사는 동안 눈치 보여 신청 못 했을 때 이사 후 5년 치 한 번에 돌려받는 국세청 경정청구 실전 비법 완벽 정리.",
+    "cat": "realestate",
+    "catName": "부동산·주거",
+    "badge": "NEW",
+    "readTime": "약 8분",
+    "calcLink": "gov-rent.html",
+    "calcName": "청년월세 지원 및 공제 조회기",
+    "hook_title": "집주인한테 알리지 않고, 이사 나간 뒤 5년 치 월세 공제금을 한 번에 통장으로 꽂아 넣는 법",
+    "hook_p1": "매달 월급날 통장을 스쳐 지나가며 빠져나가는 50만 원, 60만 원 월세 이체 내역을 볼 때마다 한숨 쉬어본 경험 다들 있으실 겁니다. 1년이면 600만 원, 2년이면 1,200만 원이 그냥 공중으로 사라지는 기분이죠. 그런데 이렇게 꼬박꼬박 낸 월세 중 최대 170만 원을 매년 국가에서 통장으로 환급해 준다는 사실, 알고 계셨나요?",
+    "hook_p2": "많은 분들이 '월세 세액공제 받으려면 집주인 동의를 받아야 하는 것 아닌가요? 집주인이 다음 재계약 때 월세 올리거나 방 빼라고 할까 봐 신청을 못 하겠어요'라고 걱정하십니다. 결론부터 시원하게 말씀드리면, 집주인 동의는 법적으로 단 1%도 필요 없습니다. 게다가 지금 사는 동안 집주인 눈치가 보인다면? 그냥 조용히 살다가 이사 나간 뒤 5년 안에 국세청에 '경정청구'를 신청하면 지난 5년 동안 낸 월세 세액공제 환급금을 한 번에 내 통장으로 고스란히 돌려받을 수 있습니다! 어려운 세법 용어 하나도 없이, 초보자도 바로 따라 할 수 있게 쉽게 풀어드릴게요.",
+    "editor_tip": "월세 세액공제는 집주인이 동의하지 않거나 임대사업자가 아니더라도 100% 신청 가능합니다. 가장 중요한 것은 '전입신고'를 마쳤는지와 '월세 계좌이체 내역'이 남아있는지 여부입니다.",
+    "content_html": """
+        <!-- [1단계: 초반부] 누구나 이해하는 쉬운 블로그식 설명 -->
+        <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 월세 세액공제, 쉽게 말해서 도대체 어떤 제도인가요?</h2>
+        <p>
+            월세 세액공제는 쉽게 말해 <strong>'나라에서 내가 낸 월세의 일부를 세금에서 깎아서 현금처럼 통장으로 돌려주는 제도'</strong>입니다.
+        </p>
+        <p>
+            예를 들어 내가 1년 동안 월세로 총 600만 원을 냈다면, 소득에 따라 그 금액의 15%~17%인 <strong>약 90만 원에서 102만 원</strong>을 연말정산 때 낼 세금에서 깎아줍니다. 내야 할 세금이 없거나 이미 세금을 냈다면 그만큼 내 통장에 환급금으로 꽂힙니다. 13월의 월급으로 한 달 치 월세 이상을 공짜로 돌려받는 셈입니다.
+        </p>
+
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 pt-2">가장 많이 오해하는 2가지 진실</h3>
+        <div class="space-y-3 my-3">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">진실 1: 집주인 동의? 법적으로 전혀 필요 없습니다</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    월세 세액공제는 세입자의 정당한 법적 권리입니다. 임대차계약서와 월세 이체 영수증, 주민등록등본만 있으면 국세청 홈택스에서 본인이 직접 신청할 수 있으며 집주인의 도장이나 동의서는 제출 서류 어디에도 없습니다.
+                </p>
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">진실 2: 사는 동안 눈치 보이면, 이사 가고 나서 5년 치 한 번에 받으세요</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    만약 집주인과의 관계가 껄끄럽거나 재계약 거절이 두렵다면 거주 중에는 그냥 신청하지 마세요. 계약이 끝나 다른 집으로 이사한 뒤, 지난 5년 치를 소급해서 한 번에 돌려받는 <strong>'경정청구(지난 세금 환급 제도)'</strong>를 신청하면 됩니다. 집주인은 내가 공제받았는지조차 알 수 없습니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- [2단계: 중반부] 세부 내역 및 비교 표, 실전 시뮬레이션 -->
+        <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-6">2. 내 연봉별 공제율과 최대 환급 한도 비교표</h2>
+        <p>
+            정부는 서민 주거 안정을 위해 2026년 기준 월세 세액공제 대상 소득 한도를 <strong>총급여 8,000만 원(종합소득 7,000만 원)</strong>까지 대폭 상향하고, 연간 공제 대상 월세 한도 역시 <strong>최대 1,000만 원</strong>으로 운영하고 있습니다.
+        </p>
+        <div class="overflow-x-auto my-4">
+            <table class="w-full text-xs sm:text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+                <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                    <tr>
+                        <th class="p-3">소득 구간</th>
+                        <th class="p-3">공제율</th>
+                        <th class="p-3">공제 대상 월세 한도</th>
+                        <th class="p-3 font-bold text-blue-600">1년 최대 환급 가능 금액</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-900">총급여 5,500만 원 이하<br><span class="text-xs text-slate-500 font-normal">(종합소득금액 4,500만 이하)</span></td>
+                        <td class="p-3 font-extrabold text-blue-600 text-base">17%</td>
+                        <td class="p-3">연 최대 1,000만 원</td>
+                        <td class="p-3 font-extrabold text-blue-600 text-base">최대 170만 원 전액 환급</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-900">총급여 5,500만 원 초과 ~ 8,000만 원 이하<br><span class="text-xs text-slate-500 font-normal">(종합소득금액 7,000만 이하)</span></td>
+                        <td class="p-3 font-bold text-slate-700 text-base">15%</td>
+                        <td class="p-3">연 최대 1,000만 원</td>
+                        <td class="p-3 font-bold text-slate-700 text-base">최대 150만 원 전액 환급</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-400">총급여 8,000만 원 초과</td>
+                        <td class="p-3 text-slate-400">세액공제 불가</td>
+                        <td class="p-3 text-slate-400">-</td>
+                        <td class="p-3 text-slate-500 font-bold">'현금영수증 소득공제'로 30% 절세 대체</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 pt-2">실전 시뮬레이션: 30대 김 대리의 2년 치 경정청구 환급금 계산</h3>
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 font-medium my-3">
+            <p>• <strong>상황</strong>: 연봉 4,200만 원(공제율 17% 적용), 보증금 1,000만 원에 매달 월세 60만 원(1년 720만 원)을 내며 2년간 원룸 거주 후 최근 다른 전셋집으로 이사 완료.</p>
+            <p>• <strong>1년 환급액</strong>: 연간 월세 720만 원 × 17% = <strong>122만 4,000원</strong></p>
+            <p>• <strong>2년 합산 경정청구 환급금</strong>: 122만 4,000원 × 2년 = <strong>총 244만 8,000원</strong></p>
+            <p class="pt-2 border-t border-slate-200 text-blue-900 font-extrabold text-sm sm:text-base">
+                김 대리는 국세청 홈택스에서 5년 치 경정청구를 신청하여 2주 만에 본인 통장으로 정확히 244만 8,000원을 입금받았습니다!
+            </p>
+        </div>
+
+        <!-- [3단계: 후반부] 치명적인 함정 체크리스트 & 신청 자격 -->
+        <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-6">3. 모르면 1원도 못 받는 치명적인 실수 함정 4가지</h2>
+        <div class="space-y-3 my-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">1. 전입신고 누락: 주민등록등본상 주소가 계약서와 같아야 함</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    월세 세액공제의 제1원칙은 '전입신고'입니다. 실제로 월세를 냈더라도 주민등록상 주소지가 해당 임차 주택으로 전입되어 있지 않은 기간에 낸 월세는 공제받을 수 없습니다. 이사한 날 무조건 바로 전입신고를 마쳐야 합니다.
+                </p>
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">2. 무주택 세대주 요건: 유주택자는 전액 불가</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    과세기간 종료일(12월 31일) 기준 본인과 배우자를 포함한 세대 구성원 전원이 무주택이어야 합니다. 다만 세대주가 주택 관련 공제를 받지 않은 경우 세대원인 근로자도 공제 신청이 가능합니다.
+                </p>
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">3. 주택 크기 및 가격 제한: 85㎡ 이하 또는 기준시가 4억 원 이하</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    국민주택규모인 전용면적 85㎡(약 25평) 이하이거나, 면적이 넓더라도 기준시가(공시가격) 4억 원 이하인 주택(아파트, 빌라, 원룸, 오피스텔, 고시원 포함)이어야 합니다.
+                </p>
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                <div class="font-bold text-slate-900 text-sm">4. 계약서와 계좌이체 송금인이 일치해야 함</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    임대차계약서에 적힌 임차인 이름과 은행 계좌이체 내역서상의 송금인 이름이 동일해야 합니다. 부모님이나 지인이 대신 송금해 준 경우 본인 공제가 불가능하므로 반드시 본인 명의 계좌에서 임대인 계좌로 이체해야 합니다.
+                </p>
+            </div>
+        </div>
+    """,
+    "faqs": [
+        ("Q. 집주인 계좌가 아니라 집주인 가족 계좌로 월세를 보냈는데 공제가 되나요?",
+         "원칙적으로 계약서상 임대인 명의 계좌로 입금해야 인정됩니다. 다만 임대차계약서 특약사항에 '월세 입금 계좌는 배우자 명의 OOO 계좌로 한다'는 내용이 명시되어 있다면 예외적으로 인정받을 수 있습니다."),
+        ("Q. 오피스텔이나 고시원 월세도 세액공제가 가능한가요?",
+         "네, 가능합니다. 주거용 오피스텔과 고시원 모두 세법상 월세 세액공제 대상 주택에 정식 포함되어 있으므로 전입신고가 완료되어 있다면 동일하게 최대 17%를 환급받을 수 있습니다."),
+        ("Q. 연봉 8,000만 원이 넘으면 월세로 낸 돈을 아예 털리는 건가요?",
+         "아닙니다. 총급여 8,000만 원 초과자는 '세액공제'는 불가능하지만, 국세청 홈택스에서 '주택임차료 현금영수증 발급'을 신청하면 월세 전액에 대해 30%의 '신용카드 등 소득공제'를 적용받아 합법적으로 세금을 줄일 수 있습니다.")
+    ]
+}
+
+def render_article(article):
+    filename = f"{article['slug']}.html"
+    title = article['title']
+    desc = article['desc']
+    cat = article['cat']
+    cat_name = article['catName']
+    badge = article['badge']
+    read_time = article['readTime']
+    calc_link = article['calcLink']
+    calc_name = article['calcName']
+    hook_title = article['hook_title']
+    hook_p1 = article['hook_p1']
+    hook_p2 = article['hook_p2']
+    editor_tip = article['editor_tip']
+    content_html = article['content_html']
+    faqs = article['faqs']
+
+    faq_cards_html = ""
+    faq_schema_items = []
+    for q, a in faqs:
+        faq_cards_html += f"""<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            <div class="font-bold text-slate-800 text-sm">{q}</div>
+                            <div class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">{a}</div>
+                        </div>"""
+        faq_schema_items.append(f"""{{
+          "@type": "Question",
+          "name": "{q}",
+          "acceptedAnswer": {{
+            "@type": "Answer",
+            "text": "{a}"
+          }}
+        }}""")
+
+    faq_schema_str = ",\n        ".join(faq_schema_items)
+
+    html = f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N5V6S642H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2N5V6S642H');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>{title} | 위집 (wezip)</title>
+    <meta name="description" content="{desc}">
+    <link rel="canonical" href="https://wezip.co.kr/{filename}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{title} | 위집">
+    <meta property="og:description" content="{desc}">
+    <meta property="og:url" content="https://wezip.co.kr/{filename}">
+    <meta property="og:site_name" content="위집 (wezip)">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://wezip.co.kr/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WE ZIP - 대한민국 생활 금융 포털">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wezip.co.kr/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-5717882145510454">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5717882145510454" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{title}",
+      "description": "{desc}",
+      "author": {{
+        "@type": "Organization",
+        "name": "위집 금융편집국",
+        "url": "https://wezip.co.kr/about.html"
+      }},
+      "publisher": {{
+        "@type": "Organization",
+        "name": "위집",
+        "url": "https://wezip.co.kr"
+      }},
+      "datePublished": "{TODAY}",
+      "dateModified": "{TODAY}",
+      "mainEntityOfPage": "https://wezip.co.kr/{filename}"
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {faq_schema_str}
+      ]
+    }}
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+    <header class="sticky top-0 z-40 bg-[#0F172A] border-b border-slate-800 text-white select-none">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group" aria-label="WE ZIP 홈으로 이동">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 group-hover:bg-blue-500 flex items-center justify-center text-white shadow-sm transition">
+                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9.5L12 3l9 6.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5v-10z"></path>
+                            <polyline points="9 21 9 12 15 12 15 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-black text-xl tracking-tight text-white notranslate" translate="no">WE <span class="text-blue-400">ZIP</span></span>
+                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+                    <a href="salary.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">급여·소득</a>
+                    <a href="real-estate.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">부동산·취득세</a>
+                    <a href="gov-finder.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">정부지원금</a>
+                    <a href="blog.html" class="px-3 py-2 rounded-lg text-blue-400 bg-slate-800/80 transition font-bold">금융 칼럼</a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <a href="gov-finder.html" class="text-xs font-bold px-3 py-2 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white transition flex items-center gap-1.5">
+                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>지원금 찾기</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
+    <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
+        <!-- [좌측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="좌측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">좌측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스 및<br>직접 광고 스폰서</div>
+                </div>
+                <div class="w-full pt-2 border-t border-slate-100">
+                    <span class="text-[10px] text-slate-400 font-medium block mb-1">WE ZIP 스폰서</span>
+                    <a href="contact.html?type=ad" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
+                        배너 광고 문의 &rarr;
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- [중앙 메인 컨텐츠] -->
+        <main class="w-full max-w-4xl mx-auto space-y-8">
+            <nav class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                <a href="index.html" class="hover:text-blue-600 transition">홈</a>
+                <span>&gt;</span>
+                <a href="blog.html" class="hover:text-blue-600 transition">금융 칼럼</a>
+                <span>&gt;</span>
+                <span class="text-slate-800 font-bold">{cat_name}</span>
+            </nav>
+
+            <header class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">{cat_name} 필독</span>
+                    <span class="text-xs text-slate-400">읽는 시간 {read_time} · {TODAY}</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
+                    {title}
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {desc}
+                </p>
+
+                <!-- 계산기 바로가기 배너 -->
+                <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+                    <div class="flex items-center gap-2 text-xs sm:text-sm text-blue-900 font-bold">
+                        <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+                        <span>내 월세 공제 및 정부 지원금 자격을 1초 만에 무료로 직접 확인해 보세요!</span>
+                    </div>
+                    <a href="{calc_link}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm shrink-0 text-center">
+                        {calc_name} 바로가기 &rarr;
+                    </a>
+                </div>
+            </header>
+
+            <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
+                <!-- [블로그형 스토리텔링 도입부 & 공감 해설 박스] -->
+                <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-5 sm:p-7 space-y-3.5 text-slate-700 text-sm sm:text-base leading-relaxed">
+                    <div class="flex items-center gap-2 font-black text-slate-900 text-base sm:text-lg">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                        <span>{hook_title}</span>
+                    </div>
+                    <p class="font-medium text-slate-800 leading-relaxed">
+                        {hook_p1}
+                    </p>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {hook_p2}
+                    </p>
+                    <div class="pt-2 border-t border-blue-100/80 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs font-bold text-blue-800">
+                        <span>* 위집 편집국 핵심 조언:</span>
+                        <span class="font-normal text-slate-600">{editor_tip}</span>
+                    </div>
+                </div>
+
+                <!-- 아티클 본문 섹션들 -->
+                {content_html}
+
+                <!-- FAQ 섹션 -->
+                <section class="space-y-4 border-t border-slate-100 pt-6">
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+                        <span>자주 묻는 질문 (FAQ)</span>
+                    </h2>
+                    <div class="space-y-3">
+                        {faq_cards_html}
+                    </div>
+                </section>
+
+                <!-- 관련 계산기 하단 추천 배너 -->
+                <section class="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="space-y-1 text-center sm:text-left">
+                        <div class="text-xs font-bold text-blue-600 uppercase tracking-wide">WE ZIP 실시간 계산기 연동</div>
+                        <div class="text-sm sm:text-base font-extrabold text-slate-900">내 실제 예상 금액을 1초 만에 확인해 보세요</div>
+                        <p class="text-xs text-slate-600">2026년 최신 법정 기준이 100% 반영된 무료 시뮬레이터입니다.</p>
+                    </div>
+                    <a href="{calc_link}" class="w-full sm:w-auto py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl transition text-center shrink-0 shadow-sm">
+                        {calc_name} 바로가기 &rarr;
+                    </a>
+                </section>
+            </article>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <div class="font-bold text-slate-900 text-sm">페이지 내용이 도움이 되셨나요?</div>
+                    <div class="text-xs text-slate-500">지인이나 동료에게 링크를 복사하여 유용한 금융·세무 정보를 공유해 보세요.</div>
+                </div>
+                <button type="button" onclick="copyPageUrl(this)" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition">
+                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <span>페이지 링크 복사</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- [우측 스폰서 배너 광고 (데스크톱 160x600)] -->
+        <aside class="hidden xl:flex flex-col items-center w-[160px] shrink-0 sticky top-20 select-none z-10" aria-label="우측 스폰서 광고">
+            <div class="w-full bg-white border border-dashed border-slate-300 rounded-2xl p-3 text-center shadow-xs min-h-[600px] flex flex-col justify-between hover:border-slate-400 transition">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
+                <div class="my-auto py-8 text-slate-400">
+                    <svg class="svg-icon w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div class="text-xs font-bold text-slate-600">우측 날개 배너</div>
+                    <div class="text-[11px] text-slate-400 mt-1">160 × 600<br>구글 애드센스 및<br>직접 광고 스폰서</div>
+                </div>
+                <div class="w-full pt-2 border-t border-slate-100">
+                    <span class="text-[10px] text-slate-400 font-medium block mb-1">WE ZIP 스폰서</span>
+                    <a href="contact.html?type=ad" class="block w-full py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold rounded-lg border border-blue-200 transition text-center">
+                        배너 광고 문의 &rarr;
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="bg-white border-t border-slate-200 mt-20 select-none">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-6 text-xs text-slate-500">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold text-xs">W</div>
+                    <span class="font-bold text-slate-700">위집 (wezip)</span>
+                    <span class="text-slate-300">|</span>
+                    <span>2026 대한민국 생활 금융 포털</span>
+                </div>
+                <div class="flex items-center gap-4 font-medium">
+                    <a href="about.html" class="hover:text-blue-600 transition">서비스 소개</a>
+                    <a href="terms.html" class="hover:text-blue-600 transition">이용약관</a>
+                    <a href="privacy.html" class="hover:text-blue-600 transition font-bold text-slate-700">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="pt-6 text-center text-xs text-slate-400 space-y-1">
+                <p>본 사이트의 모든 계산 결과는 2026년 관계 법령 및 세법 기준 시뮬레이션이며, 법적 효력을 갖는 공식 증명서가 아닙니다.</p>
+                <p>© 2026 wezip.co.kr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="common.js"></script>
+</body>
+</html>
+"""
+    return html
+
+# 2. Hooking titles for #50, #49, #48
+HOOKING_UPDATES = {
+    50: {
+        "slug": "blog-didimdol-loan-room-deduction",
+        "title": "잔금 3주 남았는데 은행에서 5,500만 원 덜 준다고? 모르면 계약금 날리는 수도권 디딤돌 대출 방공제 함정",
+        "desc": "국토교통부 수도권 정책모기지 긴급 규제 완벽 해설! 소액임차보증금(방공제) 5,500만원 필수 차감으로 축소된 실제 주택구입 잔금 대출 한도 계산법과 모기지신용보증(MCG) 배제 시 자금 조달 실전 대안 총정리.",
+        "badge": "특보",
+        "readTime": "약 8분",
+        "cat": "realestate",
+        "catName": "부동산·주거",
+        "date": "2026.11.10"
+    },
+    49: {
+        "slug": "blog-national-pension-early-receipt",
+        "title": "국민연금 5년 일찍 받으면 평생 30% 깎인다는데 몇 살까지 살아야 본전일까? 1원 단위 손익분기점과 건보료 폭탄 방어법",
+        "desc": "국민연금 정규 수령 나이보다 최대 5년 일찍 받는 조기노령연금의 장단점과 평생 깎이는 감액률(연 6%, 최대 30%) 분석! 건강보험 피부양자 자격 유지(연 2,000만원 룰)와 평균 수명 기준 손익분기점 나이(76.6세) 실전 계산.",
+        "badge": "필독",
+        "readTime": "약 8분",
+        "cat": "salary",
+        "catName": "급여·세무",
+        "date": "2026.11.08"
+    },
+    48: {
+        "slug": "blog-parental-leave-pay-250",
+        "title": "육아휴직 들어가면 진짜 월 250만 원 다 주나요? 복직 안 해도 떼였던 25% 이제 통장으로 바로 들어옵니다",
+        "desc": "2026년 대폭 개편된 육아휴직 급여 총정리! 첫 3개월 월 최대 250만원, 4~6개월 200만원, 7개월 이후 160만원으로 대폭 인상되고 직장 복귀 후 받던 25% 사후지급금이 즉시 지급으로 전환된 최신 지침과 6+6 부모육아휴직제 부부 교차 수령 실전 가이드.",
+        "badge": "NEW",
+        "readTime": "약 8분",
+        "cat": "welfare",
+        "catName": "복지·지원금",
+        "date": "2026.11.04"
+    }
+}
+
+def update_existing_html_titles():
+    for no, data in HOOKING_UPDATES.items():
+        filepath = os.path.join(BASE_DIR, f"{data['slug']}.html")
+        if os.path.exists(filepath):
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            t = data['title']
+            # Update <title>
+            content = re.sub(r'<title>[^<]+</title>', f"<title>{t} | 위집 (wezip)</title>", content)
+            # Update og:title
+            content = re.sub(r'<meta property="og:title" content="[^"]+">', f'<meta property="og:title" content="{t} | 위집">', content)
+            # Update h1
+            content = re.sub(r'<h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">\s*[^<]+\s*</h1>',
+                             f'<h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">\n                    {t}\n                </h1>',
+                             content)
+
+            with open(filepath, "w", encoding="utf-8") as f:
+                f.write(content)
+            print(f"Updated title in {data['slug']}.html")
+
+def update_blog_html():
+    blog_path = os.path.join(BASE_DIR, "blog.html")
+    with open(blog_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    new_articles_top = f"""      {{
+        no: 51,
+        title: "{ARTICLE_51['title']}",
+        desc: "{ARTICLE_51['desc']}",
+        cat: "{ARTICLE_51['cat']}",
+        catName: "{ARTICLE_51['catName']}",
+        badge: "{ARTICLE_51['badge']}",
+        date: "{TODAY_DOT}",
+        readTime: "{ARTICLE_51['readTime']}",
+        link: "{ARTICLE_51['slug']}.html"
+      }},
+      {{
+        no: 50,
+        title: "{HOOKING_UPDATES[50]['title']}",
+        desc: "{HOOKING_UPDATES[50]['desc']}",
+        cat: "{HOOKING_UPDATES[50]['cat']}",
+        catName: "{HOOKING_UPDATES[50]['catName']}",
+        badge: "{HOOKING_UPDATES[50]['badge']}",
+        date: "{HOOKING_UPDATES[50]['date']}",
+        readTime: "{HOOKING_UPDATES[50]['readTime']}",
+        link: "{HOOKING_UPDATES[50]['slug']}.html"
+      }},
+      {{
+        no: 49,
+        title: "{HOOKING_UPDATES[49]['title']}",
+        desc: "{HOOKING_UPDATES[49]['desc']}",
+        cat: "{HOOKING_UPDATES[49]['cat']}",
+        catName: "{HOOKING_UPDATES[49]['catName']}",
+        badge: "{HOOKING_UPDATES[49]['badge']}",
+        date: "{HOOKING_UPDATES[49]['date']}",
+        readTime: "{HOOKING_UPDATES[49]['readTime']}",
+        link: "{HOOKING_UPDATES[49]['slug']}.html"
+      }},
+      {{
+        no: 48,
+        title: "{HOOKING_UPDATES[48]['title']}",
+        desc: "{HOOKING_UPDATES[48]['desc']}",
+        cat: "{HOOKING_UPDATES[48]['cat']}",
+        catName: "{HOOKING_UPDATES[48]['catName']}",
+        badge: "{HOOKING_UPDATES[48]['badge']}",
+        date: "{HOOKING_UPDATES[48]['date']}",
+        readTime: "{HOOKING_UPDATES[48]['readTime']}",
+        link: "{HOOKING_UPDATES[48]['slug']}.html"
+      }},"""
+
+    # Replace from 'const ARTICLES = [' to right before 'no: 47'
+    pattern = r'const ARTICLES = \[\s*\{[^}]*no:\s*50[^}]*\},\s*\{[^}]*no:\s*49[^}]*\},\s*\{[^}]*no:\s*48[^}]*\},'
+    if re.search(pattern, content):
+        content = re.sub(pattern, f"const ARTICLES = [\n{new_articles_top}", content, count=1)
+    else:
+        # Fallback: insert at marker
+        articles_marker = "const ARTICLES = ["
+        content = content.replace(articles_marker, f"{articles_marker}\n{new_articles_top}", 1)
+
+    with open(blog_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print("Updated blog.html: set #51 through #48 with hooking titles.")
+
+def update_sitemap():
+    sitemap_path = os.path.join(BASE_DIR, "sitemap.xml")
+    with open(sitemap_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    filename = f"{ARTICLE_51['slug']}.html"
+    if f"<loc>https://wezip.co.kr/{filename}</loc>" not in content:
+        new_url = f"""    <url>
+        <loc>https://wezip.co.kr/{filename}</loc>
+        <lastmod>{TODAY}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>"""
+        content = content.replace("</urlset>", f"{new_url}\n</urlset>")
+        with open(sitemap_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Updated sitemap.xml with {filename}")
+
+def update_rss():
+    rss_path = os.path.join(BASE_DIR, "rss.xml")
+    with open(rss_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    filename = f"{ARTICLE_51['slug']}.html"
+    if f"<link>https://wezip.co.kr/{filename}</link>" not in content:
+        new_item = f"""    <item>
+      <title>{ARTICLE_51['title']}</title>
+      <link>https://wezip.co.kr/{filename}</link>
+      <guid>https://wezip.co.kr/{filename}</guid>
+      <description>{ARTICLE_51['desc']}</description>
+      <pubDate>{NOW_RFC822}</pubDate>
+      <category>{ARTICLE_51['catName']}</category>
+    </item>"""
+        m = re.search(r'(<lastBuildDate>[^<]+</lastBuildDate>)', content)
+        if m:
+            content = content.replace(m.group(1), f"{m.group(1)}\n{new_item}")
+        else:
+            content = content.replace("<channel>", f"<channel>\n{new_item}")
+        with open(rss_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Updated rss.xml with {filename}")
+
+def main():
+    print("=== Publishing New Column #51 and Updating Hooking Titles ===")
+    # 1. Generate Article #51
+    html_51 = render_article(ARTICLE_51)
+    path_51 = os.path.join(BASE_DIR, f"{ARTICLE_51['slug']}.html")
+    with open(path_51, "w", encoding="utf-8") as f:
+        f.write(html_51)
+    print(f"Created new rich column: {ARTICLE_51['slug']}.html ({len(html_51):,} bytes)")
+
+    # 2. Update existing titles
+    update_existing_html_titles()
+
+    # 3. Update blog.html
+    update_blog_html()
+
+    # 4. Update sitemap.xml
+    update_sitemap()
+
+    # 5. Update rss.xml
+    update_rss()
+
+    print("Finished successfully!")
+
+if __name__ == "__main__":
+    main()
