@@ -1,278 +1,466 @@
 # -*- coding: utf-8 -*-
 """
-Wezip Automated SEO Column Publisher (Cloud-Ready & Local Fail-Safe)
+Wezip Automated SEO Column Publisher (v2: High-Retention Blog + Live News + 3x/Week)
 Designed for GitHub Actions and Local CRON Execution.
 
-1. Automatically picks the next high-intent financial/tax/welfare topic from the curated queue.
-2. Generates a 100% compliant, rich standalone article (blog-<slug>.html).
-3. Updates blog.html (ARTICLES array), sitemap.xml, and rss.xml.
-4. Validates all pages using verify_all_pages.py.
+1. Fetches live South Korean financial/welfare/tax policy headlines from the last 7 days.
+2. Uses optional GEMINI_API_KEY (if configured in environment/GitHub Secrets) to craft a fresh
+   policy-linked column, OR selects the best seasonal/news-matched column from topics_catalog.py.
+3. Renders the 3-stage WE ZIP blog style (Hooking numbers/words -> Easy Story -> Table & 1-won Sim -> 4 Traps & FAQs).
+4. Updates blog.html, sitemap.xml, and rss.xml safely and passes strict structural verification.
 """
 
+import argparse
+import datetime
+import html
+import json
 import os
 import re
-import datetime
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 import xml.etree.ElementTree as ET
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HTML_DIR = BASE_DIR
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
 
-TOPIC_QUEUE = [
-    {
-        "slug": "blog-year-end-settlement-dual-income",
-        "title": "2026 맞벌이 부부 연말정산 몰아주기 절세 공식: 부양가족·의료비·신용카드 황금 비율",
-        "desc": "2026년 맞벌이 부부 연말정산 필수 절세 전략! 소득 차이에 따른 부양가족 몰아주기 기준, 총급여 3% 문턱 넘기는 의료비 세액공제 몰아주기 비법과 신용카드 25% 공제 황금 배분법 총정리.",
-        "cat": "salary",
-        "catName": "급여·세무",
-        "badge": "절세",
-        "readTime": "약 6분",
-        "calcLink": "salary.html",
-        "calcName": "2026 연봉 실수령액 계산기",
-        "table": {
-            "title": "맞벌이 부부 공제 항목별 최적 몰아주기 전략",
-            "headers": ["공제 항목", "기본 원칙", "절세 황금 배분 기준"],
-            "rows": [
-                ["부양가족 기본공제", "소득 높은 배우자에게 몰아주기", "과세표준 구간이 높은 배우자가 더 높은 한계세율(15%~35%)을 적용받아 절세 효과 극대화"],
-                ["의료비 세액공제", "소득 낮은 배우자에게 몰아주기", "총급여의 3% 초과분부터 공제되므로 연봉이 낮은 배우자 명의 카드로 결제해야 3% 문턱 조기 돌파"],
-                ["신용카드 소득공제", "최저 사용금액(25%) 분할 채우기", "소득 높은 배우자가 총급여 25%를 먼저 채운 뒤, 초과분은 체크카드(30%)·전통시장(40%) 집중"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 시뮬레이션: 남편 연봉 7,000만원 vs 아내 연봉 4,000만원",
-            "body": "• 부양가족 몰아주기: 자녀 2명(인당 150만원 공제)을 남편(24% 세율 구간)에게 몰아줄 경우 약 72만원 절세 효과를 보며, 아내(15% 세율 구간)에게 적용하는 것보다 약 27만원 추가 환급을 받습니다.\n• 의료비 몰아주기: 가족 의료비 200만원 지출 시 남편은 문턱(210만원) 미달로 공제액이 0원이지만, 아내(문턱 120만원)로 몰아주면 초과분 80만원의 15%인 12만원을 전액 돌려받습니다."
-        },
-        "faqs": [
-            ("Q. 맞벌이 부부 자녀의 기본공제와 의료비 공제를 따로 받을 수 있나요?",
-             "자녀 기본공제는 부부 중 한 사람만 받을 수 있으나, 의료비의 경우 자녀 기본공제를 받지 않은 배우자가 자녀를 위해 지출한 의료비도 결제한 본인의 연말정산에서 공제받을 수 있습니다."),
-            ("Q. 배우자 명의 카드로 결제한 금액을 다른 배우자가 공제받을 수 있나요?",
-             "불가능합니다. 신용카드 소득공제는 원칙적으로 카드 명의자 본인의 연말정산에서만 공제되므로 사전에 누구 카드로 결제할지 전략적으로 나누어 써야 합니다.")
-        ]
-    },
-    {
-        "slug": "blog-parental-leave-pay-250",
-        "title": "2026 육아휴직 급여 월 최대 250만원 인상 개편안 총정리: 사후지급금 폐지 및 신청 자격",
-        "desc": "2026년 대폭 개편된 육아휴직 급여 총정리! 첫 3개월 월 최대 250만원, 4~6개월 200만원, 7개월 이후 160만원으로 대폭 인상되고 직장 복귀 후 받던 25% 사후지급금이 즉시 지급으로 전환된 최신 지침 완벽 해설.",
-        "cat": "welfare",
-        "catName": "복지·지원금",
-        "badge": "NEW",
-        "readTime": "약 5분",
-        "calcLink": "gov-parent.html",
-        "calcName": "부모급여 & 아동수당 계산기",
-        "table": {
-            "title": "2026년 육아휴직 급여 기간별 지급 상한액 비교",
-            "headers": ["휴직 기간", "통상임금 반영률", "월 지급 상한액", "실제 월 지급 방식"],
-            "rows": [
-                ["1개월 ~ 3개월", "통상임금의 100%", "월 최대 250만 원", "사후지급금 공제 없이 매월 100% 전액 즉시 지급"],
-                ["4개월 ~ 6개월", "통상임금의 100%", "월 최대 200만 원", "매월 전액 즉시 통장 입금"],
-                ["7개월 ~ 12개월", "통상임금의 80%", "월 최대 160만 원", "매월 전액 즉시 통장 입금 (최대 1년 수급)"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 시뮬레이션: 통상임금 월 300만원 직장인의 1년 총 수급액",
-            "body": "• 기존 체계: 월 150만원 상한 + 25% 사후지급금(복직 후 6개월 뒤 지급)으로 휴직 중 월 112.5만원만 수령하여 1년 총 1,800만원 수준이었습니다.\n• 2026년 개편: 첫 3개월 750만원(250만×3) + 4~6개월 600만원(200만×3) + 7~12개월 960만원(160만×6)으로 1년간 총 2,310만원을 매월 감액 없이 즉시 수령(약 510만원 인상 효과)합니다."
-        },
-        "faqs": [
-            ("Q. 육아휴직 사후지급금 제도가 완전히 폐지되었나요?",
-             "네, 복직 후 6개월간 계속 근무해야 떼어둔 25%를 주던 사후지급금 제도가 폐지되어 휴직 기간 중 생계 안정을 위해 매월 급여 100%가 온전히 지급됩니다."),
-            ("Q. 6+6 부모육아휴직제와 중복 신청이 가능한가요?",
-             "부모가 동시에 또는 순차적으로 육아휴직을 사용하는 경우 6+6 부모육아휴직제가 우선 적용되어 첫 달 월 최대 200만원에서 시작해 6개월 차에는 부모 각각 최대 450만원까지 급여가 단계적으로 상향 지급됩니다.")
-        ]
-    },
-    {
-        "slug": "blog-national-pension-early-receipt",
-        "title": "국민연금 조기수령 감액(최대 30%) 손익분기점 계산: 몇 살에 받는 것이 이득일까?",
-        "desc": "국민연금 정규 수령 나이보다 최대 5년 일찍 받는 조기노령연금의 장단점과 평생 깎이는 감액률(연 6%, 최대 30%) 분석! 건강보험 피부양자 유지 전략과 평균 수명 기준 손익분기점 완벽 계산.",
-        "cat": "salary",
-        "catName": "급여·세무",
-        "badge": "필독",
-        "readTime": "약 7분",
-        "calcLink": "salary.html",
-        "calcName": "2026 연봉 실수령액 & 국민연금",
-        "table": {
-            "title": "조기수령 연령별 평생 감액률 현황",
-            "headers": ["조기 수령 신청 나이", "조기 수령 기간", "평생 감액률", "정규 수령 대비 지급 비율"],
-            "rows": [
-                ["만 60세", "5년 조기", "30% 감액 (연 6% × 5년)", "원래 연금액의 70% 평생 지급"],
-                ["만 61세", "4년 조기", "24% 감액 (연 6% × 4년)", "원래 연금액의 76% 평생 지급"],
-                ["만 62세", "3년 조기", "18% 감액 (연 6% × 3년)", "원래 연금액의 82% 평생 지급"],
-                ["만 65세 (정규)", "정규 수급", "0% 감액", "원래 연금액의 100% 전액 지급"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 손익분기점 시뮬레이션: 정규 수급액 월 100만원 기준",
-            "body": "• 5년 조기수령(만 60세): 월 70만원씩 5년간 먼저 수령하여 만 65세 시점에 이미 4,200만원(70만×60개월)의 목돈을 확보합니다.\n• 정규 수급(만 65세): 만 65세부터 매월 100만원을 받으므로 조기수령자보다 매월 30만원씩 더 많이 받습니다.\n• 결론(손익분기점 나이): 약 만 76.6세가 손익분기점입니다. 즉, 77세 이전에 사망할 경우 조기수령이 유리하고, 77세 이상 장수할 경우 정규 수령이 총 수령액 면에서 유리합니다."
-        },
-        "faqs": [
-            ("Q. 조기연금을 받다가 나중에 취업해서 소득이 생기면 어떻게 되나요?",
-             "월 소득이 국민연금 A값(약 300만원 수준)을 초과하는 소득 활동을 하게 되면 해당 기간 동안 조기연금 지급이 정지됩니다."),
-            ("Q. 조기수령을 하면 건강보험 피부양자 자격을 지키는 데 도움이 되나요?",
-             "네, 국민연금 연간 수령액이 2,000만원을 초과하면 피부양자에서 전격 박탈되는데, 조기수령으로 연금액을 2,000만원 이하로 조절하여 피부양자 자격을 방어하는 절세 전략으로 활용되기도 합니다.")
-        ]
-    },
-    {
-        "slug": "blog-didimdol-loan-room-deduction",
-        "title": "수도권 디딤돌 대출 방공제 의무화 규제 분석: 대출 한도 5,500만원 축소 실전 방어법",
-        "desc": "국토교통부 수도권 정책모기지 긴급 규제 완벽 해설! 소액임차보증금(방공제) 5,500만원 필수 차감으로 축소된 실제 주택구입 잔금 대출 한도 계산법과 모기지신용보증(MCG) 배제 시 자금 조달 실전 대안.",
-        "cat": "realestate",
-        "catName": "부동산·주거",
-        "badge": "특보",
-        "readTime": "약 6분",
-        "calcLink": "real-loan.html",
-        "calcName": "버팀목·디딤돌 대출 비교 계산기",
-        "table": {
-            "title": "수도권 디딤돌 대출 방공제 적용 전후 한도 비교",
-            "headers": ["구분", "규제 적용 전", "규제 적용 후 (현재)"],
-            "rows": [
-                ["소액임차보증금 (방공제)", "MCG 가입으로 방공제 면제 (0원)", "서울 5,500만원 / 수도권 과밀 4,800만원 필수 차감"],
-                ["생애최초 LTV 80% 대출 한도", "주택가격 5억원 기준 최대 3억원 한도", "최대 한도에서 방공제 5,500만원 차감되어 약 2.45억원 수령"],
-                ["실제 수분양자 필요 현금", "계약금 10% + 취득세 등 약 5천만원", "방공제 축소분 5,500만원 추가로 총 1.05억원 이상 현금 필요"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 자금 계획 시뮬레이션: 서울 5억원 아파트 매수 시",
-            "body": "• 기존: LTV 70% 적용 시 3.5억원 산출 한도 전액을 디딤돌 저금리(2%대)로 조달 가능.\n• 현재: 3.5억원에서 서울 최우선변제금 5,500만원이 공제되어 2억 9,500만원까지만 디딤돌이 나옵니다. 부족한 5,500만원은 2금융권이나 신용대출(고금리)로 메워야 하므로 계약 전 반드시 DSR과 추가 자금 계획을 점검해야 합니다."
-        },
-        "faqs": [
-            ("Q. 지방 주택이나 비수도권 아파트도 방공제 차감이 의무화되나요?",
-             "아닙니다. 국토교통부 지침에 따라 비수도권(지방 광역시 및 시·군 지역) 주택은 가계대출 관리 강화 대상에서 제외되어 기존처럼 MCG 가입을 통한 방공제 면제가 가능합니다."),
-            ("Q. 신생아 특례 디딤돌 대출도 이번 규제에 포함되나요?",
-             "저출생 대책의 일환으로 신생아 특례 디딤돌 대출은 방공제 의무화 규제 대상에서 전격 제외되어 기존 혜택 한도를 그대로 누릴 수 있습니다.")
-        ]
-    },
-    {
-        "slug": "blog-health-insurance-dependent-criteria",
-        "title": "은퇴하고 연금 월 170만 원 받다가 건보료 폭탄 맞았다? 피부양자 자격 철통 방어하는 2,000만 원의 비밀",
-        "desc": "은퇴자 및 프리랜서 필수 체크! 건강보험 피부양자 자격 박탈 기준인 연간 합산소득 2,000만원 초과 요건, 재산세 과세표준 5.4억원·9억원 룰과 지역가입자 전환 시 월 수십만원 건보료 폭탄 방어법.",
-        "cat": "salary",
-        "catName": "급여·세무",
-        "badge": "주의",
-        "readTime": "약 8분",
-        "calcLink": "salary.html",
-        "calcName": "2026 4대보험 & 실수령액 계산기",
-        "easy_story": "직장 다니는 아들·딸 밑으로 건강보험을 얹어두고 계시던 부모님들이 매년 11월~12월이 되면 공단에서 날아오는 안내문 한 장에 깜짝 놀라시곤 합니다. '연소득 2,000만 원을 단 1만 원 초과해서 지역가입자로 전환됩니다'라는 청천벽력 같은 통보 때문이죠. 쉽게 말해, 그동안 건강보험료 0원 내다가 갑자기 집과 자동차 점수까지 합산되어 매달 25~30만 원씩 쌩돈이 나가게 된다는 뜻입니다. 하지만 미리 몇 가지 기준만 알면 합법적으로 피부양자 자격을 지키거나 건보료를 대폭 줄일 수 있습니다.",
-        "table": {
-            "title": "건강보험 피부양자 인정 소득 및 재산 기준 요건",
-            "headers": ["평가 항목", "피부양자 유지 기준 (합격)", "피부양자 즉시 탈락 (불합격)"],
-            "rows": [
-                ["연간 금융·연금·사업 소득", "연 합산소득 2,000만 원 이하", "연 합산소득 2,000만 원 초과 (1원이라도 넘으면 탈락)"],
-                ["사업자등록 있는 사업소득", "사업소득 0원 (단 1원의 소득도 없어야 함)", "사업소득금액 1원 이상 발생 시 즉시 탈락"],
-                ["재산세 과세표준 (주택·토지)", "재산 과표 5.4억 원 이하 (소득 2천만 이하)", "재산 과표 5.4억 초과 ~ 9억 이하이면서 소득 1천만 초과 시 탈락"],
-                ["초고가 재산 보유자", "재산 과표 9억 원 이하", "소득과 무관하게 재산 과표 9억 원(시세 약 18억) 초과 시 무조건 탈락"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 탈락 방어 시뮬레이션: 국민연금 월 170만원 수급자",
-            "body": "• 위험 상태: 국민연금을 월 170만원(연 2,040만원) 받으면 연소득 2,000만원을 40만원 초과하여 직장 다니는 자녀의 피부양자에서 전격 박탈됩니다.\n• 방어 대책: 공적연금 수령 개시 전 조기수령(감액 신청)을 통해 연금액을 연 2,000만원 이하로 세팅하거나, 지역가입자 전환 시 '임의계속가입제도'를 신청하여 최장 36개월간 직장보험료 수준으로 건보료를 방어할 수 있습니다."
-        },
-        "faqs": [
-            ("Q. 주택임대사업자 등록을 하면 피부양자 자격이 유지되나요?",
-             "등록 주택임대사업자는 사업소득금액이 연 1,000만원 이하인 경우에 한해 일정한 감면 혜택이 적용되지만, 기본적으로 사업자등록 후 소득 발생 시 피부양자 유지가 매우 까다롭습니다."),
-            ("Q. 피부양자에서 탈락하면 언제부터 지역 건보료 고지서가 나오나요?",
-             "국세청 소득자료가 공단에 통보되는 매년 11월에 피부양자 자격 변동 심사가 진행되며, 12월 10일경 최초의 지역건보료 고지서가 발송됩니다.")
-        ]
-    },
-    {
-        "slug": "blog-cheongyak-dream-2026",
-        "title": "은행 이자만 4.5%에 내 집 대출까지 2.2%로 깎아준다고? 기존 청약통장 그대로 갈아타는 청년 치트키",
-        "desc": "청년 무주택자 필수! 최대 4.5% 고금리 청년 주택드림 청약통장 가입 자격(만 19~34세, 연소득 5천만 이하)과 청약 당첨 시 최저 2.2% 금리로 분양가 80%까지 지원하는 드림대출 연계 공식 총정리.",
-        "cat": "realestate",
-        "catName": "부동산·주거",
-        "badge": "청년",
-        "readTime": "약 8분",
-        "calcLink": "tax-housing-subscription-points.html",
-        "calcName": "청약 가점 계산기",
-        "easy_story": "사회초년생 때 부모님 권유로 만든 주택청약통장. 매달 꼬박꼬박 돈을 넣고는 있는데 이자는 겨우 2%대라 아쉽고, '이걸로 평생 내 집 당첨이나 될까?' 싶었던 적 많으실 겁니다. 쉽게 설명해 드리면 '청년 주택드림 청약통장'은 국가가 2030 청년들 내 집 마련하라고 작정하고 만든 슈퍼 통장입니다. 기존에 모았던 통장 납입 횟수와 가입 기간은 100% 그대로 유지한 채, 금리만 연 최대 4.5%로 높여주고 나중에 아파트에 당첨되면 집값의 80%를 연 2.2% 초저금리로 빌려주는 말 그대로 1+1 혜택입니다.",
-        "table": {
-            "title": "청년 주택드림 청약통장 vs 기존 주택청약종합저축 비교",
-            "headers": ["구분", "기존 주택청약종합저축", "청년 주택드림 청약통장"],
-            "rows": [
-                ["최고 이자율", "연 2.8% ~ 3.1%", "최대 연 4.5% 우대금리 제공"],
-                ["월 납입 한도", "월 최대 50만 원", "월 최대 100만 원까지 납입 가능"],
-                ["비과세 및 소득공제", "연 300만원 한도 40% 소득공제", "이자소득 500만원 비과세 + 연 300만원 소득공제"],
-                ["전용 연계 대출", "없음 (일반 주택담보대출 이용)", "최저 연 2.2% 청년주택드림대출 연계 (분양가 80% 한도)"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 청약 및 대출 시뮬레이션: 분양가 6억원 아파트 당첨 시",
-            "body": "• 청년 주택드림 통장 가입 1년 이상, 1,000만원 이상 납입 후 청약 당첨 시 전용 대출 적용 가능.\n• 분양가 6억원의 80%인 최대 4.8억원을 최저 2.2% 금리로 조달 가능하여, 시중 은행 주담대(4%대) 대비 매달 약 70만 원, 1년에 800만 원 이상의 이자 비용을 아낄 수 있습니다."
-        },
-        "faqs": [
-            ("Q. 기존 일반 청약통장 가입자도 청년 주택드림으로 전환할 수 있나요?",
-             "네, 소득 및 연령 요건을 충족하면 기존 가입 은행에서 '전환 신규'를 신청할 수 있으며, 기존 통장의 납입 회차와 인정 순위가 100% 그대로 승계됩니다."),
-            ("Q. 청년 주택드림 대출은 어떤 주택에 적용되나요?",
-             "분양가 6억원 이하, 전용면적 85㎡ 이하의 신규 분양 주택에 적용되며, 당첨 후 입주 시점에 대출이 실행됩니다.")
-        ]
-    },
-    {
-        "slug": "blog-freelancer-tax-saving-strategy",
-        "title": "프리랜서 3.3% 떼인 내 돈, 5월에 100만 원씩 토해낸다면? 장부 하나로 세금 폭탄 피하고 환급받는 비법",
-        "desc": "3.3% 원천징수 프리랜서 및 N잡러 필수! 직전연도 수입 2,400만원·3,600만원 기준 단순경비율과 기준경비율 판정 기준, 간편장부 작성으로 가산세 피하고 3.3% 뗀 세금 100% 환급받는 실전 노하우.",
-        "cat": "salary",
-        "catName": "급여·세무",
-        "badge": "절세",
-        "readTime": "약 8분",
-        "calcLink": "subsidy-freelancer-3-3-refund.html",
-        "calcName": "3.3% 프리랜서 환급 계산기",
-        "easy_story": "프리랜서나 아르바이트, N잡러로 일하다 보면 돈을 받을 때마다 무조건 3.3%를 떼고 받게 됩니다. '이미 세금을 다 뗐으니 5월에 할 게 없겠지'라고 생각하기 쉽지만, 오히려 그 반대로 내가 쓴 경비를 제대로 인정받지 못하면 5월에 세금을 수십만 원씩 더 내야 하는 상황이 벌어집니다. 쉽게 말씀드리면, 단순경비율과 기준경비율의 차이만 정확히 알고 영수증 몇 장만 잘 챙겨두면 남들 세금 낼 때 오히려 3.3% 떼였던 돈을 고스란히 통장으로 돌려받을 수 있습니다.",
-        "table": {
-            "title": "프리랜서 종합소득세 신고 유형별 경비 인정 기준",
-            "headers": ["신고 유형", "직전연도 수입 기준", "경비 인정 방식 및 장부 의무"],
-            "rows": [
-                ["단순경비율 (F/G유형)", "2,400만 원 미만 (당해연도 7,500만 미만)", "증빙 서류 없이도 수입의 60~70%를 경비로 일괄 인정 (대부분 환급)"],
-                ["기준경비율 (D유형)", "2,400만 원 이상 ~ 7,500만 원 미만", "주요 경비(임차료·인건비 등)는 적격증빙 필수, 기본 경비만 소액 인정"],
-                ["간편장부 대상자", "7,500만 원 미만", "가계부 형태의 간편장부를 작성하면 기준경비율 폭탄을 피하고 합법 절세 가능"]
-            ]
-        },
-        "simulation": {
-            "title": "실전 환급 시뮬레이션: 연 수입 3,000만원 프리랜서 A씨",
-            "body": "• 단순 추계 신고 시: 기준경비율(약 15%)만 적용되어 소득금액이 높게 잡혀 수십만 원의 세금을 추가 납부해야 하는 '세금 폭탄' 발생.\n• 간편장부 기장 신고 시: 업무용 통신비, 장비 구입비, 식대, 교통비 등 실제 지출 경비 1,800만 원(60%)을 장부에 반영하여 기납부 3.3% 세금 99만 원 중 약 60~80만 원을 전액 환급받을 수 있습니다."
-        },
-        "faqs": [
-            ("Q. 5월 종합소득세를 신고하지 않고 그냥 넘어가면 어떻게 되나요?",
-             "기납부된 3.3% 세금을 환급받지 못할 뿐만 아니라, 추가 납부 세액이 있는 경우 무신고가산세(20%)와 납부지연가산세(하루 0.022%)가 부과되고 건강보험료가 크게 오를 수 있습니다."),
-            ("Q. 직장인이 부업으로 3.3% 프리랜서 소득이 있는 경우 어떻게 신고하나요?",
-             "직장에서 진행한 연말정산 지급명세서와 3.3% 사업소득 원천징수영수증을 합산하여 5월 종합소득세 정기 신고 기간에 합산 신고해야 과소신고 가산세를 피할 수 있습니다.")
-        ]
-    }
+BASE_DIR = os.path.dirname(SCRIPT_DIR)
+HTML_DIR = BASE_DIR
+KST = datetime.timezone(datetime.timedelta(hours=9))
+
+from topics_catalog import TOPIC_CATALOG
+
+ALLOWED_CALCULATORS = [
+    ("salary.html", "2026 연봉 실수령액·연말정산 계산기"),
+    ("savings.html", "예·적금 & 절세 만기 비교 계산기"),
+    ("gov-finder.html", "나에게 맞는 2026 정부지원금 찾기"),
+    ("gov-rent.html", "청년월세 지원 및 공제 조회기"),
+    ("gov-parent.html", "부모급여 & 아동수당 계산기"),
+    ("gov-subsidy.html", "2026 근로·자녀장려금 즉시 계산기"),
+    ("real-estate.html", "부동산 취득세·중개보수 계산기"),
+    ("severance.html", "퇴직금·실업급여 간편 계산기"),
+    ("unemployment.html", "2026 실업급여 모의 계산기"),
+    ("hourly-wage.html", "최저시급·주휴수당 알바 급여 계산기"),
+    ("youth-leap.html", "청년도약계좌 만기 수령액 계산기"),
+    ("tax-housing-subscription-points.html", "청약 가점제 84점 만점 계산기"),
+    ("subsidy-freelancer-3-3-refund.html", "프리랜서 3.3% 세금 환급 조회기"),
+    ("subsidy-national-pension-calc.html", "국민연금 예상 수령액 계산기"),
+    ("subsidy-health-skin-dependent.html", "건강보험 피부양자 자격 조회기"),
+    ("subsidy-deposit-tax-isa.html", "ISA 만기 비과세·절세 비교 계산기"),
+    ("subsidy-overseas-stock-tax.html", "해외주식 양도소득세 계산기"),
+    ("subsidy-k-pass-transport-2026.html", "K-패스 대중교통 환급액 계산기"),
+    ("subsidy-energy-voucher-2026.html", "에너지바우처 지원금액 조회기"),
+    ("subsidy-gift-tax-deduction.html", "증여세 면제 한도 및 세율 계산기"),
+    ("tax-jeonse-protection-3law.html", "전세보증금 안전 진단·임대차 계산기"),
 ]
 
-def render_article_html(topic, today_str):
+# Highlight rules (Cool Blue for money/rates, Rose for risk/urgency; zero amber/yellow)
+_HIGHLIGHT_PATTERN = re.compile(
+    r"(?P<danger>(?<![가-힣])(?:즉시\s*탈락|전액\s*불가|세금\s*폭탄|건보료\s*폭탄|추징\s*폭탄|즉시\s*박탈|이중\s*과세|1원도|토해[내는낼내]|0원|세금\s*면제|전액\s*비과세|전액\s*공제))|"
+    r"(?P<metric>(?<![가-힣0-9a-zA-Z])(?:(?:최대\s*|최소\s*|연\s*|월\s*)?(?:\d{1,3}(?:,\d{3})*(?:\.\d+)?|\d+)\s*(?:억(?:\s*\d{1,4}\s*만)?|만(?:\s*\d{1,4})?)\s*원|(?:최대\s*|월\s*|연\s*)?\d{1,3}(?:,\d{3})+\s*원|\d{1,2}\s*원|\d{1,3}(?:\.\d+)?%|\d+(?:\.\d+)?배))"
+)
+
+
+def strip_emojis(text):
+    """Remove colored emojis/pictographs to comply with crisp monochrome editorial rules."""
+    if not text:
+        return ""
+    return re.sub(r"[\U0001F300-\U0001FAFF\u2600-\u27BF\uFE0F]", "", str(text)).strip()
+
+
+def sanitize_text(text):
+    """Sanitize forbidden color tokens (amber / #FEE500) and colored emojis."""
+    cleaned = strip_emojis(text)
+    cleaned = re.sub(r"amber", "포인트", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"#fee500", "#EFF6FF", cleaned, flags=re.IGNORECASE)
+    return cleaned
+
+
+def highlight_inline(text, variant="body"):
+    """Highlight key numeric figures and urgency phrases cleanly inside visible HTML text nodes."""
+    text = sanitize_text(text)
+    parts = re.split(r"(<[^>]+>)", text)
+
+    def _replace_match(m):
+        if m.group("danger"):
+            tok = m.group("danger")
+            if variant == "h1":
+                return f'<span class="text-rose-600">{tok}</span>'
+            return f'<span class="px-1 py-0.5 rounded bg-rose-50 text-rose-700 font-extrabold">{tok}</span>'
+        tok = m.group("metric")
+        if variant == "h1":
+            return f'<span class="text-blue-600 underline decoration-blue-200 decoration-4 underline-offset-4">{tok}</span>'
+        return f'<span class="px-1 py-0.5 rounded bg-blue-50 text-blue-700 font-extrabold">{tok}</span>'
+
+    in_anchor = False
+    out = []
+    for part in parts:
+        if not part:
+            continue
+        if part.startswith("<"):
+            lower = part.lower()
+            if lower.startswith("<a "):
+                in_anchor = True
+            elif lower.startswith("</a"):
+                in_anchor = False
+            out.append(part)
+        else:
+            if in_anchor:
+                out.append(part)
+            else:
+                out.append(_HIGHLIGHT_PATTERN.sub(_replace_match, part))
+    return "".join(out)
+
+
+def get_week_label(kst_date):
+    """Return Korean month-week label like '2026년 11월 2주차'."""
+    week_num = (kst_date.day - 1) // 7 + 1
+    return f"{kst_date.year}년 {kst_date.month}월 {week_num}주차"
+
+
+def fetch_weekly_policy_news(limit=12):
+    """Fetch recent 7-day Korean finance/policy/welfare headlines via Google News RSS."""
+    queries = [
+        "정부지원금 OR 복지정책 OR 연말정산 OR 세금개편 when:7d",
+        "국민연금 OR 건강보험료 OR 청약 OR 전월세 OR 실업급여 when:7d",
+        "최저임금 OR 근로장려금 OR 적금 OR 금리 OR 개인투자 when:7d",
+    ]
+    blocked_terms = ("야구", "축구", "연예", "드라마", "아이돌", "결별", "열애", "음주운전")
+    seen_keys = set()
+    collected = []
+
+    for q in queries:
+        encoded_q = urllib.parse.quote(q)
+        url = f"https://news.google.com/rss/search?q={encoded_q}&hl=ko&gl=KR&ceid=KR:ko"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                xml_bytes = resp.read()
+            root = ET.fromstring(xml_bytes)
+            for item in root.findall("./channel/item")[:10]:
+                raw_title = (item.findtext("title") or "").strip()
+                if not raw_title:
+                    continue
+                if " - " in raw_title:
+                    title_part, source_part = raw_title.rsplit(" - ", 1)
+                else:
+                    title_part, source_part = raw_title, "정책·경제 뉴스"
+                title_part = sanitize_text(title_part)
+                source_part = sanitize_text(source_part)
+                if len(title_part) < 10 or any(b in title_part for b in blocked_terms):
+                    continue
+                norm_key = re.sub(r"[^가-힣a-zA-Z0-9]", "", title_part)[:18]
+                if norm_key in seen_keys:
+                    continue
+                seen_keys.add(norm_key)
+                collected.append({
+                    "title": title_part,
+                    "source": source_part,
+                    "pubDate": (item.findtext("pubDate") or "").strip(),
+                })
+                if len(collected) >= limit:
+                    return collected
+        except Exception as exc:
+            print(f"[Info] Weekly RSS fetch skipped for query ({exc})")
+            continue
+    return collected
+
+
+def ensure_valid_calc_link(calc_link):
+    """Guarantee calc_link points to an existing calculator page inside HTML_DIR."""
+    valid_set = {fname for fname, _ in ALLOWED_CALCULATORS if os.path.exists(os.path.join(HTML_DIR, fname))}
+    if calc_link in valid_set:
+        return calc_link
+    if calc_link and os.path.exists(os.path.join(HTML_DIR, calc_link)):
+        return calc_link
+    return "gov-finder.html"
+
+
+def validate_topic_dict(topic):
+    """Verify a topic dictionary matches the full 3-stage WE ZIP blog schema."""
+    if not isinstance(topic, dict):
+        return False, "topic is not a dict"
+    required_str = ("slug", "title", "desc", "cat", "catName", "badge", "readTime", "calcLink", "calcName",
+                    "hook_title", "hook_p1", "hook_p2", "editor_tip")
+    for key in required_str:
+        val = topic.get(key)
+        if not isinstance(val, str) or not val.strip():
+            return False, f"missing or empty field: {key}"
+    if not re.match(r"^blog-[a-z0-9-]+$", topic["slug"]):
+        return False, f"invalid slug format: {topic['slug']}"
+    if not isinstance(topic.get("part1_easy"), list) or len(topic["part1_easy"]) < 2:
+        return False, "part1_easy must have at least 2 sections"
+    table = topic.get("table")
+    if not isinstance(table, dict) or not table.get("headers") or len(table.get("rows", [])) < 2:
+        return False, "table must have headers and at least 2 rows"
+    sim = topic.get("simulation")
+    if not isinstance(sim, dict) or not sim.get("title") or not sim.get("body"):
+        return False, "simulation missing title or body"
+    if not isinstance(topic.get("traps"), list) or len(topic["traps"]) < 3:
+        return False, "traps must have at least 3 entries"
+    if not isinstance(topic.get("faqs"), list) or len(topic["faqs"]) < 2:
+        return False, "faqs must have at least 2 entries"
+    return True, "ok"
+
+
+def get_existing_article_titles():
+    """Read existing titles from blog.html ARTICLES array so generated posts never duplicate topics."""
+    blog_path = os.path.join(HTML_DIR, "blog.html")
+    if not os.path.exists(blog_path):
+        return []
+    with open(blog_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    return re.findall(r'title:\s*"([^"]+)"', content)
+
+
+def maybe_generate_topic_with_gemini(news_items, today_kst):
+    """If GEMINI_API_KEY is set, generate a brand-new timely article based on this week's live news."""
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not api_key or not news_items:
+        return None, []
+
+    existing_titles = get_existing_article_titles()[:40]
+    headlines_str = "\n".join(f"- {n['title']} ({n['source']})" for n in news_items[:8])
+    calc_choices_str = "\n".join(f"- {fname}: {cname}" for fname, cname in ALLOWED_CALCULATORS)
+    existing_str = "\n".join(f"- {t}" for t in existing_titles[:25])
+
+    prompt = f"""당신은 대한민국 생활금융 포털 '위집(WE ZIP)'의 수석 경제·정책 블로거입니다.
+오늘은 {today_kst.isoformat()} ({get_week_label(today_kst)})입니다.
+
+[이번 주 실시간 주요 정책·경제 뉴스]
+{headlines_str}
+
+[이미 발행된 최신 칼럼 제목 목록 (절대 중복 금지)]
+{existing_str}
+
+[연동 가능한 위집 계산기 목록]
+{calc_choices_str}
+
+[작성 절대 수칙]
+1. 위 실시간 뉴스 중 독자의 지갑(월급, 세금, 지원금, 부동산, 연금, 생활비)에 가장 직결되는 핫한 주제 1건을 선정해 새로운 장문 블로그 칼럼을 작성하세요.
+2. AI 티를 완전히 배제하고 이모지를 절대 쓰지 마세요. (amber/노란색 단어 사용 금지)
+3. 제목(title)은 보도자료식 딱딱한 문체 대신, 쉬운 일상어와 자극적인 구체적 숫자·금액, 궁금증을 유발하는 후킹 제목으로 작성하세요.
+4. 1부(part1_easy)는 어려운 법률·세무 용어를 싹 빼고 중학생도 이해할 수 있는 쉬운 블로그형 말투로 작성하세요.
+5. 2부(table + simulation)는 한눈에 들어오는 비교 표와 가상 인물의 1원 단위 구체적 금액 계산 예시를 담으세요.
+6. 3부(traps + faqs)는 현장에서 90%가 놓치는 실수 함정 4가지와 실전 질문·답변 3가지를 작성하세요.
+7. 반드시 아래 순수 JSON 객체 하나만 반환하세요(마크다운 코드블록 없이 JSON만):
+{{
+  "slug": "blog-영문소문자-하이픈-슬러그-2026",
+  "title": "후킹 제목",
+  "desc": "120자 내외 메타 설명",
+  "cat": "salary 또는 realestate 또는 welfare 또는 finance 중 1개",
+  "catName": "급여·세무 또는 부동산·주거 또는 복지·지원금 또는 금융·저축 중 1개",
+  "badge": "4~6글자 뱃지 (예: 11월속보, 절세필독)",
+  "readTime": "약 7분",
+  "calcLink": "연동 계산기 파일명",
+  "calcName": "연동 계산기 이름",
+  "keywords": ["핵심키워드1", "핵심키워드2", "핵심키워드3"],
+  "hook_title": "도입부 박스 소제목",
+  "hook_p1": "공감 스토리 첫 문단 (3~4문장)",
+  "hook_p2": "궁금증 해소 및 핵심 요약 두 번째 문단 (3~4문장)",
+  "editor_tip": "편집국 실전 핵심 조언 1~2문장",
+  "part1_easy": [["1. 쉬운 질문형 소제목", "친근한 해설"], ["2. 두 번째 소제목", "친근한 해설"]],
+  "table": {{"title": "표 제목", "headers": ["구분", "대상/기준", "핵심 혜택/금액"], "rows": [["행1", "값", "값"], ["행2", "값", "값"], ["행3", "값", "값"]]}},
+  "simulation": {{"title": "실전 계산: 구체적 가상 인물 사례", "body": "• 상황: ...\\n• 비교: ...\\n• 결과: ..."}},
+  "traps": [["1. 함정1 제목", "설명"], ["2. 함정2 제목", "설명"], ["3. 함정3 제목", "설명"], ["4. 함정4 제목", "설명"]],
+  "faqs": [["Q. 질문1?", "답변1"], ["Q. 질문2?", "답변2"], ["Q. 질문3?", "답변3"]]
+}}"""
+
+    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+    payload = json.dumps({
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.6, "responseMimeType": "application/json"},
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        endpoint,
+        data=payload,
+        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=35) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        text_out = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+        text_out = re.sub(r"^```json\s*|\s*```$", "", text_out).strip()
+        topic = json.loads(text_out)
+        topic["calcLink"] = ensure_valid_calc_link(topic.get("calcLink", "gov-finder.html"))
+        if os.path.exists(os.path.join(HTML_DIR, f"{topic.get('slug', '')}.html")):
+            topic["slug"] = f"{topic['slug']}-{today_kst.strftime('%m%d')}"
+        ok, reason = validate_topic_dict(topic)
+        if not ok:
+            print(f"[Warn] Gemini output skipped ({reason}), using curated news-matched catalog.")
+            return None, []
+        matched = [n for n in news_items if any(kw in n["title"] for kw in topic.get("keywords", []))]
+        return topic, (matched[:3] if matched else news_items[:3])
+    except Exception as exc:
+        print(f"[Info] Gemini dynamic generation unavailable ({exc}), falling back to catalog.")
+        return None, []
+
+
+def select_best_catalog_topic(news_items, today_kst):
+    """Pick unpublished catalog topic with strongest score from live weekly news + current month."""
+    unpublished = [
+        t for t in TOPIC_CATALOG
+        if not os.path.exists(os.path.join(HTML_DIR, f"{t['slug']}.html"))
+    ]
+    if not unpublished:
+        return None, []
+
+    best_topic = None
+    best_score = -1
+    best_matched = []
+    cur_month = today_kst.month
+
+    for idx, topic in enumerate(unpublished):
+        keywords = topic.get("keywords", [])
+        matched = [n for n in news_items if any(kw in n["title"] for kw in keywords)]
+        score = len(matched) * 5
+        if cur_month in topic.get("best_months", []):
+            score += 4
+        if f"{cur_month}월" in topic.get("badge", "") or f"{cur_month}월" in topic.get("title", ""):
+            score += 3
+        # Slight tie-breaker favoring catalog priority order
+        total_rank = (score, -idx)
+        if best_topic is None or total_rank > best_score:
+            best_topic = topic
+            best_score = total_rank
+            best_matched = matched
+
+    display_news = best_matched[:3] if best_matched else news_items[:3]
+    return best_topic, display_news
+
+
+def render_table_html(table_data):
+    """Render clean responsive comparison table with highlighted final outcome column."""
+    headers = table_data.get("headers", [])
+    rows = table_data.get("rows", [])
+    th_parts = []
+    for idx, h_text in enumerate(headers):
+        cls = "p-3 font-bold text-blue-600" if idx == len(headers) - 1 else "p-3"
+        th_parts.append(f'<th class="{cls}">{html.escape(sanitize_text(h_text))}</th>')
+    headers_html = "".join(th_parts)
+
+    rows_parts = []
+    for row in rows:
+        cells = []
+        for idx, cell in enumerate(row):
+            safe_cell = highlight_inline(sanitize_text(str(cell)))
+            if idx == 0:
+                cells.append(f'<td class="p-3 font-bold text-slate-900">{safe_cell}</td>')
+            elif idx == len(row) - 1:
+                cells.append(f'<td class="p-3 font-extrabold text-blue-600">{safe_cell}</td>')
+            else:
+                cells.append(f'<td class="p-3 text-slate-700">{safe_cell}</td>')
+        rows_parts.append(f'<tr class="hover:bg-slate-50 transition">{"".join(cells)}</tr>')
+
+    return headers_html, "\n".join(rows_parts)
+
+
+def render_article_html(topic, today_str, matched_news=None, week_label=""):
+    """Render a full 3-stage WE ZIP article HTML page passing all structural checks."""
+    title = sanitize_text(topic["title"])
+    desc = sanitize_text(topic["desc"])
+    cat_name = sanitize_text(topic["catName"])
+    badge = sanitize_text(topic.get("badge", "필독"))
+    read_time = sanitize_text(topic["readTime"])
     filename = f"{topic['slug']}.html"
-    title = topic['title']
-    desc = topic['desc']
-    cat = topic['cat']
-    cat_name = topic['catName']
-    read_time = topic['readTime']
-    calc_link = topic['calcLink']
-    calc_name = topic['calcName']
-    tbl = topic['table']
-    sim = topic['simulation']
-    faqs = topic['faqs']
+    calc_link = ensure_valid_calc_link(topic["calcLink"])
+    calc_name = sanitize_text(topic["calcName"])
 
-    # Table rows
-    table_headers_html = "".join([f'<th class="p-3 border border-slate-200 font-bold">{h}</th>' for h in tbl['headers']])
-    table_rows_html = ""
-    for r in tbl['rows']:
-        row_tds = "".join([f'<td class="p-3 border border-slate-200">{td}</td>' for td in r])
-        table_rows_html += f'<tr class="hover:bg-slate-50">{row_tds}</tr>\n'
+    meta_title = html.escape(title, quote=True)
+    meta_desc = html.escape(desc, quote=True)
+    json_title = json.dumps(title, ensure_ascii=False)
+    json_desc = json.dumps(desc, ensure_ascii=False)
 
-    # FAQ HTML
-    faq_html = ""
+    # Weekly policy briefing box (live RSS context)
+    weekly_news_html = ""
+    if matched_news:
+        news_li = []
+        for item in matched_news[:3]:
+            n_title = html.escape(sanitize_text(item["title"]))
+            n_src = html.escape(sanitize_text(item.get("source", "경제·정책 보도")))
+            news_li.append(
+                f'<li class="flex items-start gap-2">'
+                f'<span class="text-blue-600 font-black shrink-0">&bull;</span>'
+                f'<span><strong class="text-slate-900">{n_title}</strong> '
+                f'<span class="text-slate-400 text-xs">({n_src})</span></span>'
+                f'</li>'
+            )
+        news_ul = "\n                        ".join(news_li)
+        w_label = html.escape(week_label or f"{today_str[:7]} 주요 정책 브리핑")
+        weekly_news_html = f"""
+                <!-- [이번 주 실시간 정책·뉴스 연동 브리핑] -->
+                <section class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3" aria-label="금주 정책 및 뉴스 브리핑">
+                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-[11px] font-bold">금주 이슈 연동</span>
+                            <span class="text-sm font-extrabold text-slate-900">{w_label} 최신 정책·금융 브리핑</span>
+                        </div>
+                        <span class="text-[11px] text-slate-500 font-medium">{today_str} 최신 보도 반영</span>
+                    </div>
+                    <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        {news_ul}
+                    </ul>
+                </section>"""
+
+    # Part 1: Easy storytelling explanations
+    part1_cards = []
+    for p_heading, p_body in topic["part1_easy"]:
+        part1_cards.append(
+            f'<div class="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">'
+            f'<h3 class="text-base sm:text-lg font-bold text-slate-900">{highlight_inline(p_heading)}</h3>'
+            f'<p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{highlight_inline(p_body)}</p>'
+            f'</div>'
+        )
+    part1_html = "\n                        ".join(part1_cards)
+
+    # Part 2: Comparison table & simulation
+    headers_html, table_rows_html = render_table_html(topic["table"])
+    sim = topic["simulation"]
+    sim_lines = [line.strip() for line in sanitize_text(sim["body"]).splitlines() if line.strip()]
+    sim_paras = []
+    for idx, line in enumerate(sim_lines):
+        if idx == len(sim_lines) - 1:
+            sim_paras.append(
+                f'<p class="pt-2 border-t border-slate-200 text-blue-900 font-extrabold text-sm sm:text-base">{highlight_inline(line)}</p>'
+            )
+        else:
+            sim_paras.append(f'<p>{highlight_inline(line)}</p>')
+    sim_body_html = "\n                        ".join(sim_paras)
+
+    # Part 3: 4 Traps
+    trap_cards = []
+    for t_title, t_body in topic["traps"]:
+        trap_cards.append(
+            f'<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">'
+            f'<div class="flex items-center gap-2">'
+            f'<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[11px] font-bold shrink-0">주의</span>'
+            f'<span class="font-bold text-slate-900 text-sm">{highlight_inline(t_title)}</span>'
+            f'</div>'
+            f'<p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{highlight_inline(t_body)}</p>'
+            f'</div>'
+        )
+    traps_html = "\n                        ".join(trap_cards)
+
+    # FAQs + FAQPage JSON-LD
+    faq_blocks = []
     faq_schema_items = []
-    for q, a in faqs:
-        faq_html += f'''<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                            <div class="font-bold text-slate-800 text-sm">{q}</div>
-                            <div class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">{a}</div>
-                        </div>'''
-        faq_schema_items.append(f'''{{
-          "@type": "Question",
-          "name": "{q}",
-          "acceptedAnswer": {{
-            "@type": "Answer",
-            "text": "{a}"
-          }}
-        }}''')
-
+    for q, a in topic["faqs"]:
+        q_clean = sanitize_text(q)
+        a_clean = sanitize_text(a)
+        faq_blocks.append(
+            f'<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">'
+            f'<div class="font-bold text-slate-800 text-sm">{html.escape(q_clean)}</div>'
+            f'<div class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">{highlight_inline(a_clean)}</div>'
+            f'</div>'
+        )
+        faq_schema_items.append(
+            f'{{\n          "@type": "Question",\n          "name": {json.dumps(q_clean, ensure_ascii=False)},\n'
+            f'          "acceptedAnswer": {{\n            "@type": "Answer",\n            "text": {json.dumps(a_clean, ensure_ascii=False)}\n          }}\n        }}'
+        )
+    faq_html = "\n                        ".join(faq_blocks)
     faq_schema_str = ",\n        ".join(faq_schema_items)
 
     html_content = f"""<!DOCTYPE html>
@@ -289,14 +477,14 @@ def render_article_html(topic, today_str):
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>{title} | 위집 (wezip)</title>
-    <meta name="description" content="{desc}">
+    <title>{meta_title} | 위집 (wezip)</title>
+    <meta name="description" content="{meta_desc}">
     <link rel="canonical" href="https://wezip.co.kr/{filename}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{title} | 위집">
-    <meta property="og:description" content="{desc}">
+    <meta property="og:title" content="{meta_title} | 위집">
+    <meta property="og:description" content="{meta_desc}">
     <meta property="og:url" content="https://wezip.co.kr/{filename}">
     <meta property="og:site_name" content="위집 (wezip)">
     <meta property="og:locale" content="ko_KR">
@@ -324,8 +512,8 @@ def render_article_html(topic, today_str):
     {{
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "{title}",
-      "description": "{desc}",
+      "headline": {json_title},
+      "description": {json_desc},
       "author": {{
         "@type": "Organization",
         "name": "위집 금융편집국",
@@ -413,89 +601,107 @@ def render_article_html(topic, today_str):
                 <span>&gt;</span>
                 <a href="blog.html" class="hover:text-blue-600 transition">금융 칼럼</a>
                 <span>&gt;</span>
-                <span class="text-slate-800 font-bold">{cat_name}</span>
+                <span class="text-slate-800 font-bold">{html.escape(cat_name)}</span>
             </nav>
 
             <header class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">{cat_name} 특보</span>
-                    <span class="text-xs text-slate-400">읽는 시간 {read_time} · {today_str}</span>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">{html.escape(cat_name)} {html.escape(badge)}</span>
+                    <span class="text-xs text-slate-400">읽는 시간 {html.escape(read_time)} · {today_str}</span>
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
-                    {title}
+                    {highlight_inline(title, variant="h1")}
                 </h1>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {desc}
+                    {highlight_inline(desc)}
                 </p>
 
                 <!-- 계산기 바로가기 배너 -->
                 <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
                     <div class="flex items-center gap-2 text-xs sm:text-sm text-blue-900 font-bold">
                         <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
-                        <span>내 실제 예상 금액을 1초 만에 무료로 직접 계산해 보세요!</span>
+                        <span>내 예상 금액과 자격을 지금 1초 만에 직접 계산해 보세요!</span>
                     </div>
                     <a href="{calc_link}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm shrink-0 text-center">
-                        {calc_name} 바로가기 &rarr;
+                        {html.escape(calc_name)} &rarr;
                     </a>
                 </div>
             </header>
 
             <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
-                <!-- [블로그형 스토리텔링 도입부 & 공감 해설] -->
+                <!-- [블로그형 스토리텔링 도입부 & 공감 해설 박스] -->
                 <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-5 sm:p-7 space-y-3.5 text-slate-700 text-sm sm:text-base leading-relaxed">
                     <div class="flex items-center gap-2 font-black text-slate-900 text-base sm:text-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
-                        <span>{title} 핵심 분석 및 실전 가이드</span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
+                        <span>{highlight_inline(topic["hook_title"])}</span>
                     </div>
                     <p class="font-medium text-slate-800 leading-relaxed">
-                        {topic.get('easy_story', desc)}
+                        {highlight_inline(topic["hook_p1"])}
                     </p>
-                    <div class="pt-2 border-t border-blue-100/80 flex items-center gap-2 text-xs font-bold text-blue-800">
-                        <span>* 위집 편집국 핵심 조언:</span>
-                        <span class="font-normal text-slate-600">본 칼럼의 세부 기준 및 모의 계산 결과는 관계 법령 개정에 맞춰 주기적으로 업데이트됩니다. 하단의 전용 계산기를 통해 본인의 실질 예상 금액을 직접 확인해 보세요.</span>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {highlight_inline(topic["hook_p2"])}
+                    </p>
+                    <div class="pt-2 border-t border-blue-100/80 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs font-bold text-blue-800">
+                        <span class="shrink-0">* 위집 편집국 핵심 조언:</span>
+                        <span class="font-normal text-slate-600">{highlight_inline(topic["editor_tip"])}</span>
                     </div>
                 </div>
+                {weekly_news_html}
 
+                <!-- [1단계: 초반부] 누구나 이해하는 쉬운 블로그식 원리 설명 -->
                 <section class="space-y-4">
-                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                        <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
-                        <span>1. {tbl['title']}</span>
+                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                        1. 초보자도 3분 만에 이해하는 핵심 원리
+                    </h2>
+                    <div class="space-y-3">
+                        {part1_html}
+                    </div>
+                </section>
+
+                <!-- [2단계: 중반부] 세부 비교 표 & 실전 1원 단위 시뮬레이션 -->
+                <section class="space-y-5 border-t border-slate-100 pt-6">
+                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                        2. {html.escape(sanitize_text(topic["table"]["title"]))}
                     </h2>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-xs sm:text-sm text-left border-collapse border border-slate-200">
-                            <thead>
-                                <tr class="bg-slate-100 text-slate-700 font-bold">
-                                    {table_headers_html}
-                                </tr>
+                        <table class="w-full text-xs sm:text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+                            <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                                <tr>{headers_html}</tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-200 text-slate-600 font-medium">
+                            <tbody class="divide-y divide-slate-200 font-medium">
                                 {table_rows_html}
                             </tbody>
                         </table>
                     </div>
-                </section>
 
-                <section class="space-y-4 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                        <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
-                        <span>2. {sim['title']}</span>
-                    </h2>
-                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 whitespace-pre-line font-medium">
-                        {sim['body']}
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 pt-2">{highlight_inline(sim["title"])}</h3>
+                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 font-medium">
+                        {sim_body_html}
                     </div>
                 </section>
 
+                <!-- [3단계: 후반부] 모르면 손해 보는 치명적 실수 함정 4가지 -->
+                <section class="space-y-4 border-t border-slate-100 pt-6">
+                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                        3. 모르면 손해 보는 치명적 실수 함정
+                    </h2>
+                    <div class="space-y-3">
+                        {traps_html}
+                    </div>
+                </section>
+
+                <!-- 자주 묻는 질문 (FAQ) -->
                 <section class="space-y-4 border-t border-slate-100 pt-6">
                     <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
                         <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
-                        <span>3. 자주 묻는 질문 (FAQ)</span>
+                        <span>자주 묻는 질문 (FAQ)</span>
                     </h2>
                     <div class="space-y-3">
                         {faq_html}
                     </div>
                 </section>
 
-                <!-- 관련 계산기 바로가기 배너 -->
+                <!-- 관련 계산기 하단 추천 배너 -->
                 <section class="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="space-y-1 text-center sm:text-left">
                         <div class="text-xs font-bold text-blue-600 uppercase tracking-wide">WE ZIP 실시간 계산기 연동</div>
@@ -503,7 +709,7 @@ def render_article_html(topic, today_str):
                         <p class="text-xs text-slate-600">2026년 최신 법정 기준이 100% 반영된 무료 시뮬레이터입니다.</p>
                     </div>
                     <a href="{calc_link}" class="w-full sm:w-auto py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl transition text-center shrink-0 shadow-sm">
-                        {calc_name} 바로가기 &rarr;
+                        {html.escape(calc_name)} 바로가기 &rarr;
                     </a>
                 </section>
             </article>
@@ -567,31 +773,47 @@ def render_article_html(topic, today_str):
 """
     return html_content
 
+
+def verify_rendered_html(slug, html_content):
+    """Run strict integrity assertions on rendered article HTML before saving."""
+    if "amber" in html_content.lower() or "#fee500" in html_content.lower():
+        raise AssertionError(f"[{slug}] Forbidden amber/#FEE500 token detected in rendered HTML")
+    if html_content.count("<div") != html_content.count("</div"):
+        raise AssertionError(f"[{slug}] Unbalanced <div> tags")
+    if html_content.count("<section") != html_content.count("</section"):
+        raise AssertionError(f"[{slug}] Unbalanced <section> tags")
+    for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html_content, flags=re.S):
+        json.loads(block.strip())
+
+
 def update_blog_html(topic, today_str):
     blog_path = os.path.join(HTML_DIR, "blog.html")
     with open(blog_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Find highest 'no' in ARTICLES
-    no_matches = [int(m) for m in re.findall(r'no:\s*(\d+)', content)]
-    next_no = max(no_matches) + 1 if no_matches else 47
-
-    date_formatted = today_str.replace("-", ".")
     filename = f"{topic['slug']}.html"
+    if f'link: "{filename}"' in content:
+        print(f"blog.html already contains {filename}; skipping insert.")
+        return
 
-    new_article_entry = f"""      {{
-        no: {next_no},
-        title: "{topic['title']}",
-        desc: "{topic['desc']}",
-        cat: "{topic['cat']}",
-        catName: "{topic['catName']}",
-        badge: "{topic['badge']}",
-        date: "{date_formatted}",
-        readTime: "{topic['readTime']}",
-        link: "{filename}"
-      }},"""
+    no_matches = [int(m) for m in re.findall(r"no:\s*(\d+)", content)]
+    next_no = max(no_matches) + 1 if no_matches else 52
+    date_formatted = today_str.replace("-", ".")
 
-    # Insert right after 'const ARTICLES = ['
+    new_article_entry = (
+        f"      {{\n"
+        f"        no: {next_no},\n"
+        f"        title: {json.dumps(sanitize_text(topic['title']), ensure_ascii=False)},\n"
+        f"        desc: {json.dumps(sanitize_text(topic['desc']), ensure_ascii=False)},\n"
+        f"        cat: {json.dumps(topic['cat'], ensure_ascii=False)},\n"
+        f"        catName: {json.dumps(sanitize_text(topic['catName']), ensure_ascii=False)},\n"
+        f"        badge: {json.dumps(sanitize_text(topic.get('badge', '필독')), ensure_ascii=False)},\n"
+        f"        date: \"{date_formatted}\",\n"
+        f"        readTime: {json.dumps(sanitize_text(topic['readTime']), ensure_ascii=False)},\n"
+        f"        link: \"{filename}\"\n"
+        f"      }},"
+    )
+
     articles_marker = "const ARTICLES = ["
     if articles_marker in content:
         content = content.replace(articles_marker, f"{articles_marker}\n{new_article_entry}", 1)
@@ -600,17 +822,20 @@ def update_blog_html(topic, today_str):
         f.write(content)
     print(f"Updated blog.html: Added article #{next_no} ({filename})")
 
+
 def update_sitemap(filename, today_str):
     sitemap_path = os.path.join(HTML_DIR, "sitemap.xml")
     with open(sitemap_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    new_url_entry = f"""    <url>
-        <loc>https://wezip.co.kr/{filename}</loc>
-        <lastmod>{today_str}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>"""
+    new_url_entry = (
+        f"    <url>\n"
+        f"        <loc>https://wezip.co.kr/{filename}</loc>\n"
+        f"        <lastmod>{today_str}</lastmod>\n"
+        f"        <changefreq>weekly</changefreq>\n"
+        f"        <priority>0.80</priority>\n"
+        f"    </url>"
+    )
 
     if f"<loc>https://wezip.co.kr/{filename}</loc>" not in content:
         content = content.replace("</urlset>", f"{new_url_entry}\n</urlset>")
@@ -618,74 +843,126 @@ def update_sitemap(filename, today_str):
             f.write(content)
         print(f"Updated sitemap.xml: Added {filename}")
 
-def update_rss(topic, today_str):
+
+def update_rss(topic):
     rss_path = os.path.join(HTML_DIR, "rss.xml")
     with open(rss_path, "r", encoding="utf-8") as f:
         content = f.read()
 
     filename = f"{topic['slug']}.html"
-    rfc822_date = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%a, %d %b %Y %H:%M:%S +0900")
+    rfc822_date = datetime.datetime.now(KST).strftime("%a, %d %b %Y %H:%M:%S +0900")
+    safe_title = html.escape(sanitize_text(topic["title"]), quote=False)
+    safe_desc = html.escape(sanitize_text(topic["desc"]), quote=False)
+    safe_cat = html.escape(sanitize_text(topic["catName"]), quote=False)
 
-    new_item = f"""    <item>
-      <title>{topic['title']}</title>
-      <link>https://wezip.co.kr/{filename}</link>
-      <guid>https://wezip.co.kr/{filename}</guid>
-      <description>{topic['desc']}</description>
-      <pubDate>{rfc822_date}</pubDate>
-      <category>{topic['catName']}</category>
-    </item>"""
+    new_item = (
+        f"    <item>\n"
+        f"      <title>{safe_title}</title>\n"
+        f"      <link>https://wezip.co.kr/{filename}</link>\n"
+        f"      <guid>https://wezip.co.kr/{filename}</guid>\n"
+        f"      <description>{safe_desc}</description>\n"
+        f"      <pubDate>{rfc822_date}</pubDate>\n"
+        f"      <category>{safe_cat}</category>\n"
+        f"    </item>"
+    )
 
     if f"<link>https://wezip.co.kr/{filename}</link>" not in content:
         channel_marker = "<channel>"
         if channel_marker in content:
-            # Insert after <lastBuildDate>
-            m = re.search(r'(<lastBuildDate>[^<]+</lastBuildDate>)', content)
+            m = re.search(r"(<lastBuildDate>[^<]+</lastBuildDate>)", content)
             if m:
-                content = content.replace(m.group(1), f"{m.group(1)}\n    {new_item}")
+                content = content.replace(m.group(1), f"{m.group(1)}\n    {new_item}", 1)
             else:
-                content = content.replace(channel_marker, f"{channel_marker}\n    {new_item}")
-
+                content = content.replace(channel_marker, f"{channel_marker}\n    {new_item}", 1)
         with open(rss_path, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Updated rss.xml: Added {filename}")
 
+
+def verify_catalog():
+    """Dry-run validate every topic in TOPIC_CATALOG for schema, links, tags, and zero amber."""
+    today_kst = datetime.datetime.now(KST).date()
+    today_str = today_kst.isoformat()
+    week_label = get_week_label(today_kst)
+    sample_news = [{"title": "2026년 연말정산·정부지원금 핵심 개편안 발표", "source": "정책브리핑"}]
+
+    print(f"Verifying {len(TOPIC_CATALOG)} topics in TOPIC_CATALOG...")
+    seen_slugs = set()
+    for idx, topic in enumerate(TOPIC_CATALOG, 1):
+        ok, msg = validate_topic_dict(topic)
+        if not ok:
+            raise AssertionError(f"Catalog #{idx} invalid: {msg}")
+        slug = topic["slug"]
+        if slug in seen_slugs:
+            raise AssertionError(f"Duplicate slug in TOPIC_CATALOG: {slug}")
+        seen_slugs.add(slug)
+
+        calc_path = os.path.join(HTML_DIR, topic["calcLink"])
+        if not os.path.exists(calc_path):
+            raise AssertionError(f"Catalog #{idx} ({slug}) calcLink missing on disk: {topic['calcLink']}")
+
+        rendered = render_article_html(topic, today_str, matched_news=sample_news, week_label=week_label)
+        verify_rendered_html(slug, rendered)
+
+    print(f"ALL {len(TOPIC_CATALOG)} CATALOG TOPICS VERIFIED: 0 errors, valid links, balanced tags, valid JSON-LD.")
+
+
 def main():
-    today = datetime.date.today().isoformat()
-    print(f"Starting Wezip Auto Column Publisher on {today}...")
+    parser = argparse.ArgumentParser(description="Wezip Auto Column Publisher")
+    parser.add_argument("--verify-catalog", action="store_true", help="Render-check all catalog topics without writing files")
+    parser.add_argument("--dry-run", action="store_true", help="Select and verify next post without modifying disk")
+    args = parser.parse_args()
 
-    # Find the first unpublished topic
-    selected_topic = None
-    for topic in TOPIC_QUEUE:
-        filename = f"{topic['slug']}.html"
-        full_path = os.path.join(HTML_DIR, filename)
-        if not os.path.exists(full_path):
-            selected_topic = topic
-            break
-
-    if not selected_topic:
-        print("All predefined topics have already been published. Queue is exhausted.")
+    if args.verify_catalog:
+        verify_catalog()
         return
 
-    filename = f"{selected_topic['slug']}.html"
-    print(f"Selected Topic for publication: {selected_topic['title']} -> {filename}")
+    today_kst = datetime.datetime.now(KST).date()
+    today_str = today_kst.isoformat()
+    week_label = get_week_label(today_kst)
+    print(f"Starting Wezip Auto Column Publisher ({today_str}, {week_label})...")
 
-    # 1. Render and write HTML
-    html_content = render_article_html(selected_topic, today)
+    news_items = fetch_weekly_policy_news()
+    print(f"Fetched {len(news_items)} recent 7-day Korean finance/policy headlines.")
+
+    selected_topic, matched_news = maybe_generate_topic_with_gemini(news_items, today_kst)
+    source_mode = "Gemini + Live RSS"
+    if not selected_topic:
+        selected_topic, matched_news = select_best_catalog_topic(news_items, today_kst)
+        source_mode = "Curated Catalog + Live RSS"
+
+    if not selected_topic:
+        print("All catalog topics are already published and GEMINI_API_KEY is unset. Queue exhausted.")
+        return
+
+    ok, reason = validate_topic_dict(selected_topic)
+    if not ok:
+        raise RuntimeError(f"Selected topic validation failed: {reason}")
+
+    filename = f"{selected_topic['slug']}.html"
+    print(f"[{source_mode}] Selected: {selected_topic['title']} -> {filename}")
+    if matched_news:
+        print(f"Connected weekly headlines ({len(matched_news)}):")
+        for n in matched_news:
+            print(f"  - {n['title']} ({n['source']})")
+
+    html_content = render_article_html(selected_topic, today_str, matched_news=matched_news, week_label=week_label)
+    verify_rendered_html(selected_topic["slug"], html_content)
+
+    if args.dry_run:
+        print("Dry-run completed cleanly. No files were modified.")
+        return
+
     file_path = os.path.join(HTML_DIR, filename)
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(html_content)
     print(f"Generated standalone article file: {file_path}")
 
-    # 2. Update blog.html
-    update_blog_html(selected_topic, today)
-
-    # 3. Update sitemap.xml
-    update_sitemap(filename, today)
-
-    # 4. Update rss.xml
-    update_rss(selected_topic, today)
-
+    update_blog_html(selected_topic, today_str)
+    update_sitemap(filename, today_str)
+    update_rss(selected_topic)
     print(f"Successfully published new column: {selected_topic['title']}")
+
 
 if __name__ == "__main__":
     main()
