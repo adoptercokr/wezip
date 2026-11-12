@@ -215,6 +215,17 @@ def get_existing_article_titles():
     return re.findall(r'title:\s*"([^"]+)"', content)
 
 
+def already_published_today(today_kst):
+    """Return True if blog.html already contains an article published on today_kst (YYYY.MM.DD)."""
+    blog_path = os.path.join(HTML_DIR, "blog.html")
+    if not os.path.exists(blog_path):
+        return False
+    today_dot = today_kst.strftime("%Y.%m.%d")
+    with open(blog_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    return bool(re.search(rf'date:\s*"{re.escape(today_dot)}"', content))
+
+
 def maybe_generate_topic_with_gemini(news_items, today_kst):
     """If GEMINI_API_KEY is set, generate a brand-new timely article based on this week's live news."""
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -907,10 +918,29 @@ def verify_catalog():
     print(f"ALL {len(TOPIC_CATALOG)} CATALOG TOPICS VERIFIED: 0 errors, valid links, balanced tags, valid JSON-LD.")
 
 
+def load_topic_from_json_arg(json_arg, news_items, today_kst):
+    """Load an external AI-authored topic JSON file (or '-' for stdin) and pair weekly news."""
+    if json_arg == "-":
+        raw = sys.stdin.read()
+    else:
+        with open(json_arg, "r", encoding="utf-8") as f:
+            raw = f.read()
+    topic = json.loads(raw)
+    topic["calcLink"] = ensure_valid_calc_link(topic.get("calcLink", "gov-finder.html"))
+    if os.path.exists(os.path.join(HTML_DIR, f"{topic.get('slug', '')}.html")):
+        topic["slug"] = f"{topic['slug']}-{today_kst.strftime('%m%d')}"
+    keywords = topic.get("keywords", [])
+    matched = [n for n in news_items if any(kw in n["title"] for kw in keywords)]
+    return topic, (matched[:3] if matched else news_items[:3])
+
+
 def main():
     parser = argparse.ArgumentParser(description="Wezip Auto Column Publisher")
     parser.add_argument("--verify-catalog", action="store_true", help="Render-check all catalog topics without writing files")
     parser.add_argument("--dry-run", action="store_true", help="Select and verify next post without modifying disk")
+    parser.add_argument("--check-today", action="store_true", help="Print PUBLISHED or PENDING for today's KST date and exit")
+    parser.add_argument("--force", action="store_true", help="Publish even if an article already exists for today")
+    parser.add_argument("--from-json", type=str, default="", help="Publish a custom AI-authored topic JSON file ('-' for stdin)")
     args = parser.parse_args()
 
     if args.verify_catalog:
@@ -918,18 +948,31 @@ def main():
         return
 
     today_kst = datetime.datetime.now(KST).date()
+    if args.check_today:
+        print("PUBLISHED" if already_published_today(today_kst) else "PENDING")
+        return
+
     today_str = today_kst.isoformat()
     week_label = get_week_label(today_kst)
+
+    if already_published_today(today_kst) and not args.dry_run and not args.force:
+        print(f"[Skip] Today's column ({today_kst.strftime('%Y.%m.%d')}) is already published. Skipping duplicate.")
+        return
+
     print(f"Starting Wezip Auto Column Publisher ({today_str}, {week_label})...")
 
     news_items = fetch_weekly_policy_news()
     print(f"Fetched {len(news_items)} recent 7-day Korean finance/policy headlines.")
 
-    selected_topic, matched_news = maybe_generate_topic_with_gemini(news_items, today_kst)
-    source_mode = "Gemini + Live RSS"
-    if not selected_topic:
-        selected_topic, matched_news = select_best_catalog_topic(news_items, today_kst)
-        source_mode = "Curated Catalog + Live RSS"
+    if args.from_json:
+        selected_topic, matched_news = load_topic_from_json_arg(args.from_json, news_items, today_kst)
+        source_mode = "Antigravity AI + Live RSS"
+    else:
+        selected_topic, matched_news = maybe_generate_topic_with_gemini(news_items, today_kst)
+        source_mode = "Gemini + Live RSS"
+        if not selected_topic:
+            selected_topic, matched_news = select_best_catalog_topic(news_items, today_kst)
+            source_mode = "Curated Catalog + Live RSS"
 
     if not selected_topic:
         print("All catalog topics are already published and GEMINI_API_KEY is unset. Queue exhausted.")
