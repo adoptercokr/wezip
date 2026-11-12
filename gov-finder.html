@@ -101,11 +101,11 @@
                                 </a>
                                 <a href="hourly-wage.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>알바·최저시급 계산기</span>
-                                    <span class="text-[11px] text-slate-400">10,030원</span>
+                                    <span class="text-[11px] text-slate-400">10,320원</span>
                                 </a>
                                 <a href="unemployment.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span class="font-bold">퇴사자 실업급여 계산기</span>
-                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 66,000</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">1일 68,100</span>
                                 </a>
                                 <a href="severance.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>퇴직금 계산기</span>
@@ -157,11 +157,11 @@
                                 </a>
                                 <a href="gov-rent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span class="font-bold">청년 지원 대상조회</span>
-                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만원</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">월 20만·24개월</span>
                                 </a>
                                 <a href="gov-parent.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>부모급여·아동수당 대상조회</span>
-                                    <span class="text-[11px] text-slate-400">총 3,000만</span>
+                                    <span class="text-[11px] text-slate-400">만 9세 확대</span>
                                 </a>
                                 <a href="gov-subsidy.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>근로장려금 수급 대상조회</span>
@@ -185,7 +185,7 @@
                             <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-slate-800 text-sm font-medium">
                                 <a href="loan-dsr.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span class="font-bold">대출이자 & DSR 계산기</span>
-                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.20%p</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold">+1.50%p</span>
                                 </a>
                                 <a href="savings.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>예·적금 만기이자 계산기</span>
@@ -661,13 +661,13 @@
         const POLICIES = [
             {
                 id: 'rent_subsidy',
-                name: '청년월세 한시 특별지원 (월 20만원)',
+                name: '청년월세 특별지원 (2026 상시 전환·월 20만원)',
                 dept: '국토교통부',
-                badge: '월 20만원',
-                amountNum: 2400000,
-                amountText: '연 최대 240만 원 (월 20만 × 12개월)',
+                badge: '월 20만원·24개월',
+                amountNum: 4800000,
+                amountText: '최대 480만 원 (월 20만 × 24개월, 2026 상시 전환)',
                 summary: '부모와 따로 거주하는 무주택 청년 대상, 실제 월세 납부액을 매월 현금 계좌 지급',
-                req: '만 19~34세 무주택 청년, 보증금 5천만 & 월세 70만 이하, 청년가구 중위 60% 이하 & 원가구 100% 이하',
+                req: '만 19~34세 무주택 청년, 보증금 5천만 & 월세 70만 이하, 청년가구 중위 60%(1인 153.8만) & 원가구 100% 이하',
                 linkUrl: 'gov-rent.html',
                 calcText: '청년월세 계산기',
                 officialName: '복지로 신청 바로가기',
@@ -677,18 +677,18 @@
             },
             {
                 id: 'youth_leap',
-                name: '청년도약계좌 (정부기여금 + 비과세)',
+                name: '청년도약계좌·청년미래적금 (기여금 + 비과세)',
                 dept: '서민금융진흥원',
-                badge: '5년 목돈',
-                amountNum: 1440000,
-                amountText: '정부기여금 최대 144만 원 + 이자 비과세 + 연 6%대 금리',
-                summary: '5년간 매월 최대 70만 원 납입 시 정부가 월 최대 2.4만 원 매칭 지원하여 약 5천만 원 목돈 형성',
+                badge: '월 최대 3.3만',
+                amountNum: 1980000,
+                amountText: '기존가입자 기여금 최대 198만 원(월 3.3만) + 비과세 / 2026 청년미래적금(3년) 연계',
+                summary: '전 구간 월 70만 한도 확대 매칭(기존 가입자) 및 2026년 신규 3년 만기 청년미래적금으로 목돈 형성',
                 req: '만 19~34세 청년, 개인 총급여 7,500만 원 이하, 가구소득 중위 250% 이하',
                 linkUrl: 'youth-leap.html',
                 calcText: '도약계좌 계산기',
                 officialName: '서민금융진흥원 바로가기',
                 officialUrl: 'https://www.kinfa.or.kr',
-                keywords: ['청년도약계좌', '적금', '목돈', '기여금', '비과세', '청년저축'],
+                keywords: ['청년도약계좌', '청년미래적금', '적금', '목돈', '기여금', '비과세', '청년저축'],
                 match: (u) => u.age === 'youth' && (u.job === 'employee' || u.job === 'part_time') && u.income !== 'over75'
             },
             {
@@ -725,18 +725,18 @@
             },
             {
                 id: 'child_allowance',
-                name: '아동수당 (만 8세 미만 월 10만원)',
+                name: '아동수당 (2026 확대: 만 9세 미만 월 10만원+)',
                 dept: '보건복지부',
-                badge: '월 10만원',
+                badge: '만 9세 미만',
                 amountNum: 1200000,
-                amountText: '연 120만 원 (8년간 총 960만 원 확정 지급)',
-                summary: '소득 무관 만 8세 미만(0~95개월) 모든 아동에게 매월 25일 10만 원 현금 지급',
-                req: '만 8세 생일 전월까지의 대한민국 모든 아동',
+                amountText: '연 120만 원+ (9년간 기본 총 1,080만 원, 비수도권·인구감소지역 월 10.5~13만 우대)',
+                summary: '소득 무관 만 9세 미만(0~107개월) 모든 아동에게 매월 25일 10만 원+ 현금 지급',
+                req: '만 9세 생일 전월까지의 대한민국 모든 아동 (2026년 4월 시행·1월분 소급 확대)',
                 linkUrl: 'gov-parent.html',
                 calcText: '아동수당 계산기',
                 officialName: '복지로 신청 바로가기',
                 officialUrl: 'https://www.bokjiro.go.kr',
-                keywords: ['아동수당', '육아', '자녀', '어린이', '아이'],
+                keywords: ['아동수당', '육아', '자녀', '어린이', '아이', '만9세'],
                 match: (u) => u.family === 'infant' || u.family === 'child'
             },
             {
@@ -933,13 +933,13 @@
             },
             {
                 id: 'basic_pension',
-                name: '기초연금 (만 65세 이상 월 최대 33.4만원)',
+                name: '기초연금 (2026 만 65세 이상 월 최대 34.9만원)',
                 dept: '보건복지부',
-                badge: '월 33.4만원',
-                amountNum: 4000000,
-                amountText: '단독가구 월 최대 334,810원 / 부부가구 월 최대 535,680원',
-                summary: '만 65세 이상 어르신 중 소득 인정액 하위 70% 가구에 매월 25일 평생 현금 지급',
-                req: '만 65세 이상 대한민국 국적 어르신 중 소득인정액 선정기준액 이하 가구',
+                badge: '월 34.9만원',
+                amountNum: 4196400,
+                amountText: '2026 단독가구 월 최대 349,700원 / 부부가구 월 최대 559,520원',
+                summary: '만 65세 이상 어르신 중 소득 인정액 하위 70%(단독 247만·부부 395.2만 이하)에 매월 25일 현금 지급',
+                req: '만 65세 이상 대한민국 국적 어르신 중 소득인정액 선정기준액(2026 단독 247만 원) 이하 가구',
                 linkUrl: 'gov-median.html',
                 calcText: '기초연금 모의조회',
                 officialName: '복지로 신청 바로가기',
@@ -1381,6 +1381,9 @@
         // 최초 1회 실행
         document.addEventListener('DOMContentLoaded', () => {
             runPolicyMatch();
+            if (typeof recordRecentCalc === 'function') {
+                recordRecentCalc('맞춤 정부지원금 찾기', 'gov-finder.html', 'search');
+            }
         });
     </script>
 </body>

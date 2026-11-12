@@ -30,9 +30,11 @@ jobs:
         run: |
           python scripts/auto_publish_column.py
 
-      - name: Verify all pages integrity
+      - name: Verify all pages integrity and site health audit
         run: |
           python verify_all_pages.py
+          python scripts/site_health_audit.py
+          python scripts/auto_publish_column.py --verify-catalog
 
       - name: Commit and push changes
         run: |
