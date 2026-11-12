@@ -28,9 +28,23 @@ for fpath in html_files:
         print(f"[ERROR] {fpath}: Missing policy links in footer")
         errors += 1
 
-    # 3. Check Cool Blue logo presence
+    # 3. Check Cool Blue logo & unified responsive header
     if 'w-10 h-10 rounded-xl bg-blue-600' not in full_text:
         print(f"[ERROR] {fpath}: Missing cool blue logo")
+        errors += 1
+
+    header_m = re.search(r'<header\b[^>]*>.*?</header>', full_text, flags=re.S)
+    header_html = header_m.group(0) if header_m else ""
+    if (
+        'id="mobileNavMenu"' not in header_html
+        or 'toggleMobileNav()' not in header_html
+        or 'id="mobileMenuBtn"' not in header_html
+        or header_html.count('지원금 찾기') < 3
+        or '금융 칼럼' not in header_html
+        or '급여·소득' not in header_html
+        or '대출·금융' not in header_html
+    ):
+        print(f"[ERROR] {fpath}: Inconsistent or incomplete unified <header>")
         errors += 1
 
     # 4. Check for unwanted yellow/amber traces

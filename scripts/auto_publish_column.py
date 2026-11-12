@@ -30,6 +30,7 @@ BASE_DIR = os.path.dirname(SCRIPT_DIR)
 HTML_DIR = BASE_DIR
 KST = datetime.timezone(datetime.timedelta(hours=9))
 
+from site_header import build_unified_header
 from topics_catalog import TOPIC_CATALOG
 
 ALLOWED_CALCULATORS = [
@@ -474,6 +475,8 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     faq_html = "\n                        ".join(faq_blocks)
     faq_schema_str = ",\n        ".join(faq_schema_items)
 
+    unified_header = build_unified_header(filename)
+
     html_content = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -552,38 +555,7 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
-    <header class="sticky top-0 z-40 bg-[#0F172A] border-b border-slate-800 text-white select-none">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-8">
-                <a href="index.html" class="flex items-center gap-2.5 shrink-0 group" aria-label="WE ZIP 홈으로 이동">
-                    <div class="w-10 h-10 rounded-xl bg-blue-600 group-hover:bg-blue-500 flex items-center justify-center text-white shadow-sm transition">
-                        <svg class="svg-icon w-5 h-5 text-white stroke-[2.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 9.5L12 3l9 6.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5v-10z"></path>
-                            <polyline points="9 21 9 12 15 12 15 21"></polyline>
-                        </svg>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-black text-xl tracking-tight text-white notranslate" translate="no">WE <span class="text-blue-400">ZIP</span></span>
-                        <span class="text-[11px] font-black text-emerald-300 px-2 py-0.5 bg-emerald-950/70 rounded-full border border-emerald-500 shadow-sm">100% 무료</span>
-                    </div>
-                </a>
-
-                <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
-                    <a href="salary.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">급여·소득</a>
-                    <a href="real-estate.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">부동산·취득세</a>
-                    <a href="gov-finder.html" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition">정부지원금</a>
-                    <a href="blog.html" class="px-3 py-2 rounded-lg text-blue-400 bg-slate-800/80 transition font-bold">금융 칼럼</a>
-                </nav>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <a href="gov-finder.html" class="text-xs font-bold px-3 py-2 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white transition flex items-center gap-1.5">
-                    <svg class="svg-icon w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <span>지원금 찾기</span>
-                </a>
-            </div>
-        </div>
-    </header>
+{unified_header}
 
     <!-- [와이드 3단 레이아웃: 좌측 배너 + 중앙 컨텐츠 + 우측 배너] -->
     <div class="w-full max-w-[1560px] mx-auto px-2 sm:px-4 py-8 flex items-start justify-center gap-5 flex-grow">
