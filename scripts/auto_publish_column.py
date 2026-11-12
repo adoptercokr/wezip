@@ -941,6 +941,7 @@ def main():
     parser.add_argument("--check-today", action="store_true", help="Print PUBLISHED or PENDING for today's KST date and exit")
     parser.add_argument("--force", action="store_true", help="Publish even if an article already exists for today")
     parser.add_argument("--from-json", type=str, default="", help="Publish a custom AI-authored topic JSON file ('-' for stdin)")
+    parser.add_argument("--delete-json", action="store_true", help="Remove the --from-json source file after successful publish")
     args = parser.parse_args()
 
     if args.verify_catalog:
@@ -1004,6 +1005,8 @@ def main():
     update_blog_html(selected_topic, today_str)
     update_sitemap(filename, today_str)
     update_rss(selected_topic)
+    if args.from_json and args.from_json != "-" and args.delete_json and os.path.exists(args.from_json):
+        os.remove(args.from_json)
     print(f"Successfully published new column: {selected_topic['title']}")
 
 
