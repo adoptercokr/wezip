@@ -403,15 +403,15 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
         w_label = html.escape(week_label or f"{today_str[:7]} 주요 정책 브리핑")
         weekly_news_html = f"""
                 <!-- [이번 주 실시간 정책·뉴스 연동 브리핑] -->
-                <section class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3" aria-label="금주 정책 및 뉴스 브리핑">
+                <section class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-3" aria-label="금주 정책 및 뉴스 브리핑">
                     <div class="flex items-center justify-between gap-2 flex-wrap">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-[11px] font-bold">금주 이슈 연동</span>
-                            <span class="text-sm font-extrabold text-slate-900">{w_label} 최신 정책·금융 브리핑</span>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded bg-blue-600 text-white text-xs font-bold">금주 이슈 연동</span>
+                            <span class="text-base sm:text-lg font-extrabold text-slate-900">{w_label} 최신 정책·금융 브리핑</span>
                         </div>
-                        <span class="text-[11px] text-slate-500 font-medium">{today_str} 최신 보도 반영</span>
+                        <span class="text-xs sm:text-sm text-slate-500 font-medium">{today_str} 최신 보도 반영</span>
                     </div>
-                    <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <ul class="space-y-2 text-sm sm:text-base text-slate-700 leading-relaxed">
                         {news_ul}
                     </ul>
                 </section>"""
@@ -420,9 +420,9 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     part1_cards = []
     for p_heading, p_body in topic["part1_easy"]:
         part1_cards.append(
-            f'<div class="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">'
-            f'<h3 class="text-base sm:text-lg font-bold text-slate-900">{highlight_inline(p_heading)}</h3>'
-            f'<p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{highlight_inline(p_body)}</p>'
+            f'<div class="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">'
+            f'<h3 class="text-lg sm:text-xl font-bold text-slate-900">{highlight_inline(p_heading)}</h3>'
+            f'<p class="text-base sm:text-lg text-slate-700 leading-relaxed">{highlight_inline(p_body)}</p>'
             f'</div>'
         )
     part1_html = "\n                        ".join(part1_cards)
@@ -435,7 +435,7 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     for idx, line in enumerate(sim_lines):
         if idx == len(sim_lines) - 1:
             sim_paras.append(
-                f'<p class="pt-2 border-t border-slate-200 text-blue-900 font-extrabold text-sm sm:text-base">{highlight_inline(line)}</p>'
+                f'<p class="pt-3 border-t border-slate-200 text-blue-900 font-extrabold text-base sm:text-lg">{highlight_inline(line)}</p>'
             )
         else:
             sim_paras.append(f'<p>{highlight_inline(line)}</p>')
@@ -445,12 +445,12 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     trap_cards = []
     for t_title, t_body in topic["traps"]:
         trap_cards.append(
-            f'<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">'
-            f'<div class="flex items-center gap-2">'
-            f'<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[11px] font-bold shrink-0">주의</span>'
-            f'<span class="font-bold text-slate-900 text-sm">{highlight_inline(t_title)}</span>'
+            f'<div class="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">'
+            f'<div class="flex flex-wrap items-center gap-2">'
+            f'<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold shrink-0">주의</span>'
+            f'<span class="font-bold text-slate-900 text-base sm:text-lg">{highlight_inline(t_title)}</span>'
             f'</div>'
-            f'<p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{highlight_inline(t_body)}</p>'
+            f'<p class="text-sm sm:text-base text-slate-700 leading-relaxed">{highlight_inline(t_body)}</p>'
             f'</div>'
         )
     traps_html = "\n                        ".join(trap_cards)
@@ -462,9 +462,9 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
         q_clean = sanitize_text(q)
         a_clean = sanitize_text(a)
         faq_blocks.append(
-            f'<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">'
-            f'<div class="font-bold text-slate-800 text-sm">{html.escape(q_clean)}</div>'
-            f'<div class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">{highlight_inline(a_clean)}</div>'
+            f'<div class="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl">'
+            f'<div class="font-bold text-slate-900 text-base sm:text-lg">{html.escape(q_clean)}</div>'
+            f'<div class="text-sm sm:text-base text-slate-700 mt-2 leading-relaxed">{highlight_inline(a_clean)}</div>'
             f'</div>'
         )
         faq_schema_items.append(
@@ -606,8 +606,8 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
         </aside>
 
         <!-- [중앙 메인 컨텐츠] -->
-        <main class="w-full max-w-4xl mx-auto space-y-8">
-            <nav class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+        <main class="w-full min-w-0 max-w-4xl mx-auto space-y-8">
+            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
                 <a href="index.html" class="hover:text-blue-600 transition">홈</a>
                 <span>&gt;</span>
                 <a href="blog.html" class="hover:text-blue-600 transition">금융 칼럼</a>
@@ -615,67 +615,67 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
                 <span class="text-slate-800 font-bold">{html.escape(cat_name)}</span>
             </nav>
 
-            <header class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
+            <header class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-8 shadow-xs space-y-4">
                 <div class="flex items-center gap-2 flex-wrap">
-                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">{html.escape(cat_name)} {html.escape(badge)}</span>
-                    <span class="text-xs text-slate-400">읽는 시간 {html.escape(read_time)} · {today_str}</span>
+                    <span class="text-xs sm:text-sm font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">{html.escape(cat_name)} {html.escape(badge)}</span>
+                    <span class="text-xs sm:text-sm text-slate-400">읽는 시간 {html.escape(read_time)} · {today_str}</span>
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
                     {highlight_inline(title, variant="h1")}
                 </h1>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
                     {highlight_inline(desc)}
                 </p>
 
                 <!-- 계산기 바로가기 배너 -->
-                <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
-                    <div class="flex items-center gap-2 text-xs sm:text-sm text-blue-900 font-bold">
+                <div class="p-4 sm:p-5 bg-blue-50/70 border border-blue-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+                    <div class="flex items-center gap-2 text-sm sm:text-base text-blue-900 font-bold">
                         <svg class="svg-icon w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
                         <span>내 예상 금액과 자격을 지금 1초 만에 직접 계산해 보세요!</span>
                     </div>
-                    <a href="{calc_link}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm shrink-0 text-center">
+                    <a href="{calc_link}" class="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-bold transition shadow-sm shrink-0 text-center">
                         {html.escape(calc_name)} &rarr;
                     </a>
                 </div>
             </header>
 
-            <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
+            <article class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
                 <!-- [블로그형 스토리텔링 도입부 & 공감 해설 박스] -->
-                <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-5 sm:p-7 space-y-3.5 text-slate-700 text-sm sm:text-base leading-relaxed">
-                    <div class="flex items-center gap-2 font-black text-slate-900 text-base sm:text-lg">
+                <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-4 sm:p-7 space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+                    <div class="flex items-center gap-2 font-black text-slate-900 text-lg sm:text-xl">
                         <span class="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
                         <span>{highlight_inline(topic["hook_title"])}</span>
                     </div>
                     <p class="font-medium text-slate-800 leading-relaxed">
                         {highlight_inline(topic["hook_p1"])}
                     </p>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p class="text-base sm:text-lg text-slate-700 leading-relaxed">
                         {highlight_inline(topic["hook_p2"])}
                     </p>
-                    <div class="pt-2 border-t border-blue-100/80 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs font-bold text-blue-800">
+                    <div class="pt-3 border-t border-blue-100/80 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 text-sm font-bold text-blue-800">
                         <span class="shrink-0">* 위집 편집국 핵심 조언:</span>
-                        <span class="font-normal text-slate-600">{highlight_inline(topic["editor_tip"])}</span>
+                        <span class="font-normal text-slate-700">{highlight_inline(topic["editor_tip"])}</span>
                     </div>
                 </div>
                 {weekly_news_html}
 
                 <!-- [1단계: 초반부] 누구나 이해하는 쉬운 블로그식 원리 설명 -->
                 <section class="space-y-4">
-                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
                         1. 초보자도 3분 만에 이해하는 핵심 원리
                     </h2>
-                    <div class="space-y-3">
+                    <div class="space-y-3.5">
                         {part1_html}
                     </div>
                 </section>
 
                 <!-- [2단계: 중반부] 세부 비교 표 & 실전 1원 단위 시뮬레이션 -->
                 <section class="space-y-5 border-t border-slate-100 pt-6">
-                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
                         2. {html.escape(sanitize_text(topic["table"]["title"]))}
                     </h2>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-xs sm:text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+                        <table class="w-full min-w-[540px] sm:min-w-0 text-sm sm:text-base text-left border border-slate-200 rounded-xl overflow-hidden">
                             <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
                                 <tr>{headers_html}</tr>
                             </thead>
@@ -685,53 +685,53 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
                         </table>
                     </div>
 
-                    <h3 class="text-base sm:text-lg font-bold text-slate-900 pt-2">{highlight_inline(sim["title"])}</h3>
-                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 font-medium">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 pt-2">{highlight_inline(sim["title"])}</h3>
+                    <div class="p-4 sm:p-6 bg-slate-50 border border-slate-200 rounded-2xl text-base sm:text-lg text-slate-700 leading-relaxed space-y-3.5 font-medium">
                         {sim_body_html}
                     </div>
                 </section>
 
                 <!-- [3단계: 후반부] 모르면 손해 보는 치명적 실수 함정 4가지 -->
                 <section class="space-y-4 border-t border-slate-100 pt-6">
-                    <h2 class="text-xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b border-slate-200 pb-2">
                         3. 모르면 손해 보는 치명적 실수 함정
                     </h2>
-                    <div class="space-y-3">
+                    <div class="space-y-3.5">
                         {traps_html}
                     </div>
                 </section>
 
                 <!-- 자주 묻는 질문 (FAQ) -->
                 <section class="space-y-4 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2">
                         <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
                         <span>자주 묻는 질문 (FAQ)</span>
                     </h2>
-                    <div class="space-y-3">
+                    <div class="space-y-3.5">
                         {faq_html}
                     </div>
                 </section>
 
                 <!-- 관련 계산기 하단 추천 배너 -->
-                <section class="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <section class="p-5 sm:p-6 bg-blue-50/70 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="space-y-1 text-center sm:text-left">
-                        <div class="text-xs font-bold text-blue-600 uppercase tracking-wide">WE ZIP 실시간 계산기 연동</div>
-                        <div class="text-sm sm:text-base font-extrabold text-slate-900">내 실제 예상 금액을 1초 만에 확인해 보세요</div>
-                        <p class="text-xs text-slate-600">2026년 최신 법정 기준이 100% 반영된 무료 시뮬레이터입니다.</p>
+                        <div class="text-xs sm:text-sm font-bold text-blue-600 uppercase tracking-wide">WE ZIP 실시간 계산기 연동</div>
+                        <div class="text-base sm:text-lg font-extrabold text-slate-900">내 실제 예상 금액을 1초 만에 확인해 보세요</div>
+                        <p class="text-sm sm:text-base text-slate-600">2026년 최신 법정 기준이 100% 반영된 무료 시뮬레이터입니다.</p>
                     </div>
-                    <a href="{calc_link}" class="w-full sm:w-auto py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl transition text-center shrink-0 shadow-sm">
+                    <a href="{calc_link}" class="w-full sm:w-auto py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base rounded-xl transition text-center shrink-0 shadow-sm">
                         {html.escape(calc_name)} 바로가기 &rarr;
                     </a>
                 </section>
             </article>
 
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <div class="font-bold text-slate-900 text-sm">페이지 내용이 도움이 되셨나요?</div>
-                    <div class="text-xs text-slate-500">지인이나 동료에게 링크를 복사하여 유용한 금융·세무 정보를 공유해 보세요.</div>
+                    <div class="font-bold text-slate-900 text-base">페이지 내용이 도움이 되셨나요?</div>
+                    <div class="text-sm text-slate-500">지인이나 동료에게 링크를 복사하여 유용한 금융·세무 정보를 공유해 보세요.</div>
                 </div>
-                <button type="button" onclick="copyPageUrl(this)" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition">
-                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                <button type="button" onclick="copyPageUrl(this)" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm flex items-center gap-1.5 transition shrink-0">
+                    <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                     <span>페이지 링크 복사</span>
                 </button>
             </div>

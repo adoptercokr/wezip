@@ -304,21 +304,21 @@
             <!-- 1. 카테고리 탭 & 검색창 -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <!-- 카테고리 필터 버튼 그룹 -->
-                <div class="flex flex-wrap items-center gap-1.5 text-xs font-bold" id="categoryTabs">
-                    <button type="button" onclick="setCategory('all')" class="cat-btn active px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">46</span>)
+                <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
+                    <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
+                        전체 (<span id="countAll">52</span>)
                     </button>
-                    <button type="button" onclick="setCategory('salary')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (14)
+                    <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
+                        급여·노동 (<span id="countSalary">18</span>)
                     </button>
-                    <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
-                        부동산·주거 (12)
+                    <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
+                        부동산·주거 (<span id="countRealestate">13</span>)
                     </button>
-                    <button type="button" onclick="setCategory('welfare')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="welfare">
-                        복지·지원금 (11)
+                    <button type="button" onclick="setCategory('welfare')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="welfare">
+                        복지·지원금 (<span id="countWelfare">12</span>)
                     </button>
-                    <button type="button" onclick="setCategory('finance')" class="cat-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="finance">
-                        대출·금융 (9)
+                    <button type="button" onclick="setCategory('finance')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="finance">
+                        대출·금융 (<span id="countFinance">9</span>)
                     </button>
                 </div>
 
@@ -376,7 +376,7 @@
         </div>
 
         <!-- 하단 번호 페이지네이션 컨트롤 -->
-        <nav id="paginationNav" class="mt-8 flex items-center justify-center gap-1.5" aria-label="칼럼 페이지 네비게이션">
+        <nav id="paginationNav" class="mt-8 flex flex-wrap items-center justify-center gap-2" aria-label="칼럼 페이지 네비게이션">
             <!-- JS 렌더링 영역: [« 처음] [‹ 이전] [1] [2] [3] [다음 ›] [끝 »] -->
         </nav>
 
@@ -1094,16 +1094,16 @@
               </span>
             </td>
             <td class="py-4 px-4">
-              <div class="space-y-1">
-                <div class="flex items-center gap-2">
-                  <a href="${item.link}" class="font-extrabold text-slate-900 group-hover:text-blue-600 transition text-sm sm:text-base">
+              <div class="space-y-1.5">
+                <div class="flex flex-wrap items-center gap-2">
+                  <a href="${item.link}" class="font-extrabold text-slate-900 group-hover:text-blue-600 transition text-base sm:text-lg leading-snug">
                     ${item.title}
                   </a>
-                  <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${item.badge === 'NEW' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+                  <span class="text-xs font-bold px-2 py-0.5 rounded shrink-0 ${item.badge === 'NEW' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
                     ${item.badge}
                   </span>
                 </div>
-                <p class="text-xs text-slate-500 line-clamp-1 leading-relaxed">
+                <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed">
                   ${item.desc}
                 </p>
               </div>
@@ -1119,18 +1119,18 @@
       let mobileHtml = '';
       pageItems.forEach(item => {
         mobileHtml += `
-          <a href="${item.link}" class="block p-4 hover:bg-slate-50 transition space-y-2">
-            <div class="flex items-center justify-between text-xs">
-              <span class="px-2 py-0.5 rounded font-bold bg-blue-50 text-blue-700 border border-blue-100">${item.catName}</span>
+          <a href="${item.link}" class="block p-4 sm:p-5 hover:bg-slate-50 transition space-y-2.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded font-bold bg-blue-50 text-blue-700 border border-blue-100">${item.catName}</span>
               <span class="text-slate-400 font-mono">No. ${item.no}</span>
             </div>
-            <div class="font-bold text-sm text-slate-900 leading-snug">
+            <div class="font-extrabold text-base text-slate-900 leading-snug">
               ${item.title}
             </div>
-            <p class="text-xs text-slate-500 line-clamp-2">
+            <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed">
               ${item.desc}
             </p>
-            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-100">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 pt-1.5 border-t border-slate-100">
               <span>${item.date} · ${item.readTime}</span>
               <span class="text-blue-600 font-bold flex items-center gap-0.5">
                 전문 보기 &rarr;
@@ -1201,8 +1201,27 @@
       paginationNav.innerHTML = pagHtml;
     }
 
+    function updateCategoryCounts() {
+      const counts = ARTICLES.reduce((acc, item) => {
+        acc[item.cat] = (acc[item.cat] || 0) + 1;
+        return acc;
+      }, {});
+      const map = {
+        countAll: ARTICLES.length,
+        countSalary: counts.salary || 0,
+        countRealestate: counts.realestate || 0,
+        countWelfare: counts.welfare || 0,
+        countFinance: counts.finance || 0
+      };
+      Object.entries(map).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      });
+    }
+
     // 초기 렌더링
     document.addEventListener('DOMContentLoaded', () => {
+      updateCategoryCounts();
       renderBoard();
     });
     </script>

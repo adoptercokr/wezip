@@ -332,20 +332,20 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
                 <div>
                     <!-- 회원가입 없는 100% 무료 안심 배지 -->
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black mb-2 shadow-xs">
+                    <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-black mb-2.5 shadow-xs">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         <span>회원가입·개인정보 NO · 100% 평생 전면 무료</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
                         2026 대한민국 <span class="text-blue-600">100% 무료 금융·생활 계산기</span> 포털
                     </h1>
-                    <p class="text-sm sm:text-base text-slate-500 mt-1.5">
-                        복잡한 세법·4대보험·정부지원금 기준을 별도 가입 없이 <strong class="text-slate-800 font-bold">1초 만에 무료로</strong> 정확하게 확인하세요.
+                    <p class="text-base sm:text-lg text-slate-600 mt-2 leading-relaxed">
+                        복잡한 세법·4대보험·정부지원금 기준을 별도 가입 없이 <strong class="text-slate-900 font-bold">1초 만에 무료로</strong> 정확하게 확인하세요.
                     </p>
                 </div>
 
                 <!-- 굵고 시원한 검색창 -->
-                <div class="w-full md:w-[420px] relative">
+                <div class="w-full md:w-[440px] relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                         <svg class="svg-icon w-5 h-5 text-slate-400" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -353,27 +353,27 @@
                         </svg>
                     </div>
                     <input type="text" id="calcSearchInput" placeholder="100% 무료 계산기 검색 (연봉, 양도세, 실업급여...)" 
-                           class="w-full pl-12 pr-12 py-3.5 bg-slate-50 border-2 border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-base font-bold transition focus:outline-none">
-                    <button type="button" onclick="document.getElementById('calcSearchInput').focus()" class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-extrabold text-blue-600 hover:text-blue-700">
+                           class="w-full pl-12 pr-24 py-3.5 bg-slate-50 border-2 border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-base font-bold transition focus:outline-none">
+                    <button type="button" onclick="document.getElementById('calcSearchInput').focus()" class="absolute right-4 top-1/2 -translate-y-1/2 text-sm sm:text-base font-extrabold text-blue-600 hover:text-blue-700 whitespace-nowrap">
                         무료검색
                     </button>
                 </div>
             </div>
 
             <!-- 자주 찾는 추천 검색어 -->
-            <div class="mt-5 flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600 pt-4 border-t border-slate-100">
+            <div class="mt-5 flex flex-wrap items-center gap-2 text-sm sm:text-base text-slate-600 pt-4 border-t border-slate-100">
                 <span class="font-extrabold text-slate-900 flex items-center gap-1 mr-1">
                     <svg class="svg-icon w-4 h-4 text-slate-700" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
                     <span>인기 무료 계산:</span>
                 </span>
-                <button type="button" onclick="quickSearch('연봉')" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200/80 hover:bg-blue-100 font-bold transition">#무료연봉계산</button>
-                <button type="button" onclick="quickSearch('실업급여')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료실업급여</button>
-                <button type="button" onclick="quickSearch('알바')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료알바시급</button>
-                <button type="button" onclick="quickSearch('양도세')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료양도세계산</button>
-                <button type="button" onclick="quickSearch('청년')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#청년지원무료조회</button>
-                <button type="button" onclick="quickSearch('부모급여')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#부모급여무료조회</button>
-                <button type="button" onclick="quickSearch('버팀목')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#버팀목무료조회</button>
-                <button type="button" onclick="quickSearch('DSR')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#대출DSR무료계산</button>
+                <button type="button" onclick="quickSearch('연봉')" class="px-3.5 py-2 rounded-lg bg-blue-50 text-blue-700 border border-blue-200/80 hover:bg-blue-100 font-bold transition">#무료연봉계산</button>
+                <button type="button" onclick="quickSearch('실업급여')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료실업급여</button>
+                <button type="button" onclick="quickSearch('알바')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료알바시급</button>
+                <button type="button" onclick="quickSearch('양도세')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#무료양도세계산</button>
+                <button type="button" onclick="quickSearch('청년')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#청년지원무료조회</button>
+                <button type="button" onclick="quickSearch('부모급여')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#부모급여무료조회</button>
+                <button type="button" onclick="quickSearch('버팀목')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#버팀목무료조회</button>
+                <button type="button" onclick="quickSearch('DSR')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-600 font-bold transition">#대출DSR무료계산</button>
             </div>
         </div>
     </div>
@@ -427,12 +427,12 @@
 
         <!-- [가장 많이 찾는 추천 계산기 4선] 배너 박스 (단색 라인 아이콘 적용) -->
         <section class="mb-10" id="popularSection">
-            <div class="flex items-center justify-between mb-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                 <div class="flex items-center gap-2">
-                    <svg class="svg-icon w-5 h-5 text-slate-800" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg class="svg-icon w-5 h-5 text-slate-800 shrink-0" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">가장 많이 찾는 인기 계산기</h2>
                 </div>
-                <span class="text-xs sm:text-sm font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                <span class="text-xs sm:text-sm font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 shrink-0 whitespace-nowrap">
                     회원가입 없는 100% 무료
                 </span>
             </div>
@@ -504,20 +504,20 @@
 
                 <!-- 1. 급여·소득·근로 센터 (검색 트렌드 1위) -->
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-5">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                                 <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-wrap items-center gap-2">
                                     <h3 class="font-black text-lg sm:text-xl text-slate-900">급여·소득·근로 센터</h3>
-                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">100% 무료</span>
+                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">100% 무료</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-400">2026년 최신 4대보험, 법정 최저시급, 근로기준법</p>
                             </div>
                         </div>
-                        <a href="salary.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <a href="salary.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition shrink-0 whitespace-nowrap">
                             <span>더보기</span>
                             <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a>
@@ -568,20 +568,20 @@
 
                 <!-- 2. 부동산 & 주거 금융 센터 (검색 트렌드 2위) -->
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-5">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                                 <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-wrap items-center gap-2">
                                     <h3 class="font-black text-lg sm:text-xl text-slate-900">부동산 & 주거 금융 센터</h3>
-                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">100% 무료</span>
+                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">100% 무료</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-400">1세대 1주택 비과세 세법 및 국토교통부 표준 요율</p>
                             </div>
                         </div>
-                        <a href="real-transfer-tax.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <a href="real-transfer-tax.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition shrink-0 whitespace-nowrap">
                             <span>더보기</span>
                             <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a>
@@ -616,20 +616,20 @@
 
                 <!-- 3. 정부지원 & 복지 혜택 센터 (검색 트렌드 3위) -->
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-5">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                                 <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-wrap items-center gap-2">
                                     <h3 class="font-black text-lg sm:text-xl text-slate-900">정부지원 & 복지 혜택 센터</h3>
-                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">100% 무료</span>
+                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">100% 무료</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-400">2026 보건복지부·국토교통부·국세청 지원금 모의 판정</p>
                             </div>
                         </div>
-                        <a href="gov-rent.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <a href="gov-rent.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition shrink-0 whitespace-nowrap">
                             <span>더보기</span>
                             <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a>
@@ -672,20 +672,20 @@
 
                 <!-- 4. 대출·금융·생활 센터 -->
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-5">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                                 <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-wrap items-center gap-2">
                                     <h3 class="font-black text-lg sm:text-xl text-slate-900">대출·금융·생활 센터</h3>
-                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">100% 무료</span>
+                                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">100% 무료</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-400">스트레스 DSR 규제 및 재테크 만기 이자</p>
                             </div>
                         </div>
-                        <a href="loan-dsr.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <a href="loan-dsr.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition shrink-0 whitespace-nowrap">
                             <span>더보기</span>
                             <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a>
@@ -729,20 +729,20 @@
                 
                 <!-- 2026 위집 금융·정책 지식 칼럼 매거진 그리드 -->
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-5">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                                 <svg class="svg-icon w-4 h-4 text-blue-600" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-wrap items-center gap-2">
                                     <h3 class="font-black text-lg sm:text-xl text-slate-900">WE ZIP 금융·정책 지식 칼럼</h3>
-                                    <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">전문 리포트</span>
+                                    <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0">전문 리포트</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-400">2026년 최신 세법·노동법령·금융규제 심층 분석</p>
                             </div>
                         </div>
-                        <a href="blog.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition">
+                        <a href="blog.html" class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 transition shrink-0 whitespace-nowrap">
                             <span>전체보기</span>
                             <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </a>

@@ -19,23 +19,30 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  font-size: 16px;
+  overflow-x: clip;
+}
+
 body {
   background-color: var(--bg-page);
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
+  font-size: 16.5px;
+  overflow-x: clip;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 17.5px;
+    line-height: 1.75;
   }
 }
 
-/* 폼 인풋 기본 리셋 (모바일 자동 줌 방지 & PC 시원한 크기) */
+/* 폼 인풋 기본 리셋 (모바일 자동 줌 방지 & 시니어 가독성 강화) */
 input, select, button, textarea {
   font-size: 16px;
 }
@@ -69,14 +76,15 @@ input[type="number"] {
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* 퀵 머니 추가 버튼 (무채색 심플) */
+/* 퀵 머니 추가 버튼 (무채색 심플 + 모바일 터치 영역 확대) */
 .quick-btn {
-  padding: 6px 12px;
+  padding: 8px 14px;
+  min-height: 40px;
   background-color: #f1f5f9;
   color: #334155;
   border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14.5px;
+  font-weight: 600;
   transition: background-color 0.15s ease;
   white-space: nowrap;
   user-select: none;
@@ -92,9 +100,10 @@ input[type="number"] {
 
 /* 탭 버튼 */
 .filter-tab {
-  padding: 8px 16px;
+  padding: 9px 16px;
+  min-height: 42px;
   border-radius: 9999px;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 600;
   color: #64748b;
   background-color: transparent;
@@ -196,4 +205,293 @@ td {
 [class*="rounded-full"],
 [class*="rounded"] span {
   word-break: keep-all;
+}
+
+/* ============================================================
+   전역 시니어 친화 가독성 & 모바일 반응형 최적화 (204개 페이지 공통)
+   ============================================================ */
+main,
+article,
+section {
+  min-width: 0;
+}
+
+.overflow-x-auto {
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 본문 영역(main) 전체 폰트 스케일 상향 (모바일 기본) */
+html body main .text-\[10px\],
+html body main .text-\[11px\] {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+html body main .text-xs {
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+html body main .text-sm {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+html body main .text-base {
+  font-size: 17.5px;
+  line-height: 1.75;
+}
+
+html body main .text-lg {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+html body main .text-xl {
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+html body main .text-2xl {
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+html body main .text-3xl {
+  font-size: 27px;
+  line-height: 1.3;
+}
+
+html body main .text-4xl {
+  font-size: 32px;
+  line-height: 1.22;
+}
+
+@media (min-width: 640px) {
+  html body main .text-\[10px\],
+  html body main .text-\[11px\],
+  html body main .sm\:text-\[11px\] {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  html body main .text-xs,
+  html body main .sm\:text-xs {
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  html body main .text-sm,
+  html body main .sm\:text-sm {
+    font-size: 16.5px;
+    line-height: 1.72;
+  }
+
+  html body main .text-base,
+  html body main .sm\:text-base {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  html body main .text-lg,
+  html body main .sm\:text-lg {
+    font-size: 20px;
+    line-height: 1.55;
+  }
+
+  html body main .text-xl,
+  html body main .sm\:text-xl {
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  html body main .text-2xl,
+  html body main .sm\:text-2xl {
+    font-size: 27px;
+    line-height: 1.35;
+  }
+
+  html body main .text-3xl,
+  html body main .sm\:text-3xl {
+    font-size: 32px;
+    line-height: 1.3;
+  }
+
+  html body main .text-4xl,
+  html body main .sm\:text-4xl {
+    font-size: 38px;
+    line-height: 1.2;
+  }
+}
+
+@media (min-width: 768px) {
+  html body main .md\:text-sm {
+    font-size: 16.5px;
+    line-height: 1.72;
+  }
+
+  html body main .md\:text-base {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  html body main .md\:text-lg {
+    font-size: 20px;
+    line-height: 1.55;
+  }
+
+  html body main .md\:text-xl {
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  html body main .md\:text-2xl {
+    font-size: 27px;
+    line-height: 1.35;
+  }
+}
+
+/* 장문 칼럼(article) 본문 & 표 읽기 최적화 */
+html body main {
+  min-width: 0;
+}
+
+html body main article {
+  font-size: 17px;
+  line-height: 1.82;
+}
+
+html body main article p,
+html body main article li {
+  font-size: 16.5px;
+  line-height: 1.82;
+}
+
+html body main article .text-xs {
+  font-size: 15.5px;
+  line-height: 1.72;
+}
+
+html body main article .text-sm {
+  font-size: 16.5px;
+  line-height: 1.78;
+}
+
+html body main article .text-base {
+  font-size: 17.5px;
+  line-height: 1.82;
+}
+
+html body main article .text-lg {
+  font-size: 19.5px;
+  line-height: 1.55;
+}
+
+html body main article .text-xl {
+  font-size: 22px;
+  line-height: 1.42;
+}
+
+html body main article .text-2xl {
+  font-size: 25px;
+  line-height: 1.32;
+}
+
+html body main table {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+@media (max-width: 639px) {
+  html body main .overflow-x-auto {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html body main table th,
+  html body main table td {
+    padding: 0.65rem 0.6rem;
+    word-break: keep-all;
+  }
+}
+
+@media (min-width: 640px) {
+  html body main article {
+    font-size: 18px;
+    line-height: 1.85;
+  }
+
+  html body main article p,
+  html body main article li {
+    font-size: 17.5px;
+    line-height: 1.85;
+  }
+
+  html body main article .text-xs,
+  html body main article .sm\:text-xs {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  html body main article .text-sm,
+  html body main article .sm\:text-sm {
+    font-size: 17.5px;
+    line-height: 1.82;
+  }
+
+  html body main article .text-base,
+  html body main article .sm\:text-base {
+    font-size: 18.5px;
+    line-height: 1.85;
+  }
+
+  html body main article .text-lg,
+  html body main article .sm\:text-lg {
+    font-size: 21px;
+    line-height: 1.55;
+  }
+
+  html body main article .text-xl,
+  html body main article .sm\:text-xl {
+    font-size: 24px;
+    line-height: 1.42;
+  }
+
+  html body main article .text-2xl,
+  html body main article .sm\:text-2xl {
+    font-size: 28px;
+    line-height: 1.32;
+  }
+
+  html body main table {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+/* 모바일 드롭다운 내비게이션 & 푸터 가독성/터치성 개선 */
+#mobileNavMenu .text-xs {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+#mobileNavMenu a {
+  font-size: 15px;
+  min-height: 44px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+html body footer .text-xs {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+html body footer .text-sm {
+  font-size: 15px;
+  line-height: 1.6;
 }
