@@ -13,12 +13,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 정부지원금 & 소상공인 사업자 지원금 찾기 | 위집 (wezip)</title>
-    <meta name="description" content="2026년 중앙부처·지자체 40대 핵심 정책! 청년·출산·주거 복지부터 소상공인 정책자금, 전기료, 스마트상점, 점포철거비까지 1초 만에 맞춤 매칭하고 복지로·정부24·소상공인24 공식 신청 링크를 확인하세요.">
+    <meta name="description" content="2026년 중앙부처·지자체 52대 핵심 정부지원금! 청년·출산·주거 복지부터 소상공인 정책자금, 전기료, 스마트상점, 점포철거비, 세액감면까지 1초 만에 맞춤 매칭하고 위집 지원금 계산기로 즉시 모의 계산하세요.">
     <link rel="canonical" href="https://wezip.co.kr/gov-finder.html">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="2026 정부지원금 & 사업자 지원금 찾기 | 위집">
-    <meta property="og:description" content="청년월세·부모급여·근로장려금 및 소상공인 정책자금·전기료·스마트상점 40대 정부 정책 실시간 매칭">
+    <meta property="og:title" content="2026 정부지원금 & 소상공인 사업자 지원금 찾기 | 위집">
+    <meta property="og:description" content="청년월세·부모급여·근로장려금 및 소상공인 정책자금·전기료·스마트상점·세액감면 52대 핵심 정부지원금 실시간 매칭">
     <meta property="og:image" content="https://wezip.co.kr/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -43,11 +43,11 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "나에게 맞는 정부지원금 & 정책 찾기",
+      "name": "나에게 맞는 정부지원금 찾기",
       "url": "https://wezip.co.kr/gov-finder.html",
       "applicationCategory": "GovernmentApplication",
       "operatingSystem": "All",
-      "description": "2026년 대한민국 정부 복지·주거·금융·출산 32대 지원금 맞춤형 매칭 및 모의 판정 서비스",
+      "description": "2026년 대한민국 정부 복지·주거·소상공인·출산 52대 핵심 지원금 맞춤형 매칭 및 모의 계산 서비스",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -317,43 +317,152 @@
         <div class="text-center mb-8 space-y-2">
             <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-blue-50 text-blue-800 border border-blue-200 rounded-full text-xs font-bold shadow-xs">
                 <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                <span>2026 정부지원금 & 정책 매칭 엔진 (개인 복지 & 사업자 40대 DB)</span>
+                <span>2026 정부지원금 실시간 매칭 엔진 (개인 복지 30종 & 소상공인 22종 등 52대 지원금 DB)</span>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">나에게 맞는 정부 지원금 & 정책 찾기</h1>
-            <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">내 상황(연령, 가구, 주거, 경제활동 또는 사업자 여부)을 선택하거나 검색하면, 2026년 중앙부처·지자체 40대 핵심 정책(개인 복지 및 소상공인·자영업자 지원) 중 내가 받을 수 있는 최대 지원금과 공식 신청 링크(복지로, 정부24, 소상공인24 등)를 1초 만에 찾아드립니다.</p>
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">나에게 맞는 정부지원금 찾기</h1>
+            <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">내 상황(소상공인·사업자 여부, 연령, 소득, 가구, 주거)을 선택하거나 검색하면, 2026년 중앙부처·지자체 52대 핵심 지원금(개인·가구 복지 및 소상공인·자영업자 특화 지원금) 중 내가 받을 수 있는 최대 지원금과 위집 지원금 계산기를 1초 만에 찾아드립니다.</p>
         </div>
 
-        <!-- 지원금 대상 대분류 탭 (전체 / 개인·가구 복지 / 소상공인·사업자 지원금) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-2 sm:p-2.5 shadow-xs mb-4 flex items-center justify-between gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold">
+        <!-- 지원금 대상 대분류 탭 (전체 / 소상공인·사업자 지원금 / 개인·가구 지원금) -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-2 sm:p-2.5 shadow-xs mb-5 flex items-center justify-between gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold">
             <button type="button" id="categoryTabAll" onclick="switchCategoryTab('all')"
                     class="flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5">
-                <span>전체 정책 (40건)</span>
-            </button>
-            <button type="button" id="categoryTabPersonal" onclick="switchCategoryTab('personal')"
-                    class="flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80">
-                <span>개인·가구 복지</span>
+                <span>전체 지원금 (52건)</span>
             </button>
             <button type="button" id="categoryTabBusiness" onclick="switchCategoryTab('business')"
                     class="flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80">
                 <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                <span class="text-blue-900 font-extrabold">소상공인·사업자 지원금</span>
+                <span class="text-blue-900 font-extrabold">소상공인·사업자 지원금 (22건)</span>
+            </button>
+            <button type="button" id="categoryTabPersonal" onclick="switchCategoryTab('personal')"
+                    class="flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80">
+                <span>개인·가구 지원금 (30건)</span>
             </button>
         </div>
 
-        <!-- 실시간 키워드 검색창 카드 -->
+        <!-- [나의 5대 맞춤 조건 선택 (필터링 카드 - 상단 즉시 노출)] -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-xs space-y-6 mb-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                <div>
+                    <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-black">1</span>
+                        <span>나의 5대 맞춤 조건 선택 (개인·사업자 실시간 매칭)</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">사업자 여부, 연령, 소득, 가구, 주거 조건을 클릭하시면 나에게 딱 맞는 지원금으로 실시간 좁혀집니다.</p>
+                </div>
+                <button type="button" onclick="resetFilters()" class="text-xs text-slate-500 hover:text-blue-600 font-bold transition flex items-center gap-1 border border-slate-200 px-2.5 py-1.5 rounded-lg bg-slate-50">
+                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                    <span>조건 초기화</span>
+                </button>
+            </div>
+
+            <!-- 1. 고용 및 경제활동 (사업자 vs 개인) -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">1. 대상 구분 (사업자 / 직종)</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="business">
+                        소상공인 / 자영업자
+                    </button>
+                    <button type="button" class="filter-btn active p-2.5 sm:p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="job" data-value="employee">
+                        직장인 (근로소득자)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="part_time">
+                        알바 / 프리랜서 (3.3%)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="jobless">
+                        구직자 / 퇴사자 / 미취업
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. 연령대 -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">2. 연령대</label>
+                <div class="grid grid-cols-3 gap-2 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-2.5 sm:p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="age" data-value="youth">
+                        청년층 (만 19~34세)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="middle">
+                        중장년 (만 35~64세)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="senior">
+                        어르신 (만 65세 이상)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 소득 구간 -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">3. 대략적인 연 소득 (또는 매출 규모)</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-2.5 sm:p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="income" data-value="low">
+                        중위 60% 이하 (월 143만 이하)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under36">
+                        연 3,600만 원 이하
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under75">
+                        연 7,500만 원 이하
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="over75">
+                        연 7,500만 원 초과
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. 가구 형태 -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">4. 가구 구성</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-2.5 sm:p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="family" data-value="single">
+                        1인 단독 가구
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="newlywed">
+                        신혼부부 (7년 이내)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="infant">
+                        영유아 자녀 (0~2세)
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="child">
+                        미성년/다자녀 (3~18세)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. 주거 형태 -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">5. 주거 형태</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs sm:text-sm font-semibold">
+                    <button type="button" class="filter-btn active p-2.5 sm:p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="housing" data-value="rent">
+                        무주택 월세
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="jeonse">
+                        무주택 전세
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="first_buy">
+                        생애최초 주택구입
+                    </button>
+                    <button type="button" class="filter-btn p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="owner">
+                        1주택 자가 보유
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 실시간 키워드 직접 검색창 카드 -->
         <form onsubmit="executeSearch(event)" class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs mb-6">
             <div class="flex items-center justify-between mb-2">
                 <label for="policySearchInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     지원금 직접 검색 (명칭 또는 키워드 입력)
                 </label>
                 <span id="quickMatchBadge" class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
-                    실시간 40대 정책 검색
+                    실시간 52대 지원금 검색
                 </span>
             </div>
             <div class="flex gap-2">
                 <div class="relative flex-grow">
                     <input type="text" id="policySearchInput" oninput="handlePolicySearch(this.value)"
-                           placeholder="예: 소상공인, 사업자대출, 점포철거비, 스마트상점, 청년월세, 부모급여 등..."
+                           placeholder="예: 소상공인, 사업자대출, 점포철거비, 스마트상점, 카드수수료, 세액감면, 에어컨지원, 청년월세, 부모급여 등..."
                            class="w-full pl-10 pr-10 py-3.5 rounded-xl bg-slate-50 border-2 border-slate-200 text-sm sm:text-base font-bold text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:border-blue-600 transition">
                     <svg class="svg-icon w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1" aria-label="검색어 지우기">
@@ -366,31 +475,32 @@
                 </button>
             </div>
             <div class="flex flex-wrap items-center gap-1.5 mt-3 text-xs text-slate-500 pt-2 border-t border-slate-100">
-                <span class="font-bold text-slate-700">인기 키워드:</span>
+                <span class="font-bold text-slate-700">인기 검색어:</span>
                 <button type="button" onclick="setSearchTerm('소상공인')" class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#소상공인</button>
                 <button type="button" onclick="setSearchTerm('사업자대출')" class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#사업자대출</button>
                 <button type="button" onclick="setSearchTerm('점포철거비')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#점포철거비</button>
                 <button type="button" onclick="setSearchTerm('스마트상점')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#스마트상점</button>
+                <button type="button" onclick="setSearchTerm('카드수수료')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#카드수수료</button>
+                <button type="button" onclick="setSearchTerm('창업세액감면')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#창업세액감면</button>
+                <button type="button" onclick="setSearchTerm('노란우산')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#노란우산</button>
                 <button type="button" onclick="setSearchTerm('청년월세')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#청년월세</button>
                 <button type="button" onclick="setSearchTerm('부모급여')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#부모급여</button>
-                <button type="button" onclick="setSearchTerm('노란우산')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#노란우산</button>
-                <button type="button" onclick="setSearchTerm('K-패스')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#K-패스</button>
             </div>
         </form>
 
-        <!-- 매칭 결과 영역 (검색창 바로 밑에 배치하여 눈앞에서 즉시 확인!) -->
+        <!-- 실시간 맞춤 지원금 매칭 결과 영역 -->
         <div id="resultsSection" class="space-y-6 mb-10">
             <!-- 요약 리포트 카드 -->
             <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-blue-300 bg-blue-950/70 border border-blue-500/30 px-2.5 py-1 rounded-full">실시간 정책 매칭 결과</span>
-                            <span class="text-xs text-slate-400" id="dbTotalNotice">전체 40개 정책 DB</span>
+                            <span class="text-xs font-bold text-blue-300 bg-blue-950/70 border border-blue-500/30 px-2.5 py-1 rounded-full">실시간 지원금 매칭 결과</span>
+                            <span class="text-xs text-slate-400" id="dbTotalNotice">전체 52개 지원금 DB</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black mt-2">
-                            고객님께 해당되는 정부 혜택: 총 <span id="matchCount" class="text-blue-400 font-black">0</span>건
-                            <span class="text-xs font-normal text-slate-300 block sm:inline sm:ml-2" id="matchRatioText">(전체 40건 중 매칭)</span>
+                            고객님께 해당되는 정부지원금: 총 <span id="matchCount" class="text-blue-400 font-black">0</span>건
+                            <span class="text-xs font-normal text-slate-300 block sm:inline sm:ml-2" id="matchRatioText">(전체 52건 중 매칭)</span>
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-300 mt-1">예상 누적 최대 지원 가치: <span id="matchTotalAmount" class="font-extrabold text-white text-base sm:text-lg">0원</span></p>
                     </div>
@@ -403,118 +513,9 @@
                 </div>
             </div>
 
-            <!-- 매칭 정책 카드 그리드 -->
+            <!-- 매칭 지원금 카드 그리드 -->
             <div id="policyCardsGrid" class="grid grid-cols-1 gap-4">
                 <!-- 자바스크립트로 동적 렌더링 -->
-            </div>
-        </div>
-
-        <!-- [세부 맞춤 5대 기본 조건 선택 (필터링)] -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div>
-                    <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-black">2</span>
-                        <span>나의 상세 조건으로 더 정밀하게 맞추기 (선택 필터)</span>
-                    </h2>
-                    <p class="text-xs text-slate-400 mt-1">연령, 가구, 주거, 소득을 클릭하시면 나에게 딱 맞는 지원금으로 실시간 좁혀집니다.</p>
-                </div>
-                <button type="button" onclick="resetFilters()" class="text-xs text-slate-500 hover:text-blue-600 font-bold transition flex items-center gap-1 border border-slate-200 px-2.5 py-1.5 rounded-lg bg-slate-50">
-                    <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                    <span>조건 초기화</span>
-                </button>
-            </div>
-
-            <!-- 1. 연령대 -->
-            <div class="space-y-2.5">
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">1. 연령대</label>
-                <div class="grid grid-cols-3 gap-2.5 text-xs sm:text-sm font-semibold">
-                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="age" data-value="youth">
-                        청년층 (만 19~34세)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="middle">
-                        중장년 (만 35~64세)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="age" data-value="senior">
-                        어르신 (만 65세 이상)
-                    </button>
-                </div>
-            </div>
-
-            <!-- 2. 가구 형태 -->
-            <div class="space-y-2.5">
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">2. 가구 형태</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
-                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="family" data-value="single">
-                        1인 단독 가구
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="newlywed">
-                        신혼부부 (7년 이내)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="infant">
-                        영유아 자녀 (0~2세)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="family" data-value="child">
-                        미성년/다자녀 (3~18세)
-                    </button>
-                </div>
-            </div>
-
-            <!-- 3. 주거 형태 -->
-            <div class="space-y-2.5">
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">3. 주거 형태</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
-                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="housing" data-value="rent">
-                        무주택 월세
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="jeonse">
-                        무주택 전세
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="first_buy">
-                        생애최초 주택구입
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="housing" data-value="owner">
-                        1주택 자가 보유
-                    </button>
-                </div>
-            </div>
-
-            <!-- 4. 고용 / 소득 형태 -->
-            <div class="space-y-2.5">
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">4. 고용 및 경제활동 상태</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
-                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="job" data-value="employee">
-                        직장인 (근로소득자)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="part_time">
-                        알바 / 프리랜서 (3.3%)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="jobless">
-                        구직자 / 퇴사자 / 미취업
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="job" data-value="business">
-                        소상공인 / 자영업자
-                    </button>
-                </div>
-            </div>
-
-            <!-- 5. 소득 구간 -->
-            <div class="space-y-2.5">
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">5. 대략적인 연 소득 (또는 가구 기준)</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-semibold">
-                    <button type="button" class="filter-btn active p-3 rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition text-center" data-group="income" data-value="low">
-                        중위 60% 이하 (월 143만 이하)
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under36">
-                        연 3,600만 원 이하
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="under75">
-                        연 7,500만 원 이하
-                    </button>
-                    <button type="button" class="filter-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition text-center" data-group="income" data-value="over75">
-                        연 7,500만 원 초과
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -1396,7 +1397,211 @@
                 calcText: '수수료 절감 계산기',
                 officialName: '소상공인24 바로가기',
                 officialUrl: 'https://www.sbiz24.kr',
-                keywords: ['배달비지원', '공공배달앱', '배달특급', '땡겨요', '배달수수료', '외식업지원', '배달료환급'],
+                keywords: ['배달비지원', '공공배달앱', '배달특급', '땡겨요', '배달수수료', '외식업지원', '배달료환급', '소상공인'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_energy_efficiency',
+                category: 'business',
+                name: '소상공인 고효율 냉난방기·냉장고 교체 지원 (최대 480만원)',
+                dept: '산업통상자원부 / 한국전력',
+                badge: '교체비용 최대 70%',
+                amountNum: 4800000,
+                amountText: '에너지 1등급 냉난방기·냉장고 구입비 40~70% 국비 환급 (최대 480만 원)',
+                summary: '매장의 낡은 에어컨, 냉난방기, 냉장고 등을 1등급 고효율 기기로 교체 시 비용의 최대 70%를 직접 현금 환급',
+                req: '중소기업확인서(소상공인) 발급 가능한 사업자등록 완료 점포형 사업자',
+                linkUrl: 'hourly-wage.html',
+                calcText: '전기요금 절감 계산기',
+                officialName: '한전 엔터 바로가기',
+                officialUrl: 'https://en-ter.co.kr',
+                keywords: ['고효율냉난방기', '냉난방기지원', '한전소상공인', '에너지효율', '에어컨지원', '냉장고교체', '사업자지원'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_card_fee_refund',
+                category: 'business',
+                name: '영세·중소 가맹점 카드수수료 차액 환급 (최대 150만원)',
+                dept: '금융위원회 / 여신금융협회',
+                badge: '우대수수료 0.5% 적용',
+                amountNum: 1500000,
+                amountText: '일반수수료(2.2%)와 우대수수료(0.5%)의 차액을 전액 계좌 입금 소급 환급',
+                summary: '신규 창업 사업자가 영세·중소 가맹점으로 선정 시 상반기 납부했던 카드수수료 차액을 일괄 소급 환급',
+                req: '연매출 30억 이하 영세·중소 신용카드 가맹점 (연매출 3억 이하 시 수수료 0.5% 최저)',
+                linkUrl: 'salary.html',
+                calcText: '카드수수료 절감 계산기',
+                officialName: '가맹점매출거래정보 바로가기',
+                officialUrl: 'https://www.cardsales.or.kr',
+                keywords: ['카드수수료환급', '우대수수료', '영세가맹점', '카드매출환급', '여신금융협회', '소상공인'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_tax_reduction',
+                category: 'business',
+                name: '창업 중소기업·소상공인 소득세·법인세 5년간 50~100% 감면',
+                dept: '국세청 / 기획재정부',
+                badge: '소득세 최대 100% 감면',
+                amountNum: 12000000,
+                amountText: '창업 후 최초 소득 발생 연도부터 5년간 소득세·법인세 50%~100% 전액 감면',
+                summary: '만 34세 이하 청년 창업 또는 수도권과밀억제권역 외 창업 시 5년 동안 세금을 한 푼도 내지 않거나 절반 감면',
+                req: '조세특례제한법상 감면 대상 업종으로 최초 창업한 개인사업자 또는 법인사업자',
+                linkUrl: 'salary.html',
+                calcText: '종합소득세 절세 계산기',
+                officialName: '국세청 홈택스 바로가기',
+                officialUrl: 'https://www.hometax.go.kr',
+                keywords: ['창업세액감면', '소득세감면', '법인세감면', '청년창업감면', '조특법세액감면', '창업감면', '절세'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_hope_restart',
+                category: 'business',
+                name: '희망리턴패키지 재창업·사업화 무상 자금 (최대 2,000만원)',
+                dept: '중소벤처기업부 / 소진공',
+                badge: '무상 국비 최대 2,000만',
+                amountNum: 20000000,
+                amountText: '폐업 후 유망업종 재창업 시 인테리어, 마케팅, 시제품 제작비 최대 2,000만 원 무상 지원',
+                summary: '경영난 등으로 폐업했거나 폐업 예정인 소상공인이 새로운 업종으로 다시 일어설 수 있도록 국비 보조금 지원',
+                req: '최근 폐업 완료했거나 폐업 후 신규 창업을 준비 중인 재창업 소상공인',
+                linkUrl: 'severance.html',
+                calcText: '재창업 지원금 가이드',
+                officialName: '희망리턴패키지 바로가기',
+                officialUrl: 'https://hope.sbiz.or.kr',
+                keywords: ['재창업지원금', '사업화지원', '희망리턴패키지', '폐업후창업', '재창업바우처', '소진공지원'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_bad_debt_relief',
+                category: 'business',
+                name: '소상공인·자영업자 새출발기금 채무조정 (원금 최대 60~80% 감면)',
+                dept: '금융위원회 / 캠코',
+                badge: '원금 60~80% 감면',
+                amountNum: 30000000,
+                amountText: '부실차주 순부채의 60~80% 원금 직접 감면 및 최장 10~20년 장기 저금리 분할상환 전환',
+                summary: '코로나 및 고금리 장기화로 대출 상환이 불가능한 한계 사업자의 금융 채무를 대폭 탕감하고 재기 지원',
+                req: '코로나 피해 소상공인·자영업자 중 3개월 이상 연체 차주 또는 연체 우려 차주',
+                linkUrl: 'loan-dsr.html',
+                calcText: '채무감면 모의계산기',
+                officialName: '새출발기금 바로가기',
+                officialUrl: 'https://www.newstartfund.or.kr',
+                keywords: ['새출발기금', '채무조정', '원금감면', '부실채권탕감', '사업자대출탕감', '캠코', '대출감면'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_safety_voucher',
+                category: 'business',
+                name: '소상공인 풍수해보험 정부지원 (보험료 70~92% 국가 지원)',
+                dept: '행정안전부 / 지자체',
+                badge: '보험료 최대 92% 국비',
+                amountNum: 300000,
+                amountText: '태풍·홍수·호우 등 자연재해로 인한 점포 침수·파손 시 최대 1억 원 보상 (실부담 연 1~2만 원)',
+                summary: '지하 또는 1층 점포의 침수 피해, 강풍 파손 등 자연재해 대비 정부가 보험료 대부분을 대납하는 정책보험',
+                req: '소상공인기본법상 소상공인이 운영하는 상가·공장 (소유자 및 임차인 모두 가입 가능)',
+                linkUrl: 'hourly-wage.html',
+                calcText: '재해보험료 비교기',
+                officialName: '국민재난안전포털 바로가기',
+                officialUrl: 'https://www.safekorea.go.kr',
+                keywords: ['풍수해보험', '소상공인보험', '자연재해보험', '점포침수지원', '재해지원금', '행안부'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_traditional_market',
+                category: 'business',
+                name: '온누리상품권 가맹점 수수료 0% & 디지털 전통시장 바우처',
+                dept: '중소벤처기업부 / 소진공',
+                badge: '결제 수수료 0%',
+                amountNum: 1000000,
+                amountText: '모바일·충전식 온누리상품권 결제 시 가맹점 수수료 0원 + 10% 고객 할인으로 매출 증대',
+                summary: '전통시장 및 골목형 상점가 상인의 결제 수수료 부담을 없애고 온누리상품권 활성화로 단골 고객 유치',
+                req: '전통시장, 상점가, 골목형 상점가 내 사업자등록을 완료한 소상공인',
+                linkUrl: 'hourly-wage.html',
+                calcText: '가맹점 수수료 절감기',
+                officialName: '온누리상품권 바로가기',
+                officialUrl: 'https://www.sbiz.or.kr',
+                keywords: ['온누리상품권', '골목형상점가', '전통시장지원', '수수료0원', '온누리가맹점', '소상공인'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_patent_voucher',
+                category: 'business',
+                name: '소상공인 IP(지식재산) 역량강화 상표·특허 출원 지원 (최대 160만원)',
+                dept: '특허청 / 지역지식재산센터',
+                badge: '상표출원 최대 160만',
+                amountNum: 1600000,
+                amountText: '국내 상표출원 비용 60만 원, 해외 상표출원 최대 160만 원 (자부담 10~20% 수준)',
+                summary: '나만의 상호, 브랜드, 레시피, 제품 상표권을 대기업이나 타인에게 빼앗기지 않도록 출원 비용 지원',
+                req: '사업자등록 후 영업 중인 소상공인으로 고유 상표·상호 출원을 희망하는 사업자',
+                linkUrl: 'salary.html',
+                calcText: '지식재산권 지원 가이드',
+                officialName: '지역지식재산센터 바로가기',
+                officialUrl: 'https://www.ripc.org',
+                keywords: ['상표출원지원', '특허출원', '소상공인IP', '상호등록', '특허청지원', '브랜드보호'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_export_voucher',
+                category: 'business',
+                name: '소상공인 온라인 판로개척 및 마케팅 바우처 (최대 1,500만원)',
+                dept: '중소벤처기업부 / 중소기업유통센터',
+                badge: '온라인 홍보 최대 1,500만',
+                amountNum: 15000000,
+                amountText: '라이브커머스, 대형 오픈마켓 입점, 상세페이지 제작, SNS 광고비 최대 1,500만 원 지원',
+                summary: '오프라인 매장에 갇혀 있던 소상공인 상품을 쿠팡, 네이버, 11번가 및 해외 플랫폼에 진출시키는 마케팅 지원',
+                req: '통신판매업 신고 완료 또는 제조업·도소매업을 영위하는 소상공인',
+                linkUrl: 'hourly-wage.html',
+                calcText: '마케팅비 절감 계산기',
+                officialName: '판판대로 바로가기',
+                officialUrl: 'https://fanfandaero.kr',
+                keywords: ['온라인판로', '마케팅지원', '판판대로', '스마트스토어입점', '라이브커머스', '홍보바우처'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_kibo_shinbo',
+                category: 'business',
+                name: '신용보증재단·신보 소상공인 특례보증 (보증비율 95~100%)',
+                dept: '금융위원회 / 지역신보·신보',
+                badge: '보증비율 최대 100%',
+                amountNum: 70000000,
+                amountText: '담보력이 부족한 소상공인에게 최대 7,000만~1억 원 1금융권 대출 보증서 발급 (보증료 0.5% 우대)',
+                summary: '신용점수가 낮거나 부동산 담보가 없어도 정부 보증기관의 보증서로 시중은행 저금리 대출 실행',
+                req: '사업자등록 3개월 이상 정상 영업 중인 소기업·소상공인',
+                linkUrl: 'loan-dsr.html',
+                calcText: '특례보증 대출 계산기',
+                officialName: '신용보증재단중앙회 바로가기',
+                officialUrl: 'https://www.koreg.or.kr',
+                keywords: ['특례보증', '신용보증재단', '지역신보', '소상공인보증서', '보증서대출', '신보특례'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_hire_senior',
+                category: 'business',
+                name: '고령자 계속고용장려금 (만 60세 이상 계속고용 시 분기당 90만원)',
+                dept: '고용노동부',
+                badge: '1인당 연 최대 360만',
+                amountNum: 3600000,
+                amountText: '정년 이후에도 계속 고용하는 사업주에게 근로자 1인당 월 30만 원(분기 90만 원, 최대 3년 1,080만 원) 지원',
+                summary: '숙련된 고령 인력을 유지하는 중소기업 및 소상공인 사업주의 인건비 부담을 직접 경감',
+                req: '정년을 정하고 만 60세 이상 근로자를 계속 고용한 우선지원대상기업 사업주',
+                linkUrl: 'hourly-wage.html',
+                calcText: '고령자 인건비 지원기',
+                officialName: '고용24 계속고용 바로가기',
+                officialUrl: 'https://www.work24.go.kr',
+                keywords: ['계속고용장려금', '고령자고용', '시니어채용', '인건비지원', '고용노동부장려금', '사업주지원'],
+                match: (u) => u.job === 'business'
+            },
+            {
+                id: 'biz_maternity_substitute',
+                category: 'business',
+                name: '출산육아기 대체인력 인건비 지원 (월 최대 120만원)',
+                dept: '고용노동부',
+                badge: '인건비 월 120만원',
+                amountNum: 14400000,
+                amountText: '근로자의 출산휴가·육아휴직 기간 동안 대체인력을 채용한 사업주에게 월 120만 원 직접 지급',
+                summary: '소규모 사업장의 육아휴직에 따른 업무 공백을 줄이고 대체인력 고용 비용을 국가가 지원',
+                req: '출산휴가 또는 육아휴직 기간 중 대체인력을 30일 이상 고용한 사업주',
+                linkUrl: 'parental-leave.html',
+                calcText: '대체인력 지원금 계산기',
+                officialName: '고용24 바로가기',
+                officialUrl: 'https://www.work24.go.kr',
+                keywords: ['대체인력지원금', '육아휴직대체', '사업주인건비', '출산휴가지원', '고용24', '인건비지원'],
                 match: (u) => u.job === 'business'
             }
         ];
@@ -1413,7 +1618,7 @@
         let searchQuery = '';
         let activeCategoryTab = 'all'; // 'all', 'personal', 'business'
 
-        // 대분류 탭 전환 (전체 / 개인·가구 복지 / 소상공인·사업자 지원금)
+        // 대분류 탭 전환 (전체 / 소상공인·사업자 지원금 / 개인·가구 지원금)
         function switchCategoryTab(tab) {
             activeCategoryTab = tab;
             const btnAll = document.getElementById('categoryTabAll');
@@ -1435,11 +1640,11 @@
                 }
             } else if (tab === 'business') {
                 if (btnBusiness) btnBusiness.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
-                // 사업자 탭 선택 시 고용 형태를 자동으로 '소상공인 / 자영업자'로 전환
+                // 사업자 탭 선택 시 고용 형태를 자동으로 '소상공인 / 자영업자'로 동기화
                 setFilterValue('job', 'business');
             }
 
-            // 탭 클릭 시 이전 검색어가 있었다면 검색어 초기화하여 해당 탭 전체 정책이 깨끗하게 노출되도록 함
+            // 탭 클릭 시 이전 검색어가 있었다면 검색어 초기화하여 해당 탭 전체 지원금이 깨끗하게 노출되도록 함
             if (searchQuery) {
                 const input = document.getElementById('policySearchInput');
                 if (input) input.value = '';
@@ -1449,11 +1654,6 @@
             }
 
             runPolicyMatch();
-
-            const resultsEl = document.getElementById('resultsSection');
-            if (resultsEl) {
-                resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
         }
 
         // 검색 실행 (엔터키 및 [검색] 버튼)
@@ -1630,21 +1830,21 @@
 
             if (countEl) countEl.textContent = `${matched.length}건`;
             
-            let scopeText = '전체 40건 중';
+            let scopeText = `전체 ${totalDB}건 중`;
             if (searchQuery) {
-                scopeText = `'${searchQuery}' 검색 결과: 전체 40건 중`;
+                scopeText = `'${searchQuery}' 검색 결과: 전체 ${totalDB}건 중`;
             } else if (activeCategoryTab === 'business') {
-                scopeText = '소상공인·사업자 10대 정책 중';
+                scopeText = '소상공인·사업자 22대 지원금 중';
             } else if (activeCategoryTab === 'personal') {
-                scopeText = '개인·가구 30대 복지 중';
+                scopeText = '개인·가구 30대 지원금 중';
             }
             
             if (ratioTextEl) ratioTextEl.textContent = `(${scopeText} ${matched.length}건 매칭)`;
             if (dbTotalEl) {
                 if (searchQuery) dbTotalEl.textContent = '실시간 키워드 검색 모드';
-                else if (activeCategoryTab === 'business') dbTotalEl.textContent = '사업자 특화 10개 정책 DB';
-                else if (activeCategoryTab === 'personal') dbTotalEl.textContent = '개인·가구 30개 복지 DB';
-                else dbTotalEl.textContent = '전체 40개 정책 DB';
+                else if (activeCategoryTab === 'business') dbTotalEl.textContent = '사업자 특화 22개 지원금 DB';
+                else if (activeCategoryTab === 'personal') dbTotalEl.textContent = '개인·가구 30개 지원금 DB';
+                else dbTotalEl.textContent = `전체 ${totalDB}개 지원금 DB`;
             }
 
             let totalAmt = 0;
@@ -1695,18 +1895,15 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100">
-                        <a href="${p.linkUrl}" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5">
-                            <svg class="svg-icon w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
-                            <span>${p.calcText}</span>
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-3.5 border-t border-slate-100">
+                        <a href="${p.linkUrl}" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5 shadow-xs group">
+                            <svg class="svg-icon w-3.5 h-3.5 text-white" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+                            <span>${p.calcText} 바로가기</span>
+                            <svg class="svg-icon w-3.5 h-3.5 text-blue-200 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24"><path d="M5 12h14"></path><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
-                        <a href="${p.officialUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs group">
+                        <a href="${p.officialUrl}" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-slate-400 hover:text-slate-700 hover:underline flex items-center gap-1 transition py-1">
                             <span>${p.officialName}</span>
-                            <svg class="svg-icon w-3.5 h-3.5 text-blue-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
+                            <svg class="svg-icon w-3 h-3 text-slate-400" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
                     </div>
                 `;
@@ -1720,14 +1917,14 @@
             const matched = getFilteredPolicies();
 
             let text = `[위집 2026 정부지원금 매칭 결과 (총 ${totalDB}건 중 ${matched.length}건 매칭)]\n`;
-            text += `선택 모드: ${activeCategoryTab === 'business' ? '소상공인·사업자 지원금' : activeCategoryTab === 'personal' ? '개인·가구 복지' : '전체'}\n`;
+            text += `선택 모드: ${activeCategoryTab === 'business' ? '소상공인·사업자 지원금' : activeCategoryTab === 'personal' ? '개인·가구 지원금' : '전체 지원금'}\n`;
             if (activeCategoryTab !== 'business') {
                 text += `선택 조건: ${userState.age} / ${userState.family} / ${userState.housing} / ${userState.job} / ${userState.income}\n`;
             }
             if (searchQuery) {
                 text += `검색 키워드: ${searchQuery}\n`;
             }
-            text += `매칭 정책 총 ${matched.length}건\n\n`;
+            text += `매칭 지원금 총 ${matched.length}건\n\n`;
             matched.forEach((p, i) => {
                 text += `${i+1}. [${p.dept}] ${p.name}\n- 예상 혜택: ${p.amountText}\n- 지원 내용: ${p.summary}\n- 신청 공식처: ${p.officialName} (${p.officialUrl})\n\n`;
             });
