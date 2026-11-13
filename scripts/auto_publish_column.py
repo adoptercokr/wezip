@@ -121,7 +121,7 @@ def get_week_label(kst_date):
     return f"{kst_date.year}년 {kst_date.month}월 {week_num}주차"
 
 
-def fetch_weekly_policy_news(limit=12):
+def fetch_weekly_policy_news(limit=20):
     """Fetch recent 7-day Korean finance/policy/welfare headlines via Google News RSS."""
     queries = [
         "정부지원금 OR 복지정책 OR 연말정산 OR 세금개편 when:7d",
@@ -327,7 +327,10 @@ def select_best_catalog_topic(news_items, today_kst):
 
     for idx, topic in enumerate(unpublished):
         keywords = topic.get("keywords", [])
-        matched = [n for n in news_items if any(kw in n["title"] for kw in keywords)]
+        matched = [
+            n for n in news_items
+            if any(kw.replace(" ", "") in n["title"].replace(" ", "") for kw in keywords)
+        ]
         score = len(matched) * 5
         if cur_month in topic.get("best_months", []):
             score += 4
@@ -800,6 +803,23 @@ def update_blog_html(topic, today_str):
     articles_marker = "const ARTICLES = ["
     if articles_marker in content:
         content = content.replace(articles_marker, f"{articles_marker}\n{new_article_entry}", 1)
+
+    # Automatically synchronize total count spans and category count spans
+    content = re.sub(r'(<span id="countAll">)\d+(</span>)', rf'\g<1>{next_no}\g<2>', content)
+    content = re.sub(r'(<span id="filteredTotal"[^>]*>)\d+(</span>)', rf'\g<1>{next_no}\g<2>', content)
+
+    cat_id_map = {
+        "salary": "countSalary",
+        "realestate": "countRealestate",
+        "welfare": "countWelfare",
+        "finance": "countFinance",
+    }
+    cat_span_id = cat_id_map.get(topic.get("cat"))
+    if cat_span_id:
+        def inc_cat(m):
+            cur = int(m.group(2))
+            return f"{m.group(1)}{cur + 1}{m.group(3)}"
+        content = re.sub(rf'(<span id="{cat_span_id}">)(\d+)(</span>)', inc_cat, content)
 
     with open(blog_path, "w", encoding="utf-8") as f:
         f.write(content)
