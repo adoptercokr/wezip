@@ -341,41 +341,83 @@
         </div>
 
         <!-- 실시간 키워드 검색창 카드 -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs mb-6">
-            <label for="policySearchInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                지원금 직접 검색 (명칭 또는 키워드 입력)
-            </label>
-            <div class="relative">
-                <input type="text" id="policySearchInput" oninput="handlePolicySearch(this.value)"
-                       placeholder="예: 월세, 소상공인, 사업자대출, 점포철거비, 스마트상점, 부모급여, 교통비 등..."
-                       class="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500 transition">
-                <svg class="svg-icon w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-3 text-slate-400 hover:text-slate-600 p-1" aria-label="검색어 지우기">
-                    <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <form onsubmit="executeSearch(event)" class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs mb-6">
+            <div class="flex items-center justify-between mb-2">
+                <label for="policySearchInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    지원금 직접 검색 (명칭 또는 키워드 입력)
+                </label>
+                <span id="quickMatchBadge" class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+                    실시간 40대 정책 검색
+                </span>
+            </div>
+            <div class="flex gap-2">
+                <div class="relative flex-grow">
+                    <input type="text" id="policySearchInput" oninput="handlePolicySearch(this.value)"
+                           placeholder="예: 소상공인, 사업자대출, 점포철거비, 스마트상점, 청년월세, 부모급여 등..."
+                           class="w-full pl-10 pr-10 py-3.5 rounded-xl bg-slate-50 border-2 border-slate-200 text-sm sm:text-base font-bold text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:border-blue-600 transition">
+                    <svg class="svg-icon w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1" aria-label="검색어 지우기">
+                        <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <button type="submit" class="px-5 sm:px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm sm:text-base shrink-0 transition shadow-xs flex items-center gap-1.5 active:scale-98">
+                    <svg class="svg-icon w-4 h-4 text-white" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>검색</span>
                 </button>
             </div>
-            <div class="flex flex-wrap items-center gap-1.5 mt-2.5 text-[11px] text-slate-500">
-                <span class="font-bold text-slate-400">인기 키워드:</span>
-                <button type="button" onclick="setSearchTerm('소상공인')" class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#소상공인</button>
-                <button type="button" onclick="setSearchTerm('사업자대출')" class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#사업자대출</button>
-                <button type="button" onclick="setSearchTerm('점포철거비')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#점포철거비</button>
-                <button type="button" onclick="setSearchTerm('스마트상점')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#스마트상점</button>
-                <button type="button" onclick="setSearchTerm('청년월세')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#청년월세</button>
-                <button type="button" onclick="setSearchTerm('부모급여')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#부모급여</button>
-                <button type="button" onclick="setSearchTerm('노란우산')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#노란우산</button>
-                <button type="button" onclick="setSearchTerm('K-패스')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">#K-패스</button>
+            <div class="flex flex-wrap items-center gap-1.5 mt-3 text-xs text-slate-500 pt-2 border-t border-slate-100">
+                <span class="font-bold text-slate-700">인기 키워드:</span>
+                <button type="button" onclick="setSearchTerm('소상공인')" class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#소상공인</button>
+                <button type="button" onclick="setSearchTerm('사업자대출')" class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold transition">#사업자대출</button>
+                <button type="button" onclick="setSearchTerm('점포철거비')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#점포철거비</button>
+                <button type="button" onclick="setSearchTerm('스마트상점')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#스마트상점</button>
+                <button type="button" onclick="setSearchTerm('청년월세')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#청년월세</button>
+                <button type="button" onclick="setSearchTerm('부모급여')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#부모급여</button>
+                <button type="button" onclick="setSearchTerm('노란우산')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#노란우산</button>
+                <button type="button" onclick="setSearchTerm('K-패스')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">#K-패스</button>
+            </div>
+        </form>
+
+        <!-- 매칭 결과 영역 (검색창 바로 밑에 배치하여 눈앞에서 즉시 확인!) -->
+        <div id="resultsSection" class="space-y-6 mb-10">
+            <!-- 요약 리포트 카드 -->
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-blue-300 bg-blue-950/70 border border-blue-500/30 px-2.5 py-1 rounded-full">실시간 정책 매칭 결과</span>
+                            <span class="text-xs text-slate-400" id="dbTotalNotice">전체 40개 정책 DB</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black mt-2">
+                            고객님께 해당되는 정부 혜택: 총 <span id="matchCount" class="text-blue-400 font-black">0</span>건
+                            <span class="text-xs font-normal text-slate-300 block sm:inline sm:ml-2" id="matchRatioText">(전체 40건 중 매칭)</span>
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-1">예상 누적 최대 지원 가치: <span id="matchTotalAmount" class="font-extrabold text-white text-base sm:text-lg">0원</span></p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="copyResults()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center gap-1.5">
+                            <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>결과 복사</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매칭 정책 카드 그리드 -->
+            <div id="policyCardsGrid" class="grid grid-cols-1 gap-4">
+                <!-- 자바스크립트로 동적 렌더링 -->
             </div>
         </div>
 
-        <!-- 인터랙티브 조건 선택 필터 카드 -->
+        <!-- [세부 맞춤 5대 기본 조건 선택 (필터링)] -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
                     <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-black">1</span>
-                        <span>나의 5대 기본 조건 선택 (필터링)</span>
+                        <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-black">2</span>
+                        <span>나의 상세 조건으로 더 정밀하게 맞추기 (선택 필터)</span>
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">해당되는 항목을 클릭하여 선택해 주세요. 조건에 맞춰 실시간으로 매칭됩니다.</p>
+                    <p class="text-xs text-slate-400 mt-1">연령, 가구, 주거, 소득을 클릭하시면 나에게 딱 맞는 지원금으로 실시간 좁혀집니다.</p>
                 </div>
                 <button type="button" onclick="resetFilters()" class="text-xs text-slate-500 hover:text-blue-600 font-bold transition flex items-center gap-1 border border-slate-200 px-2.5 py-1.5 rounded-lg bg-slate-50">
                     <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
@@ -473,37 +515,6 @@
                         연 7,500만 원 초과
                     </button>
                 </div>
-            </div>
-        </div>
-
-        <!-- 매칭 결과 영역 -->
-        <div id="resultsSection" class="mt-8 space-y-6">
-            <!-- 요약 리포트 카드 -->
-            <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-blue-300 bg-blue-950/70 border border-blue-500/30 px-2.5 py-1 rounded-full">실시간 모의 매칭 결과</span>
-                            <span class="text-xs text-slate-400" id="dbTotalNotice">전체 40개 정책 DB</span>
-                        </div>
-                        <h3 class="text-xl sm:text-2xl font-black mt-2">
-                            고객님께 해당되는 정부 혜택: 총 <span id="matchCount" class="text-blue-400 font-black">0</span>건
-                            <span class="text-xs font-normal text-slate-300 block sm:inline sm:ml-2" id="matchRatioText">(전체 40건 중 매칭)</span>
-                        </h3>
-                        <p class="text-xs sm:text-sm text-slate-300 mt-1">예상 누적 최대 지원 가치: <span id="matchTotalAmount" class="font-extrabold text-white text-base sm:text-lg">0원</span></p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="copyResults()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center gap-1.5">
-                            <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                            <span>결과 복사</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 매칭 정책 카드 그리드 -->
-            <div id="policyCardsGrid" class="grid grid-cols-1 gap-4">
-                <!-- 자바스크립트로 동적 렌더링 -->
             </div>
         </div>
 
@@ -1106,24 +1117,26 @@
             },
             {
                 id: 'durunuri',
+                category: 'business',
                 name: '두루누리 사회보험료 지원 (국민연금·고용보험 80% 지원)',
-                dept: '고용노동부',
+                dept: '고용노동부 / 근로복지공단',
                 badge: '사회보험 80% 감면',
                 amountNum: 1150000,
                 amountText: '근로자와 사업주가 부담하는 국민연금·고용보험료의 80% 국가 지원',
-                summary: '소규모 사업장 저임금 근로자의 사회안전망 강화를 위해 보험료의 80%를 국가가 직접 대납',
-                req: '근로자 수 10인 미만 사업장, 월평균보수 270만 원 미만 신규 가입 근로자',
+                summary: '소규모 사업장 저임금 근로자 및 사업주의 사회안전망 강화를 위해 보험료의 80%를 국가가 직접 대납',
+                req: '근로자 수 10인 미만 사업장, 월평균보수 270만 원 미만 근로자 및 해당 사업주',
                 linkUrl: 'salary.html',
                 calcText: '4대보험 감면 계산기',
                 officialName: '4대사회보험 연계센터 바로가기',
                 officialUrl: 'https://www.4insure.or.kr',
-                keywords: ['두루누리', '사회보험지원', '국민연금감면', '고용보험지원', '소규모사업장'],
-                match: (u) => (u.job === 'employee' || u.job === 'part_time') && (u.income === 'low' || u.income === 'under36')
+                keywords: ['두루누리', '사회보험지원', '국민연금감면', '고용보험지원', '소규모사업장', '사업자지원', '사업주지원'],
+                match: (u) => (u.job === 'employee' || u.job === 'part_time' || u.job === 'business')
             },
             {
                 id: 'small_biz_electricity',
+                category: 'business',
                 name: '소상공인 전기요금 특별지원 (최대 20만원)',
-                dept: '중소벤처기업부',
+                dept: '중소벤처기업부 / 소진공',
                 badge: '전기료 20만원',
                 amountNum: 200000,
                 amountText: '사업자당 최대 20만 원 전기요금 직접 차감 및 환급',
@@ -1133,8 +1146,8 @@
                 calcText: '소상공인 지원금 계산기',
                 officialName: '소상공인전기요금특별지원 바로가기',
                 officialUrl: 'https://www.kised.or.kr',
-                keywords: ['소상공인', '전기요금', '전기세지원', '영세자영업자', '사업자지원'],
-                match: (u) => u.job === 'business' && (u.income === 'low' || u.income === 'under36')
+                keywords: ['소상공인', '전기요금', '전기세지원', '영세자영업자', '사업자지원', '전기료지원'],
+                match: (u) => u.job === 'business'
             },
             {
                 id: 'postpartum_care',
@@ -1408,22 +1421,54 @@
             const btnBusiness = document.getElementById('categoryTabBusiness');
 
             [btnAll, btnPersonal, btnBusiness].forEach(b => {
-                b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80";
+                if (b) {
+                    b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80";
+                }
             });
 
             if (tab === 'all') {
-                btnAll.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
+                if (btnAll) btnAll.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
             } else if (tab === 'personal') {
-                btnPersonal.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
+                if (btnPersonal) btnPersonal.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
                 if (userState.job === 'business') {
                     setFilterValue('job', 'employee');
                 }
             } else if (tab === 'business') {
-                btnBusiness.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
+                if (btnBusiness) btnBusiness.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
                 // 사업자 탭 선택 시 고용 형태를 자동으로 '소상공인 / 자영업자'로 전환
                 setFilterValue('job', 'business');
             }
+
+            // 탭 클릭 시 이전 검색어가 있었다면 검색어 초기화하여 해당 탭 전체 정책이 깨끗하게 노출되도록 함
+            if (searchQuery) {
+                const input = document.getElementById('policySearchInput');
+                if (input) input.value = '';
+                searchQuery = '';
+                const clearBtn = document.getElementById('clearSearchBtn');
+                if (clearBtn) clearBtn.classList.add('hidden');
+            }
+
             runPolicyMatch();
+
+            const resultsEl = document.getElementById('resultsSection');
+            if (resultsEl) {
+                resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 검색 실행 (엔터키 및 [검색] 버튼)
+        function executeSearch(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const input = document.getElementById('policySearchInput');
+            const val = input ? input.value : '';
+            handlePolicySearch(val);
+            const resultsEl = document.getElementById('resultsSection');
+            if (resultsEl) {
+                resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function setFilterValue(group, val) {
@@ -1463,8 +1508,10 @@
                     const btnAll = document.getElementById('categoryTabAll');
                     const btnPersonal = document.getElementById('categoryTabPersonal');
                     const btnBusiness = document.getElementById('categoryTabBusiness');
-                    [btnAll, btnPersonal].forEach(b => b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80");
-                    btnBusiness.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
+                    [btnAll, btnPersonal].forEach(b => {
+                        if (b) b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80";
+                    });
+                    if (btnBusiness) btnBusiness.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
                 }
                 runPolicyMatch();
             });
@@ -1474,10 +1521,12 @@
         function handlePolicySearch(val) {
             searchQuery = val.trim().toLowerCase();
             const clearBtn = document.getElementById('clearSearchBtn');
-            if (searchQuery.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
+            if (clearBtn) {
+                if (searchQuery.length > 0) {
+                    clearBtn.classList.remove('hidden');
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
             }
             runPolicyMatch();
         }
@@ -1485,17 +1534,26 @@
         // 검색어 초기화
         function clearSearch() {
             const input = document.getElementById('policySearchInput');
-            input.value = '';
+            if (input) input.value = '';
             searchQuery = '';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (clearBtn) clearBtn.classList.add('hidden');
             runPolicyMatch();
         }
 
         // 인기 키워드 클릭
         function setSearchTerm(term) {
             const input = document.getElementById('policySearchInput');
-            input.value = term;
+            if (input) input.value = term;
+            const bizKeywords = ['소상공인', '사업자대출', '점포철거비', '스마트상점', '노란우산', '배달비'];
+            if (bizKeywords.includes(term) && activeCategoryTab === 'personal') {
+                switchCategoryTab('all');
+            }
             handlePolicySearch(term);
+            const resultsEl = document.getElementById('resultsSection');
+            if (resultsEl) {
+                resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // 필터 초기화
@@ -1510,8 +1568,10 @@
             const btnAll = document.getElementById('categoryTabAll');
             const btnPersonal = document.getElementById('categoryTabPersonal');
             const btnBusiness = document.getElementById('categoryTabBusiness');
-            [btnPersonal, btnBusiness].forEach(b => b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80");
-            btnAll.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
+            [btnPersonal, btnBusiness].forEach(b => {
+                if (b) b.className = "flex-1 py-2.5 px-3 rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition flex items-center justify-center gap-1.5 border border-slate-200/80";
+            });
+            if (btnAll) btnAll.className = "flex-1 py-2.5 px-3 rounded-xl bg-blue-600 text-white shadow-xs transition flex items-center justify-center gap-1.5";
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 const group = btn.dataset.group;
@@ -1527,42 +1587,69 @@
             clearSearch();
         }
 
+        // 정책 필터링 공통 로직
+        function getFilteredPolicies() {
+            return POLICIES.filter(p => {
+                const isBizPolicy = p.category === 'business' || p.id === 'small_biz_electricity' || p.id === 'durunuri';
+
+                // 1. 검색어가 입력된 경우: 전체 40대 정책 DB에서 키워드 일치하는 모든 정책을 즉시 검색!
+                // (탭으로 인한 검색 누락을 방지하여 사용자가 원하는 정책을 무조건 바로 찾아줌)
+                if (searchQuery) {
+                    const nameMatch = p.name.toLowerCase().includes(searchQuery);
+                    const summaryMatch = p.summary.toLowerCase().includes(searchQuery);
+                    const deptMatch = p.dept.toLowerCase().includes(searchQuery);
+                    const reqMatch = p.req && p.req.toLowerCase().includes(searchQuery);
+                    const kwMatch = p.keywords && p.keywords.some(k => k.toLowerCase().includes(searchQuery));
+                    return (nameMatch || summaryMatch || deptMatch || reqMatch || kwMatch);
+                }
+
+                // 2. 검색어가 없을 때: 대분류 탭에 따른 필터링
+                if (activeCategoryTab === 'personal' && isBizPolicy) return false;
+                if (activeCategoryTab === 'business' && !isBizPolicy) return false;
+
+                // 3. 사업자 탭이면 10대 소상공인 정책 100% 노출
+                if (activeCategoryTab === 'business') {
+                    return true;
+                }
+
+                // 4. 개인 복지 또는 전체 모드일 때: 유저 5대 조건 매칭 검사
+                return p.match(userState);
+            });
+        }
+
         // 매칭 실행 함수
         function runPolicyMatch() {
             const totalDB = POLICIES.length;
-
-            const matched = POLICIES.filter(p => {
-                // 0. 대분류 탭 필터링
-                const isBizPolicy = p.category === 'business' || p.id === 'small_biz_electricity' || p.id === 'duru_nuri';
-                if (activeCategoryTab === 'personal' && p.category === 'business') return false;
-                if (activeCategoryTab === 'business' && !isBizPolicy) return false;
-
-                // 1. 조건 매칭 검사
-                const conditionPass = p.match(userState);
-
-                // 2. 검색어 매칭 검사
-                if (!searchQuery) return conditionPass;
-
-                const nameMatch = p.name.toLowerCase().includes(searchQuery);
-                const summaryMatch = p.summary.toLowerCase().includes(searchQuery);
-                const deptMatch = p.dept.toLowerCase().includes(searchQuery);
-                const kwMatch = p.keywords && p.keywords.some(k => k.toLowerCase().includes(searchQuery));
-
-                // 검색어가 있을 때는 검색어에 부합하는 정책을 우선 검출 (조건과 함께 만족하거나 검색어 직접 일치)
-                return (nameMatch || summaryMatch || deptMatch || kwMatch);
-            });
+            const matched = getFilteredPolicies();
 
             const countEl = document.getElementById('matchCount');
             const totalEl = document.getElementById('matchTotalAmount');
             const ratioTextEl = document.getElementById('matchRatioText');
+            const dbTotalEl = document.getElementById('dbTotalNotice');
             const grid = document.getElementById('policyCardsGrid');
 
-            countEl.textContent = `${matched.length}건`;
-            ratioTextEl.textContent = `(전체 ${totalDB}건 중 ${matched.length}건 매칭)`;
+            if (countEl) countEl.textContent = `${matched.length}건`;
+            
+            let scopeText = '전체 40건 중';
+            if (searchQuery) {
+                scopeText = `'${searchQuery}' 검색 결과: 전체 40건 중`;
+            } else if (activeCategoryTab === 'business') {
+                scopeText = '소상공인·사업자 10대 정책 중';
+            } else if (activeCategoryTab === 'personal') {
+                scopeText = '개인·가구 30대 복지 중';
+            }
+            
+            if (ratioTextEl) ratioTextEl.textContent = `(${scopeText} ${matched.length}건 매칭)`;
+            if (dbTotalEl) {
+                if (searchQuery) dbTotalEl.textContent = '실시간 키워드 검색 모드';
+                else if (activeCategoryTab === 'business') dbTotalEl.textContent = '사업자 특화 10개 정책 DB';
+                else if (activeCategoryTab === 'personal') dbTotalEl.textContent = '개인·가구 30개 복지 DB';
+                else dbTotalEl.textContent = '전체 40개 정책 DB';
+            }
 
             let totalAmt = 0;
             matched.forEach(p => totalAmt += p.amountNum);
-            totalEl.textContent = `${formatNumber(Math.floor(totalAmt / 10000))}만 원 상당`;
+            if (totalEl) totalEl.textContent = `${formatNumber(Math.floor(totalAmt / 10000))}만 원 상당`;
 
             grid.innerHTML = '';
 
@@ -1630,18 +1717,16 @@
         // 결과 복사 함수
         function copyResults() {
             const totalDB = POLICIES.length;
-            const matched = POLICIES.filter(p => {
-                const conditionPass = p.match(userState);
-                if (!searchQuery) return conditionPass;
-                const nameMatch = p.name.toLowerCase().includes(searchQuery);
-                const summaryMatch = p.summary.toLowerCase().includes(searchQuery);
-                const deptMatch = p.dept.toLowerCase().includes(searchQuery);
-                const kwMatch = p.keywords && p.keywords.some(k => k.toLowerCase().includes(searchQuery));
-                return (nameMatch || summaryMatch || deptMatch || kwMatch);
-            });
+            const matched = getFilteredPolicies();
 
             let text = `[위집 2026 정부지원금 매칭 결과 (총 ${totalDB}건 중 ${matched.length}건 매칭)]\n`;
-            text += `선택 조건: ${userState.age} / ${userState.family} / ${userState.housing} / ${userState.job} / ${userState.income}\n`;
+            text += `선택 모드: ${activeCategoryTab === 'business' ? '소상공인·사업자 지원금' : activeCategoryTab === 'personal' ? '개인·가구 복지' : '전체'}\n`;
+            if (activeCategoryTab !== 'business') {
+                text += `선택 조건: ${userState.age} / ${userState.family} / ${userState.housing} / ${userState.job} / ${userState.income}\n`;
+            }
+            if (searchQuery) {
+                text += `검색 키워드: ${searchQuery}\n`;
+            }
             text += `매칭 정책 총 ${matched.length}건\n\n`;
             matched.forEach((p, i) => {
                 text += `${i+1}. [${p.dept}] ${p.name}\n- 예상 혜택: ${p.amountText}\n- 지원 내용: ${p.summary}\n- 신청 공식처: ${p.officialName} (${p.officialUrl})\n\n`;
