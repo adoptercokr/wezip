@@ -372,6 +372,16 @@ def check_sitemap_and_rss(html_files: list[Path], errors: list[str]) -> None:
         except ET.ParseError as exc:
             errors.append(f"[RSS] XML parse error: {exc}")
 
+    # AI GEO / LLM Discovery files check
+    for geo_file in ("llms.txt", "llms-full.txt", "wezip2026indexnowkey8f9a2b3c4d5e.txt"):
+        gp = ROOT / geo_file
+        if not gp.exists() or gp.stat().st_size < 20:
+            errors.append(f"[AI_GEO] Required AI discovery file missing or empty: {geo_file}")
+
+    gov_finder_html = (ROOT / "gov-finder.html").read_text(encoding="utf-8")
+    if 'id="staticSubsidyCatalog"' not in gov_finder_html or '"@type": "ItemList"' not in gov_finder_html:
+        errors.append("[AI_GEO] gov-finder.html missing staticSubsidyCatalog or ItemList JSON-LD for AI crawlers")
+
 
 def main() -> int:
     html_files = sorted(ROOT.glob("*.html"))

@@ -997,6 +997,14 @@ def main():
     update_blog_html(selected_topic, today_str)
     update_sitemap(filename, today_str)
     update_rss(selected_topic)
+    # Refresh llms.txt & llms-full.txt and ping IndexNow for AI search engines
+    try:
+        import subprocess
+        gen_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generate_llms_txt.py")
+        if os.path.exists(gen_script):
+            subprocess.run([sys.executable, gen_script, "--ping"], cwd=HTML_DIR, timeout=30, check=False)
+    except Exception as exc:
+        print(f"[Info] LLM context sync warning: {exc}")
     if args.from_json and args.from_json != "-" and args.delete_json and os.path.exists(args.from_json):
         os.remove(args.from_json)
     print(f"Successfully published new column: {selected_topic['title']}")
