@@ -1224,4 +1224,10 @@
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
+    <url>
+        <loc>https://wezip.co.kr/blog-irp-year-end-900-refund.html</loc>
+        <lastmod>2026-11-13</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
 </urlset>

@@ -320,10 +320,10 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">52</span>)
+                        전체 (<span id="countAll">53</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (<span id="countSalary">18</span>)
+                        급여·노동 (<span id="countSalary">19</span>)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
                         부동산·주거 (<span id="countRealestate">13</span>)
@@ -347,7 +347,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">46</span>건의 칼럼 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">53</span>건의 칼럼 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 <div class="text-[11px] text-slate-400 hidden sm:block">
@@ -448,6 +448,17 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 53,
+        title: "12월 31일 전 통장에 900만 원만 옮겨도 세금 최대 148만 5,000원 현금으로 돌려받는 연말정산 마법",
+        desc: "연말정산 시즌 필수 절세 비법! 일반 적금에 넣어두면 이자세금만 떼이지만, 연금저축과 IRP 계좌로 옮기기만 해도 최대 148만 5,000원을 13월의 월급으로 돌려받는 초간단 원리와 주의사항 총정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "절세치트키",
+        date: "2026.11.13",
+        readTime: "약 8분",
+        link: "blog-irp-year-end-900-refund.html"
+      },
       {
         no: 52,
         title: "지금 11월부터 신용카드 긁으면 세금 1원도 못 깎는다? 12월 31일까지 연말정산 환급 2배 키우는 카드 전환 시점",
