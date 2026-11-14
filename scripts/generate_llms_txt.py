@@ -294,13 +294,13 @@ def update_gov_finder_html(policies: list[dict]) -> None:
 
     # 3. Insert or replace #staticSubsidyCatalog before FAQ section
     static_section = build_static_subsidy_catalog_section(policies)
-    existing_catalog_pat = re.compile(
-        r'(?:\s*<!-- 섹션 3-2:.*?id="staticSubsidyCatalog"[\s\S]*?</section>)+', re.M
-    )
-    if existing_catalog_pat.search(content):
-        content = existing_catalog_pat.sub(lambda _: "\n\n" + static_section, content, count=1)
+    target_faq = "            <!-- 섹션 4: FAQ -->"
+    catalog_start_marker = "<!-- 섹션 3-2:"
+    if catalog_start_marker in content and target_faq in content:
+        start_idx = content.find(catalog_start_marker)
+        faq_idx = content.find(target_faq)
+        content = content[:start_idx] + static_section.strip() + "\n\n            " + content[faq_idx:]
     else:
-        target_faq = "            <!-- 섹션 4: FAQ -->"
         if target_faq not in content:
             raise RuntimeError("Could not find FAQ section marker in gov-finder.html")
         content = content.replace(
