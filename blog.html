@@ -338,19 +338,19 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">56</span>)
+                        전체 (<span id="countAll">190</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (<span id="countSalary">21</span>)
+                        급여·노동 (<span id="countSalary">68</span>)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
-                        부동산·주거 (<span id="countRealestate">14</span>)
+                        부동산·주거 (<span id="countRealestate">38</span>)
                     </button>
                     <button type="button" onclick="setCategory('welfare')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="welfare">
-                        복지·지원금 (<span id="countWelfare">12</span>)
+                        복지·지원금 (<span id="countWelfare">55</span>)
                     </button>
                     <button type="button" onclick="setCategory('finance')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="finance">
-                        대출·금융 (<span id="countFinance">9</span>)
+                        대출·금융 (<span id="countFinance">29</span>)
                     </button>
                 </div>
 
@@ -365,7 +365,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">56</span>건의 칼럼 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">190</span>건의 칼럼 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 <div class="text-[11px] text-slate-400 hidden sm:block">
@@ -466,6 +466,1480 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 190,
+        title: "연금저축·IRP 매년 900만 원 다 채웠는데 또 300만 원 추가 공제가 된다고요? 만 55세 연금 수령 시 1,500만 원 분리과세 한도 지키기",
+        desc: "2026년 최신 법령·고시 기준 연금저축IRP세액공제900만원 및 사적연금분리과세1500만원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "연금저축IRP만기",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-isa-3year-rollover-pension-tax-credit-300man-2026.html"
+      },
+      {
+        no: 189,
+        title: "서울·수도권 역세권 신축 아파트에 주변 시세 30~60% 반값으로 최대 10~20년 산다! 2026 LH·SH 청년·신혼 매입임대 & 행복주택 당첨 공식",
+        desc: "2026년 최신 법령·고시 기준 LH청년매입임대주택 및 SH행복주택모집공고 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "LH·SH반값임대",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-public-rental-housing-happy-youth-newlywed-lh-sh-2026.html"
+      },
+      {
+        no: 188,
+        title: "출퇴근길에 지하철 계단에서 넘어지거나 알바하다 다쳐도 병원비+월급 70% 국가가 다 줍니다! 2026 산재보험 신청과 사장님 동의 불필요 원칙",
+        desc: "2026년 최신 법령·고시 기준 출퇴근산재처리방법 및 알바산재보험미가입보상 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "출퇴근산재보상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-industrial-accident-insurance-commute-part-time-2026.html"
+      },
+      {
+        no: 187,
+        title: "사장님이 갑자기 '이번 주말까지만 나오세요'라고 잘랐다면? 5인 미만 가게라도 한 달 치 월급 통째로 받는 해고예고수당 청구법",
+        desc: "2026년 최신 법령·고시 기준 해고예고수당조건 및 5인미만해고예고수당 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "해고예고수당30일",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-dismissal-advance-notice-allowance-30days-2026.html"
+      },
+      {
+        no: 186,
+        title: "1년 동안 못 쓴 연차휴가 그냥 소멸된다고요? 퇴사할 때·연말에 현금으로 100% 정산받는 미사용 연차수당 계산법과 연차촉진제 허점",
+        desc: "2026년 최신 법령·고시 기준 미사용연차수당계산기 및 1년미만입사자연차11개 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "미사용연차수당",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-annual-leave-allowance-unused-calculation-2026.html"
+      },
+      {
+        no: 185,
+        title: "연봉은 똑같은데 왜 내 옆자리 동료가 매달 실수령액을 8만 원씩 더 가져갈까요? 식대 20만·자가운전보조금 20만·출산보육수당 비과세의 비밀",
+        desc: "2026년 최신 법령·고시 기준 식대비과세20만원 및 자가운전보조금비과세 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "비과세월급인상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-non-taxable-meal-20man-car-20man-childcare-2026.html"
+      },
+      {
+        no: 184,
+        title: "직장인이 퇴근 후 스마트스토어·배달·유튜브 투잡 뛰면 회사에 통보될까요? 절대 안 걸리는 부업 소득 마지노선(연 2,000만 원)의 진실",
+        desc: "2026년 최신 법령·고시 기준 직장인투잡회사통보 및 보수외소득2000만원건강보험 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "직장인투잡비밀보장",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-n-job-side-hustle-company-notification-2000man-2026.html"
+      },
+      {
+        no: 183,
+        title: "배달라이더·작가·강사·유튜버 5월 종합소득세 신고 안 하면 떼인 3.3% 세금 절대 못 돌려받습니다! 단순경비율 vs 기준경비율 절세법",
+        desc: "2026년 최신 법령·고시 기준 프리랜서종합소득세환급 및 단순경비율기준경비율차이 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "프리랜서단순경비율",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-comprehensive-income-tax-simple-expense-rate-freelancer-2026.html"
+      },
+      {
+        no: 182,
+        title: "맞벌이 부부 연말정산할 때 신용카드는 누구 카드로 긁고 병원비는 누구에게 몰아줘야 환급금 100만 원 더 나올까요?",
+        desc: "2026년 최신 법령·고시 기준 맞벌이부부연말정산전략 및 신용카드소득공제몰아주기 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "맞벌이연말정산공식",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-year-end-tax-settlement-dual-income-couple-card-medical-2026.html"
+      },
+      {
+        no: 181,
+        title: "육아휴직 쓰면 월급 반토막 난다는 건 옛말! 2026 육아휴직급여 월 최대 250만 원 인상 & 부부 동시 6+6 부모육아휴직제 총정리",
+        desc: "2026년 최신 법령·고시 기준 육아휴직급여월250만원 및 6+6부모육아휴직제 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "육아휴직월250만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-parental-leave-pay-250man-6plus6-system-2026.html"
+      },
+      {
+        no: 180,
+        title: "내가 사표 내고 자진퇴사했는데도 실업급여 월 200만 원씩 다 받는다고요? 통근 왕복 3시간·임금체불·질병 정당한 퇴사 사유 7가지",
+        desc: "2026년 최신 법령·고시 기준 자진퇴사실업급여조건 및 통근거리왕복3시간실업급여 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "자진퇴사실업급여",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-unemployment-benefit-voluntary-resignation-commute-3hours-2026.html"
+      },
+      {
+        no: 179,
+        title: "퇴직금 1억 원 받을 때 일시금으로 찾으면 세금 다 내고, IRP 연금으로 받으면 퇴직소득세 30~40% 깎아줍니다! DB형 vs DC형 황금 공식",
+        desc: "2026년 최신 법령·고시 기준 퇴직연금DB형DC형차이 및 IRP퇴직금수령세금감면 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "퇴직금세금30%감면",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-severance-pay-dc-vs-db-irp-tax-reduction-30percent-2026.html"
+      },
+      {
+        no: 178,
+        title: "집이 한 채 있어도 만 65세 어르신 70%는 매달 약 34만 원 기초연금 받습니다! 2026 기초연금 선정기준액과 부부 감액(20%) 계산법",
+        desc: "2026년 최신 법령·고시 기준 기초연금수급자격 및 기초연금선정기준액 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "기초연금월34만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-basic-pension-34man-couple-reduction-property-2026.html"
+      },
+      {
+        no: 177,
+        title: "국민연금 가입 기간이 10년 안 돼서 연금 못 받는다고요? 만 60세 이후 임의계속가입과 추후납부(추납)로 평생 연금 2배 늘리는 법",
+        desc: "2026년 최신 법령·고시 기준 국민연금임의계속가입 및 국민연금추후납부추납 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "국민연금추납임의계속",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-national-pension-voluntary-continuation-return-payment-2026.html"
+      },
+      {
+        no: 176,
+        title: "국민연금 5년 일찍 받으면 30% 깎이고, 5년 늦춰 받으면 36% 더 줍니다! 내 수명과 건보료까지 따진 조기노령연금 vs 연기연금 손익분기점",
+        desc: "2026년 최신 법령·고시 기준 조기노령연금손익분기점 및 연기연금36%증액 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "조기연금vs연기연금",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-national-pension-early-vs-deferred-7-2-percent-2026.html"
+      },
+      {
+        no: 175,
+        title: "은퇴한 부모님 연금이 월 167만 원 넘는 순간 건강보험 피부양자 박탈됩니다! 지역건보료 폭탄 막는 소득·재산 커트라인",
+        desc: "2026년 최신 법령·고시 기준 건강보험피부양자자격조건 및 피부양자소득기준2000만원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "피부양자탈락방어",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sal-health-insurance-dependent-disqualification-defense-2026.html"
+      },
+      {
+        no: 174,
+        title: "나도 모르게 잠자고 있는 휴면예금·보험금·카드포인트 평균 28만 원, 수수료 0원으로 1분 만에 내 통장에 입금받는 법",
+        desc: "2026년 최신 법령·고시 기준 계좌정보통합관리서비스어카운트인포 및 카드포인트현금화 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "숨은내돈30만찾기",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-dormant-deposit-card-point-cash-out-2026.html"
+      },
+      {
+        no: 173,
+        title: "부모님께 집 살 돈 2억 빌릴 때 이자 안 주면 증여세 폭탄 맞을까요? 국세청이 인정하는 부모·자녀 차용증 무이자 한도(2.17억) 공식",
+        desc: "2026년 최신 법령·고시 기준 부모자녀차용증양식 및 가족간금전소비대차 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "부모님차용증2.17억",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-family-loan-iou-interest-rate-4-6-percent-2026.html"
+      },
+      {
+        no: 172,
+        title: "자녀 결혼·출산할 때 부모님이 1억 5,000만 원씩 양가 합산 3억 원 주셔도 증여세 0원입니다! 혼인·출산 증여재산공제 완벽 정리",
+        desc: "2026년 최신 법령·고시 기준 혼인출산증여재산공제 및 자녀결혼자금증여세 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "결혼출산3억증여",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-marriage-childbirth-gift-tax-3eok-exemption-2026.html"
+      },
+      {
+        no: 171,
+        title: "예금 이자랑 주식 배당금 합쳐서 1년에 2,000만 원 넘으면 세금·건보료 폭탄 맞습니다! 금융소득종합과세 피하는 5가지 철칙",
+        desc: "2026년 최신 법령·고시 기준 금융소득종합과세2000만원 및 이자배당소득건강보험료 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "금융소득2천만방어",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-financial-income-comprehensive-tax-2000man-defense-2026.html"
+      },
+      {
+        no: 170,
+        title: "미국 S&P500·나스닥100 ETF, 해외 직투할까 국내 상장 ISA·연금계좌에서 살까? 투자 금액별 가장 돈 버는 계좌 선택 공식",
+        desc: "2026년 최신 법령·고시 기준 미국S&P500ETF세금 및 해외주식직투vsISA 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "미국ETF절세공식",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-us-stock-etf-direct-vs-isa-pension-comparison-2026.html"
+      },
+      {
+        no: 169,
+        title: "금(Gold) 살 때 골드바나 은행 금통장으로 사면 세금·수수료로 15% 손해 봅니다! 매매차익 비과세 0% KRX 금시장 투자법",
+        desc: "2026년 최신 법령·고시 기준 KRX금시장계좌개설 및 금투자세금비교 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "KRX금현물비과세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-gold-investment-krx-spot-tax-free-2026.html"
+      },
+      {
+        no: 168,
+        title: "월급통장에 현금 1,000만 원 그냥 두면 1년에 치킨 15마리 날립니다! 하루만 맡겨도 연 3%대 이자 주는 파킹통장 vs 증권사 CMA",
+        desc: "2026년 최신 법령·고시 기준 파킹통장금리비교 및 증권사CMA장단점 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "파킹통장vsCMA",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-cma-parking-account-daily-interest-comparison-2026.html"
+      },
+      {
+        no: 167,
+        title: "은행 예금 이자에서 떼가는 세금 15.4%를 1.4%로 확 줄여주는 마법! 새마을금고·신협·농축협 세금우대(비과세) 예탁금 3,000만 원",
+        desc: "2026년 최신 법령·고시 기준 세금우대저축3000만원 및 신협새마을금고비과세 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "예금3천만비과세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-mutual-finance-tax-free-savings-3000man-2026.html"
+      },
+      {
+        no: 166,
+        title: "승진했거나 연봉 올랐다면 은행 앱에서 1분 만에 대출 이자 깎으세요! 금리인하요구권 100% 승인받는 핵심 타이밍",
+        desc: "2026년 최신 법령·고시 기준 금리인하요구권신청방법 및 신용점수상승금리인하 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "금리인하요구권성공",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-right-to-request-interest-rate-cut-2026.html"
+      },
+      {
+        no: 165,
+        title: "토스·카카오페이에서 버튼 한 번 눌렀더니 신용점수 45점 즉시 상승! 대출 금리 0.5%p 낮추는 KCB·NICE 신용점수 관리 비법",
+        desc: "2026년 최신 법령·고시 기준 신용점수올리는법 및 비금융정보제출신용점수 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "신용점수100점상승",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-credit-score-boost-kcb-nice-100points-2026.html"
+      },
+      {
+        no: 164,
+        title: "은행 대출 중도상환수수료가 절반(0.5~0.7%)으로 확 줄었습니다! 3년 안 됐어도 대환대출 갈아타기가 무조건 이득인 손익분기점",
+        desc: "2026년 최신 법령·고시 기준 중도상환수수료인하 및 주담대대환대출갈아타기 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "중도상환수수료반값",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-prepayment-fee-half-cut-refinancing-loan-2026.html"
+      },
+      {
+        no: 163,
+        title: "주택담보대출 3억 빌릴 때 원리금균등 vs 원금균등 잘못 고르면 이자만 2,400만 원 더 냅니다! 상환방식 3종 완벽 비교",
+        desc: "2026년 최신 법령·고시 기준 원리금균등원금균등차이 및 체증식상환방식 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "원리금균등vs원금균등",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-mortgage-repayment-equal-principal-vs-installment-2026.html"
+      },
+      {
+        no: 162,
+        title: "내 연봉 6,000만 원인데 왜 대출 한도가 5,000만 원이나 줄었죠? 스트레스 DSR 40% 계산 공식과 대출 한도 늘리는 3가지 기술",
+        desc: "2026년 최신 법령·고시 기준 스트레스DSR계산기 및 연봉별주담대한도 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·투자",
+        badge: "스트레스DSR한도",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-fin-stress-dsr-phase3-limit-calculation-2026.html"
+      },
+      {
+        no: 161,
+        title: "집 수리할 때 현금 내고 10% 할인받았다가 나중에 양도세 1,500만 원 더 냅니다! 양도소득세 필요경비 인정 항목 vs 불인정 항목",
+        desc: "2026년 최신 법령·고시 기준 양도소득세필요경비인테리어 및 샷시교체양도세공제 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "인테리어양도세공제",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-interior-renovation-capital-gains-tax-deduction-2026.html"
+      },
+      {
+        no: 160,
+        title: "오피스텔 사면 주택 수에 들어가나요? 주거용 vs 업무용 오피스텔 취득세 4.6%와 청약 무주택 인정 완벽 기준",
+        desc: "2026년 최신 법령·고시 기준 오피스텔주택수포함여부 및 오피스텔취득세4.6% 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "오피스텔주택수제외",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-officetel-residential-vs-commercial-tax-2026.html"
+      },
+      {
+        no: 159,
+        title: "부모님 돌아가셔서 물려받은 시골집·아파트 때문에 내 집 팔 때 세금 폭탄 맞는다고요? 상속주택 1세대 1주택 비과세 특례",
+        desc: "2026년 최신 법령·고시 기준 상속주택양도소득세 및 상속주택1세대1주택특례 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "상속주택양도세면제",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-inherited-house-capital-gains-tax-exemption-2026.html"
+      },
+      {
+        no: 158,
+        title: "집 팔 때는 5월 31일에 잔금 치르고, 집 살 때는 6월 2일에 사야 수백만 원 아낍니다! 재산세·종부세 과세기준일 6월 1일의 비밀",
+        desc: "2026년 최신 법령·고시 기준 재산세과세기준일6월1일 및 종합부동산세공제금액 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "6월1일보유세절세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-property-tax-comprehensive-real-estate-tax-date-june1-2026.html"
+      },
+      {
+        no: 157,
+        title: "내 집에 평생 살면서 매달 150만 원씩 종신 연금 받는다! 2026 한국주택금융공사 주택연금 가입조건(공시가 12억)과 월 수령액표",
+        desc: "2026년 최신 법령·고시 기준 주택연금수령액계산기 및 주택연금가입조건12억 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "주택연금공시가12억",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-housing-pension-reverse-mortgage-12eok-2026.html"
+      },
+      {
+        no: 156,
+        title: "내 청약 가점으로 서울·수도권 아파트 당첨될 수 있을까? 84점 만점 계산표와 신생아·신혼·생애최초 특별공급 필승 전략",
+        desc: "2026년 최신 법령·고시 기준 청약가점계산기 및 신생아특별공급 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "청약가점vs특공",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-subscription-84points-special-supply-newlywed-newborn-2026.html"
+      },
+      {
+        no: 155,
+        title: "청약통장 한 달에 10만 원만 넣으면 공공분양 당첨 탈락합니다! 월 25만 원 상향 공식과 청년주택드림청약통장 4.5%",
+        desc: "2026년 최신 법령·고시 기준 청약통장월25만원 및 청년주택드림청약통장 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "청약월25만인상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-subscription-savings-25man-youth-dream-account-2026.html"
+      },
+      {
+        no: 154,
+        title: "집 사고팔 때 부동산 복비 달라는 대로 다 주면 호구됩니다! 법정 상한요율표와 중개수수료 30~50% 합법적으로 깎는 법",
+        desc: "2026년 최신 법령·고시 기준 부동산중개수수료계산기 및 복비깎는법 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "복비반값네고법",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-brokerage-fee-negotiation-half-price-2026.html"
+      },
+      {
+        no: 153,
+        title: "아파트 살 때 단독명의 vs 부부 공동명의, 뭐가 돈 굳는 길일까요? 취득세·종부세·양도세 유불리 단번에 정리",
+        desc: "2026년 최신 법령·고시 기준 부부공동명의장단점 및 공동명의양도세절세 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "부부공동명의절세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-joint-ownership-couple-property-capital-gains-tax-2026.html"
+      },
+      {
+        no: 152,
+        title: "갈아타기하려고 새 집 샀는데 옛날 집 언제까지 팔아야 세금 0원일까요? 일시적 1가구 2주택 3년 비과세 불변의 법칙",
+        desc: "2026년 최신 법령·고시 기준 일시적1가구2주택비과세 및 갈아타기처분기한3년 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "일시적2주택비과세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-temporary-2-house-3years-capital-gains-tax-2026.html"
+      },
+      {
+        no: 151,
+        title: "6억 아파트 살 때랑 6억 5,000만 원 살 때 취득세가 왜 이렇게 차이 나죠? 1주택자 6억~9억 사선세율 완벽 해부",
+        desc: "2026년 최신 법령·고시 기준 아파트취득세계산기 및 1주택자취득세율 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "취득세구간계산",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-acquisition-tax-1-2-3-percent-interval-2026.html"
+      },
+      {
+        no: 150,
+        title: "전세 만기 지났는데 아무 말 없이 연장됐다면? 묵시적 갱신 후 중도 퇴실 시 복비(중개수수료) 누가 내야 할까",
+        desc: "2026년 최신 법령·고시 기준 묵시적갱신중개수수료 및 묵시적갱신해지통보3개월 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "묵시적갱신중개비",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-silent-renewal-3months-termination-broker-fee-2026.html"
+      },
+      {
+        no: 149,
+        title: "만기 앞두고 집주인이 전세금 5,000만 원 올려달래요! 계약갱신청구권 5% 상한제 행사 타이밍과 거절 대응법",
+        desc: "2026년 최신 법령·고시 기준 계약갱신청구권행사 및 전세보증금5%인상 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "전세5%상한법",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-contract-renewal-right-5percent-cap-2026.html"
+      },
+      {
+        no: 148,
+        title: "집주인이 보증금 5,000만 원 낮추는 대신 월세 35만 원 내라는데 호구 잡힌 걸까요? 법정 전월세전환율 1초 판독법",
+        desc: "2026년 최신 법령·고시 기준 전월세전환율계산기 및 보증금월세전환 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "전월세전환율계산",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-implied-rent-deposit-conversion-rate-2026.html"
+      },
+      {
+        no: 147,
+        title: "전세 계약서 도장 찍기 전 이 4가지만 확인하면 전세사기 100% 막습니다! HUG 전세보증보험 126% 룰과 특약 문구",
+        desc: "2026년 최신 법령·고시 기준 전세보증보험126% 및 전세사기예방체크리스트 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "전세사기원천차단",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-jeonse-fraud-checklist-hug-guarantee-2026.html"
+      },
+      {
+        no: 146,
+        title: "전세자금 2억 빌려도 한 달 이자가 30만 원대! 2026 청년·신혼부부 버팀목 전세대출 한도와 보증금 기준",
+        desc: "2026년 최신 법령·고시 기준 청년전용버팀목전세대출 및 신혼부부전세대출 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "버팀목연1.5%~",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-youth-newlywed-beotimmok-jeonse-loan-2026.html"
+      },
+      {
+        no: 145,
+        title: "시중은행 주담대 금리 4%대인데 여긴 연 2%대 고정금리! 2026 내집마련 디딤돌대출 소득·자산·주택가격 커트라인",
+        desc: "2026년 최신 법령·고시 기준 내집마련디딤돌대출 및 신혼부부디딤돌한도 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "디딤돌연2%대",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-didimdol-loan-rate-income-8500man-2026.html"
+      },
+      {
+        no: 144,
+        title: "내 생애 첫 집 살 때는 규제지역 상관없이 집값의 80%까지 대출 나온다! 생애최초 LTV 80% 조건과 DSR 주의사항",
+        desc: "2026년 최신 법령·고시 기준 생애최초주택구입LTV80 및 생애최초주담대한도 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "생애최초LTV80%",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-re-first-home-ltv-80-limit-6eok-2026.html"
+      },
+      {
+        no: 143,
+        title: "서울 청년수당 300만 원 vs 경기도 청년기본소득 100만 원 & 면접수당! 주소지별 청년 현금 지원금 총정리",
+        desc: "2026년 최신 법령·고시 기준 서울청년수당 및 경기도청년기본소득 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "서울경기청년수당",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-seoul-gyeonggi-youth-basic-income-allowance-2026.html"
+      },
+      {
+        no: 142,
+        title: "9구간까지 국가장학금 확대 & 다자녀 셋째는 대학 등록금 전액 무료! 2026 한국장학재단 국가장학금 신청 필독",
+        desc: "2026년 최신 법령·고시 기준 국가장학금신청 및 다자녀국가장학금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "대학등록금전액",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-national-scholarship-type1-2-multi-child-2026.html"
+      },
+      {
+        no: 141,
+        title: "신청 안 하면 매달 12만 원씩 그냥 쌩돈 나갑니다! 기초수급·차상위·장애인·다자녀 6대 생활요금 일괄 감면 총정리",
+        desc: "2026년 최신 법령·고시 기준 취약계층통신비감면 및 한전전기요금할인 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "통신전기료반값",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-telecom-utility-discount-total-150man-2026.html"
+      },
+      {
+        no: 140,
+        title: "1인당 14만 원씩 가족 4명이면 연 56만 원 공짜 충전! 2026 문화누리카드 자동재충전 & 스포츠강좌이용권 월 10.5만 원",
+        desc: "2026년 최신 법령·고시 기준 문화누리카드 및 스포츠강좌이용권 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "문화누리14만인상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-culture-nuri-card-14man-sports-voucher-2026.html"
+      },
+      {
+        no: 139,
+        title: "벽걸이 에어컨·단열시공·보일러를 최대 330만 원까지 공짜로 설치해 준다! 저소득층 에너지효율개선사업 신청법",
+        desc: "2026년 최신 법령·고시 기준 저소득층에너지효율개선 및 취약계층에어컨무료설치 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "에어컨보일러무료",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-energy-efficiency-aircon-boiler-free-2026.html"
+      },
+      {
+        no: 138,
+        title: "1년 동안 병원비 87만 원 넘게 쓰셨나요? 실손보험 없어도 건보공단이 초과 병원비 100% 돌려주는 본인부담상한제",
+        desc: "2026년 최신 법령·고시 기준 본인부담상한제 및 건강보험병원비환급 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "병원비초과전액환급",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-medical-benefit-cap-refund-health-insurance-2026.html"
+      },
+      {
+        no: 137,
+        title: "부모님 요양보호사·주야간보호센터 비용 85~100% 건강보험이 내줍니다! 노인장기요양보험 등급 신청과 가족요양비",
+        desc: "2026년 최신 법령·고시 기준 노인장기요양보험 및 방문요양비용 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "부모님요양비85%",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-long-term-care-insurance-85percent-2026.html"
+      },
+      {
+        no: 136,
+        title: "중증장애인은 매월 최대 43만 원, 경증장애인도 장애수당 매달 지급! 2026 장애인연금 & 활동지원 바우처 총정리",
+        desc: "2026년 최신 법령·고시 기준 장애인연금 및 장애수당 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "장애인연금월43만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-disability-pension-allowance-43man-2026.html"
+      },
+      {
+        no: 135,
+        title: "혼자 아이 키우는 한부모 가정 필독! 2026 한부모 아동양육비 월 23만 원 & 양육비 선지급제 월 20만 원 신청법",
+        desc: "2026년 최신 법령·고시 기준 한부모가족아동양육비 및 양육비선지급제 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "한부모양육비지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-single-parent-child-support-23man-2026.html"
+      },
+      {
+        no: 134,
+        title: "맞벌이라 어린이집 하원 도우미 필요하신가요? 시간당 최대 85% 나라가 내주는 '아이돌봄서비스' 신청법",
+        desc: "2026년 최신 법령·고시 기준 아이돌봄서비스 및 정부지원등하원도우미 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "아이돌봄85%지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-child-care-idolbom-service-85percent-2026.html"
+      },
+      {
+        no: 133,
+        title: "만 2세 미만 아기 키우면 기저귀 월 9만 원 + 분유 월 11만 원 바우처! 다자녀(2인 이상)·중위 80% 신청 조건",
+        desc: "2026년 최신 법령·고시 기준 기저귀조제분유지원 및 국민행복카드기저귀바우처 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "기저귀분유월20만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-diaper-formula-voucher-20man-2026.html"
+      },
+      {
+        no: 132,
+        title: "집으로 오시는 산후도우미 비용 최대 80~90% 국가가 내줍니다! 2026 산모·신생아 건강관리 지원 바우처",
+        desc: "2026년 최신 법령·고시 기준 산모신생아건강관리지원 및 산후도우미정부지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "산후도우미바우처",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-postpartum-helper-voucher-150percent-2026.html"
+      },
+      {
+        no: 131,
+        title: "연봉 1억 넘어도 난임시술비 회당 최대 110만 원 지원! 소득제한 폐지 & 출산당 25회 리셋 총정리",
+        desc: "2026년 최신 법령·고시 기준 난임부부시술비지원 및 체외수정지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "난임시술소득무관",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-infertility-treatment-no-income-limit-110man-2026.html"
+      },
+      {
+        no: 130,
+        title: "한 달 30시간 일하면 29만 원, 사회서비스형은 월 76만 원! 2026 노인일자리 및 사회활동 지원사업 신청 가이드",
+        desc: "2026년 최신 법령·고시 기준 노인일자리신청 및 공익활동형노인일자리 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "노인일자리월76만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-senior-job-public-social-76man-2026.html"
+      },
+      {
+        no: 129,
+        title: "집이 있어도 만 65세 넘으면 매달 34만 9,700원 받습니다! 2026 기초연금 선정기준액(단독 247만·부부 395만) 계산법",
+        desc: "2026년 최신 법령·고시 기준 2026기초연금 및 기초연금선정기준액 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "기초연금월34.9만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-basic-pension-349700-criteria-2026.html"
+      },
+      {
+        no: 128,
+        title: "2026년 기준 중위소득 역대 최대 인상! 생계급여(4인 월 207.8만)·의료·주거·교육급여 커트라인 한눈에 확인",
+        desc: "2026년 최신 법령·고시 기준 2026기준중위소득 및 생계급여계산 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "4대급여중위소득",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-basic-livelihood-4benefits-median-2026.html"
+      },
+      {
+        no: 127,
+        title: "코딩·간호조무사·지게차·제과제빵 학원비 최대 500만 원 공짜에 매달 훈련장려금 31만 원까지! 국민내일배움카드",
+        desc: "2026년 최신 법령·고시 기준 국민내일배움카드 및 K디지털트레이닝 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "국비교육500만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-tomorrow-learning-card-500man-allowance-2026.html"
+      },
+      {
+        no: 126,
+        title: "고용보험 안 들어놨어도 구직수당 300만 원 현금 지급! 2026 국민취업지원제도 1유형 & 조기취업성공수당 150만 원",
+        desc: "2026년 최신 법령·고시 기준 국민취업지원제도1유형 및 구직촉진수당300만원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "구직수당300만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-national-employment-support-300man-2026.html"
+      },
+      {
+        no: 125,
+        title: "내가 10만 원 저축하면 나라가 매달 30만 원씩 더 넣어준다! 2026 청년내일저축계좌 만기 1,440만 원 받는 법",
+        desc: "2026년 최신 법령·고시 기준 청년내일저축계좌 및 정부매칭적금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "10만넣고40만적립",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-youth-tomorrow-savings-1440man-2026.html"
+      },
+      {
+        no: 124,
+        title: "청년월세 한 달 20만 원씩 2년 총 480만 원 공짜 현금! 2026 상시 전환 자격조건과 청약통장 필수 체크",
+        desc: "2026년 최신 법령·고시 기준 청년월세특별지원 및 청년월세480만원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "청년월세480만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-youth-monthly-rent-480man-permanent-2026.html"
+      },
+      {
+        no: 123,
+        title: "2026년 아기 낳으면 나라에서 현금만 총 3,080만 원! 첫만남이용권·부모급여·만 9세 아동수당 월별 수령 로드맵",
+        desc: "2026년 최신 법령·고시 기준 부모급여100만원 및 첫만남이용권300만원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "출산총3080만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-welfare-parent-allowance-first-meet-3080man-2026.html"
+      },
+      {
+        no: 122,
+        title: "직원 없는 1인 사장님·프리랜서 주목! 사무실 반값 입주 + 마케팅·개발비 최대 1,000만 원 주는 1인 창조기업 지원",
+        desc: "2026년 최신 법령·고시 기준 1인창조기업지원센터 및 1인창조기업마케팅지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "1인창조기업지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-one-person-creative-enterprise-voucher-2026.html"
+      },
+      {
+        no: 121,
+        title: "우리 가게도 온누리상품권 가맹점 된다고? 골목형상점가 지정으로 카드수수료 0% + 손님 10% 자동할인 만드는 법",
+        desc: "2026년 최신 법령·고시 기준 온누리상품권가맹점 및 골목형상점가 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "온누리수수료0원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-traditional-market-onnuri-10percent-2026.html"
+      },
+      {
+        no: 120,
+        title: "식당·카페 에어컨·후드 청소비 100만 원 공짜 지원! 음식점 위생등급제 무상 컨설팅 & 물품 지원받는 법",
+        desc: "2026년 최신 법령·고시 기준 음식점위생등급제지원 및 식당주방청소지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "음식점청소비지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-food-restaurant-hygiene-grade-support-2026.html"
+      },
+      {
+        no: 119,
+        title: "장사 잘되니까 건물주가 나가라고요? 상가건물 임대차보호법 '10년 계약갱신요구권 & 임대료 5% 상한' 방어법",
+        desc: "2026년 최신 법령·고시 기준 상가건물임대차보호법 및 상가계약갱신요구권10년 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "상가임대차10년",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-commercial-building-lease-10years-renewal-2026.html"
+      },
+      {
+        no: 118,
+        title: "직원 1명만 더 뽑아도 사장님 세금을 3년간 최대 4,650만 원 깎아줍니다! 통합고용세액공제 완벽 해설",
+        desc: "2026년 최신 법령·고시 기준 통합고용세액공제 및 고용증대세액공제 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "직원뽑으면1550만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-employment-increase-tax-credit-1550man-2026.html"
+      },
+      {
+        no: 117,
+        title: "창업한 지 5년 지났어도 세금 매년 15~30% 깎아준다! 사장님 필수 '중소기업 특별세액감면' 업종·지역 총정리",
+        desc: "2026년 최신 법령·고시 기준 중소기업특별세액감면 및 소기업세액감면 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "특별세액감면30%",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-sme-special-tax-reduction-30percent-2026.html"
+      },
+      {
+        no: 116,
+        title: "노란우산공제 그냥 깨면 세금 16.5% 떼입니다! 폐업·노령 사유로 퇴직소득세 1~3%만 내고 전액 타는 법",
+        desc: "2026년 최신 법령·고시 기준 노란우산공제해지 및 폐업공제금세금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "폐업공제금절세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-yellow-umbrella-termination-tax-2026.html"
+      },
+      {
+        no: 115,
+        title: "사업자통장·사업용신용카드 홈택스 미등록 시 가산세 0.2% 폭탄! 3분 등록법과 경비처리 완벽 가이드",
+        desc: "2026년 최신 법령·고시 기준 사업용신용카드등록 및 사업용계좌신고 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "사업용카드필수",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-business-account-card-hometax-2026.html"
+      },
+      {
+        no: 114,
+        title: "연매출 1억 400만 원까지 부가세 확 줄어든다! 2026 간이과세자 기준 상향 & 연 4,800만 원 부가세 0원 면제 공식",
+        desc: "2026년 최신 법령·고시 기준 간이과세자기준 및 부가세면제기준 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "간이과세1억400만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-simplified-vat-10400man-criteria-2026.html"
+      },
+      {
+        no: 113,
+        title: "은행 가기 전에 '소상공인정책자금(SEMAS)'부터 확인하세요! 연 2~3%대 일반경영안정자금·대환대출 7,000만 원 받는 법",
+        desc: "2026년 최신 법령·고시 기준 소상공인정책자금 및 소진공직접대출 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·저축",
+        badge: "정책자금저리대출",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-sme-policy-loan-semas-7000man-2026.html"
+      },
+      {
+        no: 112,
+        title: "갚지 않아도 되는 사업화 자금 최대 1억 원! 2026 강한 소상공인 & 로컬크리에이터 성장지원 선발 비법",
+        desc: "2026년 최신 법령·고시 기준 강한소상공인성장지원 및 로컬크리에이터지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "사업화최대1억",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-strong-local-creator-10000man-2026.html"
+      },
+      {
+        no: 111,
+        title: "스마트스토어 상세페이지·라이브커머스·쿠팡 광고비 최대 1,500만 원 국비 지원! 2026 판판대로 소상공인 온라인 판로지원",
+        desc: "2026년 최신 법령·고시 기준 판판대로 및 소상공인온라인판로지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "마케팅비1500만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-online-marketing-fanfandaero-1500man-2026.html"
+      },
+      {
+        no: 110,
+        title: "내 가게 이름·로고 뺏기지 마세요! 특허청이 상표출원·브랜드 개발비 최대 160만 원~2,000만 원 대주는 소상공인 IP 사업",
+        desc: "2026년 최신 법령·고시 기준 소상공인IP창출종합패키지 및 상표출원지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "상표출원무료지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-trademark-ip-voucher-160man-2026.html"
+      },
+      {
+        no: 109,
+        title: "연 1~2만 원만 내면 가게 침수·간판 파손 시 최대 1억 원 보상! 정부 90% 지원 소상공인 풍수해보험",
+        desc: "2026년 최신 법령·고시 기준 소상공인풍수해보험 및 상가침수보상금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "침수보험1만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-storm-flood-insurance-90percent-2026.html"
+      },
+      {
+        no: 108,
+        title: "연매출 1억 400만 원 이하 사장님, 한전 전기요금 최대 20만 원 돌려받으셨나요? 소상공인 전기요금 특별지원",
+        desc: "2026년 최신 법령·고시 기준 소상공인전기요금특별지원 및 전기료20만원지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "전기요금20만지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-electricity-bill-special-20man-2026.html"
+      },
+      {
+        no: 107,
+        title: "배달앱 수수료·배달비 때문에 남는 게 없는 사장님 필독! 2026 영세 소상공인 배달비·택배비 연 30만 원 현금 지원",
+        desc: "2026년 최신 법령·고시 기준 소상공인배달비지원 및 택배비지원사업 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "배달비30만지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-delivery-fee-public-app-30man-2026.html"
+      },
+      {
+        no: 106,
+        title: "직원이 육아휴직 가면 사장님께 대체인력 월급 매달 120만 원씩 드립니다! 2026 출산육아기 고용안정장려금",
+        desc: "2026년 최신 법령·고시 기준 출산육아기대체인력지원금 및 육아휴직업무분담지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "대체인력월120만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-maternity-substitute-worker-1440man-2026.html"
+      },
+      {
+        no: 105,
+        title: "만 60세 넘은 베테랑 직원 계속 채용하면 나라에서 1인당 1,080만 원 줍니다! 고령자 계속고용장려금 & 고용지원금",
+        desc: "2026년 최신 법령·고시 기준 고령자계속고용장려금 및 고령자고용지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "시니어고용1080만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-senior-continued-employment-grant-1080man-2026.html"
+      },
+      {
+        no: 104,
+        title: "사장님도 폐업하면 실업급여 매달 200만 원씩 받습니다! 자영업자 고용보험료 80~100% 환급받고 가입하는 법",
+        desc: "2026년 최신 법령·고시 기준 자영업자고용보험 및 자영업자실업급여 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "사장님실업급여",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-self-employed-unemployment-insurance-80refund-2026.html"
+      },
+      {
+        no: 103,
+        title: "폐업 후 다시 일어서는 사장님께 인테리어·마케팅비 최대 2,000만 원 무상 지급! 희망리턴패키지 재창업 사업화",
+        desc: "2026년 최신 법령·고시 기준 희망리턴패키지재창업 및 재창업사업화지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "재창업2000만무상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-restartup-package-2000man-2026.html"
+      },
+      {
+        no: 102,
+        title: "식당 주방 환기팬·공장 안전설비 고칠 때 내 돈 쓰지 마세요! 2026 클린사업장 조성 최대 3,000만 원 국비 지원",
+        desc: "2026년 최신 법령·고시 기준 클린사업장조성지원 및 안전보건공단지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "시설개선3000만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-clean-workplace-safety-3000man-2026.html"
+      },
+      {
+        no: 101,
+        title: "가게 빚 때문에 밤잠 못 이루시나요? 2026 새출발기금 대상 확대로 대출 원금 최대 60~80% 탕감받는 법",
+        desc: "2026년 최신 법령·고시 기준 새출발기금 및 소상공인채무조정 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·저축",
+        badge: "원금80%감면",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-new-start-fund-debt-80percent-cut-2026.html"
+      },
+      {
+        no: 100,
+        title: "은행 사업자대출 이자 5.5% 다 내지 마세요! 지자체가 이자 2.5%p 대신 내주는 '소상공인 이차보전' 신청법",
+        desc: "2026년 최신 법령·고시 기준 소상공인이차보전 및 지자체이자지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "finance",
+        catName: "금융·저축",
+        badge: "대출이자3%대납",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-local-interest-subsidy-3percent-2026.html"
+      },
+      {
+        no: 99,
+        title: "만 34세 이하 청년 정규직 뽑으면 사장님 통장에 1인당 최대 720만 원 입금! 2026 청년일자리도약장려금",
+        desc: "2026년 최신 법령·고시 기준 청년일자리도약장려금 및 청년채용지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "채용시720만지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-youth-job-leap-grant-720man-2026.html"
+      },
+      {
+        no: 98,
+        title: "직원 10명 미만 사장님과 근로자 모두 국민연금·고용보험료 80% 국가가 내줍니다! 2026 두루누리 사회보험 지원",
+        desc: "2026년 최신 법령·고시 기준 두루누리사회보험료지원 및 소상공인4대보험지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "4대보험80%지원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-durunuri-80percent-insurance-2026.html"
+      },
+      {
+        no: 97,
+        title: "만 34세 이하 청년이 창업하면 5년 동안 소득세·법인세 100% 전액 면제! 창업중소기업 세액감면 필수 조건",
+        desc: "2026년 최신 법령·고시 기준 창업중소기업세액감면 및 청년창업세금면제 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "창업세금100%면제",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-startup-tax-exemption-100percent-5years-2026.html"
+      },
+      {
+        no: 96,
+        title: "새로 오픈한 가게 사장님 주목! 첫해에 비싸게 떼인 신용카드 수수료 평균 37만 원~150만 원 전액 돌려받는 법",
+        desc: "2026년 최신 법령·고시 기준 영세가맹점카드수수료환급 및 신규사업자카드수수료 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "카드수수료환급",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-card-fee-refund-150man-2026.html"
+      },
+      {
+        no: 95,
+        title: "가게 에어컨·냉장고 바꿀 때 영수증만 내면 최대 480만 원 현금 환급! 2026 소상공인 고효율기기 지원",
+        desc: "2026년 최신 법령·고시 기준 소상공인고효율기기 및 냉난방기교체지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "냉난방기480만환급",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-high-efficiency-appliance-480man-2026.html"
+      },
+      {
+        no: 94,
+        title: "사장님들 종소세 최대 200만 원 깎아주고 지자체 장려금 24만 원까지 주는 노란우산공제 200% 활용법",
+        desc: "2026년 최신 법령·고시 기준 노란우산공제 및 노란우산희망장려금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "노란우산500만공제",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-yellow-umbrella-500man-deduction-2026.html"
+      },
+      {
+        no: 93,
+        title: "폐업할 때 원상복구 철거비 내 돈으로 내면 400만 원 날립니다! 2026 희망리턴패키지 점포철거비 무상 지원",
+        desc: "2026년 최신 법령·고시 기준 희망리턴패키지 및 점포철거비지원 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "철거비400만무상",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-hope-return-demolition-400man-2026.html"
+      },
+      {
+        no: 92,
+        title: "가게에 테이블오더·서빙로봇 놓을 때 내 돈 다 내지 마세요! 2026 스마트상점 국비 70% 최대 1,500만 원 지원",
+        desc: "2026년 최신 법령·고시 기준 스마트상점기술보급 및 테이블오더지원금 핵심 자격 조건, 지원 한도 비교표, 1원 단위 실전 시뮬레이션과 신청 시 놓치기 쉬운 주의사항 완벽 정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "스마트상점1500만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-biz-smart-store-kiosk-1500man-2026.html"
+      },
+      {
+        no: 91,
+        title: "ISA 통장 3년 만기 됐다고 그냥 해지하지 마세요! 연금계좌로 옮겨 세금 49만 5천 원 또 받는 풍차돌리기",
+        desc: "중개형 ISA 3년 의무가입기간 만기 시 순수익 비과세(서민형 400만 원) 혜택을 챙긴 뒤 만기 자금을 60일 이내에 연금저축·IRP로 이전해 최대 300만 원 추가 세액공제(49.5만 원 환급)를 받는 전략.",
+        cat: "finance",
+        catName: "금융·저축",
+        badge: "ISA만기절세",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-isa-maturity-pension-transfer-300man-2026.html"
+      },
+      {
+        no: 90,
+        title: "10만 원 내면 세금 10만 원 그대로 돌려받고 한우·상품권 3만 원까지 공짜로 받는 고향사랑기부제",
+        desc: "고향사랑기부제에 10만 원을 기부하면 연말정산에서 10만 원 전액(100%) 세액공제로 돌려받고 기부액의 30%인 3만 원 상당의 지역 특산물·지역화폐 답례품을 무료로 챙기는 재테크.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "10만원내고13만원",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-hometown-love-donation-10man-13man-2026.html"
+      },
+      {
+        no: 89,
+        title: "따로 사는 부모님도 연말정산에 올리면 1분당 최대 250만 원 소득공제! 형제자매 중복 추징 막는 법",
+        desc: "주민등록상 따로 거주하는 부모님·장인·장모님이라도 만 60세 이상이고 연간 소득금액 100만 원 이하라면 기본공제 150만 원 + 만 70세 이상 경로우대 100만 원을 공제받는 조건.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "부모님공제250만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-parent-dependent-deduction-250man-2026.html"
+      },
+      {
+        no: 88,
+        title: "병원비·산후조리원비 200만 원 썼는데 환급이 0원이라고요? 연봉 3% 문턱 넘는 의료비 몰아주기 비법",
+        desc: "연말정산 의료비 세액공제에서 총급여의 3% 초과분부터 15%(난임 30%, 미숙아 20%) 공제되는 원리와 맞벌이 부부 의료비 몰아주기, 실손보험금 차감 주의사항 총정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "의료비환급비법",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-medical-expense-tax-credit-3percent-2026.html"
+      },
+      {
+        no: 87,
+        title: "연봉의 25%까지는 무조건 신용카드, 그다음부터 체크카드 쓰세요! 연말정산 카드 소득공제 황금 공식",
+        desc: "연말정산 신용카드 등 사용금액 소득공제에서 총급여의 25% 최저사용금액 문턱까지는 혜택 좋은 신용카드를 쓰고, 25% 초과분부터 공제율 2배인 체크카드·현금영수증(30%)·전통시장(40%)을 쓰는 절세 전략.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "카드공제황금비",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-credit-debit-card-25percent-golden-ratio-2026.html"
+      },
+      {
+        no: 86,
+        title: "집주인 동의 없어도 두 달 치 월세 돌려받는다! 2026년 월세 세액공제 연봉 8,000만 원 확대 & 최대 170만 원 환급",
+        desc: "무주택 직장인의 월세 세액공제 소득 기준이 총급여 8,000만 원 이하로 완화되고 공제 한도가 연 1,000만 원으로 상향되어 연 최대 170만 원(지방세 포함 187만 원)을 돌려받는 신청 방법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "월세17%환급",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-monthly-rent-tax-credit-8000man-2026.html"
+      },
+      {
+        no: 85,
+        title: "중소기업 다니는 만 34세 이하 청년은 5년간 소득세 90%(연 최대 200만 원) 안 냅니다! 신청서 1장으로 환급받는 법",
+        desc: "조세특례제한법 제30조에 따라 중소기업에 취업한 만 15~34세 청년(군필 최대 만 40세)에게 취업일로부터 5년간 근로소득세의 90%(연간 200만 원 한도)를 감면해 주는 필수 절세 제도.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "소득세90%감면",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-sme-youth-tax-reduction-90percent-2026.html"
+      },
+      {
+        no: 84,
+        title: "혼인신고 도장만 찍어도 세금 100만 원 바로 깎아준다! 2026년 신혼부부 혼인세액공제 100% 환급 비법",
+        desc: "2024~2026년 혼인신고를 완료한 부부에게 초혼·재혼·소득·나이 제한 없이 1인당 50만 원, 맞벌이 부부 합산 최대 100만 원의 소득세를 즉시 감면해 주는 혼인세액공제 신청법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "신혼100만감면",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-marriage-tax-credit-100man-2026.html"
+      },
+      {
+        no: 83,
+        title: "직장인 몰래 하는 투잡·부업, 회사에 절대 안 걸리는 기준은? 연 2,000만 원 건보료 커트라인의 비밀",
+        desc: "본업 직장인이 블로그 애드포스트, 유튜브, 배달 알바, 스마트스토어, 3.3% 프리랜서 투잡을 할 때 회사 인사팀에 통보가 가는 유일한 이유(고용보험 이중취득 & 보수외소득 2,000만 원 초과)와 완벽 방어법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "투잡비밀보장",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-two-jobs-side-hustle-company-secret-2026.html"
+      },
+      {
+        no: 82,
+        title: "수수료 20% 떼이는 환급 앱 쓰지 마세요! 5월 종합소득세 3.3% 세금 홈택스 원클릭으로 100% 무료 환급받는 법",
+        desc: "알바생, 프리랜서, N잡러가 매달 떼인 3.3% 원천징수 세금을 수수료 유료 앱 없이 국세청 홈택스 '원클릭 모두채움 환급'으로 최근 5년 치까지 단 1원도 안 떼이고 100% 돌려받는 방법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "5월종소세환급",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-comprehensive-income-tax-may-refund-2026.html"
+      },
+      {
+        no: 81,
+        title: "딱 1년 일하고 퇴사하면 연차가 11개인가요, 26개인가요? 미사용 연차수당 최대 250만 원 정산 공식",
+        desc: "대법원 판례와 고용노동부 행정해석에 따른 만 1년(365일) 근무 퇴사 시 연차 11개 vs 366일 근무 퇴사 시 연차 26개(11+15개) 발생 차이와 미사용 연차수당 1원 단위 계산법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "연차수당정산",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-annual-leave-1year-11plus15-26days-2026.html"
+      },
+      {
+        no: 80,
+        title: "출산전후휴가 90일 동안 월급 다 나오나요? 2026년 정부 지원금 + 회사 차액 지급 100% 챙기는 법",
+        desc: "근로기준법상 출산전후휴가 90일(다태아 120일, 미숙아 100일) 기간 동안 우선지원대상기업(중소기업)은 정부가 90일 모두 지원하고, 최초 60일은 회사가 통상임금 차액을 의무 보전하는 구조 해설.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "출산휴가급여",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-maternity-leave-pay-210man-90days-2026.html"
+      },
+      {
+        no: 79,
+        title: "2026년 육아휴직 급여 월 최대 250만 원 + 사후지급금 폐지! 부부 합산 최대 5,920만 원 받는 6+6 부모육아휴직제",
+        desc: "2026년 육아휴직 급여 상한액 대폭 인상(1~3개월 250만, 4~6개월 200만, 7개월~ 160만 원)과 복직 후 25% 사후지급금 폐지(휴직 중 100% 지급), 6+6 부모육아휴직제 실수령액 총정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "육아휴직250만",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-parental-leave-6plus6-250man-2026.html"
+      },
+      {
+        no: 78,
+        title: "실업급여 받다가 빨리 취업하면 손해라고요? 남은 실업급여의 50%를 보너스로 한 방에 받는 조기재취업수당 비법",
+        desc: "실업급여 수급일수가 절반(1/2) 이상 남아 있을 때 재취업하거나 자영업을 시작해 12개월 이상 유지하면 남은 구직급여의 50%를 일시금 목돈으로 지급하는 조기재취업수당 신청 조건과 함정.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "조기재취업수당",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-early-reemployment-bonus-50percent-2026.html"
+      },
+      {
+        no: 77,
+        title: "내 발로 사표 쓰고 나와도 실업급여 1,200만 원 다 받는다고? 2026년 자진퇴사 예외 인정 7대 사유 총정리",
+        desc: "원칙적으로 자발적 퇴사는 실업급여 대상이 아니지만 고용보험법 시행규칙상 정당한 이직 사유로 100% 인정되는 통근 3시간 초과, 임금체불, 근로조건 저하, 질병·간병, 육아 등 7가지 핵심 조건과 서류 준비법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "자진퇴사실업급여",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-voluntary-quit-unemployment-7exceptions-2026.html"
+      },
+      {
+        no: 76,
+        title: "3.3% 떼는 프리랜서라 퇴직금 없다고요? 학원강사·미용실·헬스트레이너도 퇴직금 500만 원 다 받는 법",
+        desc: "계약서는 3.3% 사업소득 위탁계약서로 썼지만 실제로는 출퇴근 시간과 업무 지시를 받은 '무늬만 프리랜서'가 퇴사 후 퇴직금·주휴수당·4대보험 환급을 전액 받아내는 핵심 기준.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "가짜3.3%퇴직금",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-freelancer-false-employee-severance-2026.html"
+      },
+      {
+        no: 75,
+        title: "밤 10시 넘어서 일했는데 시급 그대로 받았다고요? 2026년 야간·연장·휴일수당 1.5배~2배 계산 공식",
+        desc: "5인 이상 사업장에서 밤 10시~새벽 6시 야간근로, 하루 8시간 초과 연장근로, 주말·공휴일 휴일근로 시 통상임금의 1.5배~2.0배를 가산해 받는 법정 수당 계산표.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "야간특근1.5배",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-overtime-night-holiday-pay-150-2026.html"
+      },
+      {
+        no: 74,
+        title: "사장님이 갑자기 내일부터 나오지 말라고요? 한 달 치 월급 '해고예고수당' 비과세로 당장 받아내는 법",
+        desc: "근로기준법 제26조에 따라 해고 30일 전 예고하지 않았을 때 무조건 지급해야 하는 30일분 통상임금(해고예고수당) 계산법과 세금 0원 비과세 수령, 실업급여 동시 수급 전략.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "해고수당30일",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-dismissal-notice-pay-30days-2026.html"
+      },
+      {
+        no: 73,
+        title: "5인 미만 사업장이라 퇴직금이랑 연차 없다고요? 사장님 말 믿었다가 300만 원 날리는 노동법 진실과 거짓",
+        desc: "상시근로자 5인 미만 소규모 매장·회사에서도 무조건 100% 지급해야 하는 퇴직금, 주휴수당, 해고예고수당(30일분), 출산휴가·육아휴직 권리와 미적용 항목 완벽 비교.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "5인미만필독",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-5-under-workplace-labor-law-2026.html"
+      },
+      {
+        no: 72,
+        title: "주 15시간 알바했는데 주휴수당 안 준다고요? 2026년 쪼개기 계약서도 무조건 100% 받아내는 실전 계산법",
+        desc: "2026년 최저시급 10,320원 기준 주 15시간 이상 근무 시 무조건 발생하는 주휴수당 계산 공식과 주 14시간 쪼개기 편법 대응법, 퇴사 후 노동청 진정으로 못 받은 수당 전액 회수하는 방법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "주휴수당필독",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-weekly-holiday-pay-15hours-2026.html"
+      },
+      {
+        no: 71,
+        title: "국세청에서 카톡 오면 1분 만에 최대 330만 원 현금 꽂힌다고? 2026 근로장려금 내가 받을 금액 바로 확인하기",
+        desc: "저소득 근로자·자영업자·알바생 현금 보너스! 혼자 살면 165만 원, 홑벌이 285만 원, 맞벌이 최대 330만 원까지 나라가 현금으로 쏴주는 2026 근로장려금 소득·재산 자격 요건과 1초 조회 방법 총정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "현금지원금",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-earned-income-credit-330.html"
+      },
+      {
+        no: 70,
+        title: "시급 1만 원 시대인데 알바비 주휴수당 빼고 받았다고요? 15시간 일하면 무조건 더 받아야 하는 내 돈 계산법",
+        desc: "아르바이트생 및 소상공인 사장님 필독! 2026년 법정 최저시급 10,320원 기준, 주 15시간 이상 개근 시 반드시 추가로 챙겨야 하는 주휴수당(약 20% 추가) 계산 공식과 사장님이 안 줄 때 합법적으로 다 받아내는 신고 방법.",
+        cat: "salary",
+        catName: "노동·고용",
+        badge: "알바필독",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-minimum-wage-2026-parttime.html"
+      },
+      {
+        no: 69,
+        title: "집주인이 갑자기 전세금 5,000만 원 올려달라고 통보했다면? 법으로 딱 5%만 올리게 막고 안전하게 더 사는 법",
+        desc: "전월세 재계약 시즌 세입자 필수 무기! 임대차보호법상 계약갱신청구권을 사용해 보증금 인상을 최대 5% 이내로 제한하는 법과, 묵시적 갱신 시 중도 이사 가면 복비(중개수수료)를 집주인이 내야 하는 꿀팁 총정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "세입자방어",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-housing-lease-renewal-5percent.html"
+      },
+      {
+        no: 68,
+        title: "부모님한테 집 보태려고 1억 빌렸는데 증여세 폭탄 맞는 이유? 국세청 조사 피하는 2억 1,700만 원 무이자 차용증 작성법",
+        desc: "내 집 마련 자금조달계획서 대비 필수! 부모와 자식 간 계좌이체 시 증여세 0원으로 합법 공제되는 5,000만 원 한도와, 그 이상 돈을 빌릴 때 이자 0원(무이자)으로 국세청 조사를 피하는 2억 1,700만 원 차용증 공식.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "세무절세",
+        date: "2026.11.14",
+        readTime: "약 8분",
+        link: "blog-parents-child-gift-5000-check.html"
+      },
+      {
+        no: 67,
+        title: "내가 먼저 사표 써도 매달 198만 원 실업급여 받을 수 있다? 회사 눈치 안 보고 챙기는 4가지 예외 조건",
+        desc: "직장인 퇴사 전 필수 필독! 원래 자진퇴사는 실업급여가 안 나오지만, 임금체불·주 52시간 초과·왕복 3시간 통근곤란·가족 간병 등 법적 정당한 사유를 증명하면 매월 최대 198만 원 실업급여를 전액 받는 실전 증거 모으기 비법.",
+        cat: "salary",
+        catName: "노동·고용",
+        badge: "퇴직꿀팁",
+        date: "2026.11.14",
+        readTime: "약 8분",
+        link: "blog-unemployment-benefit-2026-rules.html"
+      },
+      {
+        no: 66,
+        title: "생애 첫 집 사고 취득세 200만 원 그냥 다 내셨다고요? 집 사고 나서도 몰라서 못 돌려받는 감면 경정청구 비법",
+        desc: "내 집 마련 매수자 필수 체크! 연봉과 상관없이 생애 처음으로 12억 이하 주택을 사면 취득세 최대 200만 원을 면제받으며, 신혼부부나 출산 가구는 최대 500만 원까지 세금을 안 내도 되는 조건과 뒤늦게 돌려받는 법.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "취득세절약",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-first-home-tax-200-exempt.html"
+      },
+      {
+        no: 65,
+        title: "올겨울 가스비 고지서 보고 기겁하기 전에 확인하세요! 신청만 하면 최대 70만 원 알아서 차감되는 난방비 지원금",
+        desc: "겨울철 도시가스·전기요금 폭탄 대비 필수! 기초수급자, 차상위계층, 다자녀, 임산부 및 노인 가구라면 요금 고지서에서 알아서 깎아주는 에너지바우처와 도시가스·전기료 복지할인 동시 신청 총정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "겨울난방필수",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-energy-voucher-winter-heating.html"
+      },
+      {
+        no: 64,
+        title: "매달 교통비 10만 원 넘게 쓰면서 그냥 찍고 계신가요? 내 출퇴근 거리에 맞춰 연 30만 원 돌려받는 교통카드 고르기",
+        desc: "K-패스 vs 기후동행카드 완벽 승부! 경기도·전국 출퇴근러를 위한 최대 53% K-패스 환급부터 서울 시내 무제한 6만 2천 원 기후동행카드까지, 내 한 달 교통비 구간별 절대 손해 안 보는 선택 공식.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "교통절약",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-k-pass-climate-card-compare.html"
+      },
+      {
+        no: 63,
+        title: "매달 70만 원씩 5년 모으면 이자+지원금으로 5,000만 원 통장에 꽂힌다고? 2026 청년도약계좌 한눈에 끝내기",
+        desc: "사회초년생 종잣돈 마련의 정석! 매월 최대 70만 원 자유 적립 시 정부 기여금과 비과세 이자를 얹어 연 8~9%대 일반 적금과 맞먹는 5,000만 원 목돈을 만드는 청년도약계좌 자격 요건 및 중도 해지 방어 팁 총정리.",
+        cat: "welfare",
+        catName: "복지·지원금",
+        badge: "목돈마련",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-youth-leap-5000-check.html"
+      },
+      {
+        no: 62,
+        title: "미국 주식으로 번 돈 250만 원 넘었으면 12월 마지막 주 전에 꼭 파세요! 세금 22% 합법적으로 0원 만드는 손익통산 비법",
+        desc: "서학개미 연말 필수 절세 전략! 해외주식 수익 250만 원 초과 시 무려 22%의 양도소득세를 내야 하지만, 연말 12월 말 전 손실 종목 매도(손익통산)와 수익 250만 원 분할 매도로 세금을 합법적으로 0원 만드는 비법.",
+        cat: "finance",
+        catName: "재테크·금융",
+        badge: "12월필독",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-overseas-stock-250-deduction.html"
+      },
+      {
+        no: 61,
+        title: "주식·예금 수익 세금 15.4% 떼여서 억울했다면? 1인당 1억 원까지 이자·배당 세금 0원 만드는 만능 통장 활용법",
+        desc: "직장인 및 재테크 입문자 필수! 일반 계좌에서 예금·배당 수익의 15.4%를 떼여야 하지만, 중개형 ISA 계좌를 개설해 운용하면 최소 200~400만 원 비과세와 9.9% 분리과세까지 챙기는 절세 통장 100% 활용법.",
+        cat: "finance",
+        catName: "재테크·금융",
+        badge: "만능통장",
+        date: "2026.11.14",
+        readTime: "약 8분",
+        link: "blog-isa-tax-free-secret-2026.html"
+      },
+      {
+        no: 60,
+        title: "자동차세 1년에 50만 원 내면서 4.5% 공짜 할인은 왜 안 챙기세요? 5분 만에 끝내는 연납 신청 비법",
+        desc: "자동차 소유자 필수! 매년 6월과 12월에 날아오는 자동차세를 1월에 한꺼번에 미리 내면 법적으로 약 4.5%~5%를 그냥 할인해 주는 위택스·이택스 자동차세 연납 신청 방법과 환급 꿀팁 총정리.",
+        cat: "salary",
+        catName: "생활·절세",
+        badge: "생활꿀팁",
+        date: "2026.11.14",
+        readTime: "약 6분",
+        link: "blog-car-tax-annual-prepayment-discount.html"
+      },
+      {
+        no: 59,
+        title: "프리랜서 3.3% 떼인 내 돈, 5월에 100만 원씩 토해낸다면? 장부 하나로 세금 폭탄 피하고 환급받는 비법",
+        desc: "3.3% 원천징수 프리랜서, N잡러, 유튜버, 배달 라이더 필독! 직전연도 수입 2,400만 원 넘었을 때 세금 폭탄 맞는 이유와 쉬운 간편장부 작성으로 기납부 3.3% 세금 100% 환급받는 실전 노하우 총정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "프리랜서필독",
+        date: "2026.11.14",
+        readTime: "약 8분",
+        link: "blog-freelancer-tax-saving-strategy.html"
+      },
+      {
+        no: 58,
+        title: "은행 이자만 4.5%에 내 집 대출까지 2.2%로 깎아준다고? 기존 청약통장 그대로 갈아타는 청년 치트키",
+        desc: "청년 무주택자 필수! 최대 4.5% 고금리 청년 주택드림 청약통장 가입 자격(만 19~34세, 연소득 5천만 이하)과 기존 통장 납입 횟수 100% 유지하며 1분 만에 갈아타는 법, 분양가 80% 2.2% 드림대출 연계 공식 총정리.",
+        cat: "realestate",
+        catName: "부동산·주거",
+        badge: "청년치트키",
+        date: "2026.11.14",
+        readTime: "약 8분",
+        link: "blog-cheongyak-dream-2026.html"
+      },
+      {
+        no: 57,
+        title: "퇴사하고 국민연금 끊겼다면 꼭 신청하세요! 국가가 매달 보험료 절반(50%)을 1년 동안 공짜로 내줍니다",
+        desc: "퇴직 후 소득이 없어 국민연금 납부가 막막한 분들을 위한 정부의 '지역가입자 연금보험료 지원 사업' 완벽 가이드! 실직이나 휴업 시 연금 보험료의 50%(월 최대 4만 6,350원)를 최대 12개월간 국가가 대신 내주는 실전 신청법.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "숨은지원금",
+        date: "2026.11.14",
+        readTime: "약 7분",
+        link: "blog-national-pension-local-50-support.html"
+      },
       {
         no: 56,
         title: "부모님 건보료 갑자기 매달 30만 원씩 나온다고? 11월 피부양자 탈락 막는 2,000만 원의 마법",
