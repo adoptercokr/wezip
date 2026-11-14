@@ -997,7 +997,12 @@ def main():
     update_blog_html(selected_topic, today_str)
     update_sitemap(filename, today_str)
     update_rss(selected_topic)
-    # Refresh llms.txt & llms-full.txt and ping IndexNow for AI search engines
+    # Refresh unified top headers (with latest KST update date), llms.txt & llms-full.txt, and ping IndexNow
+    try:
+        from site_header import sync_all_html_headers
+        sync_all_html_headers(HTML_DIR)
+    except Exception as exc:
+        print(f"[Info] Header sync warning: {exc}")
     try:
         import subprocess
         gen_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generate_llms_txt.py")

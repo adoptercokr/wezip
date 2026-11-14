@@ -24,11 +24,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run automated column publisher
+      - name: Run automated column publisher & sync top update dates
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python scripts/auto_publish_column.py
+          python scripts/site_header.py
+          python scripts/generate_llms_txt.py --ping
 
       - name: Verify all pages integrity and site health audit
         run: |

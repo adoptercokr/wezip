@@ -5,9 +5,17 @@ Single source of truth for the global navigation bar across all HTML pages
 and automated column publisher scripts.
 """
 
+import datetime
 import glob
 import os
 import re
+
+KST = datetime.timezone(datetime.timedelta(hours=9))
+
+
+def get_today_kst_dot():
+    """Return current KST date formatted as YYYY.MM.DD."""
+    return datetime.datetime.now(KST).strftime("%Y.%m.%d")
 
 
 def get_active_section(filename):
@@ -31,9 +39,10 @@ def get_active_section(filename):
     return "home"
 
 
-def build_unified_header(filename="index.html", indent="    "):
-    """Return the unified WE ZIP global header HTML with active section state."""
+def build_unified_header(filename="index.html", indent="    ", update_date=None):
+    """Return the unified WE ZIP global header HTML with active section state and top update badge."""
     sec = get_active_section(filename)
+    date_dot = update_date or get_today_kst_dot()
 
     gov_desktop_cls = (
         "bg-blue-600 text-white border-blue-500 shadow-xs"
@@ -214,8 +223,22 @@ def build_unified_header(filename="index.html", indent="    "):
             </nav>
         </div>
 
-        <!-- 우측: 모바일 상단 '지원금 찾기' 상시 노출 + 햄버거 메뉴 버튼 -->
+        <!-- 우측 (PC): 2026 법령·지원금 기준 최신 업데이트 일자 배지 -->
+        <div class="hidden md:flex items-center shrink-0">
+            <a href="gov-finder.html" title="2026 법령·지원금 DB 및 계산기 수식 최신 점검일" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-800 border border-slate-700 text-[11px] font-semibold text-slate-300 hover:text-white transition whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span class="hidden lg:inline text-slate-400">2026 법령·지원금 기준</span>
+                <span class="hidden lg:inline text-slate-600">|</span>
+                <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>{date_dot}</strong></span>
+            </a>
+        </div>
+
+        <!-- 우측 (모바일): '지원금 찾기' 상시 노출 + 업데이트 일자 + 햄버거 메뉴 버튼 -->
         <div class="flex items-center gap-1.5 md:hidden shrink-0">
+            <span class="hidden xs:inline-flex sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 text-[10px] font-medium text-slate-300 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span data-wezip-updated>{date_dot}</span>
+            </span>
             <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg {gov_mobile_cls} transition flex items-center gap-1 font-bold text-xs border">
                 <svg class="svg-icon w-3.5 h-3.5 text-slate-300" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <span>지원금 찾기</span>
@@ -238,6 +261,10 @@ def build_unified_header(filename="index.html", indent="    "):
             <a href="real-transfer-tax.html" class="shrink-0 px-2.5 py-1.5 rounded-lg {re_cls} transition">부동산</a>
             <a href="gov-median.html" class="shrink-0 px-2.5 py-1.5 rounded-lg {wel_cls} transition">복지·지원</a>
             <a href="loan-dsr.html" class="shrink-0 px-2.5 py-1.5 rounded-lg {fin_cls} transition">대출·금융</a>
+            <span class="sm:hidden shrink-0 ml-auto pl-2 text-[10px] font-medium text-slate-400 flex items-center gap-1">
+                <span class="w-1 h-1 rounded-full bg-blue-400"></span>
+                <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>{date_dot}</strong></span>
+            </span>
         </div>
     </nav>
 

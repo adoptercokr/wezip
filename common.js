@@ -854,7 +854,97 @@ function renderWezipCrossLinks(footerEl, fileName) {
   footerEl.parentNode.insertBefore(sec, footerEl);
 }
 
+function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
+  const skipPages = new Set(['index.html', '', 'about.html', 'contact.html', 'privacy.html', 'terms.html']);
+  if (skipPages.has(fileName) || document.getElementById('wezipPolicyRadar')) return;
+
+  const cat = getWezipCategoryForPage(fileName);
+  const radarData = {
+    salary: {
+      title: '2026 급여·세무·사업주 인건비 핵심 기준 및 숨은 지원금',
+      items: [
+        { badge: '법정시급·주휴', name: '2026 법정 최저시급 10,320원 & 주휴수당', desc: '주 15시간 이상 근무 시 주휴수당 의무 발생 (주 40시간 월 환산 2,156,880원 / 미지급 시 임금체불)', url: 'hourly-wage.html' },
+        { badge: '4대보험 개편', name: '국민연금 4.75% · 건강보험 3.595% · 장기요양 13.14%', desc: '2026.7월 연금개혁 근로자 부담분 4.75% 및 비과세 식대 월 20만 원 한도 비과세 공제 적용', url: 'salary.html' },
+        { badge: '사업주·근로자', name: '두루누리 사회보험료 80% 지원 & 청년일자리도약장려금', desc: '10인 미만 사업장 연금·고용보험 80% 국비 지원 / 청년 정규직 채용 시 사업주 연 최대 720만 원 지급', url: 'gov-finder.html' },
+        { badge: '구직·퇴직보호', name: '실업급여 1일 상한 68,100원 / 하한 66,048원', desc: '퇴직 전 18개월 중 피보험단위기간 180일 이상 충족 시 연령·가입기간별 120~270일 비과세 지급', url: 'unemployment.html' }
+      ]
+    },
+    gov: {
+      title: '2026 개인·가구 복지 & 소상공인·사업자 핵심 지원금 브리핑',
+      items: [
+        { badge: '소상공인 특화', name: '소상공인 정책자금 5,000만 · 스마트상점 1,500만 · 철거비 400만', desc: '저금리 대환·경영안정자금, 키오스크·서빙로봇 70% 보조, 희망리턴패키지 폐업철거비·재창업 2,000만 원', url: 'gov-finder.html' },
+        { badge: '출산·양육 확대', name: '부모급여(월 100/50만) + 아동수당 만 9세 미만 확대', desc: '첫만남이용권 200~300만 원, 만 0세 월 100만·1세 50만 원, 만 9세(107개월) 미만 아동수당 월 10만 원+', url: 'gov-parent.html' },
+        { badge: '근로·자녀장려금', name: '근로장려금 최대 330만 원 & 맞벌이 상한 4,400만 원', desc: '맞벌이 가구 소득 상한 4,400만 원 확대, 자녀장려금 부부합산 7,000만 원 미만 자녀당 최대 100만 원', url: 'gov-subsidy.html' },
+        { badge: '중위소득 역대최대', name: '2026 기준 중위소득 4인 6,494,738원 (1인 2,564,238원)', desc: '생계급여(32%·4인 최대 207.8만), 의료급여(40%), 주거급여(48%), 교육급여(50%) 수급 커트라인 상향', url: 'gov-median.html' }
+      ]
+    },
+    real: {
+      title: '2026 부동산 세제·전월세 지원·정책 모기지 최신 기준',
+      items: [
+        { badge: '양도세 비과세', name: '1세대 1주택 고가주택 기준 12억 원 & 장기보유특별공제 MAX 80%', desc: '실거래가 12억 이하 비과세(2년 보유·조정지역 2년 거주) 및 10년 보유·거주 시 최대 80% 공제', url: 'real-transfer-tax.html' },
+        { badge: '취득세 감면', name: '생애최초 주택구입 취득세 최대 200만 원 면제·감면', desc: '소득 제한 없이 실거래가 12억 원 이하 생애최초 주택 취득 시 산출 취득세에서 최대 200만 원 감면', url: 'real-estate.html' },
+        { badge: '전세안전·대출', name: '신생아 특례(최저 1.6%) · 청년 버팀목 · HUG 반환보증료 30만 환급', desc: '출산 가구 최대 5억 저리 대출, 무주택 청년 전세대출 2억 및 보증보험료 최대 30만 원 현금 환급', url: 'real-loan.html' },
+        { badge: '주거비 현금지원', name: '청년월세 특별지원 상시 전환 (월 20만 원 × 24개월 = 480만 원)', desc: '만 19~34세 무주택 청년(중위 60% 이하)에게 최대 480만 원 현금 지급 및 월세 세액공제 15~17%', url: 'gov-rent.html' }
+      ]
+    },
+    loan: {
+      title: '2026 대출 한도 규제(DSR 3단계) · 정책 금융 · 절세 적금 기준',
+      items: [
+        { badge: 'DSR 3단계 시행', name: '스트레스 DSR 3단계 수도권 +1.50%p / 지방 +0.75%p 가산', desc: '전 금융권 주담대·신용대출 한도 산정 시 스트레스 가산금리 의무 반영 (주기형·혼합형 우대 적용)', url: 'loan-dsr.html' },
+        { badge: '청년 목돈마련', name: '청년도약계좌 기여금 매칭 확대 & 2026 청년미래적금(3년)', desc: '전 구간 월 70만 원 매칭 한도 확대(월 최대 3.3만 원 기여금) + 이자소득세 15.4% 전액 비과세', url: 'youth-leap.html' },
+        { badge: '소상공인 금융', name: '소상공인 저금리 대환대출(7%→4.5%) & 지자체 이차보전(2~3.5%p)', desc: '고금리 사업자대출 대환, 지역신보 특례보증, 새출발기금 부실차주 원금 60~80% 감면 지원', url: 'gov-finder.html' },
+        { badge: '이자소득 절세', name: '일반과세(15.4%) vs 세금우대·비과세 예적금 만기 실수령 비교', desc: '단리·복리 이자 산출 및 비과세 종합저축·상호금융 출자금 활용 시 세후 순이자 수익 비교', url: 'savings.html' }
+      ]
+    }
+  };
+
+  const data = radarData[cat] || radarData.gov;
+  const sec = document.createElement('section');
+  sec.id = 'wezipPolicyRadar';
+  sec.className = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8';
+  sec.innerHTML = `
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+          <h2 class="text-base sm:text-lg font-black text-slate-900">${escapeWezipHtml(data.title)}</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">기준 업데이트 <strong class="text-slate-800">${escapeWezipHtml(todayDot)}</strong></span>
+          <a href="gov-finder.html" class="text-xs font-bold text-blue-600 hover:underline">전체 지원금 찾기 &rarr;</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        ${data.items.map(item => `
+          <a href="${escapeWezipHtml(item.url)}" class="p-4 rounded-xl bg-slate-50/80 hover:bg-blue-50/50 border border-slate-200/90 hover:border-blue-400 transition block group space-y-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">${escapeWezipHtml(item.badge)}</span>
+              <span class="text-[11px] font-bold text-slate-400 group-hover:text-blue-600">계산·조회 &rarr;</span>
+            </div>
+            <div class="text-sm font-extrabold text-slate-900 group-hover:text-blue-700">${escapeWezipHtml(item.name)}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">${escapeWezipHtml(item.desc)}</p>
+          </a>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  footerEl.parentNode.insertBefore(sec, footerEl);
+}
+
+function syncWezipUpdatedDateBadges() {
+  const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  const todayDot = kstNow.toISOString().slice(0, 10).replace(/-/g, '.');
+  document.querySelectorAll('[data-wezip-updated]').forEach(el => {
+    const cur = (el.textContent || '').trim();
+    if (!cur || cur < todayDot) {
+      el.textContent = todayDot;
+    }
+  });
+  return todayDot;
+}
+
 function initWezipRetentionAndLinks() {
+  const todayDot = syncWezipUpdatedDateBadges();
   const fileName = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
   if (WEZIP_CALC_CATALOG[fileName]) {
     recordRecentCalc(WEZIP_CALC_CATALOG[fileName].title, fileName, WEZIP_CALC_CATALOG[fileName].cat);
@@ -868,6 +958,7 @@ function initWezipRetentionAndLinks() {
   const footerEl = document.querySelector('footer');
   if (footerEl && footerEl.parentNode) {
     renderWezipCalcRetentionBar(footerEl, fileName);
+    renderWezipPolicyRadar(footerEl, fileName, todayDot);
     renderWezipCrossLinks(footerEl, fileName);
   }
 }

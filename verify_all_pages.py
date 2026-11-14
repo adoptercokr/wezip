@@ -39,6 +39,7 @@ for fpath in html_files:
         'id="mobileNavMenu"' not in header_html
         or 'toggleMobileNav()' not in header_html
         or 'id="mobileMenuBtn"' not in header_html
+        or 'data-wezip-updated' not in header_html
         or header_html.count('지원금 찾기') < 3
         or '금융 칼럼' not in header_html
         or '급여·소득' not in header_html
