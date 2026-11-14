@@ -1072,6 +1072,18 @@ const WEZIP_SEARCH_INTENT_MAP = [
     ]
   },
   {
+    targetUrl: 'gov-finder.html?category=business',
+    title: '2026 소상공인·자영업자 45대 특화 지원금 총람',
+    badge: '사업자 특화 1위',
+    keywords: [
+      '소상공인정책자금', '소상공인지원금', '자영업자지원금', '개인사업자지원금', '사업자지원금',
+      '소상공인대출', '소상공인저금리', '소상공인대환대출', '소상공인대환', '희망리턴패키지',
+      '점포철거비', '점포철거비지원', '스마트상점', '스마트상점기술보급', '키오스크지원',
+      '테이블오더지원', '소상공인전기요금', '전기요금특별지원', '노란우산공제', '소상공인부채경감',
+      '새출발기금', '신용보증재단대출', '중소기업정책자금', '소상공인창업자금', '소진공대출'
+    ]
+  },
+  {
     targetUrl: 'gov-finder.html',
     title: '2026 대한민국 100대 정부지원금 실시간 매칭',
     badge: '정부지원금 1위',
@@ -1154,7 +1166,11 @@ function initWezipUrlQueryRouter() {
   const currentFile = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
   const match = findMatchingIntent(q);
 
-  if (match && match.targetUrl !== currentFile) {
+  const targetPath = match ? match.targetUrl.split('?')[0] : '';
+  const currentSearch = window.location.search;
+  const isExactCurrent = match && (match.targetUrl === currentFile || (targetPath === currentFile && (!match.targetUrl.includes('?') || currentSearch.includes('category=business'))));
+
+  if (match && !isExactCurrent) {
     // 세련된 토스 스타일의 다이렉트 이동 안내 배너 팝업
     const banner = document.createElement('div');
     banner.id = 'wezipIntentBanner';
@@ -1209,7 +1225,11 @@ function initOnPageSearchIntentGuides() {
       const match = findMatchingIntent(val);
       const currentFile = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
 
-      if (match && match.targetUrl !== currentFile) {
+      const targetPath = match ? match.targetUrl.split('?')[0] : '';
+  const currentSearch = window.location.search;
+  const isExactCurrent = match && (match.targetUrl === currentFile || (targetPath === currentFile && (!match.targetUrl.includes('?') || currentSearch.includes('category=business'))));
+
+  if (match && !isExactCurrent) {
         guideBox.classList.remove('hidden');
         guideBox.innerHTML = `
           <div class="flex items-center gap-1.5 font-bold text-blue-900 truncate">
