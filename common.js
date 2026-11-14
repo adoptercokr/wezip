@@ -401,11 +401,13 @@ if (document.readyState === 'loading') {
     initGA4();
     initVisitorCounter();
     initWezipRetentionAndLinks();
+    initWezipSearchIntentRouter();
   });
 } else {
   initGA4();
   initVisitorCounter();
   initWezipRetentionAndLinks();
+    initWezipSearchIntentRouter();
 }
 
 
@@ -961,4 +963,274 @@ function initWezipRetentionAndLinks() {
     renderWezipPolicyRadar(footerEl, fileName, todayDot);
     renderWezipCrossLinks(footerEl, fileName);
   }
+}
+
+
+// ==============================================================================
+// 2026 실시간 검색어 인텐트 라우터 (Search Intent & Direct Landing Engine)
+// 네이버·구글 실제 검색량 기반 160대 고빈도 검색어 매핑
+// ==============================================================================
+const WEZIP_SEARCH_INTENT_MAP = [
+  {
+    targetUrl: 'salary.html',
+    title: '2026 연봉·급여 실수령액 계산기',
+    badge: '급여·연봉 1위',
+    keywords: [
+      '급여계산', '급여계산기', '연봉계산', '연봉계산기', '월급계산', '월급계산기', '실수령액', '실수령액계산기',
+      '월급실수령액', '연봉실수령액', '2026연봉', '2026월급', '4대보험계산', '4대보험계산기', '국민연금계산',
+      '건강보험료계산', '소득세계산', '근로소득세계산', '간이세액표', '식대비과세', '연봉세후', '월급세후', '세전세후',
+      '연봉표', '월급표', '실수령액표', '실수령', '월급명세서', '급여명세서', '세후월급'
+    ]
+  },
+  {
+    targetUrl: 'tax-brokerage-fee-calc.html',
+    title: '2026 부동산 복비·중개수수료 계산기',
+    badge: '부동산 1위',
+    keywords: [
+      '복비', '복비계산', '복비계산기', '부동산복비', '부동산복비계산기', '중개수수료', '중개수수료계산기',
+      '부동산중개수수료', '중개보수', '중개보수계산기', '아파트복비', '전세복비', '월세복비', '매매복비',
+      '오피스텔복비', '상가복비', '공인중개사수수료', '복비요율', '중개수수료요율', '복비부가세',
+      '부동산수수료', '집계약수수료', '부동산중개비', '부동산중개료'
+    ]
+  },
+  {
+    targetUrl: 'severance.html',
+    title: '2026 퇴직금 및 퇴직소득세 계산기',
+    badge: '퇴직금 1위',
+    keywords: [
+      '퇴직금', '퇴직금계산', '퇴직금계산기', '퇴직소득세', '퇴직소득세계산기', '퇴직금세금', '퇴직금계산법',
+      '퇴직금지급기준', '퇴직금실수령액', '1년퇴직금', '알바퇴직금', '평균임금', '통상임금퇴직금', 'IRP퇴직금',
+      '퇴직연금계산', '퇴직금조건', '퇴직금세율'
+    ]
+  },
+  {
+    targetUrl: 'unemployment.html',
+    title: '2026 실업급여 모의계산기',
+    badge: '실업급여 1위',
+    keywords: [
+      '실업급여', '실업급여계산', '실업급여계산기', '실업급여모의계산', '구직급여', '구직급여계산',
+      '실업급여수급자격', '자진퇴사실업급여', '실업급여금액', '실업급여상한액', '조기재취업수당', '실업급여180일',
+      '실업급여신청', '실업급여모의', '구직급여상한액'
+    ]
+  },
+  {
+    targetUrl: 'hourly-wage.html',
+    title: '2026 시급·알바비·주휴수당 계산기',
+    badge: '알바·시급 1위',
+    keywords: [
+      '시급', '시급계산', '시급계산기', '알바비', '알바비계산', '알바비계산기', '최저시급', '최저임금',
+      '2026최저시급', '주휴수당', '주휴수당계산', '주휴수당계산기', '야간수당', '연장수당', '알바실수령액', '주15시간',
+      '최저시급계산', '시급실수령액', '알바월급'
+    ]
+  },
+  {
+    targetUrl: 'gov-rent.html',
+    title: '2026 청년월세 특별지원 대상조회기 (월 20만원)',
+    badge: '청년주거 1위',
+    keywords: [
+      '청년월세', '청년월세지원', '청년월세특별지원', '월세지원', '청년월세20만원', '청년월세조건',
+      '청년월세신청', '청년월세자격', '복지로청년월세', '청년월세소득기준', '월세480만원', '청년주거지원',
+      '월세지원금', '청년월세계산'
+    ]
+  },
+  {
+    targetUrl: 'gov-parent.html',
+    title: '2026 부모급여·아동수당 통합 계산기',
+    badge: '출산복지 1위',
+    keywords: [
+      '부모급여', '부모급여계산', '부모급여신청', '부모급여100만원', '아동수당', '아동수당신청', '아동수당10만원',
+      '첫만남이용권', '출산지원금', '출산축하금', '육아수당', '어린이집부모급여', '부모급여차액', '양육수당',
+      '출산바우처', '아동수당나이'
+    ]
+  },
+  {
+    targetUrl: 'youth-leap.html',
+    title: '2026 청년도약계좌 만기 모의 계산기',
+    badge: '청년금융 1위',
+    keywords: [
+      '청년도약계좌', '청년도약', '도약계좌', '청년도약계좌계산기', '청년도약계좌조건', '청년도약계좌신청',
+      '청년도약계좌기여금', '청년도약계좌만기', '청년미래적금', '도약계좌5000', '청년적금', '도약계좌금리'
+    ]
+  },
+  {
+    targetUrl: 'gov-subsidy.html',
+    title: '2026 국세청 근로장려금·자녀장려금 계산기',
+    badge: '국세청 환급 1위',
+    keywords: [
+      '근로장려금', '근로장려금계산', '근로장려금계산기', '근로장려금신청', '근로장려금자격', '근로장려금지급일',
+      '근로장려금소득기준', '자녀장려금', '자녀장려금계산', '자녀장려금신청', '홈택스장려금', '장려금신청자격',
+      '근로장려금재산'
+    ]
+  },
+  {
+    targetUrl: 'gov-median.html',
+    title: '2026 가구원수별 기준 중위소득 판정기',
+    badge: '복지기준 1위',
+    keywords: [
+      '기준중위소득', '중위소득', '중위소득계산', '중위소득100', '중위소득60', '중위소득50', '중위소득150',
+      '생계급여기준', '의료급여기준', '주거급여기준', '소득인정액', '4인가구중위소득', '1인가구중위소득', '중위소득기준표'
+    ]
+  },
+  {
+    targetUrl: 'gov-finder.html',
+    title: '2026 대한민국 100대 정부지원금 실시간 매칭',
+    badge: '정부지원금 1위',
+    keywords: [
+      '정부지원금', '정부지원금찾기', '지원금찾기', '지원금조회', '보조금', '보조금24', '숨은정부지원금',
+      '소상공인지원금', '소상공인정책자금', '점포철거비', '소상공인전기요금', '희망리턴패키지', '스마트상점',
+      '국가지원금', '지원금모의계산'
+    ]
+  },
+  {
+    targetUrl: 'loan-dsr.html',
+    title: '2026 스트레스 DSR 대출한도 계산기',
+    badge: '대출한도 1위',
+    keywords: [
+      'dsr', 'dsr계산', 'dsr계산기', '스트레스dsr', '대출한도', '대출한도계산', '대출한도계산기',
+      '주담대한도', '신용대출dsr', 'dti계산기', '원리금균등상환', '주택담보대출한도'
+    ]
+  },
+  {
+    targetUrl: 'tax-jeonse-to-monthly-calc.html',
+    title: '2026 전월세 전환율 및 월세 계산기',
+    badge: '임대차 1위',
+    keywords: [
+      '전월세전환', '전월세전환율', '전세월세전환', '전월세계산기', '보증금증액', '월세전환',
+      '계약갱신청구권5', '임대차3법', '전세월세계산'
+    ]
+  },
+  {
+    targetUrl: 'real-transfer-tax.html',
+    title: '2026 부동산 취득세·양도소득세 계산기',
+    badge: '부동산세금 1위',
+    keywords: [
+      '취득세', '취득세계산', '취득세계산기', '부동산취득세', '아파트취득세', '생애최초취득세',
+      '양도세', '양도소득세', '양도소득세계산기', '1가구1주택비과세', '다주택자중과', '부동산세금'
+    ]
+  },
+  {
+    targetUrl: 'annual-leave.html',
+    title: '2026 미사용 연차수당 및 연차 계산기',
+    badge: '근로기준법 1위',
+    keywords: [
+      '연차', '연차계산', '연차계산기', '연차수당', '연차수당계산', '연차수당계산기', '미사용연차수당',
+      '1년미만연차', '연차발생기준', '통상임금연차', '연차정산'
+    ]
+  },
+  {
+    targetUrl: 'savings.html',
+    title: '2026 예적금 이자 및 복리 계산기',
+    badge: '예적금 1위',
+    keywords: [
+      '적금이자계산', '적금이자계산기', '예금이자계산', '예금이자계산기', '복리계산', '복리계산기',
+      '이자소득세', '적금이자', '예금이자', '예적금계산기'
+    ]
+  }
+];
+
+// 검색어 인텐트 매칭 유틸리티
+function findMatchingIntent(query) {
+  if (!query) return null;
+  const cleanQ = query.toString().trim().toLowerCase().replace(/\s+/g, '');
+  if (cleanQ.length < 2) return null;
+
+  for (const item of WEZIP_SEARCH_INTENT_MAP) {
+    for (const kw of item.keywords) {
+      const cleanKw = kw.toLowerCase().replace(/\s+/g, '');
+      if (cleanQ.includes(cleanKw) || cleanKw.includes(cleanQ)) {
+        return item;
+      }
+    }
+  }
+  return null;
+}
+
+// URL 쿼리 파라미터(?q=... 또는 ?search=...) 기반 스마트 유입 라우터
+function initWezipUrlQueryRouter() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q') || params.get('query') || params.get('search') || params.get('keyword');
+  if (!q) return;
+
+  const currentFile = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
+  const match = findMatchingIntent(q);
+
+  if (match && match.targetUrl !== currentFile) {
+    // 세련된 토스 스타일의 다이렉트 이동 안내 배너 팝업
+    const banner = document.createElement('div');
+    banner.id = 'wezipIntentBanner';
+    banner.className = 'fixed top-16 sm:top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-white border border-blue-500/50 shadow-2xl rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-3 sm:gap-4 max-w-md w-[92%] backdrop-blur-md transition-all duration-300';
+    banner.innerHTML = `
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 text-white shadow-sm">
+          <svg class="svg-icon w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <div class="min-w-0">
+          <div class="text-[11px] text-blue-300 font-bold">'${decodeURIComponent(q)}' 검색 추천</div>
+          <div class="text-xs sm:text-sm font-extrabold truncate text-white">${match.title}</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <a href="${match.targetUrl}" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-black shadow-sm transition">
+          바로가기 &rarr;
+        </a>
+        <button type="button" onclick="this.closest('#wezipIntentBanner').remove()" class="p-1.5 text-slate-400 hover:text-white transition text-xs" aria-label="닫기">
+          ✕
+        </button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+  }
+}
+
+// 온페이지 검색창 실시간 스마트 가이드 위젯
+function initOnPageSearchIntentGuides() {
+  const searchInputs = [
+    document.getElementById('calcSearchInput'),
+    document.getElementById('boardSearchInput'),
+    document.getElementById('policySearchInput')
+  ].filter(Boolean);
+
+  searchInputs.forEach(input => {
+    // 퀵 점프 뱃지 컨테이너 생성
+    const guideBox = document.createElement('div');
+    guideBox.className = 'wezip-quick-jump-box hidden mt-2 p-3 bg-blue-50/90 border border-blue-200 rounded-xl flex items-center justify-between gap-2 text-xs transition-all';
+    if (input.parentNode) {
+      input.parentNode.appendChild(guideBox);
+    }
+
+    input.addEventListener('input', (e) => {
+      const val = (e.target.value || '').trim();
+      if (!val || val.length < 2) {
+        guideBox.classList.add('hidden');
+        guideBox.innerHTML = '';
+        return;
+      }
+
+      const match = findMatchingIntent(val);
+      const currentFile = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
+
+      if (match && match.targetUrl !== currentFile) {
+        guideBox.classList.remove('hidden');
+        guideBox.innerHTML = `
+          <div class="flex items-center gap-1.5 font-bold text-blue-900 truncate">
+            <span class="px-1.5 py-0.5 rounded bg-blue-600 text-white text-[10px] shrink-0">${match.badge}</span>
+            <span>전용 계산기:</span>
+            <span class="underline underline-offset-2">${match.title}</span>
+          </div>
+          <a href="${match.targetUrl}" class="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs transition shrink-0 whitespace-nowrap shadow-xs">
+            바로가기 &rarr;
+          </a>
+        `;
+      } else {
+        guideBox.classList.add('hidden');
+        guideBox.innerHTML = '';
+      }
+    });
+  });
+}
+
+// 통합 초기화 함수
+function initWezipSearchIntentRouter() {
+  initWezipUrlQueryRouter();
+  initOnPageSearchIntentGuides();
 }
