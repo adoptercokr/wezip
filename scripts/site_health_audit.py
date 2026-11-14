@@ -356,10 +356,20 @@ def check_sitemap_and_rss(html_files: list[Path], errors: list[str]) -> None:
                     sitemap_files.add(fname)
                     if fname not in html_names:
                         errors.append(f"[SITEMAP] URL target missing on disk: {fname}")
-            missing_in_sitemap = sorted(html_names - sitemap_files)
+            # Only indexable pages are required to be in sitemap.xml (noindex pages are properly excluded for AdSense)
+            indexable_html_names = set()
+            for p in html_files:
+                try:
+                    content = p.read_text(encoding='utf-8', errors='ignore')
+                    if 'noindex' not in content:
+                        indexable_html_names.add(p.name)
+                except Exception:
+                    indexable_html_names.add(p.name)
+
+            missing_in_sitemap = sorted(indexable_html_names - sitemap_files)
             if missing_in_sitemap:
                 errors.append(
-                    f"[SITEMAP] {len(missing_in_sitemap)} HTML pages missing from sitemap.xml: {missing_in_sitemap[:5]}"
+                    f"[SITEMAP] {len(missing_in_sitemap)} indexable HTML pages missing from sitemap.xml: {missing_in_sitemap[:5]}"
                 )
         except ET.ParseError as exc:
             errors.append(f"[SITEMAP] XML parse error: {exc}")
