@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N5V6S642H"></script>
     <script>
@@ -13,15 +13,15 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>위집 고객센터 (문의하기 & 광고 제휴 접수) | WE ZIP</title>
+    <title>위집 고객센터 (문의하기 & 서비스 제휴) | WE ZIP</title>
     <meta name="description" content="생활금융·세무·정책 시뮬레이션 포털 위집(wezip)의 서비스 이용 문의, 계산기 오류 제보 및 비즈니스 제휴 공식 접수 창구입니다.">
     <link rel="canonical" href="https://wezip.co.kr/contact.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="고객센터 & 광고 문의 | 위집 (wezip)">
-    <meta property="og:description" content="위집 일반 서비스 문의, 계산기 제보 및 배너 광고 간편 온라인 접수">
+    <meta property="og:title" content="고객센터 & 제휴 문의 | 위집 (wezip)">
+    <meta property="og:description" content="위집 일반 서비스 문의, 계산기 제보 및 서비스 제휴 및 건의사항 접수">
     <meta property="og:image" content="https://wezip.co.kr/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -44,7 +44,7 @@
       "@type": "ContactPage",
       "name": "위집 고객센터 및 광고 문의",
       "url": "https://wezip.co.kr/contact.html",
-      "description": "위집 포털 일반 이용 문의, 오류 제보 및 광고 배너 게재 간편 접수처",
+      "description": "위집 포털 일반 이용 문의, 오류 제보 및 제휴 및 서비스 의견 접수처",
       "publisher": {
         "@type": "Organization",
         "name": "WE ZIP (wezip.co.kr)",
@@ -334,7 +334,7 @@
                 <button type="button" id="tabAdBtn" onclick="switchInquiryTab('ad')"
                         class="flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900">
                     <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    <span>광고 문의</span>
+                    <span>제휴 및 제안</span>
                 </button>
             </div>
 
@@ -389,14 +389,14 @@
                 </form>
             </div>
 
-            <!-- 2. [광고 문의 초간단 폼 (제휴영역 삭제, 제목 추가)] -->
+            <!-- 2. [비즈니스 제휴 및 제안 접수 폼] -->
             <div id="formSectionAd" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
                 <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
                     <div>
-                        <h2 class="text-base font-black text-slate-900">광고 문의</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">160×600 날개 배너, 가로 띠배너, 스폰서십 제휴</p>
+                        <h2 class="text-base font-black text-slate-900">제휴 및 제안 문의</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">비즈니스 협업, 데이터 제휴 및 서비스 개선 제안</p>
                     </div>
-                    <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">광고 전용</span>
+                    <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">제휴 전용</span>
                 </div>
 
                 <form id="adInquiryForm" onsubmit="handleAdSubmit(event)" class="space-y-4">
@@ -425,7 +425,7 @@
                         <label for="adTitle" class="block text-xs font-bold text-slate-700 mb-1">
                             제목 <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="adTitle" required placeholder="예: 좌우 날개 배너 3개월 광고 문의드립니다"
+                        <input type="text" id="adTitle" required placeholder="예: 금융 데이터 연동 및 비즈니스 제휴 제안"
                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
                     </div>
 
@@ -434,14 +434,14 @@
                         <label for="adMessage" class="block text-xs font-bold text-slate-700 mb-1">
                             문의 내용 <span class="text-red-500">*</span>
                         </label>
-                        <textarea id="adMessage" rows="5" required placeholder="희망 광고 지면(날개 배너, 가로 배너 등), 희망 기간, 예산 또는 문의 사항을 간단히 적어주세요."
+                        <textarea id="adMessage" rows="5" required placeholder="제안 내용, 협업 희망 분야, 문의 사항 등을 상세히 남겨주시면 검토 후 답변드립니다."
                                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent transition leading-relaxed"></textarea>
                     </div>
 
                     <div class="pt-2 flex flex-col sm:flex-row gap-2">
                         <button type="submit" id="adSubmitBtn" class="flex-1 py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm transition active:scale-98">
                             <svg class="svg-icon w-4 h-4" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                            <span>온라인 광고 문의 접수하기</span>
+                            <span>제휴 문의 접수하기</span>
                         </button>
                         <button type="button" onclick="sendDirectEmail('ad')" class="py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-98" title="클릭 시 작성하신 내용이 이메일 프로그램으로 채워져 바로 발송됩니다">
                             <svg class="svg-icon w-4 h-4 text-slate-500" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -524,7 +524,7 @@
                 <span>·</span>
                 <a href="contact.html?type=general" class="hover:text-blue-600 transition">일반 문의</a>
                 <span>·</span>
-                <a href="contact.html?type=ad" class="hover:text-blue-600 font-bold transition">광고 문의</a>
+                <a href="contact.html" class="hover:text-blue-600 font-bold transition">문의하기</a>
             </div>
             <p class="font-medium text-slate-700">WE ZIP의 모든 계산기 및 시뮬레이션 서비스는 회원가입이나 개인정보 입력 없이 누구나 평생 100% 무료로 이용하실 수 있습니다.</p>
             <p class="pt-1 text-slate-400">© 2026 위집 (wezip.co.kr). All rights reserved.</p>
