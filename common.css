@@ -495,3 +495,9 @@ html body footer .text-sm {
   font-size: 15px;
   line-height: 1.6;
 }
+
+
+/* 구글 애드센스 미송출 슬롯 자동 숨김 처리 */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
