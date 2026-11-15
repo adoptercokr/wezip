@@ -514,16 +514,16 @@ function fallbackCopyText(textToCopy, successMsg = '클립보드에 복사되었
 // =========================================================================
 
 const WEZIP_CALC_CATALOG = {
-  'salary.html': { title: '2026 연봉 실수령액 계산기', tag: '급여·세후', cat: 'salary' },
+  'salary.html': { title: '연봉 실수령액 계산기', tag: '급여·세후', cat: 'salary' },
   'unemployment.html': { title: '퇴사자 실업급여 계산기', tag: '상한 68,100원', cat: 'salary' },
   'hourly-wage.html': { title: '알바 시급·주휴수당 계산기', tag: '최저 10,320원', cat: 'salary' },
   'severance.html': { title: '법정 퇴직금·퇴직세 계산기', tag: 'IRP 절세', cat: 'salary' },
   'annual-leave.html': { title: '연차 일수·수당 정산기', tag: '근로기준법', cat: 'salary' },
-  'gov-finder.html': { title: '2026 정부 지원금 맞춤 찾기', tag: '정책 통합', cat: 'gov' },
+  'gov-finder.html': { title: '정부 지원금 맞춤 찾기', tag: '정책 통합', cat: 'gov' },
   'gov-rent.html': { title: '청년월세 지원 (최대 480만)', tag: '상시 전환', cat: 'gov' },
   'gov-parent.html': { title: '부모급여·아동수당 로드맵', tag: '만 9세 미만', cat: 'gov' },
   'gov-subsidy.html': { title: '근로·자녀장려금 대상조회', tag: '최대 330만', cat: 'gov' },
-  'gov-median.html': { title: '2026 기준 중위소득 판정기', tag: '4대 급여', cat: 'gov' },
+  'gov-median.html': { title: '기준 중위소득 판정기', tag: '4대 급여', cat: 'gov' },
   'loan-dsr.html': { title: '대출이자 & 스트레스 DSR', tag: '3단계 +1.50%p', cat: 'loan' },
   'real-transfer-tax.html': { title: '주택 양도소득세 계산기', tag: '12억 비과세', cat: 'real' },
   'real-loan.html': { title: '전세대출 & HUG 보증조회', tag: '전세안전', cat: 'real' },
@@ -541,7 +541,7 @@ const WEZIP_CROSS_GRAPH = {
       { title: '알바 시급·주휴수당 계산기', url: 'hourly-wage.html', desc: '최저시급 10,320원·주휴수당 정밀 산정' }
     ],
     posts: [
-      { title: '2026 연봉별 통장 실수령액 & 4대보험 요율표', url: 'blog-salary-guide-2026.html' },
+      { title: '연봉별 통장 실수령액 & 4대보험 요율표', url: 'blog-salary-guide-2026.html' },
       { title: '직장인 연말정산 13월의 월급 환급 팁', url: 'blog-year-end-tax-settlement-guide.html' },
       { title: '퇴직 전 실업급여 상·하한액 및 자진퇴사 예외', url: 'blog-unemployment-benefit.html' }
     ]
@@ -549,11 +549,11 @@ const WEZIP_CROSS_GRAPH = {
   gov: {
     calcs: [
       { title: '내 조건 정부지원금 1초 통합 찾기', url: 'gov-finder.html', desc: '소득·연령·주거 조건별 수혜 정책 매칭' },
-      { title: '2026 기준 중위소득 자격 판정기', url: 'gov-median.html', desc: '생계·의료·주거·교육급여 즉시 확인' },
+      { title: '기준 중위소득 자격 판정기', url: 'gov-median.html', desc: '생계·의료·주거·교육급여 즉시 확인' },
       { title: '근로·자녀장려금 수급 모의계산', url: 'gov-subsidy.html', desc: '맞벌이 4,400만 확대 요건 반영' }
     ],
     posts: [
-      { title: '2026 기준 중위소득 4인 649만 & 복지 커트라인', url: 'blog-median-income-welfare.html' },
+      { title: '기준 중위소득 4인 & 복지 커트라인', url: 'blog-median-income-welfare.html' },
       { title: '만 9세 미만 아동수당·부모급여 총 3,080만 로드맵', url: 'blog-childcare-subsidies.html' },
       { title: '청년월세 최대 480만·버팀목 전세대출 가이드', url: 'blog-youth-welfare-2026.html' }
     ]
@@ -865,7 +865,7 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
   const cat = getWezipCategoryForPage(fileName);
   const radarData = {
     salary: {
-      title: '2026 급여·세무·사업주 인건비 핵심 기준 및 숨은 지원금',
+      title: '급여·세무·사업주 인건비 핵심 기준 및 숨은 지원금',
       items: [
         { badge: '법정시급·주휴', name: '2026 법정 최저시급 10,320원 & 주휴수당', desc: '주 15시간 이상 근무 시 주휴수당 의무 발생 (주 40시간 월 환산 2,156,880원 / 미지급 시 임금체불)', url: 'hourly-wage.html' },
         { badge: '4대보험 개편', name: '국민연금 4.75% · 건강보험 3.595% · 장기요양 13.14%', desc: '2026.7월 연금개혁 근로자 부담분 4.75% 및 비과세 식대 월 20만 원 한도 비과세 공제 적용', url: 'salary.html' },
@@ -874,7 +874,7 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
       ]
     },
     gov: {
-      title: '2026 개인·가구 복지 & 소상공인·사업자 핵심 지원금 브리핑',
+      title: '개인·가구 복지 & 소상공인·사업자 핵심 지원금 브리핑',
       items: [
         { badge: '소상공인 특화', name: '소상공인 정책자금 5,000만 · 스마트상점 1,500만 · 철거비 400만', desc: '저금리 대환·경영안정자금, 키오스크·서빙로봇 70% 보조, 희망리턴패키지 폐업철거비·재창업 2,000만 원', url: 'gov-finder.html' },
         { badge: '출산·양육 확대', name: '부모급여(월 100/50만) + 아동수당 만 9세 미만 확대', desc: '첫만남이용권 200~300만 원, 만 0세 월 100만·1세 50만 원, 만 9세(107개월) 미만 아동수당 월 10만 원+', url: 'gov-parent.html' },
@@ -883,7 +883,7 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
       ]
     },
     real: {
-      title: '2026 부동산 세제·전월세 지원·정책 모기지 최신 기준',
+      title: '부동산 세제·전월세 지원·정책 모기지 최신 기준',
       items: [
         { badge: '양도세 비과세', name: '1세대 1주택 고가주택 기준 12억 원 & 장기보유특별공제 MAX 80%', desc: '실거래가 12억 이하 비과세(2년 보유·조정지역 2년 거주) 및 10년 보유·거주 시 최대 80% 공제', url: 'real-transfer-tax.html' },
         { badge: '취득세 감면', name: '생애최초 주택구입 취득세 최대 200만 원 면제·감면', desc: '소득 제한 없이 실거래가 12억 원 이하 생애최초 주택 취득 시 산출 취득세에서 최대 200만 원 감면', url: 'real-estate.html' },
@@ -892,7 +892,7 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
       ]
     },
     loan: {
-      title: '2026 대출 한도 규제(DSR 3단계) · 정책 금융 · 절세 적금 기준',
+      title: '대출 한도 규제(DSR 3단계) · 정책 금융 · 절세 적금 기준',
       items: [
         { badge: 'DSR 3단계 시행', name: '스트레스 DSR 3단계 수도권 +1.50%p / 지방 +0.75%p 가산', desc: '전 금융권 주담대·신용대출 한도 산정 시 스트레스 가산금리 의무 반영 (주기형·혼합형 우대 적용)', url: 'loan-dsr.html' },
         { badge: '청년 목돈마련', name: '청년도약계좌 기여금 매칭 확대 & 2026 청년미래적금(3년)', desc: '전 구간 월 70만 원 매칭 한도 확대(월 최대 3.3만 원 기여금) + 이자소득세 15.4% 전액 비과세', url: 'youth-leap.html' },
@@ -975,7 +975,7 @@ function initWezipRetentionAndLinks() {
 const WEZIP_SEARCH_INTENT_MAP = [
   {
     targetUrl: 'salary.html',
-    title: '2026 연봉·급여 실수령액 계산기',
+    title: '연봉·급여 실수령액 계산기',
     badge: '급여·연봉 추천',
     keywords: [
       '급여계산', '급여계산기', '연봉계산', '연봉계산기', '월급계산', '월급계산기', '실수령액', '실수령액계산기',
@@ -986,7 +986,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'tax-brokerage-fee-calc.html',
-    title: '2026 부동산 복비·중개수수료 계산기',
+    title: '부동산 복비·중개수수료 계산기',
     badge: '부동산 복비',
     keywords: [
       '복비', '복비계산', '복비계산기', '부동산복비', '부동산복비계산기', '중개수수료', '중개수수료계산기',
@@ -997,7 +997,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'severance.html',
-    title: '2026 퇴직금 및 퇴직소득세 계산기',
+    title: '퇴직금 및 퇴직소득세 계산기',
     badge: '퇴직금 정산',
     keywords: [
       '퇴직금', '퇴직금계산', '퇴직금계산기', '퇴직소득세', '퇴직소득세계산기', '퇴직금세금', '퇴직금계산법',
@@ -1007,7 +1007,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'unemployment.html',
-    title: '2026 실업급여 모의계산기',
+    title: '실업급여 모의계산기',
     badge: '실업급여 안내',
     keywords: [
       '실업급여', '실업급여계산', '실업급여계산기', '실업급여모의계산', '구직급여', '구직급여계산',
@@ -1017,7 +1017,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'hourly-wage.html',
-    title: '2026 시급·알바비·주휴수당 계산기',
+    title: '시급·알바비·주휴수당 계산기',
     badge: '시급·주휴',
     keywords: [
       '시급', '시급계산', '시급계산기', '알바비', '알바비계산', '알바비계산기', '최저시급', '최저임금',
@@ -1027,7 +1027,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-rent.html',
-    title: '2026 청년월세 특별지원 대상조회기 (월 20만원)',
+    title: '청년월세 특별지원 대상조회기 (월 20만원)',
     badge: '청년월세 지원',
     keywords: [
       '청년월세', '청년월세지원', '청년월세특별지원', '월세지원', '청년월세20만원', '청년월세조건',
@@ -1037,7 +1037,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-parent.html',
-    title: '2026 부모급여·아동수당 통합 계산기',
+    title: '부모급여·아동수당 통합 계산기',
     badge: '부모급여·출산',
     keywords: [
       '부모급여', '부모급여계산', '부모급여신청', '부모급여100만원', '아동수당', '아동수당신청', '아동수당10만원',
@@ -1047,7 +1047,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'youth-leap.html',
-    title: '2026 청년도약계좌 만기 모의 계산기',
+    title: '청년도약계좌 만기 모의 계산기',
     badge: '청년도약계좌',
     keywords: [
       '청년도약계좌', '청년도약', '도약계좌', '청년도약계좌계산기', '청년도약계좌조건', '청년도약계좌신청',
@@ -1056,7 +1056,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-subsidy.html',
-    title: '2026 국세청 근로장려금·자녀장려금 계산기',
+    title: '국세청 근로장려금·자녀장려금 계산기',
     badge: '근로장려금',
     keywords: [
       '근로장려금', '근로장려금계산', '근로장려금계산기', '근로장려금신청', '근로장려금자격', '근로장려금지급일',
@@ -1066,7 +1066,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-median.html',
-    title: '2026 가구원수별 기준 중위소득 판정기',
+    title: '가구원수별 기준 중위소득 판정기',
     badge: '기준 중위소득',
     keywords: [
       '기준중위소득', '중위소득', '중위소득계산', '중위소득100', '중위소득60', '중위소득50', '중위소득150',
@@ -1075,7 +1075,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-finder.html?category=business',
-    title: '2026 소상공인·자영업자 45대 특화 지원금 총람',
+    title: '소상공인·자영업자 45대 특화 지원금 총람',
     badge: '소상공인 지원금',
     keywords: [
       '소상공인정책자금', '소상공인지원금', '자영업자지원금', '개인사업자지원금', '사업자지원금',
@@ -1087,7 +1087,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'gov-finder.html',
-    title: '2026 대한민국 100대 정부지원금 실시간 매칭',
+    title: '대한민국 100대 정부지원금 실시간 매칭',
     badge: '100대 지원금',
     keywords: [
       '정부지원금', '정부지원금찾기', '지원금찾기', '지원금조회', '보조금', '보조금24', '숨은정부지원금',
@@ -1097,7 +1097,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'loan-dsr.html',
-    title: '2026 스트레스 DSR 대출한도 계산기',
+    title: '스트레스 DSR 대출한도 계산기',
     badge: 'DSR 대출한도',
     keywords: [
       'dsr', 'dsr계산', 'dsr계산기', '스트레스dsr', '대출한도', '대출한도계산', '대출한도계산기',
@@ -1106,7 +1106,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'tax-jeonse-to-monthly-calc.html',
-    title: '2026 전월세 전환율 및 월세 계산기',
+    title: '전월세 전환율 및 월세 계산기',
     badge: '전월세 전환',
     keywords: [
       '전월세전환', '전월세전환율', '전세월세전환', '전월세계산기', '보증금증액', '월세전환',
@@ -1115,7 +1115,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'real-transfer-tax.html',
-    title: '2026 부동산 취득세·양도소득세 계산기',
+    title: '부동산 취득세·양도소득세 계산기',
     badge: '취득세·양도세',
     keywords: [
       '취득세', '취득세계산', '취득세계산기', '부동산취득세', '아파트취득세', '생애최초취득세',
@@ -1124,7 +1124,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'annual-leave.html',
-    title: '2026 미사용 연차수당 및 연차 계산기',
+    title: '미사용 연차수당 및 연차 계산기',
     badge: '연차수당',
     keywords: [
       '연차', '연차계산', '연차계산기', '연차수당', '연차수당계산', '연차수당계산기', '미사용연차수당',
@@ -1133,7 +1133,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
   },
   {
     targetUrl: 'savings.html',
-    title: '2026 예적금 이자 및 복리 계산기',
+    title: '예적금 이자 및 복리 계산기',
     badge: '예적금 이자',
     keywords: [
       '적금이자계산', '적금이자계산기', '예금이자계산', '예금이자계산기', '복리계산', '복리계산기',
