@@ -321,10 +321,10 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">191</span>)
+                        전체 (<span id="countAll">192</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (<span id="countSalary">69</span>)
+                        급여·노동 (<span id="countSalary">70</span>)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
                         부동산·주거 (<span id="countRealestate">38</span>)
@@ -348,7 +348,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">191</span>건의 칼럼 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">192</span>건의 칼럼 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 <div class="text-[11px] text-slate-400 hidden sm:block">
@@ -427,6 +427,17 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 192,
+        title: "자녀 둘이면 20만 원 더 환급! 2026 자녀세액공제 확대(첫째 25만·둘째 30만·셋째 40만)와 맞벌이 부부 몰아주기 역전 함정 방어법",
+        desc: "2026년 세법개정으로 10만 원씩 인상된 자녀세액공제 완벽 해부! 첫째 25만 원, 둘째 30만 원, 셋째 40만 원 기준과 맞벌이 부부 기본공제 몰아주기 역전 함정 및 1원 단위 실전 환급 시뮬레이션.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "자녀세액공제",
+        date: "2026.11.16",
+        readTime: "약 7분",
+        link: "blog-sal-child-tax-credit-dual-income-golden-ratio-2026.html"
+      },
       {
         no: 191,
         title: "11월 국세청 연말정산 미리보기 오픈! 1~9월 카드 사용액 조회하고 12월까지 환급금 30만 원 더 챙기는 3단계 황금 비율",
