@@ -1,0 +1,33 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "game.wezip.co.kr"
+        }
+      ],
+      "destination": "/games/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "saju.wezip.co.kr"
+        }
+      ],
+      "destination": "/saju/:path*"
+    },
+    {
+      "source": "/game",
+      "destination": "/games"
+    },
+    {
+      "source": "/game/:path*",
+      "destination": "/games/:path*"
+    }
+  ]
+}

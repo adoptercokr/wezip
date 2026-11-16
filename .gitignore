@@ -10,3 +10,4 @@ rename_*.py
 update_*.py
 inspect_*.py
 change_domain.py
+scratch/
