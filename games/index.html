@@ -2,6 +2,11 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+    <script>
+    if (window.location.pathname === '/games') {
+      window.location.replace('/games/' + window.location.search + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>스파크 아케이드 - 설치 없이 즉시 즐기는 100% 무료 웹게임 놀이터!</title>
   
@@ -1730,6 +1735,48 @@
       }
     };
 
+    
+    // ─── THUMBNAIL MAP & FAIL-PROOF LOADER ───
+    const THUMB_MAP = {
+      'space-survivor': 'space게임베너-640-440.gif',
+      'cat-maze': 'cat-게임베너-640-440.gif',
+      'fortress': '포트리스-게임베너-640-440.gif',
+      'gian-game': '폭탄-640-440.gif',
+      'pixel-tower': 'pixel-tower-게임베너-640-440.gif',
+      '3drace': '3drace.gif',
+      'capybara-evolution': 'capybara-evolution.gif',
+      'fly-swat': 'fly-swat.gif',
+      'galaxy': 'galaxy.gif',
+      'gun-zombie': 'gun-zombie.gif',
+      'kids-runner': 'kids-runner.gif',
+      'sneaky-snacker': 'sneaky-snacker.gif',
+      'poo': 'poo.gif',
+      'tetris': 'tetris.gif'
+    };
+
+    function getThumbPath(id) {
+      const fileName = THUMB_MAP[id] || (id + '.gif');
+      if (window.location.pathname.startsWith('/games')) {
+        return '/games/assets/thumbnails/' + fileName;
+      }
+      return 'assets/thumbnails/' + fileName;
+    }
+
+    function handleThumbImgError(img, id) {
+      if (!img.dataset.step) {
+        img.dataset.step = '1';
+        img.src = '/games/assets/thumbnails/' + id + '.gif';
+      } else if (img.dataset.step === '1') {
+        img.dataset.step = '2';
+        img.src = 'assets/thumbnails/' + id + '.gif';
+      } else if (img.dataset.step === '2') {
+        img.dataset.step = '3';
+        img.src = '/assets/thumbnails/' + id + '.gif';
+      } else {
+        img.style.display = 'none';
+      }
+    }
+
     // ─── 2. GLOBAL STATE ───
     let currentLang = 'ko';
     let currentCategory = 'all';
@@ -2045,7 +2092,7 @@
       // Load fallback or local animated GIF for the promo hero card
       document.getElementById('promoPreviewBox').innerHTML = `
         <div class="thumbnail-wrapper" style="width:100%; height:100%; border:none;">
-          <img src="assets/thumbnails/${randomId}.gif" class="captured-thumbnail" onerror="this.style.display='none';" alt="${g[currentLang].title}">
+          <img src="${getThumbPath(randomId)}" class="captured-thumbnail" onerror="handleThumbImgError(this, '${randomId}')" alt="${g[currentLang].title}">
           <div class="preview-box-fallback">
             ${getGamePreviewHTML(randomId)}
           </div>
@@ -2098,8 +2145,7 @@
           <div class="game-card" onclick="launchGameDirect('${id}')" style="animation: fadeInUp 0.4s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;">
             ${badgeHtml}
             <div class="thumbnail-wrapper">
-              <!-- If local captured animated GIF exists, load it; else fall back dynamically to CSS Art! -->
-              <img src="assets/thumbnails/${id}.gif" class="captured-thumbnail" onerror="this.style.display='none';" alt="${title}">
+              <img src="${getThumbPath(id)}" class="captured-thumbnail" onerror="handleThumbImgError(this, '${id}')" alt="${title}">
               <div class="preview-box-fallback">
                 ${visualScreenshotHTML}
               </div>
@@ -2140,7 +2186,7 @@
       // Inject interactive gameplay GIF or CSS fallback into popup preview box
       document.getElementById('popupPreviewBox').innerHTML = `
         <div class="thumbnail-wrapper" style="width:100%; height:100%; border:none;">
-          <img src="assets/thumbnails/${gameId}.gif" class="captured-thumbnail" onerror="this.style.display='none';" alt="${game[currentLang].title}">
+          <img src="${getThumbPath(gameId)}" class="captured-thumbnail" onerror="handleThumbImgError(this, '${gameId}')" alt="${game[currentLang].title}">
           <div class="preview-box-fallback">
             ${getGamePreviewHTML(gameId)}
           </div>
@@ -2198,7 +2244,11 @@
       
       // Skip countdown screen and load iframe directly
       document.getElementById('interstitialScreen').style.display = 'none';
-      document.getElementById('gameIframe').src = game.path;
+      let gamePath = game.path;
+      if (window.location.pathname.startsWith('/games') && !gamePath.startsWith('/games/')) {
+        gamePath = '/games/' + gamePath;
+      }
+      document.getElementById('gameIframe').src = gamePath;
       
       // Save current game ID to header for sharing
       document.getElementById('gamePlayOverlay').dataset.currentGameId = gameId;
