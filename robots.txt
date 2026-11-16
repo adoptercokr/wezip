@@ -4,6 +4,9 @@
 # robots.txt for 대한민국 금융·생활 정보 포털 (wezip)
 User-agent: *
 Allow: /
+Disallow: /saju/
+Disallow: /games/
+Disallow: /game/
 
 # 최신 생성형 AI 검색 엔진 및 LLM 크롤러 전면 허용 (GEO 최적화)
 # 1. OpenAI (ChatGPT Search, GPTBot)
