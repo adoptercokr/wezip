@@ -985,7 +985,7 @@ const WEZIP_SEARCH_INTENT_MAP = [
     ]
   },
   {
-    targetUrl: 'tax-brokerage-fee-calc.html',
+    targetUrl: 'real-estate.html',
     title: '부동산 복비·중개수수료 계산기',
     badge: '부동산 복비',
     keywords: [
