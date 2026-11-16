@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>버팀목·디딤돌 대출이자 & HUG 보증보험료 계산기 | 위집</title>
+    <title>버팀목 전세대출 조건 자격조회 & 이자·HUG 보증보험료 계산기 | 위집</title>
     <meta name="description" content="2026년 주택도시기금 청년·신혼부부 버팀목 전세대출(연 1.8%~2.7%)과 일반 은행 전세대출(연 4%) 월 이자 비교 및 HUG 전세보증금 반환보증보험 수수료(청년 50% 할인)를 실시간 계산합니다.">
     <meta name="keywords" content="버팀목 전세대출 계산기, 청년 버팀목 금리, 디딤돌 대출 계산기, HUG 전세보증보험료, 전세보증금 반환보증, 전세대출 이자 비교">
     <link rel="canonical" href="https://wezip.co.kr/real-loan.html">
@@ -321,7 +321,7 @@
 
         <div class="mb-6">
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold mb-2 shadow-xs"><span>회원가입 없는 100% 무료 조회</span><span class="text-slate-300 mx-1.5">|</span><span class="text-slate-500 font-medium">주택도시기금 & HUG 공시 기준</span></div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">버팀목 대출이자 & HUG 보증보험료 무료 계산기</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">버팀목 전세대출 자격조회 & 이자·HUG 보증보험료 계산기</h1>
             <p class="text-xs sm:text-sm text-slate-500 mt-1">
                 정책 저금리 버팀목 전세대출의 월 이자 절감액과 HUG 전세보증금 반환보증 수수료를 계산합니다.
             </p>
@@ -329,16 +329,222 @@
 
         <!-- 탭 전환 -->
         <div class="flex gap-2 p-1 bg-slate-200/70 rounded-xl mb-6">
-            <button type="button" id="tabLoanCompare" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition">
-                ① 버팀목 전세대출 이자 비교
+            <button type="button" id="tabEligibility" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-white text-slate-900 shadow-sm transition">
+                ① 버팀목 대출 자격 진단
+            </button>
+            <button type="button" id="tabLoanCompare" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
+                ② 대출이자 절감 비교
             </button>
             <button type="button" id="tabHugInsurance" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
-                ② HUG 전세보증보험료 계산
+                ③ HUG 보증보험료 계산
             </button>
         </div>
 
-        <!-- 탭 1: 버팀목 전세대출 -->
-        <div id="contentLoanCompare" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- 탭 1: 버팀목 자격 진단기 -->
+        <div id="contentEligibility" class="space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- 입력 컨트롤 -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="calc-card p-5 bg-white border border-slate-200 rounded-2xl space-y-4">
+                        <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-base font-extrabold text-slate-900">버팀목 전세자금대출 신청 자격 자가진단</h2>
+                                <p class="text-xs text-slate-500 mt-0.5">내 상황을 선택하면 지원 대상 여부와 예상 한도·금리를 즉시 판정합니다.</p>
+                            </div>
+                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">주택도시기금</span>
+                        </div>
+
+                        <!-- 1. 대출 상품 유형 선택 -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700">신청 대상 상품 구분</label>
+                            <select id="loanProductType" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:border-blue-600 focus:outline-none bg-white">
+                                <option value="youth" selected>청년전용 버팀목 (만 19~34세 이하 단독 세대주)</option>
+                                <option value="general">일반 버팀목 (만 19세 이상 일반 무주택 세대주)</option>
+                                <option value="newlywed">신혼부부 전용 버팀목 (혼인 7년 이내 또는 3개월 내 결혼 예정)</option>
+                                <option value="newborn">신생아 특례 버팀목 (대출 신청일 기준 2년 내 출산 가구)</option>
+                            </select>
+                        </div>
+
+                        <!-- 2. 주택 소유 여부 -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700">세대원 전원 주택 소유 여부</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="p-3 border border-slate-200 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50 text-xs font-bold text-slate-800">
+                                    <input type="radio" name="houseOwnership" value="none" checked class="text-blue-600">
+                                    <span>무주택 (전원 무주택)</span>
+                                </label>
+                                <label class="p-3 border border-slate-200 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50 text-xs font-bold text-slate-800">
+                                    <input type="radio" name="houseOwnership" value="owner" class="text-blue-600">
+                                    <span>유주택 (1주택 이상 보유)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 3. 연간 부부합산 소득 -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700">부부합산 연소득 (미혼은 본인 연소득)</label>
+                            <select id="userAnnualIncome" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:border-blue-600 focus:outline-none bg-white">
+                                <option value="under2000">2,000만 원 이하</option>
+                                <option value="under4000" selected>2,000만 원 초과 ~ 4,000만 원 이하</option>
+                                <option value="under5000">4,000만 원 초과 ~ 5,000만 원 이하</option>
+                                <option value="under6000">5,000만 원 초과 ~ 6,000만 원 이하</option>
+                                <option value="under7500">6,000만 원 초과 ~ 7,500만 원 이하 (신혼/다자녀)</option>
+                                <option value="under13000">7,500만 원 초과 ~ 1억 3,000만 원 이하 (신생아)</option>
+                                <option value="over13000">1억 3,000만 원 초과</option>
+                            </select>
+                        </div>
+
+                        <!-- 4. 순자산 가액 -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700">순자산 가액 (부동산+금융자산-부채)</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="p-3 border border-slate-200 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50 text-xs font-bold text-slate-800">
+                                    <input type="radio" name="userNetAsset" value="under345" checked class="text-blue-600">
+                                    <span>3.45억 원 이하 (충족)</span>
+                                </label>
+                                <label class="p-3 border border-slate-200 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50 text-xs font-bold text-slate-800">
+                                    <input type="radio" name="userNetAsset" value="over345" class="text-blue-600">
+                                    <span>3.45억 원 초과 (초과)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 5. 전세보증금 및 주택 면적 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700">임차보증금 (전세금)</label>
+                                <select id="targetHouseDeposit" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:border-blue-600 focus:outline-none bg-white">
+                                    <option value="under3eok" selected>3억 원 이하 (수도권 3억/지방 2억)</option>
+                                    <option value="under4eok">3억 원 초과 ~ 4억 원 이하 (신혼 4억/신생아 5억)</option>
+                                    <option value="under5eok">4억 원 초과 ~ 5억 원 이하 (신생아 수도권 5억)</option>
+                                    <option value="over5eok">5억 원 초과</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700">임차 전용면적</label>
+                                <select id="targetHouseArea" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:border-blue-600 focus:outline-none bg-white">
+                                    <option value="under85" selected>85㎡ 이하 (국민주택규모)</option>
+                                    <option value="over85">85㎡ 초과</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="runEligibilityCheck()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm rounded-xl shadow-sm transition">
+                            자격 진단 결과 확인하기 &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 진단 결과 카드 -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div id="eligibilityResultBox" class="calc-card p-6 bg-slate-900 text-white rounded-2xl space-y-5 shadow-md">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <span class="text-xs font-bold text-blue-400">자가진단 판정 결과</span>
+                            <span id="badgeResultStatus" class="px-2.5 py-1 rounded-full text-xs font-black bg-emerald-500 text-white">신청 가능</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="text-xs text-slate-400">예상 대출 금리</div>
+                            <div id="resultInterestRate" class="text-3xl sm:text-4xl font-black text-white">연 1.8% ~ 2.4%</div>
+                            <p class="text-xs text-slate-300">시중은행 전세대출(연 4.2%) 대비 절반 이하의 파격적인 정책 저금리</p>
+                        </div>
+
+                        <div class="p-4 bg-slate-800/80 border border-slate-700 rounded-xl space-y-2 text-xs">
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>최대 대출 한도:</span>
+                                <strong id="resultMaxLimit" class="text-white font-extrabold text-sm">최대 2억 원 (보증금의 80%)</strong>
+                            </div>
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>대출 이용 기간:</span>
+                                <span class="text-white font-medium">최초 2년 (최장 10년 연장 가능)</span>
+                            </div>
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>상환 방식:</span>
+                                <span class="text-white font-medium">만기일시상환 (이자만 납부)</span>
+                            </div>
+                        </div>
+
+                        <div id="resultReasonBox" class="text-xs text-emerald-400 leading-relaxed font-medium bg-emerald-950/40 p-3 rounded-lg border border-emerald-800/60">
+                            축하합니다! 무주택, 연소득, 순자산, 주택 보증금 요건을 모두 충족하여 버팀목 전세대출 신청 대상입니다.
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="#officialApplicationGuide" class="block w-full py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-black rounded-xl text-center shadow-xs transition">
+                                공식 신청방법 & 은행 링크 확인 &darr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 공식 신청처 및 취급은행 바로가기 허브 -->
+            <section id="officialApplicationGuide" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">공식 신청 포털</span>
+                    <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight mt-1">버팀목 전세대출 공식 온라인 신청처 및 5대 수탁은행</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">버팀목 대출은 주택도시보증공사(기금e든든) 온라인 접수 또는 5대 시중은행 영업점에서 접수할 수 있습니다.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 기금e든든 공식 포털 -->
+                    <div class="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-blue-900 text-sm">국토교통부 공식 비대면 신청</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-600 text-white">온라인 1초 접수</span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-slate-900">주택도시기금 기금e든든 포털</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            은행 방문 전 공인인증서로 자격 심사와 자산 심사를 온라인으로 먼저 진행할 수 있는 국토교통부 공식 기금 신청 시스템입니다.
+                        </p>
+                        <a href="https://enhuf.molit.go.kr/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-extrabold shadow-xs transition">
+                            <span>기금e든든 공식 온라인 신청 바로가기</span>
+                            <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </a>
+                    </div>
+
+                    <!-- HUG 주택도시보증공사 포털 -->
+                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-700 text-sm">전세보증금 반환보증 가입</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-white">보증금 100% 보호</span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-slate-900">HUG 주택도시보증공사 포털</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            집주인이 전세금을 돌려주지 못할 때 보증공사가 전액 대신 반환해 주는 전세보증금 반환보증 온라인 보증가입 포털입니다.
+                        </p>
+                        <a href="https://www.khug.or.kr/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold shadow-xs transition">
+                            <span>HUG 전세보증금 반환보증 사이트 바로가기</span>
+                            <svg class="svg-icon w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5대 수탁 시중은행 접수 창구 안내 -->
+                <div class="pt-2">
+                    <h3 class="text-xs font-bold text-slate-800 mb-2.5">버팀목 전세대출 공식 5대 수탁은행 창구</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
+                        <a href="https://www.wooribank.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition font-bold text-slate-800">
+                            우리은행
+                        </a>
+                        <a href="https://www.kbstar.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition font-bold text-slate-800">
+                            KB국민은행
+                        </a>
+                        <a href="https://www.shinhan.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition font-bold text-slate-800">
+                            신한은행
+                        </a>
+                        <a href="https://www.kebhana.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition font-bold text-slate-800">
+                            하나은행
+                        </a>
+                        <a href="https://banking.nonghyup.com/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition font-bold text-slate-800">
+                            NH농협은행
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 탭 2: 버팀목 전세대출 -->
+        <div id="contentLoanCompare" style="display: none;" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div class="lg:col-span-6 space-y-4">
                 <div class="calc-card p-5 bg-white border border-slate-200 rounded-2xl">
                     <div class="mb-4">
@@ -701,29 +907,175 @@
 
     <script src="common.js"></script>
     <script>
+        // 3대 탭 전환 제어
+        const tabEligibility = document.getElementById('tabEligibility');
         const tabLoanCompare = document.getElementById('tabLoanCompare');
         const tabHugInsurance = document.getElementById('tabHugInsurance');
+        const contentEligibility = document.getElementById('contentEligibility');
         const contentLoanCompare = document.getElementById('contentLoanCompare');
         const contentHugInsurance = document.getElementById('contentHugInsurance');
 
-        tabLoanCompare.addEventListener('click', () => {
-            tabLoanCompare.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-            tabLoanCompare.classList.remove('text-slate-600');
-            tabHugInsurance.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-            tabHugInsurance.classList.add('text-slate-600');
-            contentLoanCompare.style.display = 'grid';
+        function switchTab(activeTab, activeContent, displayType) {
+            [tabEligibility, tabLoanCompare, tabHugInsurance].forEach(t => {
+                t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+                t.classList.add('text-slate-600');
+            });
+            activeTab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+            activeTab.classList.remove('text-slate-600');
+
+            contentEligibility.style.display = 'none';
+            contentLoanCompare.style.display = 'none';
             contentHugInsurance.style.display = 'none';
+            activeContent.style.display = displayType;
+        }
+
+        tabEligibility.addEventListener('click', () => {
+            switchTab(tabEligibility, contentEligibility, 'block');
+            runEligibilityCheck();
+        });
+
+        tabLoanCompare.addEventListener('click', () => {
+            switchTab(tabLoanCompare, contentLoanCompare, 'grid');
+            calculateLoan();
         });
 
         tabHugInsurance.addEventListener('click', () => {
-            tabHugInsurance.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-            tabHugInsurance.classList.remove('text-slate-600');
-            tabLoanCompare.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-            tabLoanCompare.classList.add('text-slate-600');
-            contentHugInsurance.style.display = 'grid';
-            contentLoanCompare.style.display = 'none';
+            switchTab(tabHugInsurance, contentHugInsurance, 'grid');
             calculateHug();
         });
+
+        // 1. 버팀목 자격 진단기 판정 엔진
+        function runEligibilityCheck() {
+            const productType = document.getElementById('loanProductType').value;
+            const ownership = document.querySelector('input[name="houseOwnership"]:checked').value;
+            const income = document.getElementById('userAnnualIncome').value;
+            const netAsset = document.querySelector('input[name="userNetAsset"]:checked').value;
+            const deposit = document.getElementById('targetHouseDeposit').value;
+            const area = document.getElementById('targetHouseArea').value;
+
+            const badge = document.getElementById('badgeResultStatus');
+            const rateEl = document.getElementById('resultInterestRate');
+            const limitEl = document.getElementById('resultMaxLimit');
+            const reasonEl = document.getElementById('resultReasonBox');
+
+            // 주택 소유 여부 판정
+            if (ownership === 'owner') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '버팀목 전세대출은 세대주를 포함한 세대원 전원이 무주택자여야 합니다. (유주택 가구 신청 불가)';
+                return;
+            }
+
+            // 순자산 판정 (2026년 기준 3.45억 이하)
+            if (netAsset === 'over345') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '2026년 기준 신청인 및 배우자의 합산 순자산 가액이 3.45억 원을 초과하여 기금 대출 대상에서 제외됩니다.';
+                return;
+            }
+
+            // 전용면적 판정 (85㎡ 이하, 읍면 100㎡ 이하)
+            if (area === 'over85') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '임차 전용면적이 85㎡(국민주택규모)를 초과하여 대상 주택 요건에 부합하지 않습니다.';
+                return;
+            }
+
+            // 상품별 소득 및 보증금 상세 판정
+            let eligible = true;
+            let reason = '';
+            let rate = '';
+            let maxLimit = '';
+
+            if (productType === 'youth') {
+                if (['under6000', 'under7500', 'under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '청년전용 버팀목은 연소득 5,000만 원 이하 가구만 신청 가능합니다.';
+                } else if (['under4eok', 'under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '청년전용 버팀목은 임차보증금 3억 원 이하 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 1.8%' : (income === 'under4000' ? '연 2.1%' : '연 2.4% ~ 2.7%');
+                    maxLimit = '최대 2억 원 (임차보증금의 80% 이내)';
+                    reason = '축하합니다! 청년전용 버팀목 전세대출 신청 요건을 모두 충족합니다. (만 19~34세 이하 단독 세대주, 최대 2억 원 저금리 지원)';
+                }
+            } else if (productType === 'general') {
+                if (['under7500', 'under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '일반 버팀목은 부부합산 연소득 5,000만 원 이하(다자녀 가구 6,000만 원 이하)여야 합니다.';
+                } else if (['under4eok', 'under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '일반 버팀목은 수도권 기준 임차보증금 3억 원(지방 2억 원) 이하 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 2.1%' : (income === 'under4000' ? '연 2.5%' : '연 2.7% ~ 2.9%');
+                    maxLimit = '수도권 최대 1억 2,000만 원 / 지방 최대 8,000만 원 (보증금의 70%)';
+                    reason = '축하합니다! 일반 버팀목 전세대출 신청 요건을 모두 충족합니다.';
+                }
+            } else if (productType === 'newlywed') {
+                if (['under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '신혼부부 전용 버팀목은 부부합산 연소득 7,500만 원 이하 가구만 신청 가능합니다.';
+                } else if (['under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '신혼부부 버팀목은 임차보증금 수도권 4억 원 이하(지방 3억 원 이하) 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 1.5%' : (income === 'under4000' ? '연 1.8%' : '연 2.1% ~ 2.4%');
+                    maxLimit = '수도권 최대 3억 원 / 지방 최대 2억 원 (보증금의 80%)';
+                    reason = '축하합니다! 신혼부부 전용 버팀목 전세대출 신청 요건을 모두 충족합니다. (혼인 7년 이내 또는 3개월 내 결혼 예정)';
+                }
+            } else if (productType === 'newborn') {
+                if (income === 'over13000') {
+                    eligible = false;
+                    reason = '신생아 특례 버팀목은 부부합산 연소득 1억 3,000만 원 이하 가구만 신청 가능합니다.';
+                } else if (deposit === 'over5eok') {
+                    eligible = false;
+                    reason = '신생아 특례 버팀목은 임차보증금 수도권 5억 원 이하(지방 4억 원 이하) 주택만 대상입니다.';
+                } else {
+                    rate = ['under2000', 'under4000'].includes(income) ? '연 1.3% ~ 1.8%' : (['under5000', 'under6000'].includes(income) ? '연 2.0% ~ 2.5%' : '연 2.6% ~ 3.0%');
+                    maxLimit = '최대 3억 원 (임차보증금의 80% 이내)';
+                    reason = '축하합니다! 신생아 특례 버팀목 전세대출 신청 요건을 모두 충족합니다. (2년 내 출산 가구 대상 최저 연 1.3% 파격 금리)';
+                }
+            }
+
+            if (eligible) {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-emerald-500 text-white';
+                badge.textContent = '신청 가능';
+                rateEl.textContent = rate;
+                rateEl.className = 'text-3xl sm:text-4xl font-black text-white';
+                limitEl.textContent = maxLimit;
+                reasonEl.className = 'text-xs text-emerald-400 leading-relaxed font-medium bg-emerald-950/40 p-3 rounded-lg border border-emerald-800/60';
+                reasonEl.textContent = reason;
+            } else {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = reason;
+            }
+        }
+
+        // 진단기 입력 변경 이벤트 바인딩
+        document.getElementById('loanProductType').addEventListener('change', runEligibilityCheck);
+        document.querySelectorAll('input[name="houseOwnership"]').forEach(r => r.addEventListener('change', runEligibilityCheck));
+        document.getElementById('userAnnualIncome').addEventListener('change', runEligibilityCheck);
+        document.querySelectorAll('input[name="userNetAsset"]').forEach(r => r.addEventListener('change', runEligibilityCheck));
+        document.getElementById('targetHouseDeposit').addEventListener('change', runEligibilityCheck);
+        document.getElementById('targetHouseArea').addEventListener('change', runEligibilityCheck);
 
         // 대출이자 비교 로직
         const loanAmount = document.getElementById('loanAmount');
@@ -811,6 +1163,7 @@
             }
         }
 
+        runEligibilityCheck();
         calculateLoan();
         if (typeof recordRecentCalc === 'function') {
             recordRecentCalc('버팀목 전세대출 & 보증보험 조회기', 'real-loan.html', 'home');
