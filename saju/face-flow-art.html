@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>FACE FLOW ART</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { background:#000; overflow:hidden; width:100vw; height:100vh; }
+canvas { position:fixed; inset:0; width:100%; height:100%; }
+video { display:none; }
+
+#landing {
+  position:fixed; inset:0; z-index:50;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:#000; gap:.4rem; padding:2rem; transition:opacity .7s;
+}
+#landing h1 {
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(3.5rem,14vw,7rem);
+  line-height:.85; letter-spacing:.06em; text-align:center;
+  background:linear-gradient(160deg,#ffffff 0%,#999999 55%,#555555 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+#landing .sub { font-size:.65rem; letter-spacing:.3em; color:rgba(255,255,255,.22); text-align:center; margin-top:.6rem; }
+#start-btn {
+  margin-top:2rem; padding:1rem clamp(2rem,8vw,3.5rem);
+  font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:.22em;
+  color:rgba(255,255,255,.7); background:transparent; border:1px solid rgba(255,255,255,.35);
+  cursor:pointer; position:relative; overflow:hidden; transition:color .22s; -webkit-appearance:none;
+}
+#start-btn::before { content:''; position:absolute; inset:0; background:#fff; transform:translateX(-101%); transition:transform .22s; z-index:-1; }
+#start-btn:active::before { transform:translateX(0); }
+#start-btn:active { color:#000; }
+#start-btn:disabled { opacity:.3; pointer-events:none; }
+#demo-btn {
+  font-family:'Bebas Neue',cursive; font-size:.75rem; letter-spacing:.2em;
+  color:rgba(255,255,255,.2); background:none; border:none; cursor:pointer;
+  margin-top:.2rem; padding:.6rem 1rem; -webkit-appearance:none;
+}
+
+#err { display:none; position:fixed; inset:0; z-index:90; background:#080808;
+  flex-direction:column; align-items:center; justify-content:center;
+  gap:.7rem; padding:1.5rem; text-align:center; overflow-y:auto; }
+#err.on { display:flex; }
+#err h2 { font-family:'Bebas Neue',cursive; font-size:1.7rem; letter-spacing:.08em; color:rgba(255,255,255,.6); }
+.ec { font-size:.65rem; color:rgba(200,200,200,.5); font-family:monospace; padding:.3rem .8rem; background:rgba(255,255,255,.04); border-radius:4px; max-width:90vw; word-break:break-all; }
+.ecard { width:100%; max-width:400px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:1rem 1.2rem; text-align:left; }
+.ecard h3 { font-size:.55rem; letter-spacing:.18em; color:rgba(255,255,255,.28); margin-bottom:.5rem; }
+.ecard li { font-size:.72rem; color:rgba(255,255,255,.45); line-height:2.1; list-style:none; }
+.ecard li::before { content:'→ '; color:rgba(255,255,255,.15); }
+.ecard li strong { color:rgba(255,255,255,.85); }
+.ebtns { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin-top:.3rem; }
+.ebtn { padding:.7rem 1.3rem; font-family:'Bebas Neue',cursive; font-size:.88rem; letter-spacing:.12em; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.45); background:transparent; cursor:pointer; border-radius:2px; -webkit-appearance:none; }
+.ebtn.p { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.8); }
+
+#ui { display:none; position:fixed; inset:0; z-index:20; pointer-events:none; }
+#ui.on { display:block; }
+#topbar {
+  position:absolute; top:0; left:0; right:0;
+  padding:max(1rem,env(safe-area-inset-top,1rem)) 1.3rem .8rem;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent);
+}
+.logo { font-family:'Bebas Neue',cursive; font-size:.95rem; letter-spacing:.18em; color:rgba(255,255,255,.35); }
+.logo small { display:block; font-size:.36em; letter-spacing:.28em; color:rgba(255,255,255,.15); margin-top:.16em; }
+#mname { font-family:'Bebas Neue',cursive; font-size:.88rem; letter-spacing:.2em; color:rgba(255,255,255,.4); }
+#msub  { font-size:.44rem; letter-spacing:.15em; color:rgba(255,255,255,.18); margin-top:.1em; }
+#fdot { position:absolute; top:max(1.2rem,env(safe-area-inset-top,1.2rem)); left:50%; transform:translateX(-50%);
+  width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.1); transition:all .3s; }
+#fdot.on { background:#fff; box-shadow:0 0 8px rgba(255,255,255,.6); }
+#ctrl {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+  pointer-events:all;
+  display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap;
+}
+.mbtn {
+  padding:.45rem 1.1rem;
+  font-family:'Bebas Neue',cursive; font-size:.82rem; letter-spacing:.15em;
+  border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.3);
+  background:transparent; cursor:pointer; border-radius:1px; -webkit-appearance:none;
+}
+.mbtn.on { color:#fff; border-color:rgba(255,255,255,.65); background:rgba(255,255,255,.06); }
+</style>
+
+    <!-- SEO & AIO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://saju.wezip.co.kr/face-flow-art.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="심층 운세 & AI 심리 스튜디오">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "심층 운세 & AI 심리 스튜디오",
+      "url": "https://saju.wezip.co.kr/face-flow-art.html"
+    }
+    </script>
+</head>
+<body>
+
+<video id="vid" autoplay muted playsinline webkit-playsinline></video>
+<canvas id="c"></canvas>
+
+<div id="landing">
+  <h1>FACE<br>FLOW<br>ART</h1>
+  <p class="sub">얼굴이 예술이 됩니다</p>
+  <button id="start-btn" onclick="startCam()">카메라 켜기 →</button>
+  <button id="demo-btn" onclick="startDemo()">카메라 없이 데모 보기</button>
+</div>
+
+<div id="err">
+  <h2 id="et">카메라 오류</h2>
+  <div class="ec" id="ec"></div>
+  <div class="ecard"><h3>해결 방법</h3><ul id="es"></ul></div>
+  <div class="ebtns">
+    <button class="ebtn p" onclick="retryBtn()">↩ 다시 시도</button>
+    <button class="ebtn" onclick="startDemo()">데모 모드</button>
+    <button class="ebtn" onclick="copyUrl()">🔗 사파리로 열기</button>
+  </div>
+</div>
+
+<div id="ui">
+  <div id="topbar">
+    <div class="logo">FACE FLOW ART<small>GENERATIVE · LIVE</small></div>
+    <div><div id="mname">LIQUID</div><div id="msub">수채화 흐름</div></div>
+  </div>
+  <div id="fdot"></div>
+  <div id="ctrl">
+    <button class="mbtn on" onclick="setMode(0,this)">LIQUID</button>
+    <button class="mbtn" onclick="setMode(1,this)">VAPOR</button>
+    <button class="mbtn" onclick="setMode(2,this)">SHATTER</button>
+    <button class="mbtn" onclick="setMode(3,this)">ECHO</button>
+  </div>
+</div>
+
+<script>
+// ── 에러 안내 ──────────────────────────────────────────
+const EM = {
+  NotAllowedError: { t:'카메라 권한 차단됨', s:['<strong>사파리(Safari)</strong>로 접속하세요 — 카카오톡 인앱브라우저 불가','사파리 주소창 왼쪽 <strong>AA → 웹사이트 설정 → 카메라 → 허용</strong>','설정 앱 → Safari → 카메라 → 허용 후 새로고침'] },
+  NotFoundError:   { t:'카메라를 찾을 수 없음', s:['카메라 권한 허용했는지 확인','다른 앱(Zoom 등) 완전히 종료 후 재시도'] },
+  NotReadableError:{ t:'카메라가 이미 사용 중', s:['다른 앱에서 카메라 사용 중 — <strong>모든 앱 종료</strong> 후 재시도','그래도 안 되면 폰 재시작'] },
+  SecurityError:   { t:'HTTPS 필요 / 인앱브라우저', s:['주소가 <strong>https://</strong>로 시작하는지 확인','카카오톡·인스타 인앱브라우저 말고 <strong>사파리</strong>로 접속'] },
+  TypeError:       { t:'카메라 API 미지원', s:['카카오톡·인스타 인앱브라우저는 카메라 미지원','아래 "사파리로 열기" 버튼 → 사파리에서 다시 열기'] },
+  TimeoutError:    { t:'카메라 응답 없음 (인앱브라우저)', s:['카카오톡·인스타에서는 카메라가 차단됩니다','아래 "사파리로 열기" 버튼을 눌러 사파리에서 열어주세요','또는 데모 모드로 먼저 구경하세요'] },
+};
+
+function showErr(e) {
+  const n = e && e.name ? e.name : 'Error';
+  const inf = EM[n] || { t:'오류: ' + n, s:['사파리로 새로 열기','페이지 새로고침 후 재시도'] };
+  document.getElementById('et').textContent = inf.t;
+  document.getElementById('ec').textContent = n + (e && e.message ? ': ' + e.message : '');
+  document.getElementById('es').innerHTML = inf.s.map(s => '<li>' + s + '</li>').join('');
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('err').classList.add('on');
+}
+
+function retryBtn() {
+  document.getElementById('err').classList.remove('on');
+  const l = document.getElementById('landing');
+  l.style.cssText = 'display:flex;opacity:1';
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('start-btn').textContent = '카메라 켜기 →';
+}
+
+function copyUrl() {
+  var url = location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url)
+      .then(function(){ alert('주소 복사됨!\nSafari 주소창에 붙여넣기 하세요.'); })
+      .catch(function(){ prompt('주소를 복사해서 Safari에서 여세요:', url); });
+  } else {
+    prompt('주소를 복사해서 Safari에서 여세요:', url);
+  }
+}
+
+// ── 캔버스 ─────────────────────────────────────────────
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+var vid = document.getElementById('vid');
+var W, H;
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; shards = []; }
+resize();
+window.addEventListener('resize', resize);
+
+var mode = 0, T = 0, running = false, autoT = 0;
+var liqP = [], vapP = [], shards = [], shardTimer = 0;
+var useLive = false, faceApiReady = false, faceDetected = false, realLM = null;
+
+var MODES = [
+  { name:'LIQUID',  desc:'수채화 흐름' },
+  { name:'VAPOR',   desc:'연기 속 얼굴' },
+  { name:'SHATTER', desc:'수정 파편' },
+  { name:'ECHO',    desc:'시간의 잔향' },
+];
+
+// ── 카메라 ─────────────────────────────────────────────
+function camWithTimeout(cfg, ms) {
+  return Promise.race([
+    navigator.mediaDevices.getUserMedia(cfg),
+    new Promise(function(_, rej) {
+      setTimeout(function() {
+        rej({ name:'TimeoutError', message:'카카오톡/인앱브라우저에서는 카메라를 사용할 수 없어요.' });
+      }, ms || 5000);
+    })
+  ]);
+}
+
+async function startCam() {
+  var btn = document.getElementById('start-btn');
+  btn.textContent = '연결 중...';
+  btn.disabled = true;
+
+  // mediaDevices 없으면 인앱브라우저
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showErr({ name:'TypeError', message:'getUserMedia API 없음. 사파리로 열어주세요.' });
+    return;
+  }
+
+  // 5초 타임아웃 포함 — 카카오톡은 무한 pending되므로
+  var tries = [
+    { video:{ facingMode:'user', width:{ ideal:640 }, height:{ ideal:480 } } },
+    { video:{ facingMode:'user' } },
+    { video:true },
+  ];
+  var stream = null, lastErr = null;
+  for (var i = 0; i < tries.length; i++) {
+    try {
+      stream = await camWithTimeout(tries[i], 5000);
+      break;
+    } catch(e) {
+      lastErr = e;
+      if (e.name === 'NotAllowedError' || e.name === 'SecurityError' || e.name === 'TypeError' || e.name === 'TimeoutError') break;
+    }
+  }
+
+  if (!stream) { showErr(lastErr); return; }
+
+  vid.srcObject = stream;
+  try { await vid.play(); } catch(e) { showErr(e); return; }
+
+  useLive = true;
+  var land = document.getElementById('landing');
+  land.style.opacity = '0';
+  setTimeout(function(){ land.style.display = 'none'; }, 700);
+  document.getElementById('ui').classList.add('on');
+  if (!running) { running = true; requestAnimationFrame(loop); }
+
+  // face-api 백그라운드 (실패해도 무관)
+  setTimeout(function() {
+    loadFaceScript()
+      .then(function(){ return loadFaceModels(); })
+      .then(function(){ startFaceDetect(); })
+      .catch(function(){});
+  }, 500);
+}
+
+function startDemo() {
+  useLive = false;
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('err').classList.remove('on');
+  document.getElementById('ui').classList.add('on');
+  if (!running) { running = true; requestAnimationFrame(loop); }
+}
+
+// ── face-api ───────────────────────────────────────────
+function loadFaceScript() {
+  return new Promise(function(res, rej) {
+    if (window.faceapi) { res(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js';
+    s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+async function loadFaceModels() {
+  var MODEL = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights';
+  await Promise.all([
+    faceapi.nets.tinyFaceDetector.loadFromUri(MODEL),
+    faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL),
+  ]);
+  faceApiReady = true;
+}
+
+function startFaceDetect() {
+  if (!faceApiReady) return;
+  setInterval(async function() {
+    if (!useLive || vid.readyState < 2) return;
+    try {
+      var det = await faceapi
+        .detectSingleFace(vid, new faceapi.TinyFaceDetectorOptions({ inputSize:224, scoreThreshold:.4 }))
+        .withFaceLandmarks(true);
+      if (det) {
+        faceDetected = true;
+        document.getElementById('fdot').classList.add('on');
+        var sX = W / vid.videoWidth, sY = H / vid.videoHeight;
+        realLM = det.landmarks.positions.map(function(p){ return { x: W - p.x * sX, y: p.y * sY }; });
+      } else {
+        faceDetected = false; realLM = null;
+        document.getElementById('fdot').classList.remove('on');
+      }
+    } catch(e) {}
+  }, 120);
+}
+
+// ── 모드 전환 ──────────────────────────────────────────
+function setMode(m, btn) {
+  mode = m;
+  document.getElementById('mname').textContent = MODES[m].name;
+  document.getElementById('msub').textContent = MODES[m].desc;
+  document.querySelectorAll('.mbtn').forEach(function(b){ b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+  else document.querySelectorAll('.mbtn')[m] && document.querySelectorAll('.mbtn')[m].classList.add('on');
+  liqP = []; vapP = []; shards = []; ctx.clearRect(0, 0, W, H);
+}
+
+// ── 데모 얼굴 ─────────────────────────────────────────
+function getDemoFace(t) {
+  var cx=W*.5, cy=H*.42, base=Math.min(W,H), fw=base*.2, fh=base*.28;
+  var br=1+Math.sin(t*.012)*.018, nod=Math.sin(t*.009)*fh*.015, sway=Math.cos(t*.007)*fw*.012;
+  var p = {};
+  p.jaw = [];
+  for (var i=0; i<=36; i++) { var a=Math.PI*(i/36), j=Math.sin(t*.02+i*.3)*.8+Math.sin(t*.05+i*.7)*.3; p.jaw.push({ x:cx+sway+Math.cos(Math.PI-a)*fw*br*.9+j, y:cy+nod+Math.sin(Math.PI-a)*fh*br+Math.sin(t*.015+i*.25)*.9 }); }
+  p.forehead = [];
+  for (var i=0; i<=22; i++) { var a=Math.PI+Math.PI*(i/22); p.forehead.push({ x:cx+sway+Math.cos(a)*fw*.86*br+Math.sin(t*.03+i*.4)*.5, y:cy-fh*.44+nod+Math.sin(a)*fh*.27*br+Math.cos(t*.02+i*.3)*.7 }); }
+  var blink = Math.abs(Math.sin(t*.018)) > .97 ? .04 : 1;
+  p.leftEye = []; p.rightEye = [];
+  for (var i=0; i<=28; i++) { var a=(i/28)*Math.PI*2; p.leftEye.push({ x:cx-fw*.37+sway+Math.cos(a)*fw*.145+Math.sin(t*.025+i*.5)*.4, y:cy-fh*.22+nod+Math.sin(a)*fh*.052*blink+Math.cos(t*.02+i*.3)*.35 }); p.rightEye.push({ x:cx+fw*.37+sway+Math.cos(a)*fw*.145+Math.sin(t*.025+i*.5+1)*.4, y:cy-fh*.22+nod+Math.sin(a)*fh*.052*blink+Math.cos(t*.02+i*.3+1)*.35 }); }
+  p.nose = [];
+  for (var i=0; i<=18; i++) { var s=i/18; p.nose.push({ x:cx+sway+Math.sin(s*Math.PI)*.5*fw*.1+Math.sin(t*.03+i*.5)*.4, y:cy-fh*.28+nod+s*fh*.36+Math.cos(t*.02+i*.4)*.35 }); }
+  p.leftBrow = []; p.rightBrow = [];
+  for (var i=0; i<=16; i++) { var s=i/16, arch=Math.sin(s*Math.PI)*fh*.042, wave=Math.sin(t*.04+i*.4)*.55; p.leftBrow.push({ x:cx-fw*.52+sway+s*fw*.37+wave, y:cy-fh*.33+nod-arch+Math.cos(t*.03+i*.5)*.45 }); p.rightBrow.push({ x:cx+fw*.15+sway+s*fw*.37+wave, y:cy-fh*.33+nod-arch+Math.cos(t*.03+i*.5+2)*.45 }); }
+  var smile = Math.sin(t*.008)*fh*.022;
+  p.upperLip = []; p.lowerLip = [];
+  for (var i=0; i<=32; i++) { var s=(i/32)*Math.PI; p.upperLip.push({ x:cx+sway+Math.cos(Math.PI-s)*fw*.29+Math.sin(t*.04+i*.3)*.55, y:cy+fh*.36+nod+smile-Math.abs(Math.sin(s))*fh*.052+Math.sin(t*.03+i*.5)*.45 }); p.lowerLip.push({ x:cx+sway+Math.cos(Math.PI-s)*fw*.27+Math.sin(t*.04+i*.3+.5)*.55, y:cy+fh*.36+nod+smile+Math.abs(Math.sin(s))*fh*.058+Math.sin(t*.03+i*.5+.5)*.45 }); }
+  return p;
+}
+
+function getRealFace() {
+  if (!realLM || realLM.length < 68) return null;
+  var lm = realLM;
+  function g(idx) { return idx.map(function(i){ return lm[i]; }).filter(Boolean); }
+  var lb = g([17,18,19,20,21]), rb = g([22,23,24,25,26]), forehead = [];
+  if (lb.length && rb.length) {
+    for (var i=0; i<=10; i++) { var t2=i/10; forehead.push({ x:lb[0].x+(rb[rb.length-1].x-lb[0].x)*t2, y:lb[0].y-(lb[0].y-lm[0].y)*.6+Math.sin(t2*Math.PI)*(lm[0].y-lb[0].y)*.2 }); }
+  }
+  return {
+    jaw:      g([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]),
+    forehead: forehead,
+    leftEye:  g([36,37,38,39,40,41]),
+    rightEye: g([42,43,44,45,46,47]),
+    nose:     g([27,28,29,30,31,32,33,34,35]),
+    leftBrow: g([17,18,19,20,21]),
+    rightBrow:g([22,23,24,25,26]),
+    upperLip: g([48,49,50,51,52,53,54,55,56,57,58,59]),
+    lowerLip: g([60,61,62,63,64,65,66,67]),
+  };
+}
+
+function getFace(t) {
+  if (useLive && faceDetected && realLM) return getRealFace();
+  return getDemoFace(t);
+}
+
+// ── LIQUID ─────────────────────────────────────────────
+function drawLiquid() {
+  ctx.fillStyle = 'rgba(0,0,0,0.035)'; ctx.fillRect(0,0,W,H);
+  var f = getFace(T); if (!f) return;
+  var hb = (T*.35) % 360;
+  var feats = [
+    {pts:f.jaw,hue:hb,w:2.4,glow:14},
+    {pts:f.forehead,hue:(hb+35)%360,w:2,glow:10},
+    {pts:f.leftEye,hue:(hb+130)%360,w:1.6,glow:16,close:true},
+    {pts:f.rightEye,hue:(hb+130)%360,w:1.6,glow:16,close:true},
+    {pts:f.nose,hue:(hb+65)%360,w:1.2,glow:8},
+    {pts:f.upperLip,hue:(hb+195)%360,w:2.2,glow:14},
+    {pts:f.lowerLip,hue:(hb+205)%360,w:2.2,glow:14},
+    {pts:f.leftBrow,hue:(hb+95)%360,w:1.5,glow:8},
+    {pts:f.rightBrow,hue:(hb+95)%360,w:1.5,glow:8},
+  ];
+  feats.forEach(function(ft) {
+    var p = ft.pts; if (!p || p.length < 2) return;
+    [[ft.glow*2.5,.25,ft.w*3.5],[ft.glow,.6,ft.w*1.8],[ft.glow*.5,.9,ft.w]].forEach(function(v) {
+      ctx.save(); ctx.shadowBlur=v[0]; ctx.shadowColor='hsla('+ft.hue+',100%,75%,.7)';
+      ctx.beginPath(); ctx.moveTo(p[0].x,p[0].y); p.forEach(function(pt){ ctx.lineTo(pt.x,pt.y); });
+      if (ft.close) ctx.closePath();
+      ctx.strokeStyle='hsla('+ft.hue+',85%,82%,'+v[1]+')'; ctx.lineWidth=v[2]; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke(); ctx.restore();
+    });
+  });
+  if (T%3===0) {
+    var pool = [].concat(f.jaw||[],f.leftEye||[],f.rightEye||[],f.upperLip||[],f.lowerLip||[]);
+    var pt = pool[Math.floor(Math.random()*pool.length)];
+    if (pt) liqP.push({ x:pt.x, y:pt.y, vx:(Math.random()-.5)*.7, vy:Math.random()*.5+.15, life:1, decay:.005+Math.random()*.007, size:1.5+Math.random()*4, hue:(hb+Math.random()*90)%360, trail:[] });
+  }
+  liqP.forEach(function(p){ p.trail.push({x:p.x,y:p.y}); if(p.trail.length>22)p.trail.shift(); p.x+=p.vx+Math.sin(T*.05+p.y*.01)*.25; p.y+=p.vy; p.vy*=1.008; p.life-=p.decay; });
+  liqP = liqP.filter(function(p){ return p.life>0; });
+  liqP.forEach(function(p){ if(p.trail.length<2)return; ctx.save(); ctx.shadowBlur=5; ctx.shadowColor='hsla('+p.hue+',100%,75%,.5)'; ctx.beginPath(); ctx.moveTo(p.trail[0].x,p.trail[0].y); for(var i=1;i<p.trail.length;i++)ctx.lineTo(p.trail[i].x,p.trail[i].y); ctx.strokeStyle='hsla('+p.hue+',85%,72%,'+(p.life*.55)+')'; ctx.lineWidth=p.size*p.life*.5; ctx.lineCap='round'; ctx.stroke(); ctx.restore(); });
+  if (liqP.length > 500) liqP.splice(0, 100);
+}
+
+// ── VAPOR ──────────────────────────────────────────────
+function drawVapor() {
+  ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(0,0,W,H);
+  var f = getFace(T); if (!f) return;
+  var hue = (T*.28) % 360;
+  var all = [f.jaw,f.forehead,f.leftEye,f.rightEye,f.nose,f.upperLip,f.lowerLip,f.leftBrow,f.rightBrow].filter(Boolean);
+  if (T%2===0) all.forEach(function(feat){ for(var i=0;i<feat.length;i+=2){ var pt=feat[i]; if(!pt)continue; vapP.push({x:pt.x,y:pt.y,vx:(Math.random()-.5)*1.1,vy:-Math.random()*1.6-.25,life:.65+Math.random()*.5,decay:.0035+Math.random()*.005,size:7+Math.random()*18,hue:(hue+i*7+Math.random()*35)%360,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.025}); } });
+  vapP.forEach(function(p){ p.x+=p.vx+Math.sin(T*.04+p.y*.008)*.45; p.y+=p.vy; p.vx*=.992; p.vy*=.994; p.rot+=p.rotV; p.size+=.12; p.life-=p.decay; });
+  vapP = vapP.filter(function(p){ return p.life>0; }); vapP.sort(function(a,b){ return b.size-a.size; });
+  vapP.forEach(function(p){ var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size); var al=p.life*.32; g.addColorStop(0,'hsla('+p.hue+',65%,72%,'+al+')'); g.addColorStop(.5,'hsla('+p.hue+',55%,52%,'+(al*.5)+')'); g.addColorStop(1,'hsla('+p.hue+',45%,38%,0)'); ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=g; ctx.beginPath(); ctx.ellipse(0,0,p.size,p.size*.58,0,0,Math.PI*2); ctx.fill(); ctx.restore(); });
+  [f.jaw,f.leftEye,f.rightEye,f.upperLip,f.lowerLip].forEach(function(feat,fi){ if(!feat||feat.length<2)return; ctx.beginPath(); ctx.moveTo(feat[0].x,feat[0].y); feat.forEach(function(p){ctx.lineTo(p.x,p.y);}); if(fi>0&&fi<3)ctx.closePath(); ctx.strokeStyle='hsla('+((hue+fi*45)%360)+',80%,90%,.1)'; ctx.lineWidth=1; ctx.stroke(); });
+  if (vapP.length > 700) vapP.splice(0, 140);
+}
+
+// ── SHATTER ────────────────────────────────────────────
+function buildShards() {
+  var f = getFace(T); if (!f) return; shards = [];
+  var all = [].concat(f.jaw||[],f.forehead||[],f.leftEye||[],f.rightEye||[],f.upperLip||[],f.lowerLip||[],f.leftBrow||[],f.rightBrow||[],f.nose||[]);
+  for (var i=0; i<all.length-2; i+=2) { var a=all[i],b=all[i+1]||all[i],c=all[i+2]||all[i]; var cx2=(a.x+b.x+c.x)/3,cy2=(a.y+b.y+c.y)/3; shards.push({pts:[{x:a.x,y:a.y},{x:b.x,y:b.y},{x:c.x,y:c.y}],cx:cx2,cy:cy2,vx:(Math.random()-.5)*.055,vy:(Math.random()-.5)*.055,vr:(Math.random()-.5)*.0035,angle:0,hue:(T*.5+i*7)%360,po:Math.random()*Math.PI*2}); }
+}
+function drawShatter() {
+  ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fillRect(0,0,W,H);
+  shardTimer++; if (shards.length===0||shardTimer%220===0) buildShards();
+  shards.forEach(function(s){ s.angle+=s.vr+Math.sin(T*.02+s.cy*.005)*.0008; s.cx+=s.vx+Math.sin(T*.015+s.cy*.003)*.13; s.cy+=s.vy+Math.cos(T*.012+s.cx*.003)*.09; var pulse=.65+.35*Math.sin(T*.04+s.po),hue=(s.hue+T*.28)%360; ctx.save(); ctx.translate(s.cx,s.cy); ctx.rotate(s.angle); ctx.beginPath(); ctx.moveTo(s.pts[0].x-s.cx,s.pts[0].y-s.cy); ctx.lineTo(s.pts[1].x-s.cx,s.pts[1].y-s.cy); ctx.lineTo(s.pts[2].x-s.cx,s.pts[2].y-s.cy); ctx.closePath(); ctx.fillStyle='hsla('+hue+',78%,58%,'+(0.06*pulse)+')'; ctx.fill(); ctx.shadowBlur=7*pulse; ctx.shadowColor='hsla('+hue+',100%,80%,.8)'; ctx.strokeStyle='hsla('+hue+',88%,76%,'+(0.68*pulse)+')'; ctx.lineWidth=.7; ctx.stroke(); ctx.shadowBlur=0; ctx.restore(); });
+  var f = getFace(T); if (!f) return;
+  [f.jaw,f.leftEye,f.rightEye,f.upperLip].forEach(function(feat,fi){ if(!feat||feat.length<2)return; ctx.beginPath(); ctx.moveTo(feat[0].x,feat[0].y); feat.forEach(function(p){ctx.lineTo(p.x,p.y);}); if(fi>0)ctx.closePath(); ctx.strokeStyle='hsla('+((T*.5+fi*65)%360)+',70%,70%,.07)'; ctx.lineWidth=1; ctx.stroke(); });
+}
+
+// ── ECHO ───────────────────────────────────────────────
+function drawEcho() {
+  ctx.fillStyle = 'rgba(0,0,0,0.07)'; ctx.fillRect(0,0,W,H);
+  for (var l=9; l>=0; l--) {
+    var tOff = T - l*16; if (tOff < 0) continue;
+    var f = getFace(tOff); if (!f) continue;
+    var alpha=(1-l/9)*.58, hue=(T*.45+l*26)%360, scale=1+l*.02, cx=W*.5, cy=H*.42;
+    function sc(pts) { if(!pts)return[]; return pts.map(function(p){return{x:cx+(p.x-cx)*scale,y:cy+(p.y-cy)*scale};}); }
+    var fts = [{pts:sc(f.jaw),c:false},{pts:sc(f.forehead||[]),c:false},{pts:sc(f.leftEye),c:true},{pts:sc(f.rightEye),c:true},{pts:sc(f.upperLip),c:false},{pts:sc(f.lowerLip),c:false},{pts:sc(f.leftBrow),c:false},{pts:sc(f.rightBrow),c:false}];
+    fts.forEach(function(ft){ if(!ft.pts||ft.pts.length<2)return; ctx.save(); ctx.shadowBlur=l===0?16:4; ctx.shadowColor='hsla('+hue+',100%,70%,.55)'; ctx.beginPath(); ctx.moveTo(ft.pts[0].x,ft.pts[0].y); ft.pts.forEach(function(p){ctx.lineTo(p.x,p.y);}); if(ft.c)ctx.closePath(); ctx.strokeStyle='hsla('+hue+',85%,'+(52+l*4)+'%,'+alpha+')'; ctx.lineWidth=l===0?2.2:.7+l*.09; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke(); ctx.shadowBlur=0; ctx.restore(); });
+  }
+}
+
+// ── LOOP ───────────────────────────────────────────────
+function loop() {
+  T++; autoT++;
+  if (autoT > 400) { autoT = 0; var n = (mode+1)%4; setMode(n); }
+  switch(mode) { case 0: drawLiquid(); break; case 1: drawVapor(); break; case 2: drawShatter(); break; case 3: drawEcho(); break; }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

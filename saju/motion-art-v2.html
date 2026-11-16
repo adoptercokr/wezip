@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>MOTION ART</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050508;
+    --accent: #ff3c5a;
+    --accent2: #00f5d4;
+    --accent3: #f5c400;
+    --accent4: #bf5fff;
+    --text: #f0ede8;
+    --dim: rgba(240,237,232,0.35);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; height:100vh; overflow:hidden; }
+
+  /* LANDING */
+  #landing {
+    position:fixed; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    z-index:100; background:var(--bg); transition:opacity .8s ease;
+  }
+  #landing h1 {
+    font-family:'Bebas Neue',cursive;
+    font-size:clamp(3.5rem,11vw,9rem);
+    letter-spacing:.08em; line-height:.88; text-align:center;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent3) 45%,var(--accent2) 80%,var(--accent4) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    animation:flicker 5s infinite alternate;
+  }
+  @keyframes flicker { 0%,94%,100%{opacity:1}95%{opacity:.6}97%{opacity:1}98%{opacity:.4} }
+  #landing .sub { font-size:.85rem; color:var(--dim); margin-top:1rem; letter-spacing:.25em; font-weight:300; }
+  #start-btn {
+    margin-top:2.5rem; padding:.9rem 3rem;
+    font-family:'Bebas Neue'; font-size:1.3rem; letter-spacing:.15em;
+    border:1px solid var(--accent); color:var(--accent); background:transparent;
+    cursor:pointer; position:relative; overflow:hidden; transition:color .3s; -webkit-appearance:none;
+  }
+  #start-btn::before { content:''; position:absolute; inset:0; background:var(--accent); transform:translateX(-100%); transition:transform .3s ease; z-index:-1; }
+  #start-btn:hover,#start-btn:active { color:#000; }
+  #start-btn:hover::before,#start-btn:active::before { transform:translateX(0); }
+
+  /* ERROR */
+  #perm-error { display:none; position:fixed; inset:0; z-index:200; background:var(--bg); align-items:center; justify-content:center; flex-direction:column; gap:1rem; text-align:center; padding:2rem; }
+  #perm-error.show { display:flex; }
+  #perm-error h2 { font-family:'Bebas Neue'; font-size:2rem; color:var(--accent); }
+  #perm-error p { color:var(--dim); font-size:.85rem; max-width:360px; line-height:1.8; }
+  #retry-btn { margin-top:.5rem; padding:.8rem 2.5rem; font-family:'Bebas Neue'; font-size:1.1rem; letter-spacing:.1em; border:1px solid var(--accent2); color:var(--accent2); background:transparent; cursor:pointer; -webkit-appearance:none; }
+
+  /* APP */
+  #app { position:fixed; inset:0; display:none; }
+  #video { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+  #art-canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+  /* TOPBAR */
+  #topbar {
+    position:absolute; top:0; left:0; right:0; padding:1.2rem 1.8rem;
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(to bottom,rgba(5,5,8,.7),transparent); z-index:10;
+  }
+  .logo { font-family:'Bebas Neue'; font-size:1.3rem; letter-spacing:.12em; color:rgba(240,237,232,.5); }
+  #mode-label { font-size:.6rem; letter-spacing:.3em; color:var(--accent2); }
+
+  /* MOTION BAR */
+  #motion-bar-wrap { position:absolute; left:1.3rem; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; z-index:10; }
+  #motion-bar-label { font-size:.5rem; letter-spacing:.2em; color:var(--dim); writing-mode:vertical-rl; transform:rotate(180deg); }
+  #motion-bar-track { width:3px; height:100px; background:rgba(240,237,232,.08); position:relative; overflow:hidden; border-radius:2px; }
+  #motion-bar-fill { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top,var(--accent),var(--accent3),var(--accent2)); height:0%; transition:height .08s; border-radius:2px; }
+
+  /* CONTROLS */
+  #controls {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:1rem 1.2rem calc(1rem + env(safe-area-inset-bottom,0px));
+    display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap;
+    background:linear-gradient(to top,rgba(5,5,8,.85),transparent); z-index:10;
+  }
+  .mode-btn {
+    padding:.5rem 1.4rem;
+    font-family:'Bebas Neue'; font-size:.95rem; letter-spacing:.14em;
+    border:1px solid rgba(240,237,232,.18); color:rgba(240,237,232,.4);
+    background:transparent; cursor:pointer; transition:all .22s; -webkit-appearance:none;
+  }
+  .mode-btn:hover,.mode-btn:active,.mode-btn.active { border-color:var(--accent2); color:var(--accent2); }
+  .mode-btn.active { background:rgba(0,245,212,.07); }
+</style>
+
+    <!-- SEO & AIO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://saju.wezip.co.kr/motion-art-v2.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="심층 운세 & AI 심리 스튜디오">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "심층 운세 & AI 심리 스튜디오",
+      "url": "https://saju.wezip.co.kr/motion-art-v2.html"
+    }
+    </script>
+</head>
+<body>
+
+<div id="landing">
+  <h1>MOTION<br>ART</h1>
+  <p class="sub">당신의 움직임이 예술이 됩니다</p>
+  <button id="start-btn" onclick="startApp()">카메라 켜기 →</button>
+</div>
+
+<div id="perm-error">
+  <h2>카메라 접근 불가</h2>
+  <p>사파리 브라우저로 접속해 주세요.<br>카카오톡 인앱브라우저는 카메라를 지원하지 않습니다.<br><br>사파리 주소창 → AA → 웹사이트 설정 → 카메라 → 허용</p>
+  <button id="retry-btn" onclick="location.reload()">다시 시도</button>
+</div>
+
+<div id="app">
+  <video id="video" autoplay muted playsinline webkit-playsinline></video>
+  <canvas id="art-canvas"></canvas>
+  <div id="topbar">
+    <span class="logo">MOTION ART</span>
+    <span id="mode-label">RIPPLE</span>
+  </div>
+  <div id="motion-bar-wrap">
+    <div id="motion-bar-track"><div id="motion-bar-fill"></div></div>
+    <span id="motion-bar-label">MOTION</span>
+  </div>
+  <div id="controls">
+    <button class="mode-btn active" onclick="setMode('ripple',this)">RIPPLE</button>
+    <button class="mode-btn" onclick="setMode('sparks',this)">SPARKS</button>
+    <button class="mode-btn" onclick="setMode('aurora',this)">AURORA</button>
+  </div>
+</div>
+
+<script>
+const artCanvas = document.getElementById('art-canvas');
+const ctx = artCanvas.getContext('2d');
+const video = document.getElementById('video');
+const motionCanvas = document.createElement('canvas');
+const mCtx = motionCanvas.getContext('2d', { willReadFrequently:true });
+
+// 잔상 전용 캔버스 (ripple 겹침용)
+const trailCanvas = document.createElement('canvas');
+const tCtx = trailCanvas.getContext('2d');
+
+let currentMode = 'ripple';
+let prevFrame = null;
+let motionLevel = 0;
+let motionPoints = [];
+let particles = [];
+let ripples = [];
+let auroraOffset = 0;
+let t = 0;
+
+// Aurora 모션 버스트
+let auroraBursts = [];
+
+function resize() {
+  const W = window.innerWidth, H = window.innerHeight;
+  artCanvas.width = W; artCanvas.height = H;
+  trailCanvas.width = W; trailCanvas.height = H;
+  motionCanvas.width = 80; motionCanvas.height = 60;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── 카메라 시작 ───────────────────────────────────────
+function camWithTimeout(cfg, ms) {
+  return Promise.race([
+    navigator.mediaDevices.getUserMedia(cfg),
+    new Promise((_, rej) => setTimeout(() => rej({ name:'TimeoutError' }), ms))
+  ]);
+}
+
+async function startApp() {
+  const btn = document.getElementById('start-btn');
+  btn.textContent = '연결 중...'; btn.disabled = true;
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showPermErr(); return;
+  }
+
+  const tries = [
+    { video:{ facingMode:'user', width:{ideal:640}, height:{ideal:480} } },
+    { video:{ facingMode:'user' } },
+    { video:true },
+  ];
+  let stream = null, lastErr = null;
+  for (const cfg of tries) {
+    try { stream = await camWithTimeout(cfg, 5000); break; }
+    catch(e) { lastErr = e; if (e.name==='NotAllowedError'||e.name==='SecurityError'||e.name==='TypeError'||e.name==='TimeoutError') break; }
+  }
+  if (!stream) { showPermErr(lastErr); return; }
+
+  video.srcObject = stream;
+  try { await video.play(); } catch(e) { showPermErr(e); return; }
+
+  document.getElementById('landing').style.opacity = '0';
+  setTimeout(() => document.getElementById('landing').style.display = 'none', 800);
+  document.getElementById('app').style.display = 'block';
+  requestAnimationFrame(loop);
+}
+
+function showPermErr(e) {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('perm-error').classList.add('show');
+}
+
+// ── 모드 전환 ─────────────────────────────────────────
+function setMode(mode, btn) {
+  currentMode = mode;
+  document.getElementById('mode-label').textContent = mode.toUpperCase();
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  particles = []; ripples = []; auroraBursts = [];
+  ctx.clearRect(0, 0, artCanvas.width, artCanvas.height);
+  tCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+}
+
+// ── 모션 감지 ─────────────────────────────────────────
+function detectMotion() {
+  if (video.readyState < 2) return;
+  mCtx.drawImage(video, 0, 0, 80, 60);
+  const cur = mCtx.getImageData(0, 0, 80, 60);
+  if (!prevFrame) { prevFrame = cur; return; }
+  let totalDiff = 0;
+  motionPoints = [];
+  for (let y = 0; y < 60; y++) {
+    for (let x = 0; x < 80; x++) {
+      const i = (y * 80 + x) * 4;
+      const diff = Math.abs(cur.data[i]-prevFrame.data[i]) +
+                   Math.abs(cur.data[i+1]-prevFrame.data[i+1]) +
+                   Math.abs(cur.data[i+2]-prevFrame.data[i+2]);
+      totalDiff += diff;
+      if (diff > 30) motionPoints.push({ x:(1-x/80)*artCanvas.width, y:(y/60)*artCanvas.height, intensity:diff/255 });
+    }
+  }
+  prevFrame = cur;
+  motionLevel = Math.min(1, totalDiff / (80*60*255*0.15));
+  document.getElementById('motion-bar-fill').style.height = (motionLevel*100)+'%';
+}
+
+// ── RIPPLE (잔상 오래 + 겹침) ─────────────────────────
+function updateRipple() {
+  const W = artCanvas.width, H = artCanvas.height;
+
+  // 잔상 캔버스: 아주 천천히 fade → 원들이 오래 남음
+  tCtx.fillStyle = 'rgba(5,5,8,0.012)'; // 매우 느린 페이드
+  tCtx.fillRect(0, 0, W, H);
+
+  // 모션 감지 → 새 ripple 생성
+  if (motionPoints.length > 0 && motionLevel > 0.015) {
+    const count = Math.floor(motionLevel * 5);
+    for (let i = 0; i < count; i++) {
+      const mp = motionPoints[Math.floor(Math.random() * motionPoints.length)];
+      const hue = (t * 2.5 + mp.x * 0.04) % 360;
+      // 메인 원
+      ripples.push({
+        x: mp.x, y: mp.y,
+        r: 3,
+        maxR: 60 + Math.random() * 200 * motionLevel,
+        life: 1,
+        decay: 0.005 + Math.random() * 0.004, // 느리게 사라짐
+        hue: hue,
+        lw: 1.2 + motionLevel * 2.5,
+        layer: 0,
+      });
+      // 내부 동심원 1
+      ripples.push({
+        x: mp.x, y: mp.y,
+        r: 3,
+        maxR: (60 + Math.random() * 200 * motionLevel) * 0.65,
+        life: 0.85,
+        decay: 0.006 + Math.random() * 0.004,
+        hue: (hue + 45) % 360,
+        lw: 0.8 + motionLevel * 1.5,
+        layer: 1,
+      });
+      // 내부 동심원 2
+      if (motionLevel > 0.1) {
+        ripples.push({
+          x: mp.x, y: mp.y,
+          r: 2,
+          maxR: (60 + Math.random() * 200 * motionLevel) * 0.35,
+          life: 0.7,
+          decay: 0.007 + Math.random() * 0.005,
+          hue: (hue + 90) % 360,
+          lw: 0.5 + motionLevel,
+          layer: 2,
+        });
+      }
+    }
+  }
+
+  // ripple 업데이트 & 잔상 캔버스에 그리기
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.r += (r.maxR - r.r) * 0.038;
+    r.life -= r.decay;
+    if (r.life <= 0 || r.r > r.maxR * 0.98) { ripples.splice(i, 1); continue; }
+
+    // 잔상 캔버스에 원 그리기 (겹겹이 쌓임)
+    tCtx.beginPath();
+    tCtx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
+    tCtx.strokeStyle = `hsla(${r.hue},82%,68%,${r.life * 0.55})`;
+    tCtx.lineWidth = r.lw * r.life;
+    tCtx.stroke();
+
+    // 안쪽 희미한 채움 (가장 큰 원만)
+    if (r.layer === 0 && r.r > 30) {
+      const g = tCtx.createRadialGradient(r.x, r.y, r.r * 0.5, r.x, r.y, r.r);
+      g.addColorStop(0, `hsla(${r.hue},70%,50%,0)`);
+      g.addColorStop(0.7, `hsla(${r.hue},80%,60%,${r.life * 0.03})`);
+      g.addColorStop(1, `hsla(${r.hue},80%,60%,0)`);
+      tCtx.fillStyle = g;
+      tCtx.beginPath();
+      tCtx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
+      tCtx.fill();
+    }
+  }
+  if (ripples.length > 800) ripples.splice(0, 200);
+
+  // 메인 캔버스: 잔상 캔버스를 합성
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(trailCanvas, 0, 0);
+}
+
+// ── SPARKS ────────────────────────────────────────────
+function updateSparks() {
+  const W = artCanvas.width, H = artCanvas.height;
+  ctx.fillStyle = 'rgba(5,5,8,0.22)'; ctx.fillRect(0, 0, W, H);
+
+  if (motionPoints.length > 0 && motionLevel > 0.015) {
+    const count = Math.floor(motionLevel * 14);
+    for (let i = 0; i < count; i++) {
+      const mp = motionPoints[Math.floor(Math.random() * motionPoints.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 2 + Math.random() * 9 * motionLevel;
+      particles.push({
+        x: mp.x, y: mp.y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        decay: 0.014 + Math.random() * 0.02,
+        size: 1.5 + Math.random() * 2.5,
+        hue: 25 + Math.random() * 55,
+        trail: [],
+      });
+    }
+  }
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.trail.push({ x:p.x, y:p.y });
+    if (p.trail.length > 9) p.trail.shift();
+    p.x += p.vx; p.y += p.vy;
+    p.vy += 0.13; p.vx *= 0.98;
+    p.life -= p.decay;
+    if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+    // 꼬리
+    if (p.trail.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(p.trail[0].x, p.trail[0].y);
+      for (let j = 1; j < p.trail.length; j++) ctx.lineTo(p.trail[j].x, p.trail[j].y);
+      ctx.strokeStyle = `hsla(${p.hue},100%,70%,${p.life * 0.45})`;
+      ctx.lineWidth = p.size * p.life;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+    // 불꽃 점
+    ctx.fillStyle = `hsla(${p.hue + 20},100%,92%,${p.life})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  if (particles.length > 2500) particles.splice(0, 500);
+}
+
+// ── AURORA (모션 직접 반영) ───────────────────────────
+function updateAurora() {
+  const W = artCanvas.width, H = artCanvas.height;
+
+  // 베이스 페이드 (잔상 유지)
+  ctx.fillStyle = 'rgba(5,5,8,0.06)'; ctx.fillRect(0, 0, W, H);
+
+  auroraOffset += 0.003 + motionLevel * 0.025;
+  t; // 이미 루프에서 증가
+
+  // ── 기본 오로라 밴드 5개 ──
+  for (let b = 0; b < 5; b++) {
+    const hue = (t * 0.5 + b * 42 + auroraOffset * 18) % 360;
+    const baseY = H * (0.15 + b * 0.16);
+    const amp = 35 + motionLevel * 130 + Math.sin(auroraOffset * 1.3 + b) * 28;
+
+    ctx.beginPath();
+    ctx.moveTo(0, baseY);
+    for (let x = 0; x <= W; x += 6) {
+      const y = baseY
+        + Math.sin(x * 0.005 + auroraOffset * 2.2 + b * 1.4) * amp
+        + Math.sin(x * 0.011 - auroraOffset * 1.1 + b * 0.7) * amp * 0.45
+        + Math.sin(x * 0.022 + auroraOffset * 0.6 + b * 2.1) * amp * 0.2;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+
+    const intensity = 0.28 + motionLevel * 1.4;
+    const g = ctx.createLinearGradient(0, baseY - amp, 0, baseY + amp + 100);
+    g.addColorStop(0, `hsla(${hue},85%,65%,0)`);
+    g.addColorStop(0.25, `hsla(${hue},90%,68%,${0.07 * intensity})`);
+    g.addColorStop(0.5, `hsla(${(hue+28)%360},88%,72%,${0.15 * intensity})`);
+    g.addColorStop(0.75, `hsla(${hue},90%,68%,${0.07 * intensity})`);
+    g.addColorStop(1, `hsla(${hue},85%,65%,0)`);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+
+  // ── 모션 버스트: 움직임 있는 곳에 빛 폭발 ──
+  if (motionLevel > 0.04 && motionPoints.length > 0) {
+    const burstCount = Math.floor(motionLevel * 4);
+    for (let i = 0; i < burstCount; i++) {
+      const mp = motionPoints[Math.floor(Math.random() * motionPoints.length)];
+      auroraBursts.push({
+        x: mp.x, y: mp.y,
+        r: 0,
+        maxR: 60 + Math.random() * 160 * motionLevel,
+        hue: (t * 2 + mp.x * 0.05) % 360,
+        life: 1,
+        decay: 0.018 + Math.random() * 0.015,
+        streaks: Array.from({ length: 5 }, () => ({
+          angle: Math.random() * Math.PI * 2,
+          len: 20 + Math.random() * 80 * motionLevel,
+          speed: 0.8 + Math.random() * 2,
+        })),
+      });
+    }
+  }
+
+  // 버스트 그리기
+  for (let i = auroraBursts.length - 1; i >= 0; i--) {
+    const b = auroraBursts[i];
+    b.r += (b.maxR - b.r) * 0.12;
+    b.life -= b.decay;
+    if (b.life <= 0) { auroraBursts.splice(i, 1); continue; }
+
+    // 빛 방사형 후광
+    const g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+    g.addColorStop(0, `hsla(${b.hue},100%,95%,${b.life * 0.55})`);
+    g.addColorStop(0.3, `hsla(${b.hue},90%,75%,${b.life * 0.25})`);
+    g.addColorStop(0.7, `hsla(${(b.hue+40)%360},80%,60%,${b.life * 0.1})`);
+    g.addColorStop(1, `hsla(${b.hue},70%,50%,0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fill();
+
+    // 빛 줄기 streaks
+    b.streaks.forEach(s => {
+      s.angle += 0.015;
+      ctx.beginPath();
+      ctx.moveTo(b.x, b.y);
+      ctx.lineTo(
+        b.x + Math.cos(s.angle) * s.len * b.life,
+        b.y + Math.sin(s.angle) * s.len * b.life
+      );
+      ctx.strokeStyle = `hsla(${b.hue},100%,85%,${b.life * 0.4})`;
+      ctx.lineWidth = 1 + b.life * 1.5;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    });
+  }
+  if (auroraBursts.length > 200) auroraBursts.splice(0, 50);
+
+  // ── 강한 모션 → 전체 화면 오로라 파동 ──
+  if (motionLevel > 0.25) {
+    const flashHue = (t * 3) % 360;
+    const flashG = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H) * 0.8);
+    flashG.addColorStop(0, `hsla(${flashHue},100%,80%,${(motionLevel - 0.25) * 0.18})`);
+    flashG.addColorStop(1, `hsla(${flashHue},80%,50%,0)`);
+    ctx.fillStyle = flashG;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── 모션 포인트에 반짝이는 스파크 ──
+  if (motionLevel > 0.06) {
+    for (const mp of motionPoints.slice(0, 8)) {
+      if (Math.random() < motionLevel * 0.4) {
+        const sparkHue = (t * 4 + mp.x * 0.1) % 360;
+        ctx.fillStyle = `hsla(${sparkHue},100%,95%,${motionLevel * 0.9})`;
+        ctx.beginPath();
+        ctx.arc(mp.x, mp.y, Math.random() * 3 + 1, 0, Math.PI * 2);
+        ctx.fill();
+        // 십자 글로우
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = `hsla(${sparkHue},100%,80%,0.8)`;
+        ctx.fillStyle = `hsla(${sparkHue},100%,98%,${motionLevel * 0.7})`;
+        ctx.fillRect(mp.x - 3, mp.y - 0.5, 6, 1);
+        ctx.fillRect(mp.x - 0.5, mp.y - 3, 1, 6);
+        ctx.shadowBlur = 0;
+      }
+    }
+  }
+}
+
+// ── MAIN LOOP ─────────────────────────────────────────
+function loop() {
+  t++;
+  detectMotion();
+  switch (currentMode) {
+    case 'ripple': updateRipple(); break;
+    case 'sparks': updateSparks(); break;
+    case 'aurora': updateAurora(); break;
+  }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

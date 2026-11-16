@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ART FACE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { background:#000; overflow:hidden; width:100vw; height:100vh; touch-action:manipulation; }
+canvas { position:fixed; inset:0; width:100%; height:100%; }
+#vid { display:none; }
+
+#landing { position:fixed; inset:0; z-index:50; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#000; padding:2rem; transition:opacity .8s; }
+#landing h1 { font-family:'Bebas Neue',cursive; font-size:clamp(3rem,14vw,6.5rem); line-height:.82; letter-spacing:.06em; text-align:center; color:#fff; opacity:.9; }
+#landing .sub { font-size:.68rem; letter-spacing:.3em; color:rgba(255,255,255,.22); text-align:center; margin-top:.7rem; }
+#start-btn { margin-top:2rem; padding:1rem clamp(2rem,8vw,3.5rem); font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:.22em; color:#fff; background:transparent; border:1px solid rgba(255,255,255,.45); cursor:pointer; position:relative; overflow:hidden; transition:color .22s; }
+#start-btn::before { content:''; position:absolute; inset:0; background:#fff; transform:translateX(-101%); transition:transform .22s; z-index:-1; }
+#start-btn:hover::before,#start-btn:active::before { transform:translateX(0); }
+#start-btn:hover,#start-btn:active { color:#000; }
+#start-btn:disabled { opacity:.3; pointer-events:none; }
+
+#err { display:none; position:fixed; inset:0; z-index:90; background:#080808; flex-direction:column; align-items:center; justify-content:center; gap:.7rem; padding:1.5rem; text-align:center; }
+#err.on { display:flex; }
+#err h2 { font-family:'Bebas Neue',cursive; font-size:1.6rem; color:#ff5555; letter-spacing:.08em; }
+.ec { font-size:.68rem; color:rgba(255,90,90,.7); background:rgba(255,0,0,.07); border:1px solid rgba(255,0,0,.14); padding:.3rem .8rem; border-radius:4px; font-family:monospace; max-width:90vw; word-break:break-all; }
+.ecard { width:100%; max-width:380px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:.9rem 1.1rem; text-align:left; }
+.ecard h3 { font-size:.62rem; letter-spacing:.18em; color:rgba(255,255,255,.3); margin-bottom:.5rem; }
+.ecard li { font-size:.73rem; color:rgba(255,255,255,.48); line-height:2.1; list-style:none; }
+.ecard li::before { content:'→ '; color:rgba(255,255,255,.18); }
+.ecard li strong { color:rgba(255,255,255,.82); }
+.ebtns { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; }
+.ebtn { padding:.7rem 1.3rem; font-family:'Bebas Neue',cursive; font-size:.88rem; letter-spacing:.12em; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.45); background:transparent; cursor:pointer; border-radius:2px; transition:all .2s; }
+.ebtn:hover,.ebtn:active { border-color:#fff; color:#fff; }
+.ebtn.p { border-color:rgba(255,255,255,.45); color:rgba(255,255,255,.8); }
+
+#ui { display:none; position:fixed; inset:0; z-index:10; pointer-events:none; }
+#ui.on { display:block; }
+#topbar { position:absolute; top:0; left:0; right:0; padding:max(1rem,env(safe-area-inset-top,0px)) 1.3rem .9rem; display:flex; justify-content:space-between; align-items:flex-start; background:linear-gradient(to bottom,rgba(0,0,0,.6),transparent); }
+.logo { font-family:'Bebas Neue',cursive; font-size:1rem; letter-spacing:.18em; color:rgba(255,255,255,.38); }
+.logo small { display:block; font-size:.36em; letter-spacing:.3em; color:rgba(255,255,255,.16); margin-top:.18em; }
+#mname { font-family:'Bebas Neue',cursive; font-size:.92rem; letter-spacing:.2em; color:rgba(255,255,255,.42); }
+#msub  { font-size:.46rem; letter-spacing:.16em; color:rgba(255,255,255,.18); margin-top:.12em; text-align:right; }
+#controls { position:absolute; bottom:0; left:0; right:0; padding:.8rem .8rem calc(.8rem + env(safe-area-inset-bottom,0px)); background:linear-gradient(to top,rgba(0,0,0,.65),transparent); pointer-events:all; display:flex; justify-content:center; gap:.4rem; flex-wrap:wrap; }
+.fbtn { flex:1; min-width:0; max-width:90px; padding:.65rem .2rem; font-family:'Bebas Neue',cursive; font-size:clamp(.6rem,2.4vw,.8rem); letter-spacing:.07em; border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.28); background:transparent; cursor:pointer; transition:all .18s; border-radius:1px; white-space:nowrap; }
+.fbtn:active,.fbtn.on { color:#fff; border-color:rgba(255,255,255,.65); background:rgba(255,255,255,.07); }
+</style>
+
+    <!-- SEO & AIO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://saju.wezip.co.kr/face-motion-art-v3.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="심층 운세 & AI 심리 스튜디오">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "심층 운세 & AI 심리 스튜디오",
+      "url": "https://saju.wezip.co.kr/face-motion-art-v3.html"
+    }
+    </script>
+</head>
+<body>
+<video id="vid" autoplay muted playsinline webkit-playsinline></video>
+<canvas id="c"></canvas>
+
+<div id="landing">
+  <h1>ART<br>FACE</h1>
+  <p class="sub">얼굴을 예술로 변환합니다</p>
+  <button id="start-btn" onclick="startCam()">카메라 켜기 →</button>
+</div>
+
+<div id="err">
+  <h2 id="et">카메라 오류</h2>
+  <div class="ec" id="ec"></div>
+  <div class="ecard"><h3>해결 방법</h3><ul id="es"></ul></div>
+  <div class="ebtns">
+    <button class="ebtn p" onclick="retry()">↩ 다시 시도</button>
+    <button class="ebtn" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('복사됨!'))">🔗 주소 복사</button>
+  </div>
+</div>
+
+<div id="ui">
+  <div id="topbar">
+    <div class="logo">ART FACE<small>LIVE STYLE</small></div>
+    <div style="text-align:right"><div id="mname">ANIME</div><div id="msub">애니메이션 셀화</div></div>
+  </div>
+  <div id="controls">
+    <button class="fbtn on" onclick="setMode(0,this)">ANIME</button>
+    <button class="fbtn"    onclick="setMode(1,this)">PAINT</button>
+    <button class="fbtn"    onclick="setMode(2,this)">WATER</button>
+    <button class="fbtn"    onclick="setMode(3,this)">NEON</button>
+    <button class="fbtn"    onclick="setMode(4,this)">DREAM</button>
+    <button class="fbtn"    onclick="setMode(5,this)">SKETCH</button>
+  </div>
+</div>
+
+<script>
+// ══ 에러 ══════════════════════════════════════════════
+const EM={NotAllowedError:{t:'카메라 권한 차단됨',s:['주소창 <strong>🔒 → 카메라 → 허용</strong>으로 변경','또는 크롬 주소창에 <strong>chrome://settings/content/camera</strong> 입력','차단 목록에서 이 사이트 삭제 후 새로고침']},NotFoundError:{t:'카메라 없음',s:['Zoom·Teams 등 <strong>카메라 앱 종료</strong>','카메라 연결 상태 확인']},NotReadableError:{t:'카메라 사용 중',s:['<strong>다른 앱 모두 종료</strong> 후 크롬 재시작','안 되면 PC 재시작']},SecurityError:{t:'HTTPS 필요',s:['주소가 <strong>https://</strong>로 시작하는지 확인','<strong>크롬/사파리</strong>로 접속 (카카오톡 인앱 브라우저 X)']}};
+function showErr(e){const n=e.name||'Error',inf=EM[n]||{t:'오류 ('+n+')',s:['새로고침 후 재시도','크롬/사파리 사용']};document.getElementById('et').textContent=inf.t;document.getElementById('ec').textContent=n+': '+(e.message||'');document.getElementById('es').innerHTML=inf.s.map(s=>`<li>${s}</li>`).join('');document.getElementById('landing').style.display='none';document.getElementById('err').classList.add('on');console.error('[CAM]',n,e.message,e);}
+function retry(){document.getElementById('err').classList.remove('on');const l=document.getElementById('landing');l.style.cssText='display:flex;opacity:1';document.getElementById('start-btn').disabled=false;document.getElementById('start-btn').textContent='카메라 켜기 →';}
+
+// ══ 캔버스 셋업 ═══════════════════════════════════════
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+const vid=document.getElementById('vid');
+
+// 비디오 → 픽셀 읽기용 오프스크린
+const vc=document.createElement('canvas'), vx=vc.getContext('2d',{willReadFrequently:true});
+// 최종 출력용 오프스크린
+const oc=document.createElement('canvas'), ox=oc.getContext('2d');
+
+let W,H,VW=640,VH=480,T=0,mode=0,running=false;
+let curPx=null, prevPx=null;
+
+function resize(){
+  W=c.width=window.innerWidth; H=c.height=window.innerHeight;
+  oc.width=W; oc.height=H;
+}
+resize(); window.addEventListener('resize',resize);
+
+// ══ 카메라 ════════════════════════════════════════════
+async function startCam(){
+  const btn=document.getElementById('start-btn');
+  btn.textContent='연결 중...'; btn.disabled=true;
+  if(!navigator.mediaDevices?.getUserMedia){showErr({name:'SecurityError',message:'카메라 API 미지원'});return;}
+  const tries=[{video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}}},{video:{facingMode:'user',width:{ideal:640},height:{ideal:480}}},{video:{facingMode:'user'}},{video:true}];
+  let stream=null,lastErr=null;
+  for(const cfg of tries){try{stream=await navigator.mediaDevices.getUserMedia(cfg);break;}catch(e){lastErr=e;if(e.name==='NotAllowedError'||e.name==='SecurityError')break;}}
+  if(!stream){showErr(lastErr);return;}
+  vid.srcObject=stream;
+  try{await vid.play();}catch(e){showErr(e);return;}
+  VW=vid.videoWidth||640; VH=vid.videoHeight||480;
+  vc.width=VW; vc.height=VH;
+  const land=document.getElementById('landing');
+  land.style.opacity='0'; setTimeout(()=>land.style.display='none',700);
+  document.getElementById('ui').classList.add('on');
+  if(!running){running=true;requestAnimationFrame(loop);}
+}
+
+// ══ 비디오 픽셀 캡처 (미러 반전) ═════════════════════
+function capture(){
+  if(vid.readyState<2) return false;
+  vx.save(); vx.translate(VW,0); vx.scale(-1,1);
+  vx.drawImage(vid,0,0,VW,VH); vx.restore();
+  prevPx=curPx;
+  curPx=vx.getImageData(0,0,VW,VH).data;
+  return true;
+}
+
+// 스크린 좌표 → 비디오 픽셀 샘플
+function sampleRGB(data,sx,sy){
+  const vsx=Math.max(0,Math.min(VW-1,Math.round(sx*VW/W)));
+  const vsy=Math.max(0,Math.min(VH-1,Math.round(sy*VH/H)));
+  const i=(vsy*VW+vsx)*4;
+  return [data[i],data[i+1],data[i+2]];
+}
+
+// ══ MODE 0 — ANIME (셀 애니메이션) ═══════════════════
+// Kuwahara filter 간소화 버전 → 회화적 평탄화 + 엣지 강조
+function drawAnime(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+  const kR=6; // 커와하라 반경
+
+  for(let y=0;y<H;y++){
+    for(let x=0;x<W;x++){
+      const sx=x*VW/W, sy=y*VH/H;
+      // 4사분면 평균/분산 계산
+      let bestVar=Infinity, bestR=0,bestG=0,bestB=0;
+      for(let qy=-1;qy<=0;qy++){
+        for(let qx=-1;qx<=0;qx++){
+          let sr=0,sg=0,sb=0,sr2=0,sg2=0,sb2=0,n=0;
+          for(let dy=0;dy<kR;dy++){
+            for(let dx=0;dx<kR;dx++){
+              const px=sx+qx*kR+dx, py=sy+qy*kR+dy;
+              const [r,g,b]=sampleRGB(src,px,py);
+              sr+=r;sg+=g;sb+=b; sr2+=r*r;sg2+=g*g;sb2+=b*b; n++;
+            }
+          }
+          const mr=sr/n,mg=sg/n,mb=sb/n;
+          const variance=(sr2/n-mr*mr+sg2/n-mg*mg+sb2/n-mb*mb);
+          if(variance<bestVar){bestVar=variance;bestR=mr;bestG=mg;bestB=mb;}
+        }
+      }
+      // 채도 강화 (애니 느낌)
+      const gray=(bestR*0.299+bestG*0.587+bestB*0.114);
+      const sat=1.7;
+      let R=gray+(bestR-gray)*sat, G=gray+(bestG-gray)*sat, B=gray+(bestB-gray)*sat;
+      // 양자화 (셀 단계)
+      const step=42;
+      R=Math.round(R/step)*step; G=Math.round(G/step)*step; B=Math.round(B/step)*step;
+      const i=(y*W+x)*4;
+      d[i]=Math.min(255,R); d[i+1]=Math.min(255,G); d[i+2]=Math.min(255,B); d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+
+  // 엣지 라인 오버레이 (셀화 윤곽선)
+  const edge=ox.createImageData(W,H);
+  const ed=edge.data;
+  const outd=out.data;
+  for(let y=1;y<H-1;y++){
+    for(let x=1;x<W-1;x++){
+      const c0=(y*W+x)*4;
+      const cL=(y*W+(x-1))*4, cR=(y*W+(x+1))*4;
+      const cU=((y-1)*W+x)*4, cD=((y+1)*W+x)*4;
+      const gx=Math.abs(outd[cR]-outd[cL])+Math.abs(outd[cR+1]-outd[cL+1])+Math.abs(outd[cR+2]-outd[cL+2]);
+      const gy=Math.abs(outd[cD]-outd[cU])+Math.abs(outd[cD+1]-outd[cU+1])+Math.abs(outd[cD+2]-outd[cU+2]);
+      const g=(gx+gy)/3;
+      ed[c0]=ed[c0+1]=ed[c0+2]=g>60?0:255; ed[c0+3]=g>60?Math.min(255,g*1.5):0;
+    }
+  }
+  ox.putImageData(edge,0,0);
+  ctx.drawImage(out.canvas||oc,0,0,W,H); // 베이스
+  // 엣지 합성
+  const tmp=document.createElement('canvas'); tmp.width=W; tmp.height=H;
+  const tx=tmp.getContext('2d'); tx.putImageData(edge,0,0);
+  ctx.save(); ctx.globalCompositeOperation='multiply'; ctx.drawImage(tmp,0,0); ctx.restore();
+
+  // 최종: 베이스 위에 엣지
+  ctx.putImageData(out,0,0);
+  ctx.save(); ctx.globalAlpha=0.85; ctx.globalCompositeOperation='multiply'; ctx.drawImage(tmp,0,0); ctx.restore();
+}
+
+// ══ MODE 1 — PAINT (유화) ════════════════════════════
+function drawPaint(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+  const kR=8;
+  for(let y=0;y<H;y++){
+    for(let x=0;x<W;x++){
+      let bestVar=Infinity,bestR=0,bestG=0,bestB=0;
+      for(let qy=-1;qy<=0;qy++){
+        for(let qx=-1;qx<=0;qx++){
+          let sr=0,sg=0,sb=0,sr2=0,sg2=0,sb2=0,n=0;
+          for(let dy=0;dy<kR;dy++){
+            for(let dx=0;dx<kR;dx++){
+              const px=x*VW/W+qx*kR+dx, py=y*VH/H+qy*kR+dy;
+              const [r,g,b]=sampleRGB(src,px,py);
+              sr+=r;sg+=g;sb+=b;sr2+=r*r;sg2+=g*g;sb2+=b*b;n++;
+            }
+          }
+          const mr=sr/n,mg=sg/n,mb=sb/n;
+          const v=sr2/n-mr*mr+sg2/n-mg*mg+sb2/n-mb*mb;
+          if(v<bestVar){bestVar=v;bestR=mr;bestG=mg;bestB=mb;}
+        }
+      }
+      // 따뜻한 색조 + 채도 강화
+      const gray=(bestR*0.299+bestG*0.587+bestB*0.114);
+      const sat=1.5;
+      const R=Math.min(255,gray+(bestR-gray)*sat+8);
+      const G=Math.min(255,gray+(bestG-gray)*sat+3);
+      const B=Math.min(255,gray+(bestB-gray)*sat-5);
+      const i=(y*W+x)*4;
+      d[i]=R;d[i+1]=G;d[i+2]=B;d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+
+  // 붓질 텍스처 오버레이
+  ctx.putImageData(out,0,0);
+  ctx.save();
+  ctx.globalAlpha=0.06;
+  for(let i=0;i<300;i++){
+    const bx=Math.random()*W, by=Math.random()*H;
+    const blen=15+Math.random()*40, bang=(Math.random()-.5)*Math.PI;
+    const bw=1+Math.random()*3;
+    const [r,g,b]=sampleRGB(src,bx*VW/W,by*VH/H);
+    ctx.strokeStyle=`rgb(${Math.min(255,r+30)},${Math.min(255,g+20)},${Math.min(255,b+10)})`;
+    ctx.lineWidth=bw; ctx.lineCap='round';
+    ctx.beginPath();
+    ctx.moveTo(bx,by);
+    ctx.lineTo(bx+Math.cos(bang)*blen,by+Math.sin(bang)*blen);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ══ MODE 2 — WATER (수채화) ══════════════════════════
+function drawWater(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+
+  // 단계1: 비선형 블러 (수채화 번짐)
+  for(let y=0;y<H;y++){
+    for(let x=0;x<W;x++){
+      const r2=6+Math.floor(Math.sin(x*0.04+T*0.01)*3+Math.cos(y*0.035+T*0.008)*2);
+      let sr=0,sg=0,sb=0,n=0;
+      for(let dy=-r2;dy<=r2;dy+=2){
+        for(let dx=-r2;dx<=r2;dx+=2){
+          if(dx*dx+dy*dy>r2*r2) continue;
+          const [r,g,b]=sampleRGB(src,x*VW/W+dx*VW/W,y*VH/H+dy*VH/H);
+          sr+=r;sg+=g;sb+=b;n++;
+        }
+      }
+      const mr=sr/n,mg=sg/n,mb=sb/n;
+      // 밝게, 채도 낮춰서 수채화 느낌
+      const gray=(mr*0.299+mg*0.587+mb*0.114);
+      const sat=0.7;
+      const i=(y*W+x)*4;
+      d[i]  =Math.min(255,gray+(mr-gray)*sat+40);
+      d[i+1]=Math.min(255,gray+(mg-gray)*sat+35);
+      d[i+2]=Math.min(255,gray+(mb-gray)*sat+50);
+      d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+  ctx.putImageData(out,0,0);
+
+  // 수채화 번짐 획 오버레이
+  ctx.save();
+  ctx.globalAlpha=0.12;
+  ctx.globalCompositeOperation='multiply';
+  for(let i=0;i<120;i++){
+    const bx=Math.random()*W, by=Math.random()*H;
+    const [r,g,b]=sampleRGB(src,bx*VW/W,by*VH/H);
+    const r2=8+Math.random()*30;
+    const grad=ctx.createRadialGradient(bx,by,0,bx,by,r2);
+    grad.addColorStop(0,`rgba(${r},${g},${b},0.6)`);
+    grad.addColorStop(0.6,`rgba(${r},${g},${b},0.2)`);
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=grad;
+    ctx.beginPath(); ctx.arc(bx,by,r2,0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+
+  // 종이 질감
+  ctx.save();
+  ctx.globalAlpha=0.04;
+  for(let y=0;y<H;y+=2){
+    ctx.fillStyle=Math.random()>0.5?'rgba(200,180,150,0.5)':'rgba(255,250,240,0.3)';
+    ctx.fillRect(0,y,W,1);
+  }
+  ctx.restore();
+}
+
+// ══ MODE 3 — NEON (네온/사이버) ══════════════════════
+function drawNeon(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+
+  // 단계1: 어둡게 + 엣지 추출
+  for(let y=1;y<H-1;y++){
+    for(let x=1;x<W-1;x++){
+      const [r,g,b]=sampleRGB(src,x*VW/W,y*VH/H);
+      const [rL,gL,bL]=sampleRGB(src,(x-1)*VW/W,y*VH/H);
+      const [rR,gR,bR]=sampleRGB(src,(x+1)*VW/W,y*VH/H);
+      const [rU,gU,bU]=sampleRGB(src,x*VW/W,(y-1)*VH/H);
+      const [rD,gD,bD]=sampleRGB(src,x*VW/W,(y+1)*VH/H);
+      const gx=Math.abs(rR-rL)+Math.abs(gR-gL)+Math.abs(bR-bL);
+      const gy=Math.abs(rD-rU)+Math.abs(gD-gU)+Math.abs(bD-bU);
+      const edge=Math.min(255,(gx+gy)/2);
+
+      // 색상 → 네온 hue 매핑
+      const hue=(r*0.4+T*0.8)%360;
+      const neonR=edge*Math.max(0,Math.sin((hue+0)*Math.PI/180));
+      const neonG=edge*Math.max(0,Math.sin((hue+120)*Math.PI/180));
+      const neonB=edge*Math.max(0,Math.sin((hue+240)*Math.PI/180));
+
+      const i=(y*W+x)*4;
+      // 어두운 배경 + 네온 엣지
+      d[i]  =Math.min(255,r*0.08+neonR*2.5);
+      d[i+1]=Math.min(255,g*0.08+neonG*2.5);
+      d[i+2]=Math.min(255,b*0.12+neonB*2.5);
+      d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+  ctx.putImageData(out,0,0);
+
+  // 네온 글로우 블룸
+  ctx.save();
+  ctx.globalCompositeOperation='screen';
+  ctx.filter='blur(3px)';
+  ctx.globalAlpha=0.5;
+  ctx.drawImage(oc,0,0);
+  ctx.filter='blur(8px)';
+  ctx.globalAlpha=0.25;
+  ctx.drawImage(oc,0,0);
+  ctx.globalCompositeOperation='source-over';
+  ctx.filter='none';
+  ctx.restore();
+}
+
+// ══ MODE 4 — DREAM (드림/사이키델릭) ═════════════════
+function drawDream(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+  const t=T*0.02;
+
+  for(let y=0;y<H;y++){
+    for(let x=0;x<W;x++){
+      // 물결 왜곡
+      const wx=x+Math.sin(y*0.04+t)*12+Math.sin(x*0.03+t*0.7)*8;
+      const wy=y+Math.cos(x*0.035+t*0.8)*12+Math.cos(y*0.025+t*0.5)*8;
+      const [r,g,b]=sampleRGB(src,wx*VW/W,wy*VH/H);
+      // RGB 채널 분리 (크로마틱 어베레이션)
+      const shift=6+Math.sin(t+x*0.02)*4;
+      const [rr]=sampleRGB(src,(wx+shift)*VW/W,wy*VH/H);
+      const [,gg]=sampleRGB(src,wx*VW/W,wy*VH/H);
+      const [,,bb]=sampleRGB(src,(wx-shift)*VW/W,(wy+shift*0.5)*VH/H);
+      // 컬러 사이클
+      const hShift=Math.sin(t*0.5+x*0.01+y*0.008)*60;
+      const gray=(rr*0.299+gg*0.587+bb*0.114);
+      const sat=1.8;
+      const i=(y*W+x)*4;
+      d[i]  =Math.min(255,Math.max(0,gray+(rr-gray)*sat+Math.sin(t+hShift*0.017)*30));
+      d[i+1]=Math.min(255,Math.max(0,gray+(gg-gray)*sat+Math.sin(t*1.3+60*0.017+hShift*0.017)*25));
+      d[i+2]=Math.min(255,Math.max(0,gray+(bb-gray)*sat+Math.sin(t*0.7+120*0.017+hShift*0.017)*35));
+      d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+  ctx.putImageData(out,0,0);
+
+  // 부드러운 글로우
+  ctx.save();
+  ctx.globalCompositeOperation='screen';
+  ctx.filter='blur(6px)';
+  ctx.globalAlpha=0.2;
+  ctx.drawImage(oc,0,0);
+  ctx.filter='none';
+  ctx.globalCompositeOperation='source-over';
+  ctx.restore();
+}
+
+// ══ MODE 5 — SKETCH (스케치/연필) ════════════════════
+function drawSketch(){
+  if(!capture()) return;
+  const src=curPx;
+  const out=ox.createImageData(W,H);
+  const d=out.data;
+
+  for(let y=1;y<H-1;y++){
+    for(let x=1;x<W-1;x++){
+      const [r,g,b]=sampleRGB(src,x*VW/W,y*VH/H);
+      const gray=r*0.299+g*0.587+b*0.114;
+      // Sobel
+      const [r00]=sampleRGB(src,(x-1)*VW/W,(y-1)*VH/H); const [r10]=sampleRGB(src,x*VW/W,(y-1)*VH/H); const [r20]=sampleRGB(src,(x+1)*VW/W,(y-1)*VH/H);
+      const [r01]=sampleRGB(src,(x-1)*VW/W,y*VH/H);     const [r21]=sampleRGB(src,(x+1)*VW/W,y*VH/H);
+      const [r02]=sampleRGB(src,(x-1)*VW/W,(y+1)*VH/H); const [r12]=sampleRGB(src,x*VW/W,(y+1)*VH/H); const [r22]=sampleRGB(src,(x+1)*VW/W,(y+1)*VH/H);
+      function gr(p){return p*0.299;}
+      const gX=-gr(r00)+gr(r20)-2*gr(r01)+2*gr(r21)-gr(r02)+gr(r22);
+      const gY=-gr(r00)-2*gr(r10)-gr(r20)+gr(r02)+2*gr(r12)+gr(r22);
+      const edge=Math.min(255,Math.sqrt(gX*gX+gY*gY)*1.8);
+      const paper=235+Math.floor(Math.sin(x*0.3+y*0.2)*8); // 종이 질감
+      const stroke=paper-edge;
+      // 미묘한 세피아 톤
+      const i=(y*W+x)*4;
+      d[i]  =Math.min(255,stroke+5);
+      d[i+1]=Math.min(255,stroke);
+      d[i+2]=Math.min(255,stroke-8);
+      d[i+3]=255;
+    }
+  }
+  ox.putImageData(out,0,0);
+  ctx.putImageData(out,0,0);
+
+  // 연필 획 느낌
+  ctx.save();
+  ctx.globalAlpha=0.035;
+  ctx.globalCompositeOperation='multiply';
+  for(let i=0;i<200;i++){
+    const bx=Math.random()*W, by=Math.random()*H;
+    const ang=(Math.random()-.5)*0.6+Math.PI*0.15;
+    const len=6+Math.random()*20;
+    ctx.strokeStyle=`rgba(60,40,20,${0.3+Math.random()*0.5})`;
+    ctx.lineWidth=0.4+Math.random()*0.8; ctx.lineCap='round';
+    ctx.beginPath();
+    ctx.moveTo(bx,by); ctx.lineTo(bx+Math.cos(ang)*len,by+Math.sin(ang)*len);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ══ 모드 ══════════════════════════════════════════════
+const MINFO=[
+  {n:'ANIME',  s:'애니메이션 셀화'},
+  {n:'PAINT',  s:'유화 붓터치'},
+  {n:'WATER',  s:'수채화 번짐'},
+  {n:'NEON',   s:'네온 사이버'},
+  {n:'DREAM',  s:'드림 사이키델릭'},
+  {n:'SKETCH', s:'연필 스케치'},
+];
+function setMode(m,btn){
+  mode=m;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+  document.getElementById('mname').textContent=MINFO[m].n;
+  document.getElementById('msub').textContent=MINFO[m].s;
+  ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H);
+}
+
+// ══ 루프 ══════════════════════════════════════════════
+function loop(){
+  T++;
+  switch(mode){
+    case 0:drawAnime();  break;
+    case 1:drawPaint();  break;
+    case 2:drawWater();  break;
+    case 3:drawNeon();   break;
+    case 4:drawDream();  break;
+    case 5:drawSketch(); break;
+  }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

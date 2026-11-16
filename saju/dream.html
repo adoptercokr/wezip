@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>꿈 해몽 사전 - 운세 & AI 심리 스튜디오</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        .search-input { flex: 1; padding: 18px; font-size: 18px; border: 2px solid var(--primary); border-radius: 12px; outline: none; }
+        .search-input:focus { box-shadow: 0 0 0 3px rgba(255,107,53,0.2); }
+        .search-btn { background: var(--primary); color: white; border: none; border-radius: 12px; padding: 0 25px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .tag-btn { background: #FFF0E8; color: var(--primary-dark); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 20px; font-size: 16px; cursor: pointer; transition: 0.2s;}
+        .tag-btn:active { transform: scale(0.95); background: var(--primary); color: #fff;}
+        
+        .result-item { background: #fff; padding: 20px; border-radius: 16px; margin-bottom: 15px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; }
+        .res-title { font-size: 20px; font-weight: bold; color: var(--text-main); margin-bottom: 10px; }
+        .res-type { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 14px; font-weight: bold; margin-bottom: 10px; color: white; }
+        .t-good { background: #27ae60; } .t-bad { background: #e74c3c; } .t-warn { background: #f39c12; }
+        .res-desc { font-size: 17px; line-height: 1.6; color: #555; }
+        
+        .no-result { text-align: center; font-size: 18px; color: #888; padding: 40px 0; }
+    </style>
+
+    <!-- SEO & AIO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://saju.wezip.co.kr/dream.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="심층 운세 & AI 심리 스튜디오">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "심층 운세 & AI 심리 스튜디오",
+      "url": "https://saju.wezip.co.kr/dream.html"
+    }
+    </script>
+</head>
+<body>
+
+<div class="app-container">
+    <header class="top-nav">
+        <a href="index.html" class="home-btn">🏠</a>
+        <h2 style="font-size: 22px; color: #FFFFFF; font-weight: 800;">🌙 간밤의 꿈 해몽 사전</h2>
+        <div style="width:50px;"></div>
+    </header>
+
+    <div class="content-padding" style="padding-top: 0; padding-bottom: 0;">
+        <div class="ad-box">✨ [방대한 꿈 데이터베이스] 돼지·불·조상 등 핵심 꿈 기운 실시간 풀이</div>
+    </div>
+
+    <main class="content-padding">
+        <div class="card animate-in" style="text-align: center;">
+            <div style="font-size: 60px; margin-bottom: 15px;">🌙</div>
+            <h3 style="font-size: 24px; color: var(--primary-dark); margin-bottom: 15px;">간밤에 무슨 꿈을 꾸셨나요?</h3>
+            <p style="color: var(--text-sub); font-size: 16px; margin-bottom: 20px;">꿈속의 핵심 단어를 입력해 보세요. (예: 돼지, 불, 이빨)</p>
+            
+            <form class="search-box" onsubmit="event.preventDefault(); searchDream();">
+                <input type="text" id="keyword" class="search-input" placeholder="꿈 내용 검색">
+                <button type="submit" class="search-btn">해몽</button>
+            </form>
+            
+            <div class="tag-list">
+                <button class="tag-btn" onclick="setSearch('돼지')">#돼지</button>
+                <button class="tag-btn" onclick="setSearch('불')">#불</button>
+                <button class="tag-btn" onclick="setSearch('물')">#물</button>
+                <button class="tag-btn" onclick="setSearch('이빨')">#이빨</button>
+                <button class="tag-btn" onclick="setSearch('조상')">#조상</button>
+                <button class="tag-btn" onclick="setSearch('뱀')">#뱀</button>
+                <button class="tag-btn" onclick="setSearch('죽음')">#죽음</button>
+                <button class="tag-btn" onclick="setSearch('똥')">#똥</button>
+            </div>
+            
+            <div id="results-area"></div>
+        </div>
+    </main>
+
+    <div class="ad-fixed-bottom">
+        <div class="ad-box" style="margin:0; min-height: 44px; font-size: 13px; color: #9EABC5; border-color: rgba(255,255,255,0.1); background: #0C101A;">💫 <strong style="color: #D4AF37; margin: 0 4px;">운세 & AI 심리 스튜디오</strong> · 길몽의 기운이 온종일 함께하길 진심으로 응원합니다</div>
+    </div>
+</div>
+
+<script>
+const db = [
+    { t: "돼지가 집 안으로 들어오는 꿈", tag: ["돼지", "돈", "재물"], type: "good", typeStr: "길몽", d: "큰 재물이나 횡재수가 생길 징조입니다. 복권이나 추첨 등에서 좋은 결과를 기대할 수 있으며, 가업이 번창하게 됩니다." },
+    { t: "돼지를 쫓아내는 꿈", tag: ["돼지", "손실"], type: "bad", typeStr: "흉몽", d: "들어오려던 재물을 스스로 차버리는 격입니다. 금전적인 손실이나 계약의 파기가 있을 수 있으니 주의가 필요합니다." },
+    { t: "집에 큰 불이 나는 꿈", tag: ["불", "집", "성공"], type: "good", typeStr: "대길몽", d: "불길이 거셀수록 사업이 크게 번창하고 부를 축적하게 됩니다. 오랫동안 준비했던 일이 크게 성공하여 세상에 이름을 알립니다." },
+    { t: "불을 끄려고 해도 꺼지지 않는 꿈", tag: ["불", "재물"], type: "good", typeStr: "길몽", d: "재물운이 계속해서 솟아나 막을 수 없음을 의미합니다. 끝없는 부와 명예가 당신을 따를 것입니다." },
+    { t: "맑은 물에서 수영하는 꿈", tag: ["물", "수영", "건강"], type: "good", typeStr: "길몽", d: "마음의 평화와 안정을 찾으며, 환자라면 병이 씻은 듯 낫게 됩니다. 만사가 순조롭게 풀리는 시기입니다." },
+    { t: "탁하고 흙탕물에 빠지는 꿈", tag: ["물", "흙탕물"], type: "bad", typeStr: "흉몽", d: "구설수나 질병에 노출될 수 있습니다. 억울한 누명을 쓰거나 건강이 나빠질 수 있으니 매사에 신중해야 합니다." },
+    { t: "윗니가 빠지는 꿈", tag: ["이빨", "윗니", "가족"], type: "bad", typeStr: "흉몽", d: "윗사람(부모님, 상사)에게 안 좋은 일이 생길 수 있음을 암시합니다. 주변 어르신들의 건강을 잘 챙기십시오." },
+    { t: "아랫니가 빠지는 꿈", tag: ["이빨", "아랫니", "가족"], type: "bad", typeStr: "흉몽", d: "아랫사람(자녀, 부하직원)에게 사고나 질병이 발생할 수 있으니 주의 깊게 살펴야 합니다." },
+    { t: "새 이빨이 돋아나는 꿈", tag: ["이빨", "재생", "새출발"], type: "good", typeStr: "길몽", d: "어려웠던 상황이 해결되고 새로운 기회가 주어집니다. 집안에 새 생명이 태어나거나 큰 경사가 생깁니다." },
+    { t: "돌아가신 조상님이 밝게 웃는 꿈", tag: ["조상", "웃음", "성공"], type: "good", typeStr: "길몽", d: "집안에 큰 경사가 생기고, 추진 중인 일이나 사업이 귀인의 도움으로 대성공을 거두게 됩니다." },
+    { t: "조상님이 어두운 표정으로 화를 내는 꿈", tag: ["조상", "경고"], type: "warn", typeStr: "경고몽", d: "현재 진행 중인 일에 큰 실수가 있거나 집안에 우환이 생길 수 있음을 경고합니다. 계획을 재점검하십시오." },
+    { t: "큰 뱀이 몸을 칭칭 감는 꿈", tag: ["뱀", "결혼", "재물"], type: "good", typeStr: "길몽", d: "재물이 들어오거나 권력을 얻게 되며, 미혼자는 훌륭한 배우자를 만나게 되는 길몽입니다." },
+    { t: "본인이 죽는 꿈", tag: ["죽음", "부활", "재물"], type: "good", typeStr: "대길몽", d: "죽음은 부활과 새로운 시작을 의미합니다. 과거의 나쁜 운이 모두 소멸하고 막대한 재물과 행운이 찾아옵니다." },
+    { t: "똥(대변)을 온몸에 뒤집어쓰는 꿈", tag: ["똥", "재물"], type: "good", typeStr: "대길몽", d: "로또 1등 당첨자들이 가장 많이 꾸는 꿈입니다. 생각지 못한 막대한 횡재를 하게 되며 투자에서 대박이 납니다." },
+    { t: "하늘을 자유롭게 날아다니는 꿈", tag: ["하늘", "비행", "승진"], type: "good", typeStr: "길몽", d: "신분 상승이나 승진을 의미하며, 오랫동안 원했던 소원이 마침내 이루어지게 됩니다." }
+];
+
+function setSearch(kw) {
+    document.getElementById('keyword').value = kw;
+    searchDream();
+}
+
+function searchDream() {
+    const kw = document.getElementById('keyword').value.trim();
+    const area = document.getElementById('results-area');
+    area.innerHTML = "";
+    
+    if(!kw) {
+        area.innerHTML = `<div class="no-result">검색어를 입력해 주세요.</div>`;
+        return;
+    }
+    
+    let res = db.filter(item => item.t.includes(kw) || item.d.includes(kw) || item.tag.includes(kw));
+    
+    if(res.length === 0) {
+        area.innerHTML = `<div class="no-result"><b>'${kw}'</b>에 대한 해몽 결과가 없습니다.<br>비슷한 다른 단어로 검색해 보세요.</div>`;
+        return;
+    }
+    
+    let html = `<div style="text-align:left; font-size:16px; margin-bottom:10px; color:var(--primary-dark);">총 ${res.length}건의 해몽을 찾았습니다.</div>`;
+    res.forEach(item => {
+        let typeClass = item.type === 'good' ? 't-good' : (item.type === 'bad' ? 't-bad' : 't-warn');
+        html += `
+            <div class="result-item">
+                <div class="res-type ${typeClass}">${item.typeStr}</div>
+                <div class="res-title">${item.t}</div>
+                <div class="res-desc">${item.d}</div>
+            </div>
+        `;
+    });
+    
+    area.innerHTML = html;
+}
+</script>
+</body>
+</html>
