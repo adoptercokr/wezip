@@ -12,8 +12,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>버팀목 전세대출 조건 자격조회 & 이자·HUG 보증보험료 계산기 | 위집</title>
-    <meta name="description" content="2026년 주택도시기금 청년·신혼부부 버팀목 전세대출(연 1.8%~2.7%)과 일반 은행 전세대출(연 4%) 월 이자 비교 및 HUG 전세보증금 반환보증보험 수수료(청년 50% 할인)를 실시간 계산합니다.">
+    <title>버팀목 전세대출 조건 자격조회 & 이자 계산기 | 위집</title>
+    <meta name="description" content="2026년 주택도시기금 청년·신혼부부·신생아특례 버팀목 전세대출(연 1.8%~2.7%) 신청 자격 자가진단 및 일반 은행 전세대출 대비 월 이자 절감액 실시간 계산. 기금e든든 공식 신청 안내.">
     <meta name="keywords" content="버팀목 전세대출 계산기, 청년 버팀목 금리, 디딤돌 대출 계산기, HUG 전세보증보험료, 전세보증금 반환보증, 전세대출 이자 비교">
     <link rel="canonical" href="https://wezip.co.kr/real-loan.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -137,8 +137,12 @@
                                     <span class="text-[11px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold">12억 비과세</span>
                                 </a>
                                 <a href="real-loan.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
-                                    <span>버팀목 전세대출·HUG 조회</span>
-                                    <span class="text-[11px] text-slate-400">연 1.8%</span>
+                                    <span class="font-bold">버팀목 전세대출 자격조회</span>
+                                    <span class="text-[11px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-bold">연 1.8%</span>
+                                </a>
+                                <a href="hug-guarantee.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
+                                    <span class="font-bold">HUG 보증보험료 계산기</span>
+                                    <span class="text-[11px] text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded font-bold">126% 룰</span>
                                 </a>
                                 <a href="real-estate.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 hover:text-blue-600 transition">
                                     <span>부동산 복비·취득세 계산기</span>
@@ -286,7 +290,8 @@
                 <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">부동산·주거</div>
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <a href="real-transfer-tax.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-bold transition">내 집 양도세</a>
-                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 전세대출</a>
+                    <a href="real-loan.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">버팀목 대출 자격</a>
+                    <a href="hug-guarantee.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition">HUG 보증보험</a>
                     <a href="real-estate.html" class="p-2.5 rounded-lg bg-slate-800/80 hover:bg-blue-600 hover:text-white font-medium transition col-span-2">부동산 복비·취득세</a>
                 </div>
             </div>
@@ -321,7 +326,7 @@
 
         <div class="mb-6">
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold mb-2 shadow-xs"><span>회원가입 없는 100% 무료 조회</span><span class="text-slate-300 mx-1.5">|</span><span class="text-slate-500 font-medium">주택도시기금 & HUG 공시 기준</span></div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">버팀목 전세대출 자격조회 & 이자·HUG 보증보험료 계산기</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">버팀목 전세대출 자격조회 & 이자 계산기</h1>
             <p class="text-xs sm:text-sm text-slate-500 mt-1">
                 정책 저금리 버팀목 전세대출의 월 이자 절감액과 HUG 전세보증금 반환보증 수수료를 계산합니다.
             </p>
@@ -334,9 +339,6 @@
             </button>
             <button type="button" id="tabLoanCompare" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
                 ② 대출이자 절감 비교
-            </button>
-            <button type="button" id="tabHugInsurance" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
-                ③ HUG 보증보험료 계산
             </button>
         </div>
 
@@ -616,90 +618,23 @@
             </div>
         </div>
 
-        <!-- 탭 2: HUG 전세보증보험료 (기본 숨김) -->
-        <div id="contentHugInsurance" style="display: none;" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-6 space-y-4">
-                <div class="calc-card p-5 bg-white border border-slate-200 rounded-2xl">
-                    <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">전세 보증금액</label>
-                        <div class="relative">
-                            <input type="text" id="hugDeposit" value="200,000,000" inputmode="numeric"
-                                   class="w-full text-sm font-bold text-slate-900 p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-right pr-8">
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">원</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">주택 종류</label>
-                        <select id="hugHouseType" class="w-full text-sm font-medium text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl">
-                            <option value="apt" selected>아파트 (보증요율 연 0.122% 내외)</option>
-                            <option value="villa">빌라 / 다세대 / 주거용 오피스텔 (연 0.140%)</option>
-                            <option value="house">단독 / 다가구 주택 (연 0.154%)</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">보증 기간</label>
-                        <select id="hugPeriod" class="w-full text-sm font-medium text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl">
-                            <option value="2" selected>2년 (24개월 - 표준 계약)</option>
-                            <option value="1">1년 (12개월)</option>
-                        </select>
-                    </div>
-
-                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <div>
-                            <div class="text-xs font-bold text-slate-800">청년·신혼부부 감면 (50% 할인)</div>
-                            <div class="text-[11px] text-slate-400">만 19~34세 또는 혼인 7년 이내</div>
-                        </div>
-                        <input type="checkbox" id="hugYouthDiscount" checked class="w-5 h-5 accent-slate-900 rounded">
-                    </div>
+                <!-- HUG 전세보증금 반환보증 계산기 바로가기 연계 배너 -->
+        <div class="mt-8 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-blue-800 bg-blue-100 px-2 py-0.5 rounded">HUG 전세보증보험</span>
+                    <span class="text-xs text-slate-500 font-semibold">공시가격 126% 룰 실시간 판정</span>
                 </div>
+                <h3 class="text-base font-extrabold text-slate-900 mt-1">집주인이 전세금을 안 돌려줄까 걱정되시나요?</h3>
+                <p class="text-xs text-slate-600 mt-0.5">내 전세집이 HUG 보증보험 가입 가능한지(깡통전세 여부)와 예상 보증료, 안심전세 App 신청방법을 확인하세요.</p>
             </div>
-
-            <div class="lg:col-span-6 space-y-4">
-                <div class="calc-card p-6 bg-white border border-slate-200 rounded-2xl">
-                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">HUG 보증보험료 합계</div>
-                    <div class="mt-2 flex items-baseline gap-1">
-                        <span class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight" id="hugTotalFee">244,000</span>
-                        <span class="text-base font-bold text-slate-600">원</span>
-                    </div>
-
-                    <div class="mt-5 space-y-2.5 text-xs pt-4 border-t border-slate-100">
-                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
-                            <span class="text-slate-600">기준 보증요율</span>
-                            <span class="font-bold text-slate-900" id="hugAppliedRateText">연 0.122%</span>
-                        </div>
-                        <div class="flex justify-between items-center py-1 border-b border-slate-50">
-                            <span class="text-slate-600">기본 산정 수수료 (2년치)</span>
-                            <span class="font-bold text-slate-900" id="hugBaseFeeText">488,000원</span>
-                        </div>
-                        <div class="flex justify-between items-center py-1">
-                            <span class="text-slate-600 font-bold">청년 50% 감면 할인</span>
-                            <span class="font-bold text-slate-900" id="hugDiscountText">-244,000원 할인</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100">
-                        <div class="flex gap-2 w-full mt-2">
-                                <button type="button" onclick="copyHugResult()" class="flex-1 py-2.5 px-3 sm:px-4 rounded-xl bg-slate-900 text-white text-xs sm:text-sm font-bold hover:bg-slate-800 active:scale-98 transition flex items-center justify-center gap-2 shadow-sm">
-                                <svg class="svg-icon w-4 h-4 text-white" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                                <span>결과 복사 · 공유하기</span>
-                            </button>
-                            <button type="button" onclick="window.print()" class="py-2.5 px-3.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 active:scale-98 transition flex items-center justify-center shrink-0" title="인쇄 및 PDF 저장">
-                                <svg class="svg-icon w-4 h-4 text-slate-600" viewBox="0 0 24 24">
-                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                                    <rect x="6" y="14" width="12" height="8"></rect>
-                                </svg>
-                            </button>
-                            </div>
-                    </div>
-                </div>
-            </div>
+            <a href="hug-guarantee.html" class="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow-sm transition flex items-center gap-1.5 whitespace-nowrap">
+                <span>HUG 보증보험 자격·계산기 바로가기</span>
+                &rarr;
+            </a>
         </div>
 
-    
-        <!-- [전문가 심층 가이드 & 2026 법령 해설 리포트] -->
+    <!-- [전문가 심층 가이드 & 2026 법령 해설 리포트] -->
         <article class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-10">
             <div>
                 <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">2026 전세 금융 심층 가이드</span>
@@ -907,16 +842,14 @@
 
     <script src="common.js"></script>
     <script>
-        // 3대 탭 전환 제어
+        // 2대 탭 전환 제어
         const tabEligibility = document.getElementById('tabEligibility');
         const tabLoanCompare = document.getElementById('tabLoanCompare');
-        const tabHugInsurance = document.getElementById('tabHugInsurance');
         const contentEligibility = document.getElementById('contentEligibility');
         const contentLoanCompare = document.getElementById('contentLoanCompare');
-        const contentHugInsurance = document.getElementById('contentHugInsurance');
 
         function switchTab(activeTab, activeContent, displayType) {
-            [tabEligibility, tabLoanCompare, tabHugInsurance].forEach(t => {
+            [tabEligibility, tabLoanCompare].forEach(t => {
                 t.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
                 t.classList.add('text-slate-600');
             });
@@ -925,7 +858,6 @@
 
             contentEligibility.style.display = 'none';
             contentLoanCompare.style.display = 'none';
-            contentHugInsurance.style.display = 'none';
             activeContent.style.display = displayType;
         }
 
@@ -939,9 +871,187 @@
             calculateLoan();
         });
 
-        tabHugInsurance.addEventListener('click', () => {
-            switchTab(tabHugInsurance, contentHugInsurance, 'grid');
-            calculateHug();
+        // 1. 버팀목 자격 진단기 판정 엔진
+        function runEligibilityCheck() {
+            const productType = document.getElementById('loanProductType').value;
+            const ownership = document.querySelector('input[name="houseOwnership"]:checked').value;
+            const income = document.getElementById('userAnnualIncome').value;
+            const netAsset = document.querySelector('input[name="userNetAsset"]:checked').value;
+            const deposit = document.getElementById('targetHouseDeposit').value;
+            const area = document.getElementById('targetHouseArea').value;
+
+            const badge = document.getElementById('badgeResultStatus');
+            const rateEl = document.getElementById('resultInterestRate');
+            const limitEl = document.getElementById('resultMaxLimit');
+            const reasonEl = document.getElementById('resultReasonBox');
+
+            // 주택 소유 여부 판정
+            if (ownership === 'owner') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '버팀목 전세대출은 세대주를 포함한 세대원 전원이 무주택자여야 합니다. (유주택 가구 신청 불가)';
+                return;
+            }
+
+            // 순자산 판정 (2026년 기준 3.45억 이하)
+            if (netAsset === 'over345') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '2026년 기준 신청인 및 배우자의 합산 순자산 가액이 3.45억 원을 초과하여 기금 대출 대상에서 제외됩니다.';
+                return;
+            }
+
+            // 전용면적 판정 (85㎡ 이하, 읍면 100㎡ 이하)
+            if (area === 'over85') {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = '임차 전용면적이 85㎡(국민주택규모)를 초과하여 대상 주택 요건에 부합하지 않습니다.';
+                return;
+            }
+
+            // 상품별 소득 및 보증금 상세 판정
+            let eligible = true;
+            let reason = '';
+            let rate = '';
+            let maxLimit = '';
+
+            if (productType === 'youth') {
+                if (['under6000', 'under7500', 'under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '청년전용 버팀목은 연소득 5,000만 원 이하 가구만 신청 가능합니다.';
+                } else if (['under4eok', 'under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '청년전용 버팀목은 임차보증금 3억 원 이하 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 1.8%' : (income === 'under4000' ? '연 2.1%' : '연 2.4% ~ 2.7%');
+                    maxLimit = '최대 2억 원 (임차보증금의 80% 이내)';
+                    reason = '축하합니다! 청년전용 버팀목 전세대출 신청 요건을 모두 충족합니다. (만 19~34세 이하 단독 세대주, 최대 2억 원 저금리 지원)';
+                }
+            } else if (productType === 'general') {
+                if (['under7500', 'under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '일반 버팀목은 부부합산 연소득 5,000만 원 이하(다자녀 가구 6,000만 원 이하)여야 합니다.';
+                } else if (['under4eok', 'under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '일반 버팀목은 수도권 기준 임차보증금 3억 원(지방 2억 원) 이하 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 2.1%' : (income === 'under4000' ? '연 2.5%' : '연 2.7% ~ 2.9%');
+                    maxLimit = '수도권 최대 1억 2,000만 원 / 지방 최대 8,000만 원 (보증금의 70%)';
+                    reason = '축하합니다! 일반 버팀목 전세대출 신청 요건을 모두 충족합니다.';
+                }
+            } else if (productType === 'newlywed') {
+                if (['under13000', 'over13000'].includes(income)) {
+                    eligible = false;
+                    reason = '신혼부부 전용 버팀목은 부부합산 연소득 7,500만 원 이하 가구만 신청 가능합니다.';
+                } else if (['under5eok', 'over5eok'].includes(deposit)) {
+                    eligible = false;
+                    reason = '신혼부부 버팀목은 임차보증금 수도권 4억 원 이하(지방 3억 원 이하) 주택만 대상입니다.';
+                } else {
+                    rate = income === 'under2000' ? '연 1.5%' : (income === 'under4000' ? '연 1.8%' : '연 2.1% ~ 2.4%');
+                    maxLimit = '수도권 최대 3억 원 / 지방 최대 2억 원 (보증금의 80%)';
+                    reason = '축하합니다! 신혼부부 전용 버팀목 전세대출 신청 요건을 모두 충족합니다. (혼인 7년 이내 또는 3개월 내 결혼 예정)';
+                }
+            } else if (productType === 'newborn') {
+                if (income === 'over13000') {
+                    eligible = false;
+                    reason = '신생아 특례 버팀목은 부부합산 연소득 1억 3,000만 원 이하 가구만 신청 가능합니다.';
+                } else if (deposit === 'over5eok') {
+                    eligible = false;
+                    reason = '신생아 특례 버팀목은 임차보증금 수도권 5억 원 이하(지방 4억 원 이하) 주택만 대상입니다.';
+                } else {
+                    rate = ['under2000', 'under4000'].includes(income) ? '연 1.3% ~ 1.8%' : (['under5000', 'under6000'].includes(income) ? '연 2.0% ~ 2.5%' : '연 2.6% ~ 3.0%');
+                    maxLimit = '최대 3억 원 (임차보증금의 80% 이내)';
+                    reason = '축하합니다! 신생아 특례 버팀목 전세대출 신청 요건을 모두 충족합니다. (2년 내 출산 가구 대상 최저 연 1.3% 파격 금리)';
+                }
+            }
+
+            if (eligible) {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-emerald-500 text-white';
+                badge.textContent = '신청 가능';
+                rateEl.textContent = rate;
+                rateEl.className = 'text-3xl sm:text-4xl font-black text-white';
+                limitEl.textContent = maxLimit;
+                reasonEl.className = 'text-xs text-emerald-400 leading-relaxed font-medium bg-emerald-950/40 p-3 rounded-lg border border-emerald-800/60';
+                reasonEl.textContent = reason;
+            } else {
+                badge.className = 'px-2.5 py-1 rounded-full text-xs font-black bg-rose-500 text-white';
+                badge.textContent = '신청 불가';
+                rateEl.textContent = '신청 요건 미부합';
+                rateEl.className = 'text-2xl sm:text-3xl font-black text-rose-400';
+                limitEl.textContent = '-';
+                reasonEl.className = 'text-xs text-rose-300 leading-relaxed font-medium bg-rose-950/40 p-3 rounded-lg border border-rose-800/60';
+                reasonEl.textContent = reason;
+            }
+        }
+
+        // 진단기 입력 변경 이벤트 바인딩
+        document.getElementById('loanProductType').addEventListener('change', runEligibilityCheck);
+        document.querySelectorAll('input[name="houseOwnership"]').forEach(r => r.addEventListener('change', runEligibilityCheck));
+        document.getElementById('userAnnualIncome').addEventListener('change', runEligibilityCheck);
+        document.querySelectorAll('input[name="userNetAsset"]').forEach(r => r.addEventListener('change', runEligibilityCheck));
+        document.getElementById('targetHouseDeposit').addEventListener('change', runEligibilityCheck);
+        document.getElementById('targetHouseArea').addEventListener('change', runEligibilityCheck);
+
+        // 대출이자 비교 로직
+        const loanAmount = document.getElementById('loanAmount');
+        const policyRate = document.getElementById('policyRate');
+        const bankRate = document.getElementById('bankRate');
+        const loanAmtKorean = document.getElementById('loanAmtKorean');
+
+        function calculateLoan() {
+            const principal = unformatNumber(loanAmount.value);
+            const pRate = parseFloat(policyRate.value) || 0;
+            const bRate = parseFloat(bankRate.value) || 0;
+
+            const man = Math.floor(principal / 10000);
+            loanAmtKorean.textContent = `${formatNumber(man)}만 원`;
+
+            const pMonthly = Math.round((principal * (pRate / 100)) / 12);
+            const bMonthly = Math.round((principal * (bRate / 100)) / 12);
+            const savedMonthly = Math.max(0, bMonthly - pMonthly);
+            const saved2Years = savedMonthly * 24;
+
+            document.getElementById('policyMonthlyInterest').textContent = `${formatNumber(pMonthly)}원`;
+            document.getElementById('bankMonthlyInterest').textContent = `${formatNumber(bMonthly)}원`;
+            document.getElementById('monthlySavedInterest').textContent = formatNumber(savedMonthly);
+            document.getElementById('twoYearTotalSaved').textContent = `약 ${formatNumber(saved2Years)}원`;
+        }
+
+        loanAmount.addEventListener('input', (e) => {
+            e.target.value = formatNumber(unformatNumber(e.target.value));
+            calculateLoan();
+        });
+        policyRate.addEventListener('input', calculateLoan);
+        bankRate.addEventListener('input', calculateLoan);
+
+        function copyLoanCompareResult(toKakao) {
+            const saved = document.getElementById('twoYearTotalSaved').textContent;
+            const text = `[위집 버팀목 대출이자 비교]\n2년간 절감액: ${saved}\n계산기: ${window.location.href}`;
+            if (toKakao && typeof shareToKakao === 'function') {
+                shareToKakao('버팀목 전세대출 & HUG 반환보증 조회기', text);
+            } else {
+                copyToClipboard(text);
+            }
+        }
+
+        runEligibilityCheck();
+        });
+
+        tabLoanCompare.addEventListener('click', () => {
+            switchTab(tabLoanCompare, contentLoanCompare, 'grid');
+            calculateLoan();
         });
 
         // 1. 버팀목 자격 진단기 판정 엔진

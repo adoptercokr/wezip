@@ -526,7 +526,8 @@ const WEZIP_CALC_CATALOG = {
   'gov-median.html': { title: '기준 중위소득 판정기', tag: '4대 급여', cat: 'gov' },
   'loan-dsr.html': { title: '대출이자 & 스트레스 DSR', tag: '3단계 +1.50%p', cat: 'loan' },
   'real-transfer-tax.html': { title: '주택 양도소득세 계산기', tag: '12억 비과세', cat: 'real' },
-  'real-loan.html': { title: '전세대출 & HUG 보증조회', tag: '전세안전', cat: 'real' },
+  'real-loan.html': { title: '버팀목 전세대출 자격조회', tag: '연 1.8%', cat: 'real' },
+  'hug-guarantee.html': { title: 'HUG 전세보증보험 계산기', tag: '126% 룰', cat: 'real' },
   'real-estate.html': { title: '부동산 복비·취득세 계산기', tag: '생애최초 감면', cat: 'real' },
   'savings.html': { title: '예·적금 만기이자 비교기', tag: '세후 실수익', cat: 'loan' },
   'youth-leap.html': { title: '청년도약·청년미래적금 안내', tag: '정부 매칭', cat: 'gov' },
@@ -562,7 +563,8 @@ const WEZIP_CROSS_GRAPH = {
     calcs: [
       { title: '주택 양도소득세 & 장특공 계산기', url: 'real-transfer-tax.html', desc: '1주택 12억 비과세 & 다주택 중과 체크' },
       { title: '부동산 복비·취득세 계산기', url: 'real-estate.html', desc: '생애최초 취득세 200만 감면 반영' },
-      { title: '전세대출·HUG 보증보험 안전 조회', url: 'real-loan.html', desc: '부채비율 70% 깡통전세 사전 차단' }
+      { title: '버팀목 전세대출 자격조회 & 이자 계산기', url: 'real-loan.html', desc: '청년·신혼부부 연 1.8% 저금리 자격진단' },
+      { title: 'HUG 전세보증보험 가입조건 & 계산기', url: 'hug-guarantee.html', desc: '공시가격 126% 룰 판정 및 보증료 50% 감면' }
     ],
     posts: [
       { title: '스트레스 DSR 3단계(+1.50%p) 대출 한도 방어 전략', url: 'blog-stress-dsr-guide.html' },
@@ -574,7 +576,8 @@ const WEZIP_CROSS_GRAPH = {
     calcs: [
       { title: '대출이자 & 스트레스 DSR 계산기', url: 'loan-dsr.html', desc: '수도권 +1.50%p 반영 최대 한도 산출' },
       { title: '예·적금 세후 만기이자 비교기', url: 'savings.html', desc: '일반과세 vs 비과세 실수령 이자 비교' },
-      { title: '전세대출 & HUG 전세보증 조회', url: 'real-loan.html', desc: '임대차 보증금 안전성 즉시 확인' }
+      { title: '버팀목 전세대출 자격조회', url: 'real-loan.html', desc: '주택도시기금 연 1.8% 저리 자격진단' },
+      { title: 'HUG 전세보증보험 계산기', url: 'hug-guarantee.html', desc: '공시가 126% 룰 & 깡통전세 판정' }
     ],
     posts: [
       { title: '스트레스 DSR 3단계 주담대 한도 축소 방어 전략', url: 'blog-stress-dsr-guide.html' },
@@ -887,7 +890,8 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
       items: [
         { badge: '양도세 비과세', name: '1세대 1주택 고가주택 기준 12억 원 & 장기보유특별공제 MAX 80%', desc: '실거래가 12억 이하 비과세(2년 보유·조정지역 2년 거주) 및 10년 보유·거주 시 최대 80% 공제', url: 'real-transfer-tax.html' },
         { badge: '취득세 감면', name: '생애최초 주택구입 취득세 최대 200만 원 면제·감면', desc: '소득 제한 없이 실거래가 12억 원 이하 생애최초 주택 취득 시 산출 취득세에서 최대 200만 원 감면', url: 'real-estate.html' },
-        { badge: '전세안전·대출', name: '신생아 특례(최저 1.6%) · 청년 버팀목 · HUG 반환보증료 30만 환급', desc: '출산 가구 최대 5억 저리 대출, 무주택 청년 전세대출 2억 및 보증보험료 최대 30만 원 현금 환급', url: 'real-loan.html' },
+        { badge: '버팀목 대출', name: '신생아 특례(최저 1.3%) · 청년전용 버팀목 전세대출 최대 2억 원', desc: '출산 가구 및 만 19~34세 무주택 청년 대상 연 1.8%~2.7% 초저금리 전세자금 지원', url: 'real-loan.html' },
+      { badge: 'HUG 보증보험', name: '전세보증금 반환보증 공시가격 126% 룰 & 보증료 최대 30만 원 전액 지원', desc: '공시가격 140% × 전세가율 90% 이하 가입 승인 및 청년 보증료 50% 감면', url: 'hug-guarantee.html' },
         { badge: '주거비 현금지원', name: '청년월세 특별지원 상시 전환 (월 20만 원 × 24개월 = 480만 원)', desc: '만 19~34세 무주택 청년(중위 60% 이하)에게 최대 480만 원 현금 지급 및 월세 세액공제 15~17%', url: 'gov-rent.html' }
       ]
     },
