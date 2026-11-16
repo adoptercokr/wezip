@@ -836,7 +836,7 @@ function renderWezipCrossLinks(footerEl, fileName) {
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-          <h2 class="text-base sm:text-lg font-black text-slate-900">함께 확인하면 좋은 계산기 &amp; 필독 머니 가이드</h2>
+          <h2 class="text-base sm:text-lg font-black text-slate-900">함께 확인하면 좋은 계산기 &amp; 필독 머니 매거진</h2>
         </div>
         <a href="index.html" class="text-xs font-bold text-blue-600 hover:underline">전체 계산기 허브 &rarr;</a>
       </div>
@@ -850,7 +850,7 @@ function renderWezipCrossLinks(footerEl, fileName) {
         `).join('')}
         ${recPosts.map(p => `
           <a href="${escapeWezipHtml(p.url)}" class="p-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 transition block group">
-            <div class="text-xs font-bold text-emerald-700 mb-1">필독 머니 가이드</div>
+            <div class="text-xs font-bold text-emerald-700 mb-1">필독 머니 매거진</div>
             <div class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-blue-700">${escapeWezipHtml(p.title)}</div>
             <div class="text-xs text-slate-500 mt-1">실제 수령액 비교표·함정 체크리스트 확인</div>
           </a>
