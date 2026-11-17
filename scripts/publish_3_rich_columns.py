@@ -545,7 +545,7 @@ def render_full_article(article):
             <nav class="flex items-center gap-2 text-xs text-slate-500 font-medium">
                 <a href="index.html" class="hover:text-blue-600 transition">홈</a>
                 <span>&gt;</span>
-                <a href="blog.html" class="hover:text-blue-600 transition">금융 칼럼</a>
+                <a href="blog.html" class="hover:text-blue-600 transition">머니 매거진</a>
                 <span>&gt;</span>
                 <span class="text-slate-800 font-bold">{cat_name}</span>
             </nav>

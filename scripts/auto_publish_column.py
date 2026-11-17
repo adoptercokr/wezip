@@ -585,7 +585,7 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
             <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
                 <a href="index.html" class="hover:text-blue-600 transition">홈</a>
                 <span>&gt;</span>
-                <a href="blog.html" class="hover:text-blue-600 transition">금융 칼럼</a>
+                <a href="blog.html" class="hover:text-blue-600 transition">머니 매거진</a>
                 <span>&gt;</span>
                 <span class="text-slate-800 font-bold">{html.escape(cat_name)}</span>
             </nav>

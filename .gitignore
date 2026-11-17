@@ -11,3 +11,7 @@ update_*.py
 inspect_*.py
 change_domain.py
 scratch/
+game/
+games/
+saju/
+assets/
