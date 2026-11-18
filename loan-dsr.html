@@ -226,7 +226,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     <span class="hidden lg:inline text-slate-400">2026 법령·지원금 기준</span>
                     <span class="hidden lg:inline text-slate-600">|</span>
-                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.17</strong></span>
+                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.18</strong></span>
                 </a>
             </div>
 
@@ -234,7 +234,7 @@
             <div class="flex items-center gap-1.5 md:hidden shrink-0">
                 <span class="hidden xs:inline-flex sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 text-[10px] font-medium text-slate-300 whitespace-nowrap">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                    <span data-wezip-updated>2026.11.17</span>
+                    <span data-wezip-updated>2026.11.18</span>
                 </span>
                 <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 hover:text-white border-slate-700 transition flex items-center gap-1 font-bold text-xs border">
                     <svg class="svg-icon w-3.5 h-3.5 text-slate-300" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -260,7 +260,7 @@
                 <a href="loan-dsr.html" class="shrink-0 px-2.5 py-1.5 rounded-lg text-white bg-slate-800 transition">대출·금융</a>
                 <span class="sm:hidden shrink-0 ml-auto pl-2 text-[10px] font-medium text-slate-400 flex items-center gap-1">
                     <span class="w-1 h-1 rounded-full bg-blue-400"></span>
-                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.17</strong></span>
+                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.18</strong></span>
                 </span>
             </div>
         </nav>
@@ -403,8 +403,9 @@
                         <label class="block text-xs font-bold text-slate-700 mb-1.5">스트레스 DSR 심사 모의적용</label>
                         <select id="stressDsrMode" class="w-full text-xs font-semibold text-slate-800 p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
                             <option value="0">적용 안 함 (실제 약정금리만)</option>
-                            <option value="1.5">수도권·규제지역 주담대 (+1.50%p 3단계 가산금리 심사)</option>
-                            <option value="0.75">비수도권 주담대 (+0.75%p 가산금리 심사)</option>
+                            <option value="3.0">수도권·규제지역 주담대 (+3.00%p 10·15대책 하한 심사)</option>
+                            <option value="1.5">3단계 기본·비규제·신용대출 (+1.50%p 가산금리 심사)</option>
+                            <option value="0.75">비수도권 지방 주담대 (+0.75%p 완화 가산금리 심사)</option>
                         </select>
                     </div>
 
@@ -490,7 +491,7 @@
             <!-- 섹션 1: 스트레스 DSR 3단계 개념 및 수도권 차등 -->
             <section class="space-y-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-6">
                 <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                    <span>1. 2026년 스트레스 DSR 3단계 체계 및 수도권 +1.50%p 차등 가산금리</span>
+                    <span>1. 2026년 스트레스 DSR 3단계 체계 및 수도권·규제지역 +3.00%p 하한</span>
                 </h3>
                 <p>
                     <strong>DSR(총부채원리금상환비율, Debt Service Ratio)</strong>이란 차주의 연간 소득 대비 모든 가계대출의 연간 원리금 상환액이 차지하는 비율입니다. 현재 제1금융권 은행 대출 시 <strong>DSR 40% 한도</strong>(제2금융권은 50%)가 엄격하게 적용됩니다.
@@ -502,7 +503,7 @@
                     </div>
                     <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl space-y-1.5">
                         <div class="font-bold text-blue-900 text-sm">3단계 전 금융권 및 수도권 차등 규제</div>
-                        <p class="text-slate-700 leading-relaxed">• <strong>비수도권(지방)</strong>: 스트레스 가산금리 <strong>+0.75%p</strong> 반영 (유예)<br>• <strong>수도권(서울·경기·인천) 및 규제지역</strong>: 3단계 가산금리 <strong>+1.50%p</strong> 상향 적용<br>• 연봉 5천만 원 차주의 30년 만기 주담대 한도가 기존 대비 약 5,000만~7,000만 원 축소됩니다.</p>
+                        <p class="text-slate-700 leading-relaxed">• <strong>비수도권(지방) 주담대</strong>: 완화 가산금리 <strong>+0.75%p</strong> 적용<br>• <strong>3단계 기본·신용대출(1억 초과)</strong>: 기본 스트레스 금리 <strong>+1.50%p</strong> 적용<br>• <strong>수도권(서울·경기·인천)·규제지역 주담대</strong>: 10·15 대책에 따라 스트레스 금리 하한 <strong>+3.00%p</strong> 강화 적용</p>
                     </div>
                 </div>
             </section>
@@ -599,7 +600,7 @@
                     <span>4. 대출이자 절약 팁: 중도상환수수료 감면 및 금리인하요구권</span>
                 </h3>
                 <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs leading-relaxed">
-                    <p>• <strong>3년 경과 후 중도상환수수료 0원</strong>: 대출 실행일로부터 만 3년이 경과하면 시중은행의 법정 중도상환수수료(대출 원금의 1.2~1.4%)가 전액 면제됩니다. 여유자금이 생기면 3년이 지난 후 수수료 없이 원금을 수시로 상환하는 것이 총이자를 줄이는 지름길입니다.</p>
+                    <p>• <strong>실비용 기반 중도상환수수료 절반 인하 & 3년 후 0원</strong>: 2025년 실비용 반영 개편으로 주요 시중은행 주택담보대출 중도상환수수료율이 기존 절반 수준인 <strong>0.5~0.7%대</strong>로 낮아졌으며, 대출 실행일로부터 만 3년이 경과하면 전액 면제됩니다. 금리 인하 시 대환대출이나 중도상환 손익을 반드시 따져보세요.</p>
                     <p>• <strong>금융소비자보호법상 금리인하요구권</strong>: 취업, 승진, 신용점수 상승, 부채 감소 등으로 신용상태가 현저히 개선된 경우 은행에 대출금리 인하를 당당히 요구할 수 있으며, 은행은 접수 후 10영업일 이내에 심사 결과를 통보해야 합니다.</p>
                 </div>
             </section>

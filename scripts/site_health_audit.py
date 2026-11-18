@@ -35,13 +35,18 @@ STALE_RATE_RULES: list[tuple[str, re.Pattern[str], str]] = [
     ("stale_unemp_lower", re.compile(r"(?<![\d,+\-])(?:64,192|63,104)"), "2026 실업급여 1일 하한액은 66,048원입니다."),
     ("stale_unemp_upper", re.compile(r"(?<![\d,+\-])(?:66,000원|66000원)|상한\s*66,000"), "2026 실업급여 1일 상한액은 68,100원입니다."),
     ("stale_median_1", re.compile(r"(?<![\d,+\-])2,392,013"), "2026 1인 가구 기준 중위소득은 2,564,238원입니다."),
+    ("stale_median_3", re.compile(r"(?<![\d,+\-])5,025,353"), "2026 3인 가구 기준 중위소득은 5,359,036원입니다."),
     ("stale_median_4", re.compile(r"(?<![\d,+\-])6,097,773|4인\s*기준\s*609만|4인가구\s*609만"), "2026 4인 가구 기준 중위소득은 6,494,738원입니다."),
+    ("stale_life_1_2025", re.compile(r"(?<![\d,+\-])765,444"), "2026 1인 가구 생계급여 선정기준액은 820,556원입니다."),
+    ("stale_life_4_2025", re.compile(r"(?<![\d,+\-])1,951,287"), "2026 4인 가구 생계급여 선정기준액은 2,078,316원입니다."),
     ("stale_np_rate_code", re.compile(r"(?<![\d.])0\.045\b"), "2026.7월 이후 국민연금 근로자 요율은 0.0475입니다."),
     ("stale_hi_rate_code", re.compile(r"(?<![\d.])0\.03545\b|(?<![\d.])3\.545%"), "2026 건강보험 근로자 요율은 3.595%입니다."),
     ("stale_ltc_rate_code", re.compile(r"(?<![\d.])0\.1295\b|(?<![\d.])12\.95%"), "2026 노인장기요양보험 요율은 건보료의 13.14%입니다."),
     ("stale_ins_sum", re.compile(r"(?<![\d.])9\.39%"), "2026 4대보험 합계는 약 9.72%입니다."),
     ("stale_np_cap_617", re.compile(r"(?<![\d,+\-])(?:617만\s*원|617만원|277,650)"), "2026.7월 이후 국민연금 상한은 월 659만 원(월 최대 313,020원)입니다."),
     ("stale_eitc_dual", re.compile(r"(?<![\d,+\-])38000000"), "2026 근로장려금 맞벌이 소득 상한은 4,400만 원입니다."),
+    ("stale_prepayment_fee", re.compile(r"1\.2~1\.4%"), "2025년 실비용 반영 개편으로 시중은행 주담대 중도상환수수료는 0.5~0.7%대입니다."),
+    ("broken_og_desc", re.compile(r'<meta\s+property="og:description"\s+content="[^"\n]*\n\s*<meta\s+property="og:image"'), "og:description 메타태그가 손상되어 있습니다."),
     ("stale_hardcoded_date", re.compile(r"new\s+Date\(2026,\s*9"), "고정 날짜 대신 new Date()를 사용하세요."),
 ]
 
@@ -317,7 +322,11 @@ runInlineCalc('gov-parent.html', (ctx, doc) => {
 });
 
 // 8. loan-dsr.html & real-transfer-tax.html & youth-leap.html syntax & execution check
-runInlineCalc('loan-dsr.html', (ctx) => ctx.calculateLoan());
+runInlineCalc('loan-dsr.html', (ctx, doc) => {
+  doc.getElementById('stressDsrMode').value = '3.0';
+  ctx.calculateLoan();
+  assert.strictEqual(doc.getElementById('stressDsrResultRow').style.display, 'flex', 'loan-dsr 3.0%p mode should show stress row');
+});
 runInlineCalc('real-transfer-tax.html', (ctx) => { if (typeof ctx.calculateTax === 'function') ctx.calculateTax(); else if (typeof ctx.calculate === 'function') ctx.calculate(); });
 runInlineCalc('youth-leap.html', (ctx) => { if (typeof ctx.calculateLeap === 'function') ctx.calculateLeap(); else if (typeof ctx.calculate === 'function') ctx.calculate(); });
 
