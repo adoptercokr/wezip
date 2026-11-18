@@ -373,6 +373,154 @@ def render_table_html(table_data):
     return headers_html, "\n".join(rows_parts)
 
 
+IMAGE_POOLS = {
+    "child_family": [
+        "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1543332164-6e82f355badc?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+    ],
+    "tax_docs": [
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80",
+    ],
+    "pension_senior": [
+        "https://images.unsplash.com/photo-1508847154043-be5407fcaa5a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1567057419565-4349c49d8a04?auto=format&fit=crop&w=800&q=80",
+    ],
+    "subway_commute": [
+        "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+    ],
+    "store_work": [
+        "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1703825864792-5880081beaaf?auto=format&fit=crop&w=800&q=80",
+    ],
+    "savings_bank": [
+        "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80",
+    ],
+    "office_career": [
+        "https://images.unsplash.com/photo-1530099486328-e021101a494a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1475823678248-624fc6f85785?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1604212467162-2b0f6f58612a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1598262721485-a3825ae2a7d1?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800&q=80",
+    ],
+    "apartment": [
+        "https://images.unsplash.com/photo-1576613443548-c586abb1e2f4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602161100872-7daa350808e3?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1621269050686-13387e760500?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1593726222205-21404ff4e5fd?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554782647-42840d3c766f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1708242152350-4c34d2ee5a4d?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+    ],
+    "health_medical": [
+        "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
+    ],
+    "city_skyline": [
+        "https://images.unsplash.com/photo-1546874177-9e664107314e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1506816561089-5cc37b3aa9b0?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1570191913384-7b4ff11716e7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1532649097480-b67d52743b69?auto=format&fit=crop&w=800&q=80",
+    ]
+}
+
+
+def resolve_article_image(title, link, no=0):
+    """Pick an exact, contextual Korean/Asian photography image URL based on title and topic."""
+    t_title = (title or "").lower()
+    t_all = f"{title} {link}".lower()
+
+    if any(k in t_title for k in ["골드바", "krx 금", "금(gold)", "금 살 때"]):
+        return IMAGE_POOLS["savings_bank"][3]
+
+    if any(k in t_all for k in ["지하철", "출퇴근", "k-패스", "기후동행", "교통카드", "대중교통", "버스", "계단"]):
+        p = IMAGE_POOLS["subway_commute"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["자녀", "아이", "육아", "출산", "부모급여", "아동", "학원", "태권도", "피아노", "어린이", "임신", "신생아", "산후도우미", "다자녀"]):
+        p = IMAGE_POOLS["child_family"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["국민연금", "기초연금", "노령연금", "노인", "어르신", "시니어", "은퇴", "노후", "고령자"]):
+        p = IMAGE_POOLS["pension_senior"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["사장", "알바", "아르바이트", "해고", "주휴수당", "퇴직금", "근로계약", "폐업", "가게", "카페", "소상공인", "자영업", "노란우산", "온누리", "권리금", "잘렸", "상가건물", "임대료"]):
+        p = IMAGE_POOLS["store_work"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["연말정산", "국세청", "홈택스", "세액공제", "소득공제", "원천징수", "간이과세", "부가가치세", "종합소득세", "미리보기", "환급", "현금영수증", "문화누리카드", "고향사랑기부"]):
+        p = IMAGE_POOLS["tax_docs"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["청년도약", "청년미래", "청년내일", "적금", "예금", "파킹통장", "isa", "irp", "금리", "이자", "복리", "투자", "비상금", "주식", "etf", "배당금", "휴면예금"]):
+        p = IMAGE_POOLS["savings_bank"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["아파트", "행복주택", "매입임대", "청약", "주택", "lh", "sh", "청년월세", "원룸", "전세", "월세", "방공제", "디딤돌", "보금자리", "깡통전세", "hug", "임대차", "중개수수료", "재산세", "종부세", "집 수리", "양도세", "양도소득세", "집 팔", "집 살", "에너지효율", "에너지바우처", "가스비", "난방비", "집주인", "대출", "dsr", "대환대출", "중도상환수수료"]):
+        p = IMAGE_POOLS["apartment"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["실손보험", "건강보험", "건보료", "의료비", "병원", "간병", "요양", "질병", "암", "수술", "치료", "피부양자"]):
+        p = IMAGE_POOLS["health_medical"]
+        return p[no % len(p)]
+
+    if any(k in t_title for k in ["연봉", "실수령액", "월급", "직장인", "동료", "식대", "연차", "성과급", "이직", "청년수당", "중위소득", "생계급여", "실업급여", "사표", "자진퇴사", "야간", "연장", "야근", "통상임금", "취업지원", "구직수당"]):
+        p = IMAGE_POOLS["office_career"]
+        return p[no % len(p)]
+
+    if any(k in t_all for k in ["child", "baby"]):
+        p = IMAGE_POOLS["child_family"]
+        return p[no % len(p)]
+    if any(k in t_all for k in ["tax", "hometax"]):
+        p = IMAGE_POOLS["tax_docs"]
+        return p[no % len(p)]
+    if any(k in t_all for k in ["pension"]):
+        p = IMAGE_POOLS["pension_senior"]
+        return p[no % len(p)]
+    if any(k in t_all for k in ["biz-", "store", "salary", "job"]):
+        p = IMAGE_POOLS["office_career"]
+        return p[no % len(p)]
+
+    p = IMAGE_POOLS["city_skyline"]
+    return p[no % len(p)]
+
+
 def render_article_html(topic, today_str, matched_news=None, week_label=""):
     """Render a full 3-stage WE ZIP article HTML page passing all structural checks."""
     title = sanitize_text(topic["title"])
@@ -383,6 +531,7 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     filename = f"{topic['slug']}.html"
     calc_link = ensure_valid_calc_link(topic["calcLink"])
     calc_name = sanitize_text(topic["calcName"])
+    editorial_cover_url = resolve_article_image(title, filename, 0)
 
     meta_title = html.escape(title, quote=True)
     meta_desc = html.escape(desc, quote=True)
@@ -614,6 +763,11 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
                 </div>
             </header>
 
+            <!-- 매거진 에디토리얼 커버 비주얼 -->
+            <div class="my-5 rounded-2xl overflow-hidden border border-slate-200 shadow-xs aspect-[16/9] sm:aspect-[21/9] bg-slate-100">
+                <img src="{editorial_cover_url}" alt="{html.escape(title)}" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            </div>
+
             <article class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-8 shadow-xs space-y-8 text-slate-700 leading-relaxed font-normal">
                 <!-- [블로그형 스토리텔링 도입부 & 공감 해설 박스] -->
                 <div class="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/40 border-l-4 border-blue-600 rounded-r-2xl p-4 sm:p-7 space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
@@ -785,6 +939,7 @@ def update_blog_html(topic, today_str):
     no_matches = [int(m) for m in re.findall(r"no:\s*(\d+)", content)]
     next_no = max(no_matches) + 1 if no_matches else 52
     date_formatted = today_str.replace("-", ".")
+    article_image_url = resolve_article_image(topic.get("title", ""), filename, next_no)
 
     new_article_entry = (
         f"      {{\n"
@@ -796,7 +951,8 @@ def update_blog_html(topic, today_str):
         f"        badge: {json.dumps(sanitize_text(topic.get('badge', '필독')), ensure_ascii=False)},\n"
         f"        date: \"{date_formatted}\",\n"
         f"        readTime: {json.dumps(sanitize_text(topic['readTime']), ensure_ascii=False)},\n"
-        f"        link: \"{filename}\"\n"
+        f"        link: \"{filename}\",\n"
+        f"        image: \"{article_image_url}\"\n"
         f"      }},"
     )
 
