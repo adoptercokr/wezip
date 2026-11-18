@@ -518,7 +518,8 @@ def render_article_html(topic, today_str, matched_news=None, week_label=""):
     filename = f"{topic['slug']}.html"
     calc_link = ensure_valid_calc_link(topic["calcLink"])
     calc_name = sanitize_text(topic["calcName"])
-    editorial_cover_url = resolve_article_image(title, filename, 0)
+    editorial_cover_url = topic.get("image") or resolve_article_image(title, filename, 0)
+    topic["image"] = editorial_cover_url
 
     meta_title = html.escape(title, quote=True)
     meta_desc = html.escape(desc, quote=True)
@@ -926,7 +927,7 @@ def update_blog_html(topic, today_str):
     no_matches = [int(m) for m in re.findall(r"no:\s*(\d+)", content)]
     next_no = max(no_matches) + 1 if no_matches else 52
     date_formatted = today_str.replace("-", ".")
-    article_image_url = resolve_article_image(topic.get("title", ""), filename, next_no)
+    article_image_url = topic.get("image") or resolve_article_image(topic.get("title", ""), filename, next_no)
 
     new_article_entry = (
         f"      {{\n"
@@ -1072,14 +1073,99 @@ def load_topic_from_json_arg(json_arg, news_items, today_kst):
     return topic, fallback_news
 
 
+def stage_draft_for_review(selected_topic, matched_news, today_str, week_label, html_content):
+    """Save candidate column, preview HTML, downloaded cover image, and review report in scratch/drafts/ for user approval."""
+    drafts_dir = os.path.join(HTML_DIR, "scratch", "drafts")
+    os.makedirs(drafts_dir, exist_ok=True)
+    slug = selected_topic["slug"]
+    filename = f"{slug}.html"
+    image_url = selected_topic.get("image") or resolve_article_image(selected_topic.get("title", ""), filename, 0)
+    selected_topic["image"] = image_url
+
+    # 1. Save pending_draft.json
+    draft_payload = {
+        "topic": selected_topic,
+        "matched_news": matched_news,
+        "today_str": today_str,
+        "week_label": week_label,
+    }
+    draft_json_path = os.path.join(drafts_dir, "pending_draft.json")
+    with open(draft_json_path, "w", encoding="utf-8") as fp:
+        json.dump(draft_payload, fp, ensure_ascii=False, indent=2)
+
+    # 2. Save standalone preview HTML in scratch/drafts/
+    preview_html_path = os.path.join(drafts_dir, filename)
+    with open(preview_html_path, "w", encoding="utf-8") as fp:
+        fp.write(html_content)
+
+    # 3. Download actual cover image thumbnail for visual verification
+    preview_img_path = os.path.join(drafts_dir, "pending_cover_preview.jpg")
+    try:
+        req = urllib.request.Request(image_url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            if resp.status == 200:
+                with open(preview_img_path, "wb") as fp:
+                    fp.write(resp.read())
+    except Exception as exc:
+        print(f"[Warning] Could not download cover image preview: {exc}")
+
+    # 4. Write human-readable review summary markdown
+    summary_md_path = os.path.join(drafts_dir, "pending_review_summary.md")
+    part1_titles = [h for h, _ in selected_topic.get("part1_easy", [])]
+    trap_titles = [t for t, _ in selected_topic.get("traps", [])]
+    faq_q = [q for q, _ in selected_topic.get("faqs", [])]
+    md_text = f"""# [검수 대기] WE ZIP 머니 매거진 신규 칼럼 사전 검수표
+
+- **작성일**: {today_str} ({week_label})
+- **카테고리 / 뱃지**: {selected_topic.get('catName')} ({selected_topic.get('cat')}) / `{selected_topic.get('badge')}`
+- **파일명(Slug)**: `{filename}`
+- **연동 계산기**: `{selected_topic.get('calcName')}` (`{selected_topic.get('calcLink')}`)
+
+## 1. 제목 및 요약
+- **제목**: **{selected_topic.get('title')}**
+- **요약 설명**: {selected_topic.get('desc')}
+
+## 2. 매칭된 썸네일 / 커버 이미지
+- **이미지 URL**: `{image_url}`
+- **로컬 미리보기 파일**: `scratch/drafts/pending_cover_preview.jpg`
+
+## 3. 본문 3단계 핵심 구성
+- **도입부 후킹**: {selected_topic.get('hook_title')}
+- **1단계 (쉬운 원리 설명)**: {', '.join(part1_titles)}
+- **2단계 (비교표 & 1원 시뮬레이션)**: {selected_topic.get('table', {}).get('title')} / {selected_topic.get('simulation', {}).get('title')}
+- **3단계 (4대 실수 함정)**: {', '.join(trap_titles)}
+- **FAQ (3선)**: {', '.join(faq_q)}
+
+---
+### 승인 및 정식 반영 명령어
+- **그대로 승인 및 발행**: `python scripts/auto_publish_column.py --approve-draft`
+- **이미지 변경 후 승인**: `python scripts/auto_publish_column.py --approve-draft --image-url "https://images.unsplash.com/..."`
+"""
+    with open(summary_md_path, "w", encoding="utf-8") as fp:
+        fp.write(md_text)
+
+    print("=" * 75)
+    print("[사전 검수 대기 모드] 매거진 초안 및 썸네일이 생성되었습니다 (실제 사이트 미반영)")
+    print(f"  - 제목: {selected_topic.get('title')}")
+    print(f"  - 이미지 URL: {image_url}")
+    print(f"  - 이미지 미리보기: {preview_img_path}")
+    print(f"  - 검수 요약표: {summary_md_path}")
+    print(f"  - 대표님 검수 승인 후 정식 업데이트 명령어:")
+    print(f"    python scripts/auto_publish_column.py --approve-draft")
+    print("=" * 75)
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Wezip Auto Column Publisher")
+    parser = argparse.ArgumentParser(description="Wezip Auto Column Publisher (with 2-Stage Pre-Publish Review Gate)")
     parser.add_argument("--verify-catalog", action="store_true", help="Render-check all catalog topics without writing files")
     parser.add_argument("--dry-run", action="store_true", help="Select and verify next post without modifying disk")
-    parser.add_argument("--check-today", action="store_true", help="Print PUBLISHED or PENDING for today's KST date and exit")
+    parser.add_argument("--check-today", action="store_true", help="Print PUBLISHED, DRAFT_PENDING, or PENDING for today's KST date and exit")
     parser.add_argument("--force", action="store_true", help="Publish even if an article already exists for today")
-    parser.add_argument("--from-json", type=str, default="", help="Publish a custom AI-authored topic JSON file ('-' for stdin)")
-    parser.add_argument("--delete-json", action="store_true", help="Remove the --from-json source file after successful publish")
+    parser.add_argument("--from-json", type=str, default="", help="Load a custom AI-authored topic JSON file ('-' for stdin)")
+    parser.add_argument("--delete-json", action="store_true", help="Remove the --from-json source file after staging/publishing")
+    parser.add_argument("--stage-draft", action="store_true", help="Stage the column and cover image in scratch/drafts/ for user review without modifying live files")
+    parser.add_argument("--approve-draft", action="store_true", help="Approve and publish the staged draft from scratch/drafts/pending_draft.json to live blog.html")
+    parser.add_argument("--image-url", type=str, default="", help="Optional custom image URL override when staging or approving a draft")
     args = parser.parse_args()
 
     if args.verify_catalog:
@@ -1087,18 +1173,72 @@ def main():
         return
 
     today_kst = datetime.datetime.now(KST).date()
+    draft_json_path = os.path.join(HTML_DIR, "scratch", "drafts", "pending_draft.json")
+
     if args.check_today:
-        print("PUBLISHED" if already_published_today(today_kst) else "PENDING")
+        if already_published_today(today_kst):
+            print("PUBLISHED")
+        elif os.path.exists(draft_json_path):
+            print("DRAFT_PENDING")
+        else:
+            print("PENDING")
         return
 
     today_str = today_kst.isoformat()
     week_label = get_week_label(today_kst)
 
+    # Mode A: Approve and publish an existing staged draft
+    if args.approve_draft:
+        if not os.path.exists(draft_json_path):
+            raise RuntimeError("승인 대기 중인 초안(scratch/drafts/pending_draft.json)이 없습니다. 먼저 --stage-draft 로 초안을 생성하세요.")
+        with open(draft_json_path, "r", encoding="utf-8") as fp:
+            draft_data = json.load(fp)
+        selected_topic = draft_data["topic"]
+        matched_news = draft_data.get("matched_news", [])
+        today_str = draft_data.get("today_str", today_str)
+        week_label = draft_data.get("week_label", week_label)
+        if args.image_url:
+            selected_topic["image"] = args.image_url.strip()
+
+        ok, reason = validate_topic_dict(selected_topic)
+        if not ok:
+            raise RuntimeError(f"Approved draft validation failed: {reason}")
+
+        filename = f"{selected_topic['slug']}.html"
+        html_content = render_article_html(selected_topic, today_str, matched_news=matched_news, week_label=week_label)
+        verify_rendered_html(selected_topic["slug"], html_content)
+
+        file_path = os.path.join(HTML_DIR, filename)
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print(f"[승인 완료] 정식 칼럼 파일 생성: {file_path}")
+
+        update_blog_html(selected_topic, today_str)
+        update_sitemap(filename, today_str)
+        update_rss(selected_topic)
+        try:
+            from site_header import sync_all_html_headers
+            sync_all_html_headers(HTML_DIR)
+        except Exception as exc:
+            print(f"[Info] Header sync warning: {exc}")
+        try:
+            import subprocess
+            gen_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generate_llms_txt.py")
+            if os.path.exists(gen_script):
+                subprocess.run([sys.executable, gen_script, "--ping"], cwd=HTML_DIR, timeout=30, check=False)
+        except Exception as exc:
+            print(f"[Info] LLM context sync warning: {exc}")
+
+        os.remove(draft_json_path)
+        print(f"Successfully approved and published column: {selected_topic['title']}")
+        return
+
+    # Mode B: Generate and Stage Draft for Review (Default safe behavior)
     if already_published_today(today_kst) and not args.dry_run and not args.force:
         print(f"[Skip] Today's column ({today_kst.strftime('%Y.%m.%d')}) is already published. Skipping duplicate.")
         return
 
-    print(f"Starting Wezip Auto Column Publisher ({today_str}, {week_label})...")
+    print(f"Starting Wezip Auto Column Draft Generator ({today_str}, {week_label})...")
 
     news_items = fetch_weekly_policy_news()
     print(f"Fetched {len(news_items)} recent 7-day Korean finance/policy headlines.")
@@ -1116,6 +1256,9 @@ def main():
     if not selected_topic:
         print("All catalog topics are already published and GEMINI_API_KEY is unset. Queue exhausted.")
         return
+
+    if args.image_url:
+        selected_topic["image"] = args.image_url.strip()
 
     ok, reason = validate_topic_dict(selected_topic)
     if not ok:
@@ -1135,30 +1278,10 @@ def main():
         print("Dry-run completed cleanly. No files were modified.")
         return
 
-    file_path = os.path.join(HTML_DIR, filename)
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(html_content)
-    print(f"Generated standalone article file: {file_path}")
-
-    update_blog_html(selected_topic, today_str)
-    update_sitemap(filename, today_str)
-    update_rss(selected_topic)
-    # Refresh unified top headers (with latest KST update date), llms.txt & llms-full.txt, and ping IndexNow
-    try:
-        from site_header import sync_all_html_headers
-        sync_all_html_headers(HTML_DIR)
-    except Exception as exc:
-        print(f"[Info] Header sync warning: {exc}")
-    try:
-        import subprocess
-        gen_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generate_llms_txt.py")
-        if os.path.exists(gen_script):
-            subprocess.run([sys.executable, gen_script, "--ping"], cwd=HTML_DIR, timeout=30, check=False)
-    except Exception as exc:
-        print(f"[Info] LLM context sync warning: {exc}")
+    # Always stage into scratch/drafts/ first so the user reviews & approves before live update!
+    stage_draft_for_review(selected_topic, matched_news, today_str, week_label, html_content)
     if args.from_json and args.from_json != "-" and args.delete_json and os.path.exists(args.from_json):
         os.remove(args.from_json)
-    print(f"Successfully published new column: {selected_topic['title']}")
 
 
 if __name__ == "__main__":
