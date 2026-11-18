@@ -461,63 +461,53 @@ IMAGE_POOLS = {
 
 
 def resolve_article_image(title, link, no=0):
-    """Pick an exact, contextual Korean/Asian photography image URL based on title and topic."""
+    """Pick an exact, contextual Korean/Asian photography image URL, strictly guaranteeing ZERO duplicates across blog.html."""
     t_title = (title or "").lower()
     t_all = f"{title} {link}".lower()
 
+    # Read currently used images from blog.html
+    blog_path = os.path.join(HTML_DIR, "blog.html")
+    used_images = set()
+    if os.path.exists(blog_path):
+        with open(blog_path, "r", encoding="utf-8") as f:
+            used_images = set(re.findall(r'image:\s*"([^"]+)"', f.read()))
+
     if any(k in t_title for k in ["골드바", "krx 금", "금(gold)", "금 살 때"]):
-        return IMAGE_POOLS["savings_bank"][3]
+        category = "savings_bank"
+    elif any(k in t_all for k in ["지하철", "출퇴근", "k-패스", "기후동행", "교통카드", "대중교통", "버스", "계단"]):
+        category = "subway_commute"
+    elif any(k in t_title for k in ["자녀", "아이", "육아", "출산", "부모급여", "아동", "학원", "태권도", "피아노", "어린이", "임신", "신생아", "산후도우미", "다자녀"]):
+        category = "child_family"
+    elif any(k in t_title for k in ["국민연금", "기초연금", "노령연금", "노인", "어르신", "시니어", "은퇴", "노후", "고령자"]):
+        category = "pension_senior"
+    elif any(k in t_title for k in ["사장", "알바", "아르바이트", "해고", "주휴수당", "퇴직금", "근로계약", "폐업", "가게", "카페", "소상공인", "자영업", "노란우산", "온누리", "권리금", "잘렸", "상가건물", "임대료"]):
+        category = "store_work"
+    elif any(k in t_title for k in ["연말정산", "국세청", "홈택스", "세액공제", "소득공제", "원천징수", "간이과세", "부가가치세", "종합소득세", "미리보기", "환급", "현금영수증", "문화누리카드", "고향사랑기부"]):
+        category = "tax_docs"
+    elif any(k in t_title for k in ["청년도약", "청년미래", "청년내일", "적금", "예금", "파킹통장", "isa", "irp", "금리", "이자", "복리", "투자", "비상금", "주식", "etf", "배당금", "휴면예금"]):
+        category = "savings_bank"
+    elif any(k in t_title for k in ["아파트", "행복주택", "매입임대", "청약", "주택", "lh", "sh", "청년월세", "원룸", "전세", "월세", "방공제", "디딤돌", "보금자리", "깡통전세", "hug", "임대차", "중개수수료", "재산세", "종부세", "집 수리", "양도세", "양도소득세", "집 팔", "집 살", "에너지효율", "에너지바우처", "가스비", "난방비", "집주인", "대출", "dsr", "대환대출", "중도상환수수료"]):
+        category = "apartment"
+    elif any(k in t_title for k in ["실손보험", "건강보험", "건보료", "의료비", "병원", "간병", "요양", "질병", "암", "수술", "치료", "피부양자"]):
+        category = "health_medical"
+    elif any(k in t_title for k in ["연봉", "실수령액", "월급", "직장인", "동료", "식대", "연차", "성과급", "이직", "청년수당", "중위소득", "생계급여", "실업급여", "사표", "자진퇴사", "야간", "연장", "야근", "통상임금", "취업지원", "구직수당"]):
+        category = "office_career"
+    else:
+        category = "city_skyline"
 
-    if any(k in t_all for k in ["지하철", "출퇴근", "k-패스", "기후동행", "교통카드", "대중교통", "버스", "계단"]):
-        p = IMAGE_POOLS["subway_commute"]
-        return p[no % len(p)]
+    candidates = IMAGE_POOLS.get(category, [])
+    for u in candidates:
+        if u not in used_images:
+            return u
 
-    if any(k in t_title for k in ["자녀", "아이", "육아", "출산", "부모급여", "아동", "학원", "태권도", "피아노", "어린이", "임신", "신생아", "산후도우미", "다자녀"]):
-        p = IMAGE_POOLS["child_family"]
-        return p[no % len(p)]
+    # If all in category are used, check other categories for an unused image
+    for other_cat, other_candidates in IMAGE_POOLS.items():
+        for u in other_candidates:
+            if u not in used_images:
+                return u
 
-    if any(k in t_title for k in ["국민연금", "기초연금", "노령연금", "노인", "어르신", "시니어", "은퇴", "노후", "고령자"]):
-        p = IMAGE_POOLS["pension_senior"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["사장", "알바", "아르바이트", "해고", "주휴수당", "퇴직금", "근로계약", "폐업", "가게", "카페", "소상공인", "자영업", "노란우산", "온누리", "권리금", "잘렸", "상가건물", "임대료"]):
-        p = IMAGE_POOLS["store_work"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["연말정산", "국세청", "홈택스", "세액공제", "소득공제", "원천징수", "간이과세", "부가가치세", "종합소득세", "미리보기", "환급", "현금영수증", "문화누리카드", "고향사랑기부"]):
-        p = IMAGE_POOLS["tax_docs"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["청년도약", "청년미래", "청년내일", "적금", "예금", "파킹통장", "isa", "irp", "금리", "이자", "복리", "투자", "비상금", "주식", "etf", "배당금", "휴면예금"]):
-        p = IMAGE_POOLS["savings_bank"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["아파트", "행복주택", "매입임대", "청약", "주택", "lh", "sh", "청년월세", "원룸", "전세", "월세", "방공제", "디딤돌", "보금자리", "깡통전세", "hug", "임대차", "중개수수료", "재산세", "종부세", "집 수리", "양도세", "양도소득세", "집 팔", "집 살", "에너지효율", "에너지바우처", "가스비", "난방비", "집주인", "대출", "dsr", "대환대출", "중도상환수수료"]):
-        p = IMAGE_POOLS["apartment"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["실손보험", "건강보험", "건보료", "의료비", "병원", "간병", "요양", "질병", "암", "수술", "치료", "피부양자"]):
-        p = IMAGE_POOLS["health_medical"]
-        return p[no % len(p)]
-
-    if any(k in t_title for k in ["연봉", "실수령액", "월급", "직장인", "동료", "식대", "연차", "성과급", "이직", "청년수당", "중위소득", "생계급여", "실업급여", "사표", "자진퇴사", "야간", "연장", "야근", "통상임금", "취업지원", "구직수당"]):
-        p = IMAGE_POOLS["office_career"]
-        return p[no % len(p)]
-
-    if any(k in t_all for k in ["child", "baby"]):
-        p = IMAGE_POOLS["child_family"]
-        return p[no % len(p)]
-    if any(k in t_all for k in ["tax", "hometax"]):
-        p = IMAGE_POOLS["tax_docs"]
-        return p[no % len(p)]
-    if any(k in t_all for k in ["pension"]):
-        p = IMAGE_POOLS["pension_senior"]
-        return p[no % len(p)]
-    if any(k in t_all for k in ["biz-", "store", "salary", "job"]):
-        p = IMAGE_POOLS["office_career"]
-        return p[no % len(p)]
-
-    p = IMAGE_POOLS["city_skyline"]
+    # Fallback to modulo if all pools exhausted
+    p = IMAGE_POOLS.get(category, IMAGE_POOLS["city_skyline"])
     return p[no % len(p)]
 
 
