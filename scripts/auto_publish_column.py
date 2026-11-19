@@ -1111,9 +1111,9 @@ def stage_draft_for_review(selected_topic, matched_news, today_str, week_label, 
 
     # 4. Write human-readable review summary markdown
     summary_md_path = os.path.join(drafts_dir, "pending_review_summary.md")
-    part1_titles = [h for h, _ in selected_topic.get("part1_easy", [])]
-    trap_titles = [t for t, _ in selected_topic.get("traps", [])]
-    faq_q = [q for q, _ in selected_topic.get("faqs", [])]
+    part1_titles = [item.get("subheading", "") if isinstance(item, dict) else str(item) for item in selected_topic.get("part1_easy", [])]
+    trap_titles = [item.get("title", "") if isinstance(item, dict) else str(item) for item in selected_topic.get("traps", [])]
+    faq_q = [item.get("q", "") if isinstance(item, dict) else str(item) for item in selected_topic.get("faqs", [])]
     md_text = f"""# [검수 대기] WE ZIP 머니 매거진 신규 칼럼 사전 검수표
 
 - **작성일**: {today_str} ({week_label})
