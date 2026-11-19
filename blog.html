@@ -205,7 +205,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     <span class="hidden lg:inline text-slate-400">2026 법령·지원금 기준</span>
                     <span class="hidden lg:inline text-slate-600">|</span>
-                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.18</strong></span>
+                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.19</strong></span>
                 </a>
             </div>
 
@@ -213,7 +213,7 @@
             <div class="flex items-center gap-1.5 md:hidden shrink-0">
                 <span class="hidden xs:inline-flex sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 text-[10px] font-medium text-slate-300 whitespace-nowrap">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                    <span data-wezip-updated>2026.11.18</span>
+                    <span data-wezip-updated>2026.11.19</span>
                 </span>
                 <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 hover:text-white border-slate-700 transition flex items-center gap-1 font-bold text-xs border">
                     <svg class="svg-icon w-3.5 h-3.5 text-slate-300" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -239,7 +239,7 @@
                 <a href="loan-dsr.html" class="shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">대출·금융</a>
                 <span class="sm:hidden shrink-0 ml-auto pl-2 text-[10px] font-medium text-slate-400 flex items-center gap-1">
                     <span class="w-1 h-1 rounded-full bg-blue-400"></span>
-                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.18</strong></span>
+                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.19</strong></span>
                 </span>
             </div>
         </nav>
@@ -322,7 +322,7 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">196</span>)
+                        전체 (<span id="countAll">197</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
                         급여·노동 (<span id="countSalary">72</span>)
@@ -331,7 +331,7 @@
                         부동산·주거 (<span id="countRealestate">38</span>)
                     </button>
                     <button type="button" onclick="setCategory('welfare')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="welfare">
-                        복지·지원금 (<span id="countWelfare">56</span>)
+                        복지·지원금 (<span id="countWelfare">57</span>)
                     </button>
                     <button type="button" onclick="setCategory('finance')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="finance">
                         대출·금융 (<span id="countFinance">30</span>)
@@ -349,7 +349,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">196</span>건의 머니 매거진 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">197</span>건의 머니 매거진 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 
@@ -408,6 +408,18 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 197,
+        title: "하루 2시간 일찍 퇴근하는데 월급은 거의 그대로? 초등 6학년까지 최대 3년 쓰는 2026 육아기 근로시간 단축 급여와 신청 팁",
+        desc: "2026년 대폭 확대된 육아기 근로시간 단축제도! 대상 연령이 초등 6학년(만 12세)까지 넓어지고 기간도 최대 3년으로 늘어났습니다. 하루 1~2시간 단축 시 통상임금 100% 국가 지원금 계산법과 회사 눈치 안 보고 승인받는 핵심 절차를 총정리했습니다.",
+        cat: "welfare",
+        catName: "복지·지원",
+        badge: "2026확대",
+        date: "2026.11.19",
+        readTime: "약 7분",
+        link: "blog-welf-parental-working-hours-reduction-pay-2026.html",
+        image: "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?auto=format&fit=crop&w=800&q=80"
+      },
       {
         no: 196,
         title: "11월 건보료 고지서 갑자기 2배 나왔다면? 12월 10일 전 '6종 소득 조정' 신청으로 지역건보료 절반 깎는 법",
