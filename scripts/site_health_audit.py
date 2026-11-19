@@ -46,6 +46,7 @@ STALE_RATE_RULES: list[tuple[str, re.Pattern[str], str]] = [
     ("stale_np_cap_617", re.compile(r"(?<![\d,+\-])(?:617만\s*원|617만원|277,650)"), "2026.7월 이후 국민연금 상한은 월 659만 원(월 최대 313,020원)입니다."),
     ("stale_eitc_dual", re.compile(r"(?<![\d,+\-])38000000"), "2026 근로장려금 맞벌이 소득 상한은 4,400만 원입니다."),
     ("stale_prepayment_fee", re.compile(r"1\.2~1\.4%"), "2025년 실비용 반영 개편으로 시중은행 주담대 중도상환수수료는 0.5~0.7%대입니다."),
+    ("stale_child_credit_150k", re.compile(r"childCount\s*\*\s*150000"), "2026 자녀세액공제는 1명 25만, 2명 55만, 3명 이상 +40만 원입니다."),
     ("broken_og_desc", re.compile(r'<meta\s+property="og:description"\s+content="[^"\n]*\n\s*<meta\s+property="og:image"'), "og:description 메타태그가 손상되어 있습니다."),
     ("stale_hardcoded_date", re.compile(r"new\s+Date\(2026,\s*9"), "고정 날짜 대신 new Date()를 사용하세요."),
 ]
@@ -248,7 +249,7 @@ function runInlineCalc(fileName, extraSetup) {
   if (extraSetup) extraSetup(ctx, doc, elements);
 }
 
-// 1. salary.html: verify 2026.7 rates (4.75%, 3.595%, 13.14%)
+// 1. salary.html: verify 2026.7 rates (4.75%, 3.595%, 13.14%) & 2026 child tax credit (2 children = 550,000)
 runInlineCalc('salary.html', (ctx, doc) => {
   doc.getElementById('salaryInput').value = '50,000,000';
   doc.getElementById('nonTaxInput').value = '200,000';
@@ -257,6 +258,9 @@ runInlineCalc('salary.html', (ctx, doc) => {
   ctx.calculate();
   const net = doc.getElementById('resultNetPay').textContent;
   assert(net.includes('3,497,496'), `salary.html net mismatch: ${net}`);
+  const tax0 = ctx.calculateIncomeTax(3966666, 3, 0);
+  const tax2 = ctx.calculateIncomeTax(3966666, 3, 2);
+  assert(tax0 - tax2 >= 45000 && tax0 - tax2 <= 46000, `salary.html 2026 2-child credit mismatch: ${tax0} vs ${tax2}`);
 });
 
 // 2. hourly-wage.html: 10,320 * 209 = 2,156,880

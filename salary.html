@@ -986,8 +986,11 @@
             if (annualTaxable > 70000000) creditLimit = 500000;
             taxCredit = Math.min(taxCredit, creditLimit);
 
-            // 자녀세액공제
-            const childCredit = childCount * 150000;
+            // 2026 자녀세액공제 (1명 25만, 2명 55만, 3명 이상 55만 + 2명 초과 1인당 40만)
+            let childCredit = 0;
+            if (childCount === 1) childCredit = 250000;
+            else if (childCount === 2) childCredit = 550000;
+            else if (childCount >= 3) childCredit = 550000 + (childCount - 2) * 400000;
 
             const finalAnnualTax = Math.max(0, tax - taxCredit - childCredit);
             const monthlyTax = Math.floor((finalAnnualTax / 12) / 10) * 10;
