@@ -205,7 +205,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     <span class="hidden lg:inline text-slate-400">2026 법령·지원금 기준</span>
                     <span class="hidden lg:inline text-slate-600">|</span>
-                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.19</strong></span>
+                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.20</strong></span>
                 </a>
             </div>
 
@@ -213,7 +213,7 @@
             <div class="flex items-center gap-1.5 md:hidden shrink-0">
                 <span class="hidden xs:inline-flex sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 text-[10px] font-medium text-slate-300 whitespace-nowrap">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                    <span data-wezip-updated>2026.11.19</span>
+                    <span data-wezip-updated>2026.11.20</span>
                 </span>
                 <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 hover:text-white border-slate-700 transition flex items-center gap-1 font-bold text-xs border">
                     <svg class="svg-icon w-3.5 h-3.5 text-slate-300" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -239,7 +239,7 @@
                 <a href="loan-dsr.html" class="shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">대출·금융</a>
                 <span class="sm:hidden shrink-0 ml-auto pl-2 text-[10px] font-medium text-slate-400 flex items-center gap-1">
                     <span class="w-1 h-1 rounded-full bg-blue-400"></span>
-                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.19</strong></span>
+                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.20</strong></span>
                 </span>
             </div>
         </nav>
@@ -322,10 +322,10 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">197</span>)
+                        전체 (<span id="countAll">198</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (<span id="countSalary">72</span>)
+                        급여·노동 (<span id="countSalary">73</span>)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
                         부동산·주거 (<span id="countRealestate">38</span>)
@@ -349,7 +349,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">197</span>건의 머니 매거진 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">198</span>건의 머니 매거진 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 
@@ -408,6 +408,18 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 198,
+        title: "주말부부 따로 내던 월세, 올해부터 부부 각자 연말정산 돌려받습니다! 최대 170만 원 환급 조건과 시·군·구 함정 총정리",
+        desc: "2026년 귀속 연말정산 핵심 변경! 직장 때문에 떨어져 사는 무주택 주말부부도 서로 다른 시·군·구 거주 요건을 채우면 부부 합산 연 1,000만 원 한도 내에서 각자 월세 세액공제(15~17%)를 받을 수 있습니다. 한도 배분 공식과 4대 탈락 함정 정리.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "연말정산신설",
+        date: "2026.11.20",
+        readTime: "약 7분",
+        link: "blog-weekend-couple-rent-tax-credit-2026.html",
+        image: "https://images.unsplash.com/photo-1710418561655-7a9460df902b?auto=format&fit=crop&w=800&q=80"
+      },
       {
         no: 197,
         title: "하루 2시간 일찍 퇴근하는데 월급은 거의 그대로? 초등 6학년까지 최대 3년 쓰는 2026 육아기 근로시간 단축 급여와 신청 팁",
