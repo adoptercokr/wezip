@@ -205,7 +205,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     <span class="hidden lg:inline text-slate-400">2026 법령·지원금 기준</span>
                     <span class="hidden lg:inline text-slate-600">|</span>
-                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.20</strong></span>
+                    <span>업데이트 <strong class="font-bold text-white" data-wezip-updated>2026.11.23</strong></span>
                 </a>
             </div>
 
@@ -213,7 +213,7 @@
             <div class="flex items-center gap-1.5 md:hidden shrink-0">
                 <span class="hidden xs:inline-flex sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-800/80 border border-slate-700/80 text-[10px] font-medium text-slate-300 whitespace-nowrap">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                    <span data-wezip-updated>2026.11.20</span>
+                    <span data-wezip-updated>2026.11.23</span>
                 </span>
                 <a href="gov-finder.html" class="whitespace-nowrap shrink-0 px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 hover:text-white border-slate-700 transition flex items-center gap-1 font-bold text-xs border">
                     <svg class="svg-icon w-3.5 h-3.5 text-slate-300" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -239,7 +239,7 @@
                 <a href="loan-dsr.html" class="shrink-0 px-2.5 py-1.5 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition">대출·금융</a>
                 <span class="sm:hidden shrink-0 ml-auto pl-2 text-[10px] font-medium text-slate-400 flex items-center gap-1">
                     <span class="w-1 h-1 rounded-full bg-blue-400"></span>
-                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.20</strong></span>
+                    <span>기준 <strong class="text-slate-200 font-semibold" data-wezip-updated>2026.11.23</strong></span>
                 </span>
             </div>
         </nav>
@@ -322,10 +322,10 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">198</span>)
+                        전체 (<span id="countAll">200</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
-                        급여·노동 (<span id="countSalary">73</span>)
+                        급여·노동 (<span id="countSalary">74</span>)
                     </button>
                     <button type="button" onclick="setCategory('realestate')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="realestate">
                         부동산·주거 (<span id="countRealestate">38</span>)
@@ -349,7 +349,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">198</span>건의 머니 매거진 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">200</span>건의 머니 매거진 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 
@@ -408,6 +408,18 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 200,
+        title: "헬스장·수영장 100만 원 긁고 연말정산 30% 공제 다 받으셨나요? PT·필라테스는 '이 표시' 없으면 0원 됩니다",
+        desc: "2026년 연말정산부터 1년 치 온전히 적용되는 헬스장·수영장 문화비 30% 소득공제! 총급여 7,000만 원 이하 조건과 PT 강습비 50% 분리 기준, 미등록 가맹점·필라테스 제외 함정까지 알기 쉽게 총정리했습니다.",
+        cat: "salary",
+        catName: "급여·세무",
+        badge: "연말정산",
+        date: "2026.11.23",
+        readTime: "약 7분",
+        link: "blog-gym-pool-tax-deduction-2026.html",
+        image: "https://images.unsplash.com/photo-1775993699105-4d18bcac7e54?auto=format&fit=crop&w=800&q=80"
+      },
       {
         no: 199,
         title: "2026년 연봉 3천만원(3000만) 실수령액 224만 원: 4대보험 공제와 현실적인 한 달 생활비·저축 로드맵",
