@@ -732,7 +732,7 @@ function renderWezipCalcRetentionBar(footerEl, fileName) {
   if (document.getElementById('wezipCalcSaveBar')) return;
   const bar = document.createElement('section');
   bar.id = 'wezipCalcSaveBar';
-  bar.className = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8';
+  bar.className = 'w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8';
   bar.innerHTML = `
     <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -762,7 +762,7 @@ function renderWezipCrossLinks(footerEl, fileName) {
 
   const sec = document.createElement('section');
   sec.id = 'wezipCrossLinks';
-  sec.className = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6';
+  sec.className = 'w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6';
   sec.innerHTML = `
     <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -841,7 +841,7 @@ function renderWezipPolicyRadar(footerEl, fileName, todayDot) {
   const data = radarData[cat] || radarData.gov;
   const sec = document.createElement('section');
   sec.id = 'wezipPolicyRadar';
-  sec.className = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8';
+  sec.className = 'w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8';
   sec.innerHTML = `
     <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
