@@ -317,82 +317,14 @@ function initGA4() {
 }
 
 /**
- * 실시간 방문자 카운터 위젯 (hits.sh API 연동)
- * 모든 페이지 푸터에 핀테크 스타일의 [오늘 방문자 / 전체 방문자] 배지를 자동 렌더링합니다.
+ * 실시간 방문자 카운터 (hits.sh API 연동)
+ * 사용자 사이트 페이지에서는 UI를 노출하지 않고 백그라운드 집계만 수행합니다.
  */
 function initVisitorCounter() {
-  const footer = document.querySelector('footer .max-w-4xl') || 
-                 document.querySelector('footer .max-w-5xl') || 
-                 document.querySelector('footer .max-w-6xl') || 
-                 document.querySelector('footer');
-  if (!footer) return;
-
-  let badgeContainer = document.getElementById('wezipVisitorBadge');
-  if (!badgeContainer) {
-    badgeContainer = document.createElement('div');
-    badgeContainer.id = 'wezipVisitorBadge';
-    badgeContainer.className = 'py-2 flex items-center justify-center';
-    badgeContainer.innerHTML = `
-      <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 px-3.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-medium shadow-2xs">
-        <span class="flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>오늘 방문 <strong id="wezipTodayVisits" class="font-bold text-slate-800">...</strong></span>
-        </span>
-        <span class="text-slate-300">|</span>
-        <span class="flex items-center gap-1">
-          <svg class="svg-icon w-3 h-3 text-blue-600" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <span>전체 방문 <strong id="wezipTotalVisits" class="font-bold text-blue-600">...</strong></span>
-        </span>
-        <span class="text-slate-300">·</span>
-        <span class="text-[10px] text-slate-400 font-normal">26년 10월 27일부터</span>
-      </div>
-    `;
-
-    const copyrightP = footer.querySelector('p.text-slate-400') || footer.querySelector('p:last-of-type');
-    if (copyrightP && copyrightP.parentNode) {
-      copyrightP.parentNode.insertBefore(badgeContainer, copyrightP);
-    } else {
-      footer.appendChild(badgeContainer);
-    }
-  }
-
-  // 1. 브라우저 로컬 캐시 (기존 수신한 서버 카운트가 있을 경우 즉시 표시하여 깜빡임 방지)
-  const todayDateStr = new Date().toISOString().slice(0, 10);
-  const cachedDate = localStorage.getItem('wezip_counter_date');
-  const cachedToday = parseInt(localStorage.getItem('wezip_counter_today') || '0', 10);
-  const cachedTotal = parseInt(localStorage.getItem('wezip_counter_total') || '0', 10);
-
-  const todayEl = document.getElementById('wezipTodayVisits');
-  const totalEl = document.getElementById('wezipTotalVisits');
-
-  // 당일 캐시 데이터가 있으면 즉시 렌더링 (새 브라우저라도 1로 초기화되지 않고 서버 기준치 유지)
-  if (cachedDate === todayDateStr && cachedToday > 0 && cachedTotal > 0) {
-    if (todayEl) todayEl.textContent = cachedToday.toLocaleString();
-    if (totalEl) totalEl.textContent = cachedTotal.toLocaleString();
-  }
-
-  // 2. Vercel 서버리스 카운터 API (/api/counter) 호출
-  // 브라우저 간 편차(CORS 차단, 개별 로컬스토리지 격리) 없이
-  // 모든 브라우저(크롬, 엣지, 사파리, 모바일 등)에서 중앙 서버 카운트를 100% 동일하게 동기화합니다.
-  fetch('/api/counter?_t=' + Date.now())
-    .then(res => {
-      if (!res.ok) throw new Error('Network response was not ok');
-      return res.json();
-    })
-    .then(data => {
-      if (data && typeof data.today === 'number' && typeof data.total === 'number') {
-        if (todayEl) todayEl.textContent = data.today.toLocaleString();
-        if (totalEl) totalEl.textContent = data.total.toLocaleString();
-        localStorage.setItem('wezip_counter_date', todayDateStr);
-        localStorage.setItem('wezip_counter_today', data.today);
-        localStorage.setItem('wezip_counter_total', data.total);
-      }
-    })
-    .catch(() => {
-      // 오프라인이거나 API 응답 지연 시 안정적인 기본 기준치 유지
-      if (todayEl && todayEl.textContent === '...') todayEl.textContent = (cachedToday || 16).toLocaleString();
-      if (totalEl && totalEl.textContent === '...') totalEl.textContent = (cachedTotal || 148).toLocaleString();
-    });
+  // 사용자 화면 UI 렌더링은 중단하고 백그라운드 카운터 API 호출만 수행
+  try {
+    fetch('/api/counter?_t=' + Date.now()).catch(() => {});
+  } catch (e) {}
 }
 
   // DOM 준비 시 자동 초기화 (GA4, 방문자 카운터, 리텐션·비교·추천 위젯)
