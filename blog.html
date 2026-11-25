@@ -368,7 +368,7 @@
                 <!-- 카테고리 필터 버튼 그룹 -->
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold" id="categoryTabs">
                     <button type="button" onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-xs transition" data-cat="all">
-                        전체 (<span id="countAll">201</span>)
+                        전체 (<span id="countAll">202</span>)
                     </button>
                     <button type="button" onclick="setCategory('salary')" class="cat-btn px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" data-cat="salary">
                         급여·노동 (<span id="countSalary">75</span>)
@@ -398,7 +398,7 @@
             <!-- 현황 요약 줄 -->
             <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100">
                 <div>
-                    총 <span id="filteredTotal" class="font-bold text-blue-600">201</span>건의 머니 매거진 중
+                    총 <span id="filteredTotal" class="font-bold text-blue-600">202</span>건의 머니 매거진 중
                     <span id="pageRange" class="font-semibold text-slate-700">1~10번째</span> 표시 중
                 </div>
                 
@@ -692,6 +692,18 @@
     <!-- 게시판 동적 데이터 및 페이지네이션 스크립트 -->
     <script>
         const ARTICLES = [
+      {
+        no: 202,
+        title: "건별대출 vs 한도대출(마이너스통장) 이자 계산법과 중도상환수수료 0원 팁: 내 DSR 대출한도에 유리한 선택은?",
+        desc: "건별대출과 한도대출(마이너스통장)의 일할 이자 계산 차이와 중도상환수수료 면제 전략! 3,000만 원 대출 시 실제 이자 시뮬레이션 및 DSR 대출한도 갉아먹는 치명적 차이까지 알기 쉽게 총정리했습니다.",
+        cat: "loan",
+        catName: "대출·금융",
+        badge: "대출가이드",
+        date: "2026.11.25",
+        readTime: "약 8분",
+        link: "blog-loan-case-by-case-vs-limit-2026.html",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80"
+      },
       {
         no: 201,
         title: "대학생 자녀가 알바로 500만 원 넘게 벌어도 등록금 최대 135만 원 돌려받습니다! 2026 연말정산 자녀 교육비·카드 한도 400만 원 활용법",
