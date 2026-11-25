@@ -8,6 +8,10 @@ Disallow: /saju/
 Disallow: /games/
 Disallow: /game/
 
+# 구글 애드센스 전용 크롤러 (Google AdSense Crawler & ads.txt 최우선 허용)
+User-agent: Mediapartners-Google
+Allow: /
+
 # 최신 생성형 AI 검색 엔진 및 LLM 크롤러 전면 허용 (GEO 최적화)
 # 1. OpenAI (ChatGPT Search, GPTBot)
 User-agent: GPTBot
@@ -66,12 +70,8 @@ Allow: /
 
 # Sitemap
 Sitemap: https://wezip.co.kr/sitemap.xml
-
 Sitemap: https://wezip.co.kr/rss.xml
 
 # AI / LLM Context Index (llmstxt.org standard)
 # LLMs-Txt: https://wezip.co.kr/llms.txt
 # LLMs-Full-Txt: https://wezip.co.kr/llms-full.txt
-
-# Daum Webmaster Tool Verification
-#DaumWebMasterTool:742ccc120c16a4ff031a8e1d8971d975e5fe0e655e361ff24f28b17b870faabc:7v7Co2KibzUex4fH7zWmNA==
